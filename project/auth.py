@@ -1,16 +1,16 @@
 from flask import Blueprint
 from . import db
 
-main = Blueprint('auth', __name__)
+auth = Blueprint('auth', __name__)
 
-@main.route('/login')
+@auth.route('/login')
 def index():
     return 'Login'
 
-@main.route('/signup')
+@auth.route('/signup')
 def index():
     return 'Signup'
 
-@main.route('/logout')
+@auth.route('/logout')
 def index():
     return 'Logout'
