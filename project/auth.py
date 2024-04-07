@@ -4,13 +4,13 @@ from . import db
 auth = Blueprint('auth', __name__)
 
 @auth.route('/login')
-def index():
+def login():
     return 'Login'
 
 @auth.route('/signup')
-def index():
+def signup():
     return 'Signup'
 
 @auth.route('/logout')
-def index():
+def logout():
     return 'Logout'

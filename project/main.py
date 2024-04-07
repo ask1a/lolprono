@@ -8,5 +8,5 @@ def index():
     return 'Index'
 
 @main.route('/profile')
-def index():
+def profile():
     return 'Profile'
