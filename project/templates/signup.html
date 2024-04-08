@@ -2,7 +2,17 @@
 
 {% block content %}
 <div class="column is-4 is-offset-4">
-    <h3 class="title">Sign Up</h3>
+    <h3 class="title">Inscription</h3>
+
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+        <div class="notification is-danger">
+            {{ messages[0] }} Aller à la <a href="{{ url_for('auth.login') }}">page de connexion</a>.
+        </div>
+    {% endif %}
+    {% endwith %}
+    <form method="POST" action="/signup">
+
     <div class="box">
         <form method="POST" action="/signup">
             <div class="field">
@@ -13,17 +23,17 @@
 
             <div class="field">
                 <div class="control">
-                    <input class="input is-large" type="text" name="name" placeholder="Name" autofocus="">
+                    <input class="input is-large" type="text" name="name" placeholder="Nom" autofocus="">
                 </div>
             </div>
 
             <div class="field">
                 <div class="control">
-                    <input class="input is-large" type="password" name="password" placeholder="Password">
+                    <input class="input is-large" type="password" name="password" placeholder="Mot de passe">
                 </div>
             </div>
 
-            <button class="button is-block is-info is-large is-fullwidth">Sign Up</button>
+            <button class="button is-block is-info is-large is-fullwidth">Inscription</button>
         </form>
     </div>
 </div>
