@@ -6,35 +6,35 @@
 
     {% with messages = get_flashed_messages() %}
     {% if messages %}
-        <div class="notification is-danger">
-            {{ messages[0] }} Aller à la <a href="{{ url_for('auth.login') }}">page de connexion</a>.
-        </div>
+    <div class="notification is-danger">
+        {{ messages[0] }} Aller à la <a href="{{ url_for('auth.login') }}">page de connexion</a>.
+    </div>
     {% endif %}
     {% endwith %}
     <form method="POST" action="/signup">
 
-    <div class="box">
-        <form method="POST" action="/signup">
-            <div class="field">
-                <div class="control">
-                    <input class="input is-large" type="email" name="email" placeholder="Email" autofocus="">
+        <div class="box">
+            <form method="POST" action="/signup">
+                <div class="field">
+                    <div class="control">
+                        <input class="input is-large" type="email" name="email" placeholder="Email" autofocus="">
+                    </div>
                 </div>
-            </div>
 
-            <div class="field">
-                <div class="control">
-                    <input class="input is-large" type="text" name="name" placeholder="Nom" autofocus="">
+                <div class="field">
+                    <div class="control">
+                        <input class="input is-large" type="text" name="name" placeholder="Nom" autofocus="">
+                    </div>
                 </div>
-            </div>
 
-            <div class="field">
-                <div class="control">
-                    <input class="input is-large" type="password" name="password" placeholder="Mot de passe">
+                <div class="field">
+                    <div class="control">
+                        <input class="input is-large" type="password" name="password" placeholder="Mot de passe">
+                    </div>
                 </div>
-            </div>
 
-            <button class="button is-block is-info is-large is-fullwidth">Inscription</button>
-        </form>
-    </div>
+                <button class="button is-block is-info is-large is-fullwidth">Inscription</button>
+            </form>
+        </div>
 </div>
 {% endblock %}

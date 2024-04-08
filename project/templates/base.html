@@ -6,51 +6,50 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Flask Auth Example</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.2/css/bulma.min.css" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bulma.css') }}"/>
 </head>
 
 <body>
-    <section class="hero is-link is-fullheight">
-        <div class="hero-head">
-            <nav class="navbar">
-                <div class="container">
-
-                    <div id="navbarMenuHeroA" class="navbar-menu">
-                        <div class="navbar-start">
-                            <a href="{{ url_for('main.index') }}" class="navbar-item">
-                                Accueil
-                            </a>
-                            {% if current_user.is_authenticated %}
-                            <a href="{{ url_for('main.profile') }}" class="navbar-item">
-                                Profil
-                            </a>
-                            {% endif %}
-                            {% if not current_user.is_authenticated %}
-                            <a href="{{ url_for('auth.login') }}" class="navbar-item">
-                                Connexion
-                            </a>
-                            <a href="{{ url_for('auth.signup') }}" class="navbar-item">
-                                Inscription
-                            </a>
-                            {% endif %}
-                            {% if current_user.is_authenticated %}
-                            <a href="{{ url_for('auth.logout') }}" class="navbar-item">
-                                Déconnexion
-                            </a>
-                            {% endif %}
-                        </div>
+<section class="hero is-link is-fullheight">
+    <div class="hero-head">
+        <nav class="navbar">
+            <div class="container">
+                <div id="navbarMenuHeroA" class="navbar-menu">
+                    <div class="navbar-start">
+                        <a href="{{ url_for('main.index') }}" class="navbar-item">
+                            Accueil
+                        </a>
+                        {% if current_user.is_authenticated %}
+                        <a href="{{ url_for('main.profile') }}" class="navbar-item">
+                            Profil
+                        </a>
+                        {% endif %}
+                        {% if not current_user.is_authenticated %}
+                        <a href="{{ url_for('auth.login') }}" class="navbar-item">
+                            Connexion
+                        </a>
+                        <a href="{{ url_for('auth.signup') }}" class="navbar-item">
+                            Inscription
+                        </a>
+                        {% endif %}
+                        {% if current_user.is_authenticated %}
+                        <a href="{{ url_for('auth.logout') }}" class="navbar-item">
+                            Déconnexion
+                        </a>
+                        {% endif %}
                     </div>
                 </div>
-            </nav>
-        </div>
-
-        <div class="hero-body">
-            <div class="container has-text-centered">
-                {% block content %}
-                {% endblock %}
             </div>
+        </nav>
+    </div>
+
+    <div class="hero-body">
+        <div class="container has-text-centered">
+            {% block content %}
+            {% endblock %}
         </div>
-    </section>
+    </div>
+</section>
 </body>
 
 </html>

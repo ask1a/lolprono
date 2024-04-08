@@ -3,11 +3,14 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from .models import User
 from flask_login import login_user, logout_user, login_required
 from . import db
+
 auth = Blueprint('auth', __name__)
+
 
 @auth.route('/login')
 def login():
     return render_template('login.html')
+
 
 @auth.route('/login', methods=['POST'])
 def login_post():
@@ -21,24 +24,27 @@ def login_post():
     # take the user-supplied password, hash it, and compare it to the hashed password in the database
     if not user or not check_password_hash(user.password, password):
         flash('Mauvais identifiants, email et/ou mot de passe incorrects.')
-        return redirect(url_for('auth.login')) # if the user doesn't exist or password is wrong, reload the page
+        return redirect(url_for('auth.login'))  # if the user doesn't exist or password is wrong, reload the page
 
     # if the above check passes, then we know the user has the right credentials
     login_user(user, remember=remember)
     return redirect(url_for('main.profile'))
 
+
 @auth.route('/signup')
 def signup():
     return render_template('signup.html')
+
 
 @auth.route('/signup', methods=['POST'])
 def signup_post():
     email = request.form.get('email')
     name = request.form.get('name')
     password = request.form.get('password')
-    user = User.query.filter_by(email=email).first() # if this returns a user, then the email already exists in database
+    user = User.query.filter_by(
+        email=email).first()  # if this returns a user, then the email already exists in database
 
-    if user: # if a user is found, we want to redirect back to signup page so user can try again
+    if user:  # if a user is found, we want to redirect back to signup page so user can try again
         flash("L'email existe déjà en base de donnée!")
         return redirect(url_for('auth.signup'))
 
@@ -51,6 +57,7 @@ def signup_post():
 
     # code to validate and add user to database goes here
     return redirect(url_for('auth.login'))
+
 
 @auth.route('/logout')
 @login_required
