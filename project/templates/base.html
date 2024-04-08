@@ -8,42 +8,38 @@
     <title>Flask Auth Example</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/bulma.css') }}"/>
 </head>
-
 <body>
-<section class="hero is-link is-fullheight">
-    <div class="hero-head">
-        <nav class="navbar">
-            <div class="container">
-                <div id="navbarMenuHeroA" class="navbar-menu">
-                    <div class="navbar-start">
-                        <a href="{{ url_for('main.index') }}" class="navbar-item">
-                            Accueil
-                        </a>
-                        {% if current_user.is_authenticated %}
-                        <a href="{{ url_for('main.profile') }}" class="navbar-item">
-                            Profil
-                        </a>
-                        {% endif %}
-                        {% if not current_user.is_authenticated %}
-                        <a href="{{ url_for('auth.login') }}" class="navbar-item">
-                            Connexion
-                        </a>
-                        <a href="{{ url_for('auth.signup') }}" class="navbar-item">
-                            Inscription
-                        </a>
-                        {% endif %}
-                        {% if current_user.is_authenticated %}
-                        <a href="{{ url_for('auth.logout') }}" class="navbar-item">
-                            Déconnexion
-                        </a>
-                        {% endif %}
-                    </div>
-                </div>
+<section class="hero is-dark is-fullheight">
+    <nav class="navbar is-link">
+        <div class="container">
+            <div class="navbar-start">
+                <a href="{{ url_for('main.index') }}" class="navbar-item">
+                    Accueil
+                </a>
+                {% if current_user.is_authenticated %}
+                <a href="{{ url_for('main.profile') }}" class="navbar-item">
+                    Profil
+                </a>
+                {% endif %}
+                {% if not current_user.is_authenticated %}
+                <a href="{{ url_for('auth.login') }}" class="navbar-item">
+                    Connexion
+                </a>
+                <a href="{{ url_for('auth.signup') }}" class="navbar-item">
+                    Inscription
+                </a>
+                {% endif %}
+                {% if current_user.is_authenticated %}
+                <a href="{{ url_for('auth.logout') }}" class="navbar-item">
+                    Déconnexion
+                </a>
+                {% endif %}
             </div>
-        </nav>
-    </div>
+        </div>
+        </div>
+    </nav>
 
-    <div class="hero-body">
+    <div class="hero-body header-image">
         <div class="container has-text-centered">
             {% block content %}
             {% endblock %}

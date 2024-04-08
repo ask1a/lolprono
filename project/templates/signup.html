@@ -2,7 +2,6 @@
 
 {% block content %}
 <div class="column is-4 is-offset-4">
-    <h3 class="title">Inscription</h3>
 
     {% with messages = get_flashed_messages() %}
     {% if messages %}
@@ -14,6 +13,8 @@
     <form method="POST" action="/signup">
 
         <div class="box">
+                <h3 class="title is-3 has-text-dark">Inscrivez-vous :</h3>
+
             <form method="POST" action="/signup">
                 <div class="field">
                     <div class="control">
@@ -33,7 +34,7 @@
                     </div>
                 </div>
 
-                <button class="button is-block is-info is-large is-fullwidth">Inscription</button>
+                <button class="button is-link is-large is-fullwidth">Inscription</button>
             </form>
         </div>
 </div>
