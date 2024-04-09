@@ -6,3 +6,4 @@
 # @ask1a will be requested for
 # review when someone opens a pull request.
 *       @ask1a
+/.github/CODEOWNERS @ask1a
