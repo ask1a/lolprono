@@ -1,9 +1,8 @@
 from flask import Blueprint, render_template, redirect, url_for, request, flash
 from werkzeug.security import generate_password_hash, check_password_hash
-from .models import User, UserLeague
+from .models import User, UserLeague, Game
 from flask_login import login_user, logout_user, login_required, current_user
 from . import db
-
 
 auth = Blueprint('auth', __name__)
 
@@ -107,7 +106,23 @@ def ligue_summer_post():
 
 @auth.route('/pronos')
 def pronos():
-    return render_template('pronos.html')
+    current_user_league_list = [e.leaguename for e in
+                                UserLeague.query.filter_by(userid=current_user.id).order_by(UserLeague.leagueid).all()]
+    return render_template('pronos.html', league_list=current_user_league_list, leagueid=0)
+
+
+@auth.route('/pronos_show_league/<leaguename>', methods=['POST'])
+def pronos_show_league(leaguename):
+    row = UserLeague.query.filter_by(userid=current_user.id, leaguename=leaguename).first()
+    current_user_league_list = [e.leaguename for e in
+                                UserLeague.query.filter_by(userid=current_user.id).order_by(UserLeague.leagueid).all()]
+    games = Game.query.filter_by(leagueid=row.leagueid).order_by(Game.gamedatetime).all()
+    records = [u.__dict__ for u in games]
+    for r in records:
+        r.pop('_sa_instance_state')
+
+    return render_template('pronos.html', league_list=current_user_league_list, leaguename=leaguename,
+                           leagueid=row.leagueid, records=records)
 
 
 @auth.route('/classements')
