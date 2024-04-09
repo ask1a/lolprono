@@ -10,32 +10,30 @@
     </div>
     {% endif %}
     {% endwith %}
-    <form method="POST" action="/signup">
+    <div class="box">
+        <h3 class="title is-3 has-text-dark">Inscrivez-vous :</h3>
 
-        <div class="box">
-                <h3 class="title is-3 has-text-dark">Inscrivez-vous :</h3>
-
-            <form method="POST" action="/signup">
-                <div class="field">
-                    <div class="control">
-                        <input class="input is-large" type="email" name="email" placeholder="Email" autofocus="">
-                    </div>
+        <form method="POST" action="/signup">
+            <div class="field">
+                <div class="control">
+                    <input class="input is-large" type="email" name="email" placeholder="Email" autofocus="">
                 </div>
+            </div>
 
-                <div class="field">
-                    <div class="control">
-                        <input class="input is-large" type="text" name="name" placeholder="Nom" autofocus="">
-                    </div>
+            <div class="field">
+                <div class="control">
+                    <input class="input is-large" type="text" name="name" placeholder="Nom" autofocus="">
                 </div>
+            </div>
 
-                <div class="field">
-                    <div class="control">
-                        <input class="input is-large" type="password" name="password" placeholder="Mot de passe">
-                    </div>
+            <div class="field">
+                <div class="control">
+                    <input class="input is-large" type="password" name="password" placeholder="Mot de passe">
                 </div>
+            </div>
 
-                <button class="button is-link is-large is-fullwidth">Inscription</button>
-            </form>
-        </div>
+            <button class="button is-link is-large is-fullwidth">Inscription</button>
+        </form>
+    </div>
 </div>
 {% endblock %}
