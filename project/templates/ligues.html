@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="column is-4 is-offset-4">
+    <div class="notification is-link">
+        <h2 class="title is-4">
+            Liste des ligues disponibles :
+        </h2>
+    </div>
+</div>
+
+<div class="columns">
+    <div class="column"></div>
+    <div class="column">
+        <div class="box">
+            <div class="columns">
+                <div class="column">
+                    <figure class="image is-128x128">
+                        <img class="is-rounded" src="static/LEC_logo.webp"/>
+                    </figure>
+                </div>
+                <div class="column">
+                    <h6 class="title is-6"></h6>
+                    <h6 class="title is-6 has-text-dark">LEC Spring🌷 split 2024</h6>
+                    <button class="button is-link is-outlined">Ajouter la ligue</button>
+                </div>
+            </div>
+        </div>
+        <div class="box">
+            <div class="columns">
+                <div class="column">
+                    <figure class="image is-128x128">
+                        <img class="is-rounded" src="static/LEC_logo.webp"/>
+                    </figure>
+                </div>
+                <div class="column">
+                    <h6 class="title is-6"></h6>
+                    <h6 class="title is-6 has-text-dark">LEC Summer🌞 split 2024</h6>
+                    <button class="button is-link is-outlined">Ajouter la ligue</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="column"></div>
+</div>
+
+{% endblock %}

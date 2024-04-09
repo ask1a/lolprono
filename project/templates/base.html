@@ -30,6 +30,21 @@
                 </a>
                 {% endif %}
                 {% if current_user.is_authenticated %}
+                <a href="{{ url_for('auth.ligues') }}" class="navbar-item">
+                    Ligues
+                </a>
+                {% endif %}
+                {% if current_user.is_authenticated %}
+                <a href="{{ url_for('auth.pronos') }}" class="navbar-item">
+                    Pronos
+                </a>
+                {% endif %}
+                {% if current_user.is_authenticated %}
+                <a href="{{ url_for('auth.classements') }}" class="navbar-item">
+                    Classements
+                </a>
+                {% endif %}
+                {% if current_user.is_authenticated %}
                 <a href="{{ url_for('auth.logout') }}" class="navbar-item">
                     Déconnexion
                 </a>
