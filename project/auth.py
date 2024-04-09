@@ -1,8 +1,9 @@
 from flask import Blueprint, render_template, redirect, url_for, request, flash
 from werkzeug.security import generate_password_hash, check_password_hash
-from .models import User
+from .models import User, UserLeague
 from flask_login import login_user, logout_user, login_required, current_user
 from . import db
+
 
 auth = Blueprint('auth', __name__)
 
@@ -58,17 +59,56 @@ def signup_post():
     # code to validate and add user to database goes here
     return redirect(url_for('auth.login'))
 
+
 @auth.route('/ligues')
 def ligues():
-    return render_template('ligues.html')
+    return render_template('ligues.html', league1=is_registered_in_league(1), league2=is_registered_in_league(2))
 
-@auth.route('/ligues', methods=['POST'])
-def ligues_post():
+
+def add_userleague_row(leagueid, leaguename, userid):
+    """Add new row in userleague table"""
+    userleague = UserLeague.query.filter_by(userid=userid, leagueid=leagueid).first()
+    if userleague:  # if a user/league already exist, dont go further.
+        flash("Déjà inscrit à cette ligue!")
+        return redirect(url_for('main.profile'))
+    # create a new userleague's row with the form data.
+    new_userleague = UserLeague(userid=userid, leagueid=leagueid, leaguename=leaguename)
+    # add the new userleague to the database
+    db.session.add(new_userleague)
+    db.session.commit()
     return redirect(url_for('auth.pronos'))
+
+
+def is_registered_in_league(leagueid):
+    userleague = UserLeague.query.filter_by(userid=current_user.id, leagueid=leagueid).first()
+    if userleague:
+        return 1
+    else:
+        return 0
+
+
+@auth.route('/ligue_spring', methods=['POST'])
+def ligue_spring_post():
+    userid = current_user.id
+    leagueid = 1
+    leaguename = "LEC spring 2024"
+
+    return add_userleague_row(leagueid, leaguename, userid)
+
+
+@auth.route('/ligue_summer', methods=['POST'])
+def ligue_summer_post():
+    userid = current_user.id
+    leagueid = 2
+    leaguename = "LEC summer 2024"
+
+    return add_userleague_row(leagueid, leaguename, userid)
+
 
 @auth.route('/pronos')
 def pronos():
     return render_template('pronos.html')
+
 
 @auth.route('/classements')
 def classements():

@@ -1,7 +1,31 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h1 class="title">
-    Bienvenu, {{ name }}!
-</h1>
+<div class="column is-4 is-offset-4">
+    <h1 class="title has-text-black">
+        Bienvenu, {{ name }}!
+    </h1>
+    <h2 class="title is-4 has-text-black">
+        Ligue(s) suivie(s) :
+    </h2>
+
+    {% for item in league_list %}
+    <div class="box has-background-dark has-text-white">
+        <form method="POST" action="/profile_unsubscribe_league/{{item}}">
+            <div class="columns">
+                <div class="column">
+                    {{ item }}
+                </div>
+                <div class="column">
+                    <button class="button is-link is-focused">
+                        Se désinscrire
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+    {% endfor %}
+</div>
+
+
 {% endblock %}

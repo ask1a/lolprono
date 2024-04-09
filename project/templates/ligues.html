@@ -13,32 +13,44 @@
     <div class="column"></div>
     <div class="column">
         <div class="box has-background-dark">
-            <div class="columns">
-                <div class="column">
-                    <figure class="image is-128x128">
-                        <img class="is-rounded" src="static/LEC_logo.webp"/>
-                    </figure>
+            <form method="POST" action="/ligue_spring">
+                <div class="columns">
+                    <div class="column">
+                        <figure class="image is-128x128">
+                            <img class="is-rounded" src="static/LEC_logo.webp"/>
+                        </figure>
+                    </div>
+                    <div class="column">
+                        <h6 class="title is-6"></h6>
+                        <h6 class="title is-6 has-text-light">LEC Spring🌷 split 2024</h6>
+                        {% if league1 %}
+                        <div class="box has-background-dark has-text-white">Déjà inscrit!</div>
+                        {% else %}
+                        <button class="button is-link is-focused">Ajouter la ligue</button>
+                        {% endif %}
+                    </div>
                 </div>
-                <div class="column">
-                    <h6 class="title is-6"></h6>
-                    <h6 class="title is-6 has-text-light">LEC Spring🌷 split 2024</h6>
-                    <button class="button is-link is-focused">Ajouter la ligue</button>
-                </div>
-            </div>
+            </form>
         </div>
         <div class="box has-background-dark">
-            <div class="columns">
-                <div class="column">
-                    <figure class="image is-128x128">
-                        <img class="is-rounded" src="static/LEC_logo.webp"/>
-                    </figure>
+            <form method="POST" action="/ligue_summer">
+                <div class="columns">
+                    <div class="column">
+                        <figure class="image is-128x128">
+                            <img class="is-rounded" src="static/LEC_logo.webp"/>
+                        </figure>
+                    </div>
+                    <div class="column">
+                        <h6 class="title is-6"></h6>
+                        <h6 class="title is-6 has-text-light">LEC Summer🌞 split 2024</h6>
+                        {% if league2 %}
+                        <div class="box has-background-dark has-text-white">Déjà inscrit!</div>
+                        {% else %}
+                        <button class="button is-link is-focused">Ajouter la ligue</button>
+                        {% endif %}
+                    </div>
                 </div>
-                <div class="column">
-                    <h6 class="title is-6"></h6>
-                    <h6 class="title is-6 has-text-light">LEC Summer🌞 split 2024</h6>
-                    <button class="button is-link is-focused">Ajouter la ligue</button>
-                </div>
-            </div>
+            </form>
         </div>
     </div>
     <div class="column"></div>
