@@ -32,4 +32,11 @@ class Game(db.Model):
     team1score = db.Column(db.Integer, unique=False, nullable=True)
     team2score = db.Column(db.Integer, unique=False, nullable=True)
 
+class GameProno(db.Model):
+    """Manage games infos"""
+    id = db.Column(db.Integer, primary_key=True)  # primary keys are required by SQLAlchemy
+    userid = db.Column(db.Integer, db.ForeignKey('user.id'), unique=False, nullable=False)
+    gameid = db.Column(db.Integer, db.ForeignKey('game.id'), unique=False, nullable=False)
+    team1prono = db.Column(db.Integer, unique=False, nullable=True)
+    team2prono = db.Column(db.Integer, unique=False, nullable=True)
 
