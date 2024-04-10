@@ -8,12 +8,56 @@
         </h1>
     </div>
 </div>
-<div class="column is-4 is-offset-4">
-
-        {% for table in tables %}
-        {{titles[loop.index]}}
-        {{ table|safe }}
-        {% endfor %}
+<div class="dropdown is-hoverable">
+    <div class="dropdown-trigger">
+        <button class="button has-background-link has-text-white" aria-haspopup="true" aria-controls="dropdown-menu4">
+            <span>Selectionnez une ligue :</span>
+        </button>
+    </div>
+    <div class="dropdown-menu" id="dropdown-menu4" role="menu">
+        <div class="dropdown-content has-background-dark">
+            <div class="dropdown-item">
+                {% for item in league_list %}
+                <form method="POST" action="/classements_show_ranking/{{item}}">
+                    <button class="button is-dark">{{ item }}</button>
+                </form>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
 </div>
+<h1 class="title has-text-white is-capitalized"> </h1>
+{% if leagueid==0 %}
+<div></div>
+{% else %}
+<div class="column is-8 is-offset-2">
+    <table class="table is-striped is-hoverable is-fullwidth">
+        <thead>
+        {% for title in titles %}
+        <th class="is-dark">
+            {{title}}
+        </th>
+        {% endfor %}
+        </thead>
+        <tfoot>
+        {% for title in titles %}
+        <th>
+            {{title}}
+        </th>
+        {% endfor %}
+        </tfoot>
+        <tbody>
+        {% for dict_item in recap_score %}
+        <tr>
+            {% for key, value in dict_item.items() %}
+            <td>{{value}}</td>
+            {% endfor %}
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endif %}
 
 {% endblock %}
