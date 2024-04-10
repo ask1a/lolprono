@@ -38,7 +38,7 @@
 </div>
     {% for item in records %}
     <div class="box has-background-dark has-text-white">
-        <h1 class="title is-4 has-text-white ">{{item}}</h1>
+        <h1 class="title is-4 has-text-white "><div>{{item.gamedatetime}} - BO {{item.bo}}</div><div>{{item.team1}} {{item.team1score}} - {{item.team2score}} {{item.team2}}</div></h1>
     </div>
     {% endfor %}
 {% endif %}
