@@ -8,5 +8,12 @@
         </h1>
     </div>
 </div>
+<div class="column is-4 is-offset-4">
+
+        {% for table in tables %}
+        {{titles[loop.index]}}
+        {{ table|safe }}
+        {% endfor %}
+</div>
 
 {% endblock %}

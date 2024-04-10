@@ -1,8 +1,11 @@
 from flask import Blueprint, render_template, redirect, url_for, request, flash
 from werkzeug.security import generate_password_hash, check_password_hash
-from .models import User, UserLeague, Game
+from .models import User, UserLeague, Game, GameProno
 from flask_login import login_user, logout_user, login_required, current_user
 from . import db
+from sqlalchemy import select
+import pandas as pd
+import numpy as np
 
 auth = Blueprint('auth', __name__)
 
@@ -127,7 +130,32 @@ def pronos_show_league(leaguename):
 
 @auth.route('/classements')
 def classements():
-    return render_template('classements.html')
+    query = (select(User.id, User.name
+                    , GameProno.gameid, GameProno.team1prono, GameProno.team2prono
+                    , Game.team1score, Game.team2score
+                    )
+             .join(GameProno, User.id == GameProno.userid)
+             .join(Game, Game.id == GameProno.gameid)
+             .where(Game.leagueid == 1)
+             )
+    print(query)
+    pronos = db.session.execute(query).all()
+    pronos = pd.DataFrame(pronos, columns=['userid', 'username', 'gameid',
+                                           'team1prono', 'team2prono',
+                                           'team1score', 'team2score'])
+    pronos['prono_team_win'] = np.where((pronos['team1prono']>pronos['team2prono']) & (pronos['team1prono']!=pronos['team2prono']),'team1','team2')
+    pronos['score_team_win'] = np.where((pronos['team1score']>pronos['team2score']) & (pronos['team1score']!=pronos['team2score']),'team1','team2')
+    pronos['bon_prono'] = np.where(pronos['prono_team_win']==pronos['score_team_win'],1,0)
+    pronos['score_exact'] = np.where((pronos['team1prono']==pronos['team1score']) & (pronos['team2prono']==pronos['team2score']),1,0)
+    pronos['points'] = pronos['bon_prono'] + pronos['score_exact']
+
+    recap_score = pronos[['userid', 'username','bon_prono','score_exact','points']].groupby(['userid', 'username']).sum()
+    recap_score = recap_score.sort_values('points',ascending=False)
+    recap_score = recap_score.reset_index(level=['userid','username'])
+    recap_score = recap_score.drop(columns=['userid'])
+    print(pronos)
+    print(recap_score)
+    return render_template('classements.html',  tables=[recap_score.to_html(classes='data')], titles=recap_score.columns.values)
 
 
 @auth.route('/logout')
