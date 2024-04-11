@@ -1,46 +1,52 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class="column is-4 is-offset-4">
-    <div class="notification is-dark">
+
+<nav class="navbar" role="navigation" aria-label="main navigation">
+    <div class="column is-4 is-offset-4 has-text-centered">
         <h1 class="title has-text-white is-capitalized">
             Resultats & pronostics
         </h1>
     </div>
-</div>
+</nav>
 
-<div class="dropdown is-hoverable">
-    <div class="dropdown-trigger">
-        <button class="button has-background-link has-text-white" aria-haspopup="true" aria-controls="dropdown-menu4">
-            <span>Selectionnez une ligue :</span>
-        </button>
-    </div>
-    <div class="dropdown-menu" id="dropdown-menu4" role="menu">
-        <div class="dropdown-content has-background-dark">
-            <div class="dropdown-item">
-                {% for item in league_list %}
-                <form method="POST" action="/pronos_show_league/{{item}}">
-                    <button class="button is-dark">{{ item }}</button>
-                </form>
-                {% endfor %}
+<div class="hero-body header-image">
+    <div class="container has-text-centered">
+        <div class="dropdown is-hoverable">
+            <div class="dropdown-trigger">
+                <button class="button has-background-link has-text-white" aria-haspopup="true"
+                        aria-controls="dropdown-menu4">
+                    <span>Selectionnez une ligue &#8964</span>
+                </button>
+            </div>
+            <div class="dropdown-menu" id="dropdown-menu4" role="menu">
+                <div class="dropdown-content has-background-dark">
+                    <div class="dropdown-item">
+                        {% for item in league_list %}
+                        <form method="POST" action="/pronos_show_league/{{item}}">
+                            <button class="button is-dark">{{ item }}</button>
+                        </form>
+                        {% endfor %}
+                    </div>
+                </div>
             </div>
         </div>
+        <h1 class="title has-text-white is-capitalized"></h1>
+        {% if leagueid==0 %}
+        <div></div>
+        {% else %}
+        <div class="column is-4 is-offset-4">
+            <div class="notification is-dark">
+                <h1 class="title has-text-white">Matchs du {{leaguename}}</h1>
+            </div>
+        </div>
+        {% for item in records %}
+        <div class="box has-background-dark has-text-white">
+            <h1 class="title is-4 has-text-white ">{{item}}</h1>
+        </div>
+        {% endfor %}
+        {% endif %}
     </div>
 </div>
-<h1 class="title has-text-white is-capitalized"> </h1>
-{% if leagueid==0 %}
-<div></div>
-{% else %}
-<div class="column is-4 is-offset-4">
-    <div class="notification is-dark">
-        <h1 class="title has-text-white">Matchs du {{leaguename}}</h1>
-    </div>
-</div>
-    {% for item in records %}
-    <div class="box has-background-dark has-text-white">
-        <h1 class="title is-4 has-text-white ">{{item}}</h1>
-    </div>
-    {% endfor %}
-{% endif %}
 
 {% endblock %}
