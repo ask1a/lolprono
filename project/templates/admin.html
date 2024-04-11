@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block content %}
+<nav class="navbar" role="navigation" aria-label="main navigation">
+    <div class="column is-4 is-offset-4 has-text-centered">
+        <h1 class="title has-text-white is-capitalized">
+            Admin
+        </h1>
+    </div>
+</nav>
+
+<div class="hero-body header-image">
+    <div class="container has-text-centered">
+        <h2>Téléchargez votre CSV</h2>
+        <form action="/admin_add_games" method="post" enctype="multipart/form-data">
+            Sélectionnez un CSV:
+            <input type="file" name="gamesdata" accept=".csv" required>
+            <input type="submit" value="Envoyer le fichier de matchs">
+        </form>
+    </div>
+</div>
+
+
+
+{% endblock %}
