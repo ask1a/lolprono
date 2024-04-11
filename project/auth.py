@@ -1,9 +1,11 @@
 from flask import Blueprint, render_template, redirect, url_for, request, flash
 from werkzeug.security import generate_password_hash, check_password_hash
-from .models import User, UserLeague
+from .models import User, UserLeague, Game, GameProno
 from flask_login import login_user, logout_user, login_required, current_user
 from . import db
-
+from sqlalchemy import select
+import pandas as pd
+import numpy as np
 
 auth = Blueprint('auth', __name__)
 
@@ -105,14 +107,81 @@ def ligue_summer_post():
     return add_userleague_row(leagueid, leaguename, userid)
 
 
+def get_current_user_league_list():
+    current_user_league_list = [e.leaguename for e in
+                                UserLeague.query.filter_by(userid=current_user.id).order_by(UserLeague.leagueid).all()]
+    return current_user_league_list
+
+
+def get_leagueid_from_leaguename(leaguename):
+    row = UserLeague.query.filter_by(userid=current_user.id, leaguename=leaguename).first()
+    leagueid = row.leagueid
+    return leagueid
+
+
 @auth.route('/pronos')
 def pronos():
-    return render_template('pronos.html')
+    current_user_league_list = get_current_user_league_list()
+    return render_template('pronos.html', league_list=current_user_league_list, leagueid=0)
+
+
+@auth.route('/pronos_show_league/<leaguename>', methods=['POST'])
+def pronos_show_league(leaguename):
+    leagueid = get_leagueid_from_leaguename(leaguename)
+    current_user_league_list = get_current_user_league_list()
+    games = Game.query.filter_by(leagueid=leagueid).order_by(Game.gamedatetime).all()
+    records = [u.__dict__ for u in games]
+    for r in records:
+        r.pop('_sa_instance_state')
+
+    return render_template('pronos.html', league_list=current_user_league_list, leaguename=leaguename,
+                           leagueid=leagueid, records=records)
 
 
 @auth.route('/classements')
 def classements():
-    return render_template('classements.html')
+    current_user_league_list = get_current_user_league_list()
+    return render_template('classements.html', league_list=current_user_league_list, leagueid=0)
+
+
+@auth.route('/classements_show_ranking/<leaguename>', methods=['POST'])
+def classements_show_ranking(leaguename):
+    leagueid = get_leagueid_from_leaguename(leaguename)
+    current_user_league_list = get_current_user_league_list()
+    query = (select(User.id, User.name
+                    , GameProno.gameid, GameProno.team1prono, GameProno.team2prono
+                    , Game.team1score, Game.team2score
+                    )
+             .join(GameProno, User.id == GameProno.userid)
+             .join(Game, Game.id == GameProno.gameid)
+             .where(Game.leagueid == leagueid)
+             )
+
+    pronos = db.session.execute(query).all()
+    pronos = pd.DataFrame(pronos, columns=['userid', 'username', 'gameid',
+                                           'team1prono', 'team2prono',
+                                           'team1score', 'team2score'])
+    pronos['prono_team_win'] = np.where(
+        (pronos['team1prono'] > pronos['team2prono']) & (pronos['team1prono'] != pronos['team2prono']), 'team1',
+        'team2')
+    pronos['score_team_win'] = np.where(
+        (pronos['team1score'] > pronos['team2score']) & (pronos['team1score'] != pronos['team2score']), 'team1',
+        'team2')
+    pronos['bon_prono'] = np.where(pronos['prono_team_win'] == pronos['score_team_win'], 1, 0)
+    pronos['score_exact'] = np.where(
+        (pronos['team1prono'] == pronos['team1score']) & (pronos['team2prono'] == pronos['team2score']), 1, 0)
+    pronos['points'] = pronos['bon_prono'] + pronos['score_exact']
+
+    recap_score = pronos[['userid', 'username', 'bon_prono', 'score_exact', 'points']].groupby(
+        ['userid', 'username']).sum()
+    recap_score = recap_score.sort_values('points', ascending=False)
+    recap_score = recap_score.reset_index(level=['userid', 'username'])
+    recap_score = recap_score.drop(columns=['userid']).to_dict("records")
+
+    titles = ['Pseudo', 'Bons pronos', 'Pronos exacts', 'Points']
+    return render_template('classements.html', leagueid=leagueid, league_list=current_user_league_list,
+                           recap_score=recap_score,
+                           titles=titles)
 
 
 @auth.route('/logout')
