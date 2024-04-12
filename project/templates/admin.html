@@ -10,16 +10,39 @@
 </nav>
 
 <div class="hero-body header-image">
-    <div class="container has-text-centered">
-        <h2>Téléchargez votre CSV</h2>
+    <div class="container has-text-centered has-background-dark">
+        <h2 class="title is-4"> Importer un .csv de matchs(BO)</h2>
+        <h3 class="subtitle is-5">
+            <a href="/static/game_table_exemple.csv" download="game_table_exemple.csv">Télécharger ici un fichier
+                exemple</a>
+        </h3>
+        <p>L'ajout d'un bo avec le même triplet gamedatetime/team1/team2 va ecraser la ligne et permet de mettre à jour
+            le résultat d'un bo.</p>
         <form action="/admin_add_games" method="post" enctype="multipart/form-data">
-            Sélectionnez un CSV:
+            Chemin du .csv :
             <input type="file" name="gamesdata" accept=".csv" required>
             <input type="submit" value="Envoyer le fichier de matchs">
         </form>
+        <h2 class="title is-4"> -------------------------- </h2>
+        <h2 class="title is-4"> Importer un .csv de ligues</h2>
+        <h3 class="subtitle is-5">
+            <a href="/static/league_table_exemple.csv" download="league_table_exemple.csv">Télécharger ici un fichier
+                exemple</a>
+        </h3>
+        <p>L'ajout d'une ligue avec un id déjà existant va écraser la ligne et permet de mettre à jour le nom d'une
+            ligue.</p>
+        <form action="/admin_add_leagues" method="post" enctype="multipart/form-data">
+            Chemin du .csv :
+            <input type="file" name="leaguesdata" accept=".csv" required>
+            <input type="submit" value="Envoyer le fichier de leagues">
+        </form>
+        <h2 class="title is-4"> -------------------------- </h2>
+        <h2 class="title is-4"> Visualiser les BOs et supprimer un match</h2>
+        <a href="{{ url_for('auth.admin_show_games') }}">
+            ➡️Voir les BOs
+        </a>
     </div>
 </div>
-
 
 
 {% endblock %}

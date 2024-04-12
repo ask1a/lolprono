@@ -1,11 +1,14 @@
 from flask import Blueprint, render_template, redirect, url_for, request, flash
 from werkzeug.security import generate_password_hash, check_password_hash
-from .models import User, UserLeague, Game, GameProno
+from .models import User, UserLeague, Game, GameProno, League
 from flask_login import login_user, logout_user, login_required, current_user
 from . import db
 from sqlalchemy import select
 import pandas as pd
 import numpy as np
+import io
+from datetime import datetime, timedelta
+
 
 auth = Blueprint('auth', __name__)
 
@@ -182,6 +185,123 @@ def classements_show_ranking(leaguename):
     return render_template('classements.html', leagueid=leagueid, league_list=current_user_league_list,
                            recap_score=recap_score,
                            titles=titles)
+
+
+@auth.route('/admin')
+@login_required
+def admin():
+    if current_user.email != 'skiaa@hotmail.com':
+        return redirect(url_for('main.index'))
+    else:
+        return render_template("admin.html")
+
+
+@auth.route('/admin_add_games', methods=['POST'])
+@login_required
+def admin_add_games():
+    if 'gamesdata' not in request.files:
+        return redirect(url_for('auth.admin'))
+    file = request.files['gamesdata']
+    if file.filename == '':
+        return redirect(url_for('auth.admin'))
+    if file.filename[-3:] != 'csv':
+        return redirect(url_for('auth.admin'))
+
+    file_stream = io.BytesIO(file.read())
+    games_to_load_in_database = pd.read_csv(file_stream).to_dict("records")
+
+    for game in games_to_load_in_database:
+        # check if game already exist then delete to overwrite:
+        check_exist = {}
+        row = Game.query.filter(
+            Game.gamedatetime <= datetime.fromisoformat(game['gamedatetime']) + timedelta(minutes=1),
+            Game.gamedatetime >= datetime.fromisoformat(game['gamedatetime']) - timedelta(minutes=1),
+            Game.team1 == game['team1'],
+            Game.team2 == game['team2']
+        ).first()
+        if row:
+            check_exist['gameid'] = row.id
+            print("suppression enregistrement")
+            # delete the game in database
+            db.session.delete(row)
+            db.session.commit()
+
+        # create a game with the csv data.
+        new_game = Game(
+            leagueid=game['leagueid'],
+            bo=game['bo'],
+            gamedatetime=datetime.fromisoformat(game['gamedatetime']),
+            team1=game['team1'],
+            team2=game['team2'],
+            team1score=game['team1score'],
+            team2score=game['team2score']
+        )
+        if check_exist.get('gameid'):
+            new_game.id = check_exist.get('gameid')
+        # add the new user to the database
+        db.session.add(new_game)
+        db.session.commit()
+
+    return render_template('admin.html')
+
+@auth.route('/admin_add_leagues', methods=['POST'])
+@login_required
+def admin_add_leagues():
+    if 'leaguesdata' not in request.files:
+        return redirect(url_for('auth.admin'))
+    file = request.files['leaguesdata']
+    if file.filename == '':
+        return redirect(url_for('auth.admin'))
+    if file.filename[-3:] != 'csv':
+        return redirect(url_for('auth.admin'))
+
+    file_stream = io.BytesIO(file.read())
+    leagues_to_load_in_database = pd.read_csv(file_stream).to_dict("records")
+
+    for league in leagues_to_load_in_database:
+        check_exist = {}
+        row = League.query.filter(League.id == league['id']).first()
+        if row:
+            check_exist['id'] = row.id
+            print("suppression enregistrement")
+            # delete the league in database
+            db.session.delete(row)
+            db.session.commit()
+        # create a game with the csv data.
+        new_league = League(leaguename=league['leaguename'])
+        if check_exist.get('id'):
+            new_league.id = check_exist.get('id')
+        # add the new user to the database
+        db.session.add(new_league)
+        db.session.commit()
+    return redirect(url_for('auth.admin'))
+
+@auth.route('/admin_show_games')
+@login_required
+def admin_show_games():
+    if current_user.email != 'skiaa@hotmail.com':
+        return redirect(url_for('main.index'))
+    else:
+        query = (select(Game.id, Game.leagueid,
+                        Game.bo, Game.gamedatetime,
+                        Game.team1, Game.team2,
+                        Game.team1score, Game.team2score))
+        games = pd.DataFrame(db.session.execute(query).all())
+        print(games)
+        columns = games.columns
+        return render_template("admin_show_games.html", bos=games.to_dict("records"), titles=columns)
+
+@auth.route('/admin_delete_game', methods=['POST'])
+@login_required
+def admin_delete_game():
+    to_delete = request.form.getlist("todelete")
+    to_delete = [int(e) for e in to_delete]
+    print(to_delete)
+    for id in to_delete:
+        row = Game.query.filter(Game.id == id).first()
+        db.session.delete(row)
+        db.session.commit()
+    return redirect(url_for('auth.admin'))
 
 
 @auth.route('/logout')
