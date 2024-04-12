@@ -9,9 +9,9 @@ import numpy as np
 import io
 from datetime import datetime, timedelta
 
-
 auth = Blueprint('auth', __name__)
-allowed_admin_account = ['skiaa@hotmail.com',]
+allowed_admin_account = ['skiaa@hotmail.com', ]
+
 
 @auth.route('/login')
 def login():
@@ -244,6 +244,7 @@ def admin_add_games():
 
     return render_template('admin.html')
 
+
 @auth.route('/admin_add_leagues', methods=['POST'])
 @login_required
 def admin_add_leagues():
@@ -276,6 +277,7 @@ def admin_add_leagues():
         db.session.commit()
     return redirect(url_for('auth.admin'))
 
+
 @auth.route('/admin_show_games')
 @login_required
 def admin_show_games():
@@ -290,6 +292,7 @@ def admin_show_games():
         print(games)
         columns = games.columns
         return render_template("admin_show_games.html", bos=games.to_dict("records"), titles=columns)
+
 
 @auth.route('/admin_delete_game', methods=['POST'])
 @login_required
