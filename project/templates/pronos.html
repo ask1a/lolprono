@@ -40,66 +40,39 @@
                 <h1 class="title has-text-white">Matchs du {{leaguename}}</h1>
             </div>
         </div>
-        {% for item in records %}
-        <div class="box has-background-dark has-text-white">
-            <div class="columns">
-                <div class="column">{{item.gamedatetime}} (BO{{item.bo}})</div>
-                <div class="column">{{item.team1}}</div>
-                <div class="column">{{item.team1score}} - {{item.team2score}}</div>
-                <div class="column">{{item.team2}}</div>
-                <div class="column">Points</div>
+        <form method="POST" action="/pronos_update">
+            <button class="button is-link is-dark is-medium">Valider mes pronostics</button>
+                <h1 class="title has-text-white">                </h1>
+            {% for item in records %}
+            <div class="box has-background-dark has-text-white">
+                <div class="columns">
+                    <div class="column">{{item.gamedatetime}} (BO{{item.bo}})</div>
+                    <div class="column">{{item.team1}}</div>
+                    <div class="column">{{item.team1score}}</div>
+                    <div class="column">{{item.team2score}}</div>
+                    <div class="column">{{item.team2}}</div>
+                    <div class="column">Points</div>
+                </div>
+                <div class="columns has-background-grey-lighter has-text-dark">
+                    <div class="column"></div>
+                    <div class="column has-text-large">Mon pronostic :</div>
+                    <div class="column">
+                                <input class="input is-small" type="number" name="number" placeholder="{{item.team1prono}}" min="0"
+                                       max="{{(item.bo//2)+1}}"  value="{{item.team1prono}}"
+                                       autofocus="">
+                    </div>
+                    <div class="column">
+                                <input class="input is-small" type="number" name="number" placeholder="{{item.team2prono}}"
+                        min="0" max="{{(item.bo//2)+1}}" value="{{item.team2prono}}"
+                                       autofocus="">
+                    </div>
+                    <div class="column">
+                    </div>
+                    <div class="column">???</div>
+                </div>
             </div>
-            <div class="columns has-background-grey-lighter has-text-dark">
-                <div class="column"></div>
-                <div class="column">Mon pronostic :</div>
-                <div class="column">{{item.team1score}} - {{item.team2score}}</div>
-                <div class="column"></div>
-                <div class="column">???</div>
-            </div>
-            <!--            <table class="table is-striped is-hoverable is-fullwidth">-->
-            <!--                <tbody>-->
-            <!--                <tr>-->
-            <!--                    <td>-->
-            <!--                        {{item.gamedatetime}}-->
-            <!--                    </td>-->
-            <!--                     <td>-->
-            <!--                        {{item.bo}}-->
-            <!--                    </td>-->
-            <!--                    <td>-->
-            <!--                        {{item.team1}}-->
-            <!--                    </td>-->
-            <!--                    <td>-->
-            <!--                        {{item.team1score}} - {{item.team2score}}-->
-            <!--                    </td>-->
-            <!--                    <td>-->
-            <!--                        {{item.team2}}-->
-            <!--                    </td>-->
-            <!--                </tr>-->
-            <!--                </tbody>-->
-            <!--            </table>-->
-            <!--            <table class="table is-striped is-hoverable is-fullwidth">-->
-            <!--                <tbody>-->
-            <!--                <tr>-->
-            <!--                    <td>-->
-            <!--                        {{item.gamedatetime}}-->
-            <!--                    </td>-->
-            <!--                     <td>-->
-            <!--                        Mon prono :-->
-            <!--                    </td>-->
-            <!--                    <td>-->
-            <!--                        {{item.team1}}-->
-            <!--                    </td>-->
-            <!--                    <td>-->
-            <!--                        {{item.team1score}} - {{item.team2score}}-->
-            <!--                    </td>-->
-            <!--                    <td>-->
-            <!--                        {{item.team2}}-->
-            <!--                    </td>-->
-            <!--                </tr>-->
-            <!--                </tbody>-->
-            <!--            </table>-->
-        </div>
-        {% endfor %}
+            {% endfor %}
+        </form>
         {% endif %}
     </div>
 </div>
