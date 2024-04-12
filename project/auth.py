@@ -10,7 +10,7 @@ import io
 from datetime import datetime, timedelta
 
 auth = Blueprint('auth', __name__)
-allowed_admin_account = ['skiaa@hotmail.com', ]
+allowed_admin_account = ['skiaa@hotmail.com', 'zayedlewis@hotmail.com']
 
 
 @auth.route('/login')
@@ -196,20 +196,23 @@ def admin():
         return render_template("admin.html")
 
 
-@auth.route('/admin_add_games', methods=['POST'])
-@login_required
-def admin_add_games():
-    if 'gamesdata' not in request.files:
+def verification_file_upload(request_file, file_type):
+    if file_type not in request_file:
         return redirect(url_for('auth.admin'))
-    file = request.files['gamesdata']
+    file = request.files[file_type]
     if file.filename == '':
         return redirect(url_for('auth.admin'))
     if file.filename[-3:] != 'csv':
         return redirect(url_for('auth.admin'))
-
     file_stream = io.BytesIO(file.read())
-    games_to_load_in_database = pd.read_csv(file_stream).to_dict("records")
+    return pd.read_csv(file_stream).to_dict("records")
 
+@auth.route('/admin_add_games', methods=['POST'])
+@login_required
+def admin_add_games():
+    games_to_load_in_database = verification_file_upload(request.files, 'gamesdata')
+
+    print(games_to_load_in_database)
     for game in games_to_load_in_database:
         # check if game already exist then delete to overwrite:
         check_exist = {}
@@ -248,16 +251,7 @@ def admin_add_games():
 @auth.route('/admin_add_leagues', methods=['POST'])
 @login_required
 def admin_add_leagues():
-    if 'leaguesdata' not in request.files:
-        return redirect(url_for('auth.admin'))
-    file = request.files['leaguesdata']
-    if file.filename == '':
-        return redirect(url_for('auth.admin'))
-    if file.filename[-3:] != 'csv':
-        return redirect(url_for('auth.admin'))
-
-    file_stream = io.BytesIO(file.read())
-    leagues_to_load_in_database = pd.read_csv(file_stream).to_dict("records")
+    leagues_to_load_in_database = verification_file_upload(request.files, 'leaguesdata')
 
     for league in leagues_to_load_in_database:
         check_exist = {}
