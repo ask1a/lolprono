@@ -8,4 +8,5 @@ flask-login = "*"
 python-dotenv = "*"
 pytest = "*"
 requests = "*"
+pandas = "*"
 

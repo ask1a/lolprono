@@ -1,39 +1,47 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class="column is-4 is-offset-4">
-
-    {% with messages = get_flashed_messages() %}
-    {% if messages %}
-    <div class="notification is-danger">
-        {{ messages[0] }} Aller à la <a href="{{ url_for('auth.login') }}">page de connexion</a>.
+<nav class="navbar" role="navigation" aria-label="main navigation">
+    <div class="column is-4 is-offset-4 has-text-centered">
+        <h1 class="title has-text-white is-capitalized">
+            Inscription
+        </h1>
     </div>
-    {% endif %}
-    {% endwith %}
-    <div class="box">
-        <h3 class="title is-3 has-text-dark">Inscrivez-vous :</h3>
+</nav>
 
-        <form method="POST" action="/signup">
-            <div class="field">
-                <div class="control">
-                    <input class="input is-large" type="email" name="email" placeholder="Email" autofocus="">
-                </div>
+<div class="hero-body header-image">
+    <div class="container has-text-centered">
+        <div class="column is-4 is-offset-4">
+            {% with messages = get_flashed_messages() %}
+            {% if messages %}
+            <div class="notification is-danger">
+                {{ messages[0] }} Aller à la <a href="{{ url_for('auth.login') }}">page de connexion</a>.
             </div>
-
-            <div class="field">
-                <div class="control">
-                    <input class="input is-large" type="text" name="name" placeholder="Nom" autofocus="">
-                </div>
+            {% endif %}
+            {% endwith %}
+            <div class="box">
+                <h3 class="title is-3 has-text-dark">Inscrivez-vous :</h3>
+                <form method="POST" action="/signup">
+                    <div class="field">
+                        <div class="control">
+                            <input class="input is-large" type="email" name="email" placeholder="Email" autofocus="">
+                        </div>
+                    </div>
+                    <div class="field">
+                        <div class="control">
+                            <input class="input is-large" type="text" name="name" placeholder="Pseudo" autofocus="">
+                        </div>
+                    </div>
+                    <div class="field">
+                        <div class="control">
+                            <input class="input is-large" type="password" name="password" placeholder="Mot de passe">
+                        </div>
+                    </div>
+                    <button class="button is-link is-large is-fullwidth">Inscription</button>
+                </form>
             </div>
-
-            <div class="field">
-                <div class="control">
-                    <input class="input is-large" type="password" name="password" placeholder="Mot de passe">
-                </div>
-            </div>
-
-            <button class="button is-link is-large is-fullwidth">Inscription</button>
-        </form>
+        </div>
     </div>
 </div>
+
 {% endblock %}
