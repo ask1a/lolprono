@@ -11,7 +11,7 @@ from datetime import datetime, timedelta
 
 
 auth = Blueprint('auth', __name__)
-
+allowed_admin_account = ['skiaa@hotmail.com',]
 
 @auth.route('/login')
 def login():
@@ -190,7 +190,7 @@ def classements_show_ranking(leaguename):
 @auth.route('/admin')
 @login_required
 def admin():
-    if current_user.email != 'skiaa@hotmail.com':
+    if current_user.email not in allowed_admin_account:
         return redirect(url_for('main.index'))
     else:
         return render_template("admin.html")
@@ -279,7 +279,7 @@ def admin_add_leagues():
 @auth.route('/admin_show_games')
 @login_required
 def admin_show_games():
-    if current_user.email != 'skiaa@hotmail.com':
+    if current_user.email not in allowed_admin_account:
         return redirect(url_for('main.index'))
     else:
         query = (select(Game.id, Game.leagueid,
