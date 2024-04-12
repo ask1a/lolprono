@@ -212,7 +212,6 @@ def verification_file_upload(request_file, file_type):
 def admin_add_games():
     games_to_load_in_database = verification_file_upload(request.files, 'gamesdata')
 
-    print(games_to_load_in_database)
     for game in games_to_load_in_database:
         # check if game already exist then delete to overwrite:
         check_exist = {}
