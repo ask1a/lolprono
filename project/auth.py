@@ -300,8 +300,8 @@ def admin_delete_game():
     to_delete = request.form.getlist("todelete")
     to_delete = [int(e) for e in to_delete]
     print(to_delete)
-    for id in to_delete:
-        row = Game.query.filter(Game.id == id).first()
+    for idd in to_delete:
+        row = Game.query.filter(Game.id == idd).first()
         db.session.delete(row)
         db.session.commit()
     return redirect(url_for('auth.admin'))
