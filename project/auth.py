@@ -3,7 +3,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from .models import User, UserLeague, Game, GameProno, League
 from flask_login import login_user, logout_user, login_required, current_user
 from . import db
-from sqlalchemy import select
+from sqlalchemy import select, and_
 import pandas as pd
 import numpy as np
 import io
@@ -132,10 +132,24 @@ def pronos():
 def pronos_show_league(leaguename):
     leagueid = get_leagueid_from_leaguename(leaguename)
     current_user_league_list = get_current_user_league_list()
-    games = Game.query.filter_by(leagueid=leagueid).order_by(Game.gamedatetime).all()
-    records = [u.__dict__ for u in games]
-    for r in records:
-        r.pop('_sa_instance_state')
+    query = (select(User.id.label("userid")
+                    , Game.team1score, Game.team2score, Game.leagueid, Game.bo
+                    , Game.gamedatetime, Game.team1, Game.team2, Game.id.label("gameid")
+                    , GameProno.team1prono, GameProno.team2prono
+                    )
+             .join(UserLeague, UserLeague.userid == User.id)
+             .join(Game, UserLeague.leagueid == Game.leagueid)
+             .join(GameProno, and_(GameProno.userid == User.id, GameProno.gameid == Game.id), isouter=True)
+             .where(Game.leagueid == leagueid)
+             .where(current_user.id == User.id)
+             .order_by(Game.gamedatetime)
+             )
+    pronos = db.session.execute(query).all()
+    pronos = pd.DataFrame(pronos)
+    columns_to_integer = ['team1score', 'team2score', 'team1prono', 'team2prono']
+    for col in columns_to_integer:
+        pronos[col] = pronos[col].astype('Int64')
+    records = pronos.to_dict("records")
 
     return render_template('pronos.html', league_list=current_user_league_list, leaguename=leaguename,
                            leagueid=leagueid, records=records)
