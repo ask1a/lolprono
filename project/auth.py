@@ -66,6 +66,7 @@ def signup_post():
 
 
 @auth.route('/ligues')
+@login_required
 def ligues():
     return render_template('ligues.html', league1=is_registered_in_league(1), league2=is_registered_in_league(2))
 
@@ -93,6 +94,7 @@ def is_registered_in_league(leagueid):
 
 
 @auth.route('/ligue_spring', methods=['POST'])
+@login_required
 def ligue_spring_post():
     userid = current_user.id
     leagueid = 1
@@ -102,6 +104,7 @@ def ligue_spring_post():
 
 
 @auth.route('/ligue_summer', methods=['POST'])
+@login_required
 def ligue_summer_post():
     userid = current_user.id
     leagueid = 2
@@ -123,12 +126,14 @@ def get_leagueid_from_leaguename(leaguename):
 
 
 @auth.route('/pronos')
+@login_required
 def pronos():
     current_user_league_list = get_current_user_league_list()
     return render_template('pronos.html', league_list=current_user_league_list, leagueid=0)
 
 
 @auth.route('/pronos_show_league/<leaguename>', methods=['POST'])
+@login_required
 def pronos_show_league(leaguename):
     leagueid = get_leagueid_from_leaguename(leaguename)
     current_user_league_list = get_current_user_league_list()
@@ -142,12 +147,14 @@ def pronos_show_league(leaguename):
 
 
 @auth.route('/classements')
+@login_required
 def classements():
     current_user_league_list = get_current_user_league_list()
     return render_template('classements.html', league_list=current_user_league_list, leagueid=0)
 
 
 @auth.route('/classements_show_ranking/<leaguename>', methods=['POST'])
+@login_required
 def classements_show_ranking(leaguename):
     leagueid = get_leagueid_from_leaguename(leaguename)
     current_user_league_list = get_current_user_league_list()
