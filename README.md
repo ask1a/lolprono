@@ -18,7 +18,7 @@ L'application permet :
 
 ```pip install virtualenv```
 
-```virtualenv venv```
+```python -m virtualenv venv```
 
 ```source venv/bin/activate```
 
