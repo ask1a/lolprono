@@ -10,7 +10,11 @@ import io
 from datetime import datetime, timedelta
 
 auth = Blueprint('auth', __name__)
-allowed_admin_account = ['skiaa@hotmail.com', 'zayedlewis@hotmail.com']
+allowed_admin_account = ('skiaa@hotmail.com', 'zayedlewis@hotmail.com')
+
+def redirect_not_allowed_admin_account(allowed_account):
+    if current_user.email not in allowed_account:
+        return redirect(url_for('main.index'))
 
 
 @auth.route('/login')
@@ -194,13 +198,13 @@ def classements_show_ranking(leaguename):
                            titles=titles)
 
 
+
+
 @auth.route('/admin')
 @login_required
 def admin():
-    if current_user.email not in allowed_admin_account:
-        return redirect(url_for('main.index'))
-    else:
-        return render_template("admin.html")
+    redirect_not_allowed_admin_account(allowed_admin_account)
+    return render_template("admin.html")
 
 
 def verification_file_upload(request_file, file_type):
@@ -218,6 +222,7 @@ def verification_file_upload(request_file, file_type):
 @auth.route('/admin_add_games', methods=['POST'])
 @login_required
 def admin_add_games():
+    redirect_not_allowed_admin_account(allowed_admin_account)
     games_to_load_in_database = verification_file_upload(request.files, 'gamesdata')
 
     for game in games_to_load_in_database:
@@ -258,6 +263,7 @@ def admin_add_games():
 @auth.route('/admin_add_leagues', methods=['POST'])
 @login_required
 def admin_add_leagues():
+    redirect_not_allowed_admin_account(allowed_admin_account)
     leagues_to_load_in_database = verification_file_upload(request.files, 'leaguesdata')
 
     for league in leagues_to_load_in_database:
@@ -301,22 +307,35 @@ def admin_show_users():
     return admin_show_table(query=(select(User.id, User.name, User.email)), html_template="admin_show_users.html")
 
 
-def admin_show_table(query, html_template):
-    if current_user.email not in allowed_admin_account:
-        return redirect(url_for('main.index'))
-    else:
-        df = pd.DataFrame(db.session.execute(query).all())
-        return render_template(html_template, data=df.to_dict("records"), titles=df.columns)
+def admin_show_table(query, html_template, allowed=allowed_admin_account):
+    redirect_not_allowed_admin_account(allowed)
+    df = pd.DataFrame(db.session.execute(query).all())
+    return render_template(html_template, data=df.to_dict("records"), titles=df.columns)
 
 
 @auth.route('/admin_delete_game', methods=['POST'])
 @login_required
 def admin_delete_game():
+    return admin_delete_from(Game)
+
+
+@auth.route('/admin_delete_league', methods=['POST'])
+@login_required
+def admin_delete_league():
+    return admin_delete_from(League)
+
+
+@auth.route('/admin_delete_user', methods=['POST'])
+@login_required
+def admin_delete_user():
+    return admin_delete_from(User)
+
+
+def admin_delete_from(table):
     to_delete = request.form.getlist("todelete")
     to_delete = [int(e) for e in to_delete]
-    print(to_delete)
     for idd in to_delete:
-        row = Game.query.filter(Game.id == idd).first()
+        row = table.query.filter(table.id == idd).first()
         db.session.delete(row)
         db.session.commit()
     return redirect(url_for('auth.admin'))
