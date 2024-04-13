@@ -214,6 +214,7 @@ def verification_file_upload(request_file, file_type):
     file_stream = io.BytesIO(file.read())
     return pd.read_csv(file_stream).to_dict("records")
 
+
 @auth.route('/admin_add_games', methods=['POST'])
 @login_required
 def admin_add_games():
@@ -281,17 +282,31 @@ def admin_add_leagues():
 @auth.route('/admin_show_games')
 @login_required
 def admin_show_games():
+    return admin_show_table(query=(select(Game.id, Game.leagueid,
+                                          Game.bo, Game.gamedatetime,
+                                          Game.team1, Game.team2,
+                                          Game.team1score, Game.team2score)),
+                            html_template="admin_show_games.html")
+
+
+@auth.route('/admin_show_leagues')
+@login_required
+def admin_show_leagues():
+    return admin_show_table(query=(select(League.id, League.leaguename)), html_template="admin_show_leagues.html")
+
+
+@auth.route('/admin_show_users')
+@login_required
+def admin_show_users():
+    return admin_show_table(query=(select(User.id, User.name, User.email)), html_template="admin_show_users.html")
+
+
+def admin_show_table(query, html_template):
     if current_user.email not in allowed_admin_account:
         return redirect(url_for('main.index'))
     else:
-        query = (select(Game.id, Game.leagueid,
-                        Game.bo, Game.gamedatetime,
-                        Game.team1, Game.team2,
-                        Game.team1score, Game.team2score))
-        games = pd.DataFrame(db.session.execute(query).all())
-        print(games)
-        columns = games.columns
-        return render_template("admin_show_games.html", bos=games.to_dict("records"), titles=columns)
+        df = pd.DataFrame(db.session.execute(query).all())
+        return render_template(html_template, data=df.to_dict("records"), titles=df.columns)
 
 
 @auth.route('/admin_delete_game', methods=['POST'])
