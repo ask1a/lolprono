@@ -12,6 +12,7 @@ from datetime import datetime, timedelta
 auth = Blueprint('auth', __name__)
 allowed_admin_account = ('skiaa@hotmail.com', 'zayedlewis@hotmail.com')
 
+
 def redirect_not_allowed_admin_account(allowed_account):
     if current_user.email not in allowed_account:
         return redirect(url_for('main.index'))
@@ -196,8 +197,6 @@ def classements_show_ranking(leaguename):
     return render_template('classements.html', leagueid=leagueid, league_list=current_user_league_list,
                            recap_score=recap_score,
                            titles=titles)
-
-
 
 
 @auth.route('/admin')
