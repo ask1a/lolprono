@@ -214,7 +214,11 @@ def classements_show_ranking(leaguename):
 @login_required
 @redirect_not_allowed_admin_account
 def admin():
-    status = bool(UserTableLocked.query.filter(UserTableLocked.id == 1).first().status)
+    query = UserTableLocked.query.filter(UserTableLocked.id == 1).first()
+    if query:
+        status = bool(query.status)
+    else:
+        status = 0
     return render_template("admin.html", signup_locked=status)
 
 
