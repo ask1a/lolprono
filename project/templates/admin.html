@@ -63,7 +63,7 @@
             ➡️Voir les ligues
         </a>
         <h2 class="title is-4"></h2>
-                <div class="column is-8 is-offset-2 has-text-centered">
+        <div class="column is-8 is-offset-2 has-text-centered">
             <div class="box has-background-danger">
                 <h2 class="title is-4"> Visualiser/supprimer un/des utilisateur(s).</h2>
             </div>
@@ -71,6 +71,20 @@
         <a href="{{ url_for('auth.admin_show_users') }}">
             ➡️Voir les utilisateurs
         </a>
+        <h2 class="title is-4"></h2>
+        <form action="/admin_lock_signup" , method="post">
+            <div class="column is-8 is-offset-2 has-text-centered">
+                <div class="box has-background-warning">
+                    <h2 class="title is-4 has-text-dark"> Verrouiller les nouvelles inscriptions.</h2>
+                </div>
+            </div>
+            <tr>
+                🔒 Inscriptions verrouillées :
+            </tr>
+            <input type="checkbox" class="onoffswitch-checkbox" name="signup_status" {{'checked' if signup_locked}}>
+            <h2 class="title is-4"></h2>
+            <input class="button" type="submit" value="Confirmer"/>
+        </form>
         <h2 class="title is-4"></h2>
         <h2 class="title is-4"></h2>
     </div>

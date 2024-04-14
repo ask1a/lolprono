@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, redirect, url_for, request, flash
 from werkzeug.security import generate_password_hash, check_password_hash
-from .models import User, UserLeague, Game, GameProno, League
+from .models import User, UserLeague, Game, GameProno, League, UserTableLocked
 from flask_login import login_user, logout_user, login_required, current_user
 from . import db
 from sqlalchemy import select
@@ -10,12 +10,16 @@ import io
 from datetime import datetime, timedelta
 
 auth = Blueprint('auth', __name__)
-allowed_admin_account = ('skiaa@hotmail.com', 'zayedlewis@hotmail.com')
 
-
-def redirect_not_allowed_admin_account(allowed_account):
-    if current_user.email not in allowed_account:
-        return redirect(url_for('main.index'))
+def redirect_not_allowed_admin_account(func):
+    def wrapper():
+        allowed_admin_account = ('skiaa@hotmail.com', 'zayedlewis@hotmail.com')
+        if current_user.email not in allowed_admin_account:
+            return redirect(url_for('main.index'))
+        else:
+            return func()
+    wrapper.__name__ = func.__name__
+    return wrapper
 
 
 @auth.route('/login')
@@ -57,6 +61,13 @@ def signup_post():
 
     if user:  # if a user is found, we want to redirect back to signup page so user can try again
         flash("L'email existe déjà en base de donnée!")
+        return redirect(url_for('auth.signup'))
+
+    # check if new signup is locked
+    locked = UserTableLocked.query.filter(UserTableLocked.status == 1).first()
+    if locked:
+        flash(
+            "L'inscription de nouveaux utilisateurs est actuellement verrouillée, contactez un admin ou utilisez un compte existant.")
         return redirect(url_for('auth.signup'))
 
     # create a new user with the form data. Hash the password so the plaintext version isn't saved.
@@ -201,9 +212,10 @@ def classements_show_ranking(leaguename):
 
 @auth.route('/admin')
 @login_required
+@redirect_not_allowed_admin_account
 def admin():
-    redirect_not_allowed_admin_account(allowed_admin_account)
-    return render_template("admin.html")
+    status = bool(UserTableLocked.query.filter(UserTableLocked.id == 1).first().status)
+    return render_template("admin.html", signup_locked=status)
 
 
 def verification_file_upload(request_file, file_type):
@@ -220,8 +232,8 @@ def verification_file_upload(request_file, file_type):
 
 @auth.route('/admin_add_games', methods=['POST'])
 @login_required
+@redirect_not_allowed_admin_account
 def admin_add_games():
-    redirect_not_allowed_admin_account(allowed_admin_account)
     games_to_load_in_database = verification_file_upload(request.files, 'gamesdata')
 
     for game in games_to_load_in_database:
@@ -261,8 +273,8 @@ def admin_add_games():
 
 @auth.route('/admin_add_leagues', methods=['POST'])
 @login_required
+@redirect_not_allowed_admin_account
 def admin_add_leagues():
-    redirect_not_allowed_admin_account(allowed_admin_account)
     leagues_to_load_in_database = verification_file_upload(request.files, 'leaguesdata')
 
     for league in leagues_to_load_in_database:
@@ -286,6 +298,7 @@ def admin_add_leagues():
 
 @auth.route('/admin_show_games')
 @login_required
+@redirect_not_allowed_admin_account
 def admin_show_games():
     return admin_show_table(query=(select(Game.id, Game.leagueid,
                                           Game.bo, Game.gamedatetime,
@@ -296,36 +309,40 @@ def admin_show_games():
 
 @auth.route('/admin_show_leagues')
 @login_required
+@redirect_not_allowed_admin_account
 def admin_show_leagues():
     return admin_show_table(query=(select(League.id, League.leaguename)), html_template="admin_show_leagues.html")
 
 
 @auth.route('/admin_show_users')
 @login_required
+@redirect_not_allowed_admin_account
 def admin_show_users():
     return admin_show_table(query=(select(User.id, User.name, User.email)), html_template="admin_show_users.html")
 
 
-def admin_show_table(query, html_template, allowed=allowed_admin_account):
-    redirect_not_allowed_admin_account(allowed)
+def admin_show_table(query, html_template):
     df = pd.DataFrame(db.session.execute(query).all())
     return render_template(html_template, data=df.to_dict("records"), titles=df.columns)
 
 
 @auth.route('/admin_delete_game', methods=['POST'])
 @login_required
+@redirect_not_allowed_admin_account
 def admin_delete_game():
     return admin_delete_from(Game)
 
 
 @auth.route('/admin_delete_league', methods=['POST'])
 @login_required
+@redirect_not_allowed_admin_account
 def admin_delete_league():
     return admin_delete_from(League)
 
 
 @auth.route('/admin_delete_user', methods=['POST'])
 @login_required
+@redirect_not_allowed_admin_account
 def admin_delete_user():
     return admin_delete_from(User)
 
@@ -337,6 +354,25 @@ def admin_delete_from(table):
         row = table.query.filter(table.id == idd).first()
         db.session.delete(row)
         db.session.commit()
+    return redirect(url_for('auth.admin'))
+
+
+@auth.route('/admin_lock_signup', methods=['POST'])
+@login_required
+@redirect_not_allowed_admin_account
+def admin_lock_signup():
+    signup_status = int(bool(request.form.get("signup_status")))
+    row = UserTableLocked.query.filter(UserTableLocked.status == signup_status).first()
+    if not row:
+        to_delete = UserTableLocked.query.filter(UserTableLocked.id == 1).first()
+        if to_delete:
+            db.session.delete(to_delete)
+            db.session.commit()
+
+        new_status = UserTableLocked(id=1, status=signup_status)
+        db.session.add(new_status)
+        db.session.commit()
+
     return redirect(url_for('auth.admin'))
 
 
