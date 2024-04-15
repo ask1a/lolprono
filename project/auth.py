@@ -239,7 +239,7 @@ def admin_add_games():
         new_game = Game(
             leagueid=game['leagueid'],
             bo=game['bo'],
-            gamedatetime=datetime.fromisoformat(game['gamedatetime']),
+             gamedatetime=datetime.fromisoformat(game['game_datetime']),
             team_1=game['team_1'],
             team_2=game['team_2'],
             score_team_1=game['score_team_1'],
