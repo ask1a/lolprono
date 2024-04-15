@@ -1,5 +1,5 @@
 /*
-    Quick code to rename all column names accordingly in the database.
+    Quick code to rename all column names accordingly in the database. To run in DB browser. Useful to updating a sqlite database that has the old column naming format.
 */
 -- Modifying table "game"
 ALTER TABLE game RENAME COLUMN gamedatetime TO game_datetime;
