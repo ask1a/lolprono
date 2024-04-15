@@ -223,7 +223,7 @@ def admin_add_games():
         # check if game already exist then delete to overwrite:
         check_exist = {}
         row = Game.query.filter(
-            Game.gamedatetime <= datetime.fromisoformat(game['gamedatetime']) + timedelta(minutes=1),
+             Game.gamedatetime <= datetime.fromisoformat(game['game_datetime']) + timedelta(minutes=1),
              Game.gamedatetime >= datetime.fromisoformat(game['game_datetime']) - timedelta(minutes=1),
             Game.team_1 == game['team_1'],
             Game.team_2 == game['team_2']
