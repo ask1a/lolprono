@@ -4,11 +4,11 @@ from .__init__ import create_app
 
 app_test=create_app()
 
-app_test.config['DEBUG'] = True
-app_test.config['TESTING'] = True
-
-app_test.config['SECRET_KEY'] = 'secret-key-goes-here'
-app_test.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db_test.sqlite'
+# app_test.config['DEBUG'] = True
+# app_test.config['TESTING'] = True
+#
+# app_test.config['SECRET_KEY'] = 'secret-key-goes-here'
+# app_test.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db_test.sqlite'
 
 
 @pytest.fixture
