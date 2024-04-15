@@ -6,9 +6,16 @@ from flask_login import LoginManager
 db = SQLAlchemy()
 
 
-def create_app(testing=None):
+def create_app(test_config=None):
     app = Flask(__name__)
 
+    app.config.from_mapping(
+        SQLALCHEMY_DATABASE_URI="sqlite:///dbtesttttt.sqlite"
+    )
+
+    if test_config is not None:
+        app.config['DEBUG'] = True
+        app.config['TESTING'] = True
     app.config['SECRET_KEY'] = 'secret-key-goes-here'
     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db.sqlite'
 

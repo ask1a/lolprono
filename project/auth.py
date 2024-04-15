@@ -11,15 +11,27 @@ from datetime import datetime, timedelta
 
 auth = Blueprint('auth', __name__)
 
+
 def redirect_not_allowed_admin_account(func):
     def wrapper():
-        allowed_admin_account = ('skiaa@hotmail.com', 'zayedlewis@hotmail.com')
+        allowed_admin_account = ('skiaa@hotmail.com', 'zayedlewis@hotmail.com', 'test@test.fr')
         if current_user.email not in allowed_admin_account:
             return redirect(url_for('main.index'))
         else:
             return func()
+
     wrapper.__name__ = func.__name__
     return wrapper
+
+
+@auth.route('/delete_usertest_post', methods=['POST'])
+def delete_usertest_post():
+    row = User.query.filter(User.email == 'test@test.fr').first()
+    if row:
+        db.session.delete(row)
+        db.session.commit()
+        return 'ok'
+    return 'ko'
 
 
 @auth.route('/login')
