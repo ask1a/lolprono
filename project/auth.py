@@ -285,7 +285,7 @@ def admin_show_games():
         return redirect(url_for('main.index'))
     else:
         query = (select(Game.id, Game.leagueid,
-                        Game.bo, Game.gamedatetime,
+                         Game.bo, Game.game_datetime,
                         Game.team_1, Game.team_2,
                         Game.score_team_1, Game.score_team_2))
         games = pd.DataFrame(db.session.execute(query).all())
