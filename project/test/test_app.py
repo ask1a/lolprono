@@ -193,11 +193,13 @@ def test_admin_loadpage_not_allowed(client):
     assert response.text.__contains__("ça a commencé?")
 
 
-def test_delete_usertest(client):
-    response = client.post("/delete_usertest_post", data={"email": "test@test.fr"})
+def test_delete_usertest2(client):
+    assert login(client).status_code == 200
+    response = client.post("/delete_usertest_post", data={"email": "t@t.fr"})
     assert response.text == 'ok'
 
 
-def test_delete_usertest2(client):
-    response = client.post("/delete_usertest_post", data={"email": "t@t.fr"})
+def test_delete_usertest(client):
+    assert login(client).status_code == 200
+    response = client.post("/delete_usertest_post", data={"email": "test@test.fr"})
     assert response.text == 'ok'
