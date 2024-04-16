@@ -266,7 +266,6 @@ def admin_add_games():
         ).first()
         if row:
             check_exist['gameid'] = row.id
-            print("suppression enregistrement")
             # delete the game in database
             db.session.delete(row)
             db.session.commit()
@@ -301,7 +300,6 @@ def admin_add_leagues():
         row = League.query.filter(League.id == league['id']).first()
         if row:
             check_exist['id'] = row.id
-            print("suppression enregistrement")
             # delete the league in database
             db.session.delete(row)
             db.session.commit()
