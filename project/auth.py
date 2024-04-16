@@ -145,8 +145,7 @@ def pronos_update():
             GameProno.userid == current_user.id,
             GameProno.gameid == match[0]
         ).first()
-        print(match)
-        print(row)
+
         if row:
             check_exist['gamepronoid'] = row.id
             print("suppression enregistrement")
