@@ -68,13 +68,25 @@ def test_login_fail(client):
     assert response.text.__contains__("Mauvais identifiants, email et/ou mot de passe incorrects.")
 
 
+def test_ligues_loadpage(client):
+    assert login(client).status_code == 200
+    response = client.get("/ligues", follow_redirects=True)
+    assert response.text.__contains__("Ajouter la ligue")
+
+def test_ligues_spring_add(client):
+    assert login(client).status_code == 200
+    response = client.post("/ligue_spring", follow_redirects=True)
+    assert response.text.__contains__("Resultats & pronostics")
+
 def test_profile_loadpage(client):
     assert login(client).status_code == 200
-    response = client.get("/profile", data={
-        "email": "test@test.fr",
-        "password": "test"
-    }, follow_redirects=True)
+    response = client.get("/profile", follow_redirects=True)
     assert response.text.__contains__("Bienvenu, test!")
+
+def test_profile_unsubscribe_league(client):
+    assert login(client).status_code == 200
+    response = client.post("/profile_unsubscribe_league/LEC spring 2024", follow_redirects=True)
+    assert not response.text.__contains__("Se désinscrire")
 
 
 def test_delete_usertest(client):
