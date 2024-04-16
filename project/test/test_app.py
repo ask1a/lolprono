@@ -146,16 +146,16 @@ def test_admin_show_users_loadpage(client):
     response = client.get("/admin_show_users", follow_redirects=True)
     assert (response.text.__contains__("Admin")) and (response.text.__contains__("email"))
 
-# def test_admin_lock_signup_yes(client):
-#     assert login(client).status_code == 200
-#     response = client.post("/admin_lock_signup", data={"signup_status":True}, follow_redirects=True)
-#     assert (response.text.__contains__("Admin")) and (response.text.__contains__("Statut de verrouillage mis à jour!"))
-#
-#
-# def test_admin_lock_signup_no(client):
-#     assert login(client).status_code == 200
-#     response = client.post("/admin_lock_signup", data={"signup_status":False}, follow_redirects=True)
-#     assert (response.text.__contains__("Admin")) and (response.text.__contains__("Statut de verrouillage mis à jour!"))
+def test_admin_lock_signup_yes(client):
+    assert login(client).status_code == 200
+    response = client.post("/admin_lock_signup", data={"signup_status":True}, follow_redirects=True)
+    assert (response.text.__contains__("Admin")) and (response.text.__contains__("Statut de verrouillage mis à jour!"))
+
+
+def test_admin_lock_signup_no(client):
+    assert login(client).status_code == 200
+    response = client.post("/admin_lock_signup", data={}, follow_redirects=True)
+    assert (response.text.__contains__("Admin")) and (response.text.__contains__("Statut de verrouillage mis à jour!"))
 
 
 def test_admin_loadpage_not_allowed(client):
