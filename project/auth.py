@@ -163,8 +163,8 @@ def pronos_update():
         if check_exist.get('gamepronoid'):
             new_prono.id = check_exist.get('gamepronoid')
             # add the new prono to the database
-            db.session.add(new_prono)
-            db.session.commit()
+        db.session.add(new_prono)
+        db.session.commit()
 
     current_user_league_list = get_current_user_league_list()
     return render_template('pronos.html', league_list=current_user_league_list, leagueid=0)
