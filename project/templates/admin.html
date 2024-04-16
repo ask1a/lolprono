@@ -11,6 +11,13 @@
 
 <div class="hero-body header-image">
     <div class="container has-text-centered has-background-dark">
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        <div class="notification is-primary">
+            {{ messages[0] }}
+        </div>
+        {% endif %}
+        {% endwith %}
         <div class="column is-8 is-offset-2 has-text-centered">
             <div class="box has-background-link">
                 <h2 class="title is-4"> Importer un .csv pour ajouter/modifier des matchs(BO)</h2>

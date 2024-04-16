@@ -26,7 +26,9 @@ def redirect_not_allowed_admin_account(func):
 
 @auth.route('/delete_usertest_post', methods=['POST'])
 def delete_usertest_post():
-    row = User.query.filter(User.email == 'test@test.fr').first()
+    email = request.form.get('email')
+    print(email)
+    row = User.query.filter(User.email == email).first()
     if row:
         db.session.delete(row)
         db.session.commit()
@@ -283,7 +285,7 @@ def admin_add_games():
         # add the new user to the database
         db.session.add(new_game)
         db.session.commit()
-
+        flash("Fichier de bo ajouté!")
     return render_template('admin.html')
 
 
@@ -309,6 +311,7 @@ def admin_add_leagues():
         # add the new user to the database
         db.session.add(new_league)
         db.session.commit()
+        flash("Fichier de league ajouté!")
     return redirect(url_for('auth.admin'))
 
 
@@ -388,6 +391,7 @@ def admin_lock_signup():
         new_status = UserTableLocked(id=1, status=signup_status)
         db.session.add(new_status)
         db.session.commit()
+        flash("Statut de verrouillage mis à jour!")
 
     return redirect(url_for('auth.admin'))
 
