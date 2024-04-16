@@ -131,6 +131,19 @@ def test_admin_loadpage_allowed(client):
     response = client.get("/admin", follow_redirects=True)
     assert response.text.__contains__("Admin")
 
+def test_admin_add_games(client):
+    assert login(client).status_code == 200
+    gamesdata = "static/game_table_exemple.csv"
+    response = client.post("/admin_add_games", data={'gamesdata': (open(gamesdata, 'rb'), gamesdata)}, follow_redirects=True)
+    assert response.text.__contains__("Fichier de bo ajouté")
+
+def test_admin_add_leagues(client):
+    assert login(client).status_code == 200
+    leaguesdata = "static/league_table_exemple.csv"
+    response = client.post("/admin_add_leagues", data={'leaguesdata': (open(leaguesdata, 'rb'), leaguesdata)}, follow_redirects=True)
+    assert response.text.__contains__("Fichier de league ajouté!")
+
+
 def test_admin_show_games_loadpage(client):
     assert login(client).status_code == 200
     response = client.get("/admin_show_games", follow_redirects=True)
@@ -150,6 +163,14 @@ def test_admin_lock_signup_yes(client):
     assert login(client).status_code == 200
     response = client.post("/admin_lock_signup", data={"signup_status":True}, follow_redirects=True)
     assert (response.text.__contains__("Admin")) and (response.text.__contains__("Statut de verrouillage mis à jour!"))
+
+def test_signup_locked(client, email="testlock@test.fr", name="test", password="test"):
+    response = client.post("/signup", data={
+        "email": email,
+        "name": name,
+        "password": password
+    }, follow_redirects=True)
+    assert not response.text.__contains__("Connectez-vous :")
 
 
 def test_admin_lock_signup_no(client):
