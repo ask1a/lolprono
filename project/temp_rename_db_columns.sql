@@ -9,6 +9,6 @@ ALTER TABLE game RENAME COLUMN team1score TO score_team_1;
 ALTER TABLE game RENAME COLUMN team2score TO score_team_2;
 
 -- Modifying game "game_prono"
-ALTER TABLE game RENAME COLUMN team1prono TO prono_team_1;
-ALTER TABLE game RENAME COLUMN team2prono TO prono_team_2;
+ALTER TABLE game_prono RENAME COLUMN team1prono TO prono_team_1;
+ALTER TABLE game_prono RENAME COLUMN team2prono TO prono_team_2;
 
