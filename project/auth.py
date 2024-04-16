@@ -127,6 +127,49 @@ def pronos():
     current_user_league_list = get_current_user_league_list()
     return render_template('pronos.html', league_list=current_user_league_list, leagueid=0)
 
+@auth.route('/pronos_update',methods=['POST'])
+def pronos_update():
+    pronos_joueur = dict(request.form)
+    matchs = {}
+    for prono in pronos_joueur.items():
+        if prono[1] != '':
+            matchs[prono[0][-1]] = []
+    for prono in pronos_joueur.items():
+        if prono[1] != '':
+            matchs[prono[0][-1]].append(prono[1])
+
+    for match in matchs.items():
+        # check if bet already exist then delete to overwrite:
+        check_exist = {}
+        row = GameProno.query.filter(
+            GameProno.userid == current_user.id,
+            GameProno.gameid == match[0]
+        ).first()
+        print(match)
+        print(row)
+        if row:
+            check_exist['gamepronoid'] = row.id
+            print("suppression enregistrement")
+            # delete the prono in database
+            db.session.delete(row)
+            db.session.commit()
+
+        # create a prono with the matchs dict.
+        new_prono = GameProno(
+            userid=current_user.id,
+            gameid=match[0],
+            team1prono=match[1][0],
+            team2prono=match[1][1],
+            )
+        if check_exist.get('gamepronoid'):
+            new_prono.id = check_exist.get('gamepronoid')
+            # add the new prono to the database
+            db.session.add(new_prono)
+            db.session.commit()
+
+    current_user_league_list = get_current_user_league_list()
+    return render_template('pronos.html', league_list=current_user_league_list, leagueid=0)
+
 
 @auth.route('/pronos_show_league/<leaguename>', methods=['POST'])
 def pronos_show_league(leaguename):
@@ -319,3 +362,4 @@ def admin_delete_game():
 def logout():
     logout_user()
     return redirect(url_for('main.index'))
+
