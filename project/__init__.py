@@ -9,10 +9,6 @@ db = SQLAlchemy()
 def create_app(test_config=None):
     app = Flask(__name__)
 
-    app.config.from_mapping(
-        SQLALCHEMY_DATABASE_URI="sqlite:///dbtesttttt.sqlite"
-    )
-
     if test_config is not None:
         app.config['DEBUG'] = True
         app.config['TESTING'] = True
