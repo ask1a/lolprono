@@ -1,7 +1,6 @@
 import pytest
 
 from project import create_app
-from project.auth import delete_usertest_post
 
 app_test = create_app('testing')
 
@@ -202,16 +201,3 @@ def test_delete_usertest(client):
 def test_delete_usertest2(client):
     response = client.post("/delete_usertest_post", data={"email": "t@t.fr"})
     assert response.text == 'ok'
-
-# def test_login_logout(client):
-#     """Make sure login and logout works."""
-#     print(dir(client))
-#     email = client.app.config["test@test.fr"]
-#     password = client.app.config["test"]
-#
-#     rv = login(client)
-#     assert rv.status_code == 200
-
-# def test_index_profile(client):
-#     response = client.get("/profile")
-#     assert response.status_code == 200

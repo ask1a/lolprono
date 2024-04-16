@@ -27,7 +27,6 @@ def redirect_not_allowed_admin_account(func):
 @auth.route('/delete_usertest_post', methods=['POST'])
 def delete_usertest_post():
     email = request.form.get('email')
-    print(email)
     row = User.query.filter(User.email == email).first()
     if row:
         db.session.delete(row)
