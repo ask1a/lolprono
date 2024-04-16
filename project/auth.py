@@ -3,7 +3,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from .models import User, UserLeague, Game, GameProno, League
 from flask_login import login_user, logout_user, login_required, current_user
 from . import db
-from sqlalchemy import select, and_
+from sqlalchemy import select, and_, update
 import pandas as pd
 import numpy as np
 import io
@@ -12,6 +12,13 @@ from datetime import datetime, timedelta
 auth = Blueprint('auth', __name__)
 allowed_admin_account = ['skiaa@hotmail.com', 'zayedlewis@hotmail.com']
 
+
+def common_entries(*dcts):
+    #function used to combine several dictionaries into a list of tuple using list() with common key on first tuple index
+    if not dcts:
+        return
+    for i in set(dcts[0]).intersection(*dcts[1:]):
+        yield (i,) + tuple(d[i] for d in dcts)
 
 @auth.route('/login')
 def login():
@@ -130,41 +137,30 @@ def pronos():
 @auth.route('/pronos_update',methods=['POST'])
 def pronos_update():
     pronos_joueur = dict(request.form)
-    matchs = {}
-    for prono in pronos_joueur.items():
-        if prono[1] != '':
-            matchs[prono[0][-1]] = []
-    for prono in pronos_joueur.items():
-        if prono[1] != '':
-            matchs[prono[0][-1]].append(prono[1])
+    pronos_team1 = {k.split(':')[-1]: v for k, v in pronos_joueur.items() if 't1' in k}
+    pronos_team2 = {k.split(':')[-1]: v for k, v in pronos_joueur.items() if 't2' in k}
 
-    for match in matchs.items():
-        # check if bet already exist then delete to overwrite:
-        check_exist = {}
-        row = GameProno.query.filter(
-            GameProno.userid == current_user.id,
-            GameProno.gameid == match[0]
-        ).first()
+    pronos_teams = list(common_entries(pronos_team1, pronos_team2))
+
+    for prono in pronos_teams:
+        # check if there is an existing prediction for this user and this game
+        row = GameProno.query.filter_by(userid=current_user.id, gameid=prono[0]).first()
 
         if row:
-            check_exist['gamepronoid'] = row.id
-            print("suppression enregistrement")
-            # delete the prono in database
-            db.session.delete(row)
-            db.session.commit()
-
-        # create a prono with the matchs dict.
-        new_prono = GameProno(
-            userid=current_user.id,
-            gameid=match[0],
-            team1prono=match[1][0],
-            team2prono=match[1][1],
+            # Update existing prediction
+            db.session.execute(
+                update(GameProno)
+                .where(GameProno.userid == current_user.id)
+                .where(GameProno.gameid == prono[0])
+                .values(team1prono=int(prono[1]), team2prono=int(prono[2]))
             )
-        if check_exist.get('gamepronoid'):
-            new_prono.id = check_exist.get('gamepronoid')
-            # add the new prono to the database
-        db.session.add(new_prono)
+        else:
+            # Add new prediction
+            new_prono = GameProno(userid=current_user.id, gameid=prono[0], team1prono=int(prono[1]),
+                                  team2prono=int(prono[2]))
+            db.session.add(new_prono)
         db.session.commit()
+
 
     current_user_league_list = get_current_user_league_list()
     return render_template('pronos.html', league_list=current_user_league_list, leagueid=0)
