@@ -43,3 +43,8 @@ Linux:
 
 puis ouvrir dans un navigateur l'url:
 http://127.0.0.1:5000/index
+
+## Lancer les tests
+
+```python -m pytest -v```
+
