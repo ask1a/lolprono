@@ -220,3 +220,8 @@ def test_delete_usertest(client):
     assert login(client).status_code == 200
     response = client.post("/delete_usertest_post", data={"email": "test@test.fr"})
     assert response.text == 'ok'
+
+import os
+def test_delete_temp_csvfiles():
+    os.remove("./game_table_exemple.csv")
+    os.remove("./league_table_exemple.csv")
