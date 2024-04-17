@@ -32,5 +32,3 @@ def create_standing_table(pronos: pd.DataFrame) -> dict:
     return recap_score
 
 
-def bo_coefficient(bo):
-    bo // 2 + 1

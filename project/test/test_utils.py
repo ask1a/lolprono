@@ -12,3 +12,6 @@ def test_create_standing_table():
                             columns=['userid', 'username', 'gameid', 'prono_team_1', 'prono_team_2', 'score_team_1',
                                      'score_team_2', 'bo'])
     print(df_input)
+    dico_result = u.create_standing_table(df_input)
+    dico_expected = {}
+    assert dico_expected == dico_result
