@@ -1,6 +1,7 @@
 import pytest
 
 from project import create_app
+import pandas as pd
 
 app_test = create_app('testing')
 
@@ -130,34 +131,37 @@ def test_admin_loadpage_allowed(client):
     response = client.get("/admin", follow_redirects=True)
     assert response.text.__contains__("Admin")
 
-# @pytest.fixture(scope='session')
-# def csv_gamesdata(tmpdir_factory):
-#     gamesdata = "./static/game_table_exemple.csv"
-#     return (open(gamesdata, 'rb'), gamesdata)
-# @pytest.fixture(scope='session')
-# def csv_leaguesdata(tmpdir_factory):
-#     leaguesdata = "./static/league_table_exemple.csv"
-#     return (open(leaguesdata, 'rb'), leaguesdata)
 
-import os
-def test_admin_add_games(client):
+@pytest.fixture(scope='session')
+def csv_gamesdata(tmpdir_factory):
+    pd.DataFrame(
+        {'leagueid': [1], 'bo': [5], 'game_datetime': ['2024-04-07T17:00:00'], 'team_1': ['G2 Esports'], 'team_2': ['Team BDS'],
+         'score_team_1': [3], 'score_team_2': [1]}).to_csv('./game_table_exemple.csv', index=False)
+    gamesdata = "./game_table_exemple.csv"
+    return (open(gamesdata, 'rb'), gamesdata)
+
+
+@pytest.fixture(scope='session')
+def csv_leaguesdata(tmpdir_factory):
+    pd.DataFrame({'id': [1, 2], 'leaguename': ['LEC spring 2024', 'LEC summer 2024']}).to_csv(
+        './league_table_exemple.csv', index=False)
+    leaguesdata = "./league_table_exemple.csv"
+    return (open(leaguesdata, 'rb'), leaguesdata)
+
+
+# import os
+def test_admin_add_games(client,csv_gamesdata):
     assert login(client).status_code == 200
-    # gamesdata = "./static/game_table_exemple.csv"
-    cwdp = os.getcwd()
-    pathsplit = cwdp.split('/')
-    pthstart = '/'.join(pathsplit[:pathsplit.index('lolprono') + 1])
-    gamesdata = pthstart + "/project/static/game_table_exemple.csv"
-    response = client.post("/admin_add_games", data={'gamesdata': (open(gamesdata, 'rb'), gamesdata)},
+    response = client.post("/admin_add_games", data={'gamesdata': csv_gamesdata},
                            follow_redirects=True)
     assert response.text.__contains__("Fichier de bo ajouté")
 
 
-# def test_admin_add_leagues(client, csv_leaguesdata):
-#     assert login(client).status_code == 200
-#     # leaguesdata = "./league_table_exemple.csv"
-#     response = client.post("/admin_add_leagues", data={'leaguesdata': csv_leaguesdata},
-#                            follow_redirects=True)
-#     assert response.text.__contains__("Fichier de league ajouté!")
+def test_admin_add_leagues(client, csv_leaguesdata):
+    assert login(client).status_code == 200
+    response = client.post("/admin_add_leagues", data={'leaguesdata': csv_leaguesdata},
+                           follow_redirects=True)
+    assert response.text.__contains__("Fichier de league ajouté!")
 
 
 def test_admin_show_games_loadpage(client):
