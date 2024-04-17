@@ -1,4 +1,5 @@
 import pytest
+import os
 
 from project import create_app
 import pandas as pd
@@ -221,7 +222,6 @@ def test_delete_usertest(client):
     response = client.post("/delete_usertest_post", data={"email": "test@test.fr"})
     assert response.text == 'ok'
 
-import os
 def test_delete_temp_csvfiles():
     os.remove("./game_table_exemple.csv")
     os.remove("./league_table_exemple.csv")
