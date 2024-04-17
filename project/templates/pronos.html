@@ -57,12 +57,12 @@
                     <div class="column"></div>
                     <div class="column has-text-large">Mon pronostic : </div>
                     <div class="column">
-                                <input class="input is-small" type="number" name="gameidt1:{{item.gameid}}" placeholder="{{item.team1prono}}"
+                                <input class="input is-small" type="number" name="gameidt1;{{item.gameid}};{{item.gamedatetime}};{{item.bo}}" placeholder="{{item.team1prono}}"
                                        min="0"  max="{{(item.bo//2)+1}}"  value="{{item.team1prono}}"
                                        autofocus="">
                     </div>
                     <div class="column">
-                                <input class="input is-small" type="number" name="gameidt2:{{item.gameid}}" placeholder="{{item.team2prono}}"
+                                <input class="input is-small" type="number" name="gameidt2;{{item.gameid}};{{item.gamedatetime}};{{item.bo}}" placeholder="{{item.team2prono}}"
                         min="0" max="{{(item.bo//2)+1}}" value="{{item.team2prono}}"
                                        autofocus="">
                     </div>
