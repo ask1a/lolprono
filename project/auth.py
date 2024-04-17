@@ -168,7 +168,7 @@ def pronos():
 def pronos_show_league(leaguename):
     leagueid = get_leagueid_from_leaguename(leaguename)
     current_user_league_list = get_current_user_league_list()
-    games = Game.query.filter_by(leagueid=leagueid).order_by(Game.gamedatetime).all()
+    games = Game.query.filter_by(leagueid=leagueid).order_by(Game.game_datetime).all()
     records = [u.__dict__ for u in games]
     for r in records:
         r.pop('_sa_instance_state')
@@ -190,8 +190,8 @@ def classements_show_ranking(leaguename):
     leagueid = get_leagueid_from_leaguename(leaguename)
     current_user_league_list = get_current_user_league_list()
     query = (select(User.id, User.name
-                    , GameProno.gameid, GameProno.team1prono, GameProno.team2prono
-                    , Game.team1score, Game.team2score
+                    , GameProno.gameid, GameProno.prono_team_1, GameProno.prono_team_2
+                    , Game.score_team_1, Game.score_team_2
                     )
              .join(GameProno, User.id == GameProno.userid)
              .join(Game, Game.id == GameProno.gameid)
@@ -200,20 +200,20 @@ def classements_show_ranking(leaguename):
 
     pronos = db.session.execute(query).all()
     pronos = pd.DataFrame(pronos, columns=['userid', 'username', 'gameid',
-                                           'team1prono', 'team2prono',
-                                           'team1score', 'team2score'])
+                                           'prono_team_1', 'prono_team_2',
+                                           'score_team_1', 'score_team_2'])
     pronos['prono_team_win'] = np.where(
-        (pronos['team1prono'] > pronos['team2prono']) & (pronos['team1prono'] != pronos['team2prono']), 'team1',
-        'team2')
+        (pronos['prono_team_1'] > pronos['prono_team_2']) & (pronos['prono_team_1'] != pronos['prono_team_2']), 'team_1',
+        'team_2')
     pronos['score_team_win'] = np.where(
-        (pronos['team1score'] > pronos['team2score']) & (pronos['team1score'] != pronos['team2score']), 'team1',
-        'team2')
-    pronos['bon_prono'] = np.where(pronos['prono_team_win'] == pronos['score_team_win'], 1, 0)
+        (pronos['score_team_1'] > pronos['score_team_2']) & (pronos['score_team_1'] != pronos['score_team_2']), 'team_1',
+        'team_2')
+    pronos['prono_correct'] = np.where(pronos['prono_team_win'] == pronos['score_team_win'], 1, 0)
     pronos['score_exact'] = np.where(
-        (pronos['team1prono'] == pronos['team1score']) & (pronos['team2prono'] == pronos['team2score']), 1, 0)
-    pronos['points'] = pronos['bon_prono'] + pronos['score_exact']
+        (pronos['prono_team_1'] == pronos['score_team_1']) & (pronos['prono_team_2'] == pronos['score_team_2']), 1, 0)
+    pronos['points'] = pronos['prono_correct'] + pronos['score_exact']
 
-    recap_score = pronos[['userid', 'username', 'bon_prono', 'score_exact', 'points']].groupby(
+    recap_score = pronos[['userid', 'username', 'prono_correct', 'score_exact', 'points']].groupby(
         ['userid', 'username']).sum()
     recap_score = recap_score.sort_values('points', ascending=False)
     recap_score = recap_score.reset_index(level=['userid', 'username'])
@@ -259,10 +259,10 @@ def admin_add_games():
         # check if game already exist then delete to overwrite:
         check_exist = {}
         row = Game.query.filter(
-            Game.gamedatetime <= datetime.fromisoformat(game['gamedatetime']) + timedelta(minutes=1),
-            Game.gamedatetime >= datetime.fromisoformat(game['gamedatetime']) - timedelta(minutes=1),
-            Game.team1 == game['team1'],
-            Game.team2 == game['team2']
+            Game.game_datetime <= datetime.fromisoformat(game['game_datetime']) + timedelta(minutes=1),
+            Game.game_datetime >= datetime.fromisoformat(game['game_datetime']) - timedelta(minutes=1),
+            Game.team_1 == game['team_1'],
+            Game.team_2 == game['team_2']
         ).first()
         if row:
             check_exist['gameid'] = row.id
@@ -274,11 +274,11 @@ def admin_add_games():
         new_game = Game(
             leagueid=game['leagueid'],
             bo=game['bo'],
-            gamedatetime=datetime.fromisoformat(game['gamedatetime']),
-            team1=game['team1'],
-            team2=game['team2'],
-            team1score=game['team1score'],
-            team2score=game['team2score']
+            game_datetime=datetime.fromisoformat(game['game_datetime']),
+            team_1=game['team_1'],
+            team_2=game['team_2'],
+            score_team_1=game['score_team_1'],
+            score_team_2=game['score_team_2']
         )
         if check_exist.get('gameid'):
             new_game.id = check_exist.get('gameid')
@@ -319,9 +319,9 @@ def admin_add_leagues():
 @redirect_not_allowed_admin_account
 def admin_show_games():
     return admin_show_table(query=(select(Game.id, Game.leagueid,
-                                          Game.bo, Game.gamedatetime,
-                                          Game.team1, Game.team2,
-                                          Game.team1score, Game.team2score)),
+                                          Game.bo, Game.game_datetime,
+                                          Game.team_1, Game.team_2,
+                                          Game.score_team_1, Game.score_team_2)),
                             html_template="admin_show_games.html")
 
 
