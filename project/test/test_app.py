@@ -1,5 +1,3 @@
-import os
-
 import pytest
 
 from project import create_app
@@ -135,10 +133,7 @@ def test_admin_loadpage_allowed(client):
 
 def test_admin_add_games(client):
     assert login(client).status_code == 200
-    cwdp = os.getcwd()
-    pathsplit = cwdp.split('/')
-    pthstart = '/'.join(pathsplit[:pathsplit.index('lolprono') + 1])
-    gamesdata = pthstart + "/project/static/game_table_exemple.csv"
+    gamesdata = "static/game_table_exemple.csv"
     response = client.post("/admin_add_games", data={'gamesdata': (open(gamesdata, 'rb'), gamesdata)},
                            follow_redirects=True)
     assert response.text.__contains__("Fichier de bo ajouté")
@@ -146,10 +141,7 @@ def test_admin_add_games(client):
 
 def test_admin_add_leagues(client):
     assert login(client).status_code == 200
-    cwdp = os.getcwd()
-    pathsplit = cwdp.split('/')
-    pthstart = '/'.join(pathsplit[:pathsplit.index('lolprono') + 1])
-    leaguesdata = pthstart + "/project/static/league_table_exemple.csv"
+    leaguesdata = "static/league_table_exemple.csv"
     response = client.post("/admin_add_leagues", data={'leaguesdata': (open(leaguesdata, 'rb'), leaguesdata)},
                            follow_redirects=True)
     assert response.text.__contains__("Fichier de league ajouté!")
