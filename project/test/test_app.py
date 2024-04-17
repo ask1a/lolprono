@@ -132,11 +132,11 @@ def test_admin_loadpage_allowed(client):
 
 @pytest.fixture(scope='session')
 def csv_gamesdata(tmpdir_factory):
-    gamesdata = "./static/game_table_exemple.csv"
+    gamesdata = "./game_table_exemple.csv"
     return (open(gamesdata, 'rb'), gamesdata)
 @pytest.fixture(scope='session')
 def csv_leaguesdata(tmpdir_factory):
-    leaguesdata = "./static/league_table_exemple.csv"
+    leaguesdata = "./league_table_exemple.csv"
     return (open(leaguesdata, 'rb'), leaguesdata)
 
 def test_admin_add_games(client, csv_gamesdata):
