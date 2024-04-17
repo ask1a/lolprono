@@ -25,6 +25,7 @@ jobs:
           pip install ruff
           ruff --output-format=github .
         continue-on-error: true
+      - uses: actions/checkout@v4
       - name: Test with pytest
         run: |
           pip install pytest pytest-cov
