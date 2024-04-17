@@ -8,6 +8,7 @@ import pandas as pd
 import numpy as np
 import io
 from datetime import datetime, timedelta
+from .utils import create_standing_table
 
 auth = Blueprint('auth', __name__)
 allowed_admin_account = ['skiaa@hotmail.com', 'zayedlewis@hotmail.com']
@@ -160,7 +161,7 @@ def classements_show_ranking(leaguename):
     current_user_league_list = get_current_user_league_list()
     query = (select(User.id, User.name
                     , GameProno.gameid, GameProno.prono_team_1, GameProno.prono_team_2
-                    , Game.score_team_1, Game.score_team_2
+                    , Game.score_team_1, Game.score_team_2, Game.bo
                     )
              .join(GameProno, User.id == GameProno.userid)
              .join(Game, Game.id == GameProno.gameid)
@@ -170,28 +171,15 @@ def classements_show_ranking(leaguename):
     pronos = db.session.execute(query).all()
     pronos = pd.DataFrame(pronos, columns=['userid', 'username', 'gameid',
                                            'prono_team_1', 'prono_team_2',
-                                           'score_team_1', 'score_team_2'])
-    pronos['prono_team_win'] = np.where(
-        (pronos['prono_team_1'] > pronos['prono_team_2']) & (pronos['prono_team_1'] != pronos['prono_team_2']), 'team_1',
-        'team_2')
-    pronos['score_team_win'] = np.where(
-        (pronos['score_team_1'] > pronos['score_team_2']) & (pronos['score_team_1'] != pronos['score_team_2']), 'team_1',
-        'team_2')
-    pronos['prono_correct'] = np.where(pronos['prono_team_win'] == pronos['score_team_win'], 1, 0)
-    pronos['score_exact'] = np.where(
-        (pronos['prono_team_1'] == pronos['score_team_1']) & (pronos['prono_team_2'] == pronos['score_team_2']), 1, 0)
-    pronos['points'] = pronos['prono_correct'] + pronos['score_exact']
-
-    recap_score = pronos[['userid', 'username', 'prono_correct', 'score_exact', 'points']].groupby(
-        ['userid', 'username']).sum()
-    recap_score = recap_score.sort_values('points', ascending=False)
-    recap_score = recap_score.reset_index(level=['userid', 'username'])
-    recap_score = recap_score.drop(columns=['userid']).to_dict("records")
+                                           'score_team_1', 'score_team_2','bo'])
+    recap_score = create_standing_table(pronos)
 
     titles = ['Pseudo', 'Bons pronos', 'Pronos exacts', 'Points']
     return render_template('classements.html', leagueid=leagueid, league_list=current_user_league_list,
                            recap_score=recap_score,
                            titles=titles)
+
+
 
 
 @auth.route('/admin')
