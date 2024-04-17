@@ -16,7 +16,7 @@ def create_app(test_config=None):
     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db.sqlite'
 
     db.init_app(app)
-    from . import models
+    from . import models # noqa
     with app.app_context():
         db.create_all()
 
