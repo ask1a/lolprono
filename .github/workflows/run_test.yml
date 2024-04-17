@@ -24,6 +24,7 @@ jobs:
           pip install ruff  
           ruff --format=github --target-version=py310 .
         continue-on-error: true
+      - uses: actions/checkout@v3
       - name: Test with pytest
         run: |  
           python -m pytest  -v -s
