@@ -2,3 +2,4 @@
 instance/
 .sqlite
 __pycache__/
+draft.py
