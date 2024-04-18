@@ -3,7 +3,6 @@ import pandas as pd
 
 
 def create_standing_table(pronos: pd.DataFrame) -> list:
-    # print(pronos.to_dict('split'))
     pronos['prono_team_win'] = np.where(
         (pronos['prono_team_1'] > pronos['prono_team_2']) & (pronos['prono_team_1'] != pronos['prono_team_2']),
         'team_1',
