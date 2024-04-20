@@ -197,12 +197,12 @@ def pronos_update():
                     update(GameProno)
                     .where(GameProno.userid == current_user.id)
                     .where(GameProno.gameid == prono[0])
-                    .values(team1prono=int(prono[1]), team2prono=int(prono[2]))
+                    .values(prono_team_1=int(prono[1]), prono_team_2=int(prono[2]))
                 )
             else:
                 # Add new prediction
-                new_prono = GameProno(userid=current_user.id, gameid=prono[0], team1prono=int(prono[1]),
-                                      team2prono=int(prono[2]))
+                new_prono = GameProno(userid=current_user.id, gameid=prono[0], prono_team_1=int(prono[1]),
+                                      prono_team_2=int(prono[2]))
                 db.session.add(new_prono)
             db.session.commit()
 
@@ -219,7 +219,7 @@ def pronos_show_league(leaguename):
     query = (select(User.id.label("userid")
                     , Game.score_team_1, Game.score_team_2, Game.leagueid, Game.bo
                     , Game.game_datetime, Game.team_1, Game.team_2, Game.id.label("gameid")
-                    , GameProno., GameProno.prono_team_2
+                    , GameProno.prono_team_1, GameProno.prono_team_2
                     )
              .join(UserLeague, UserLeague.userid == User.id)
              .join(Game, UserLeague.leagueid == Game.leagueid)

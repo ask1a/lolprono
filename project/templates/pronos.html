@@ -46,24 +46,24 @@
             {% for item in records %}
             <div class="box has-background-dark has-text-white">
                 <div class="columns">
-                    <div class="column">{{item.gamedatetime}} (BO{{item.bo}})</div>
-                    <div class="column">{{item.team1}}</div>
-                    <div class="column">{{item.team1score}}</div>
-                    <div class="column">{{item.team2score}}</div>
-                    <div class="column">{{item.team2}}</div>
+                    <div class="column">{{item.game_datetime}} (BO{{item.bo}})</div>
+                    <div class="column">{{item.team_1}}</div>
+                    <div class="column">{{item.score_team_1}}</div>
+                    <div class="column">{{item.score_team_2}}</div>
+                    <div class="column">{{item.team_2}}</div>
                     <div class="column">Points</div>
                 </div>
                 <div class="columns has-background-grey-lighter has-text-dark">
                     <div class="column"></div>
                     <div class="column has-text-large">Mon pronostic : </div>
                     <div class="column">
-                                <input class="input is-small" type="number" name="gameidt1;{{item.gameid}};{{item.gamedatetime}};{{item.bo}}" placeholder="{{item.team1prono}}"
-                                       min="0"  max="{{(item.bo//2)+1}}"  value="{{item.team1prono}}"
+                                <input class="input is-small" type="number" name="gameidt1;{{item.gameid}};{{item.game_datetime}};{{item.bo}}" placeholder="{{item.prono_team_1}}"
+                                       min="0"  max="{{(item.bo//2)+1}}"  value="{{item.prono_team_1}}"
                                        autofocus="">
                     </div>
                     <div class="column">
-                                <input class="input is-small" type="number" name="gameidt2;{{item.gameid}};{{item.gamedatetime}};{{item.bo}}" placeholder="{{item.team2prono}}"
-                        min="0" max="{{(item.bo//2)+1}}" value="{{item.team2prono}}"
+                                <input class="input is-small" type="number" name="gameidt2;{{item.gameid}};{{item.game_datetime}};{{item.bo}}" placeholder="{{item.prono_team_2}}"
+                        min="0" max="{{(item.bo//2)+1}}" value="{{item.prono_team_2}}"
                                        autofocus="">
                     </div>
                     <div class="column">
