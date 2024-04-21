@@ -183,6 +183,9 @@ def pronos_update():
     pronos_teams = list(common_entries(pronos_team1, pronos_team2,pronos_bo, heure_pronos))
 
     for prono in pronos_teams:
+        # skip incomplete prono
+        if '' in prono:
+            continue
         # verification of the score and time of the bet
         if ((int(prono[1]) + int(prono[2]) <= int(prono[3])) and
             ((int(prono[1]) == (int(prono[3])//2 + 1)) or (int(prono[2]) == (int(prono[3])//2 + 1))) and
@@ -232,6 +235,7 @@ def pronos_show_league(leaguename):
     records=[]
     if pronos:
         pronos = pd.DataFrame(pronos)
+        pronos['editable'] = datetime.now() < pronos["game_datetime"]
         columns_to_integer = ['score_team_1', 'score_team_2', 'prono_team_1', 'prono_team_2']
         for col in columns_to_integer:
 
