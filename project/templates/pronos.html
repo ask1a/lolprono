@@ -67,13 +67,14 @@
                         min="0" max="{{(item.bo//2)+1}}" value="{{item.prono_team_2}}"
                                        autofocus="">
                     </div>
+                    <div class="column">???</div>
                     {% else %}
                     <div class="column">{{item.prono_team_1}}</div>
                     <div class="column">{{item.prono_team_2}}</div>
+                    <div class="column">afficher points</div>
                     {% endif %}
                     <div class="column">
                     </div>
-                    <div class="column">???</div>
                 </div>
             </div>
             {% endfor %}
