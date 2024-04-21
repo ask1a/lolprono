@@ -84,3 +84,21 @@ def send_email_validation(mail_to):
     send_email(mail_to, "Votre code de validation d'inscription.", validation_email_body(code))
     write_signup_code(mail_to, code)
     return None
+
+
+import smtplib
+try:
+    print("server connection")
+    server = smtplib.SMTP('pro2.mail.ovh.net', 587)
+    server.set_debuglevel(1)
+    print("server login")
+    server.login("monom@domaine.com", "password")
+    print("send mail")
+
+    msg = r"Hello de lu!"
+    server.sendmail("askiavanr@gmail.com", "test", msg)
+    server.quit()
+
+except:
+    print("error")
+
