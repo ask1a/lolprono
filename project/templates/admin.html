@@ -11,23 +11,38 @@
 
 <div class="hero-body header-image">
     <div class="container has-text-centered has-background-dark">
-        <h2 class="title is-4"> Importer un .csv de matchs(BO)</h2>
-        <h3 class="subtitle is-5">
-            <a href="/static/game_table_exemple.csv" download="game_table_exemple.csv">Télécharger ici un fichier
-                exemple</a>
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        <div class="notification is-primary">
+            {{ messages[0] }}
+        </div>
+        {% endif %}
+        {% endwith %}
+        <div class="column is-8 is-offset-2 has-text-centered">
+            <div class="box has-background-link">
+                <h2 class="title is-4"> Importer un .csv pour ajouter/modifier des matchs(BO)</h2>
+            </div>
+        </div>
+        <h3 class="subtitle is-6">
+            <a href="/static/game_table_exemple.csv" download="game_table_exemple.csv">>>Télécharger ici un fichier
+                exemple<<</a>
         </h3>
-        <p>L'ajout d'un bo avec le même triplet gamedatetime/team1/team2 va ecraser la ligne et permet de mettre à jour
+        <p>L'ajout d'un bo avec le même triplet game_datetime/team_1/team_2 va ecraser la ligne et permet de mettre à jour
             le résultat d'un bo.</p>
         <form action="/admin_add_games" method="post" enctype="multipart/form-data">
             Chemin du .csv :
             <input type="file" name="gamesdata" accept=".csv" required>
             <input type="submit" value="Envoyer le fichier de matchs">
         </form>
-        <h2 class="title is-4"> -------------------------- </h2>
-        <h2 class="title is-4"> Importer un .csv de ligues</h2>
-        <h3 class="subtitle is-5">
-            <a href="/static/league_table_exemple.csv" download="league_table_exemple.csv">Télécharger ici un fichier
-                exemple</a>
+        <h2 class="title is-4"></h2>
+        <div class="column is-8 is-offset-2 has-text-centered">
+            <div class="box has-background-link">
+                <h2 class="title is-4"> Importer un .csv ajouter/modifier des ligues</h2>
+            </div>
+        </div>
+        <h3 class="subtitle is-6">
+            <a href="/static/league_table_exemple.csv" download="league_table_exemple.csv">>>Télécharger ici un fichier
+                exemple<<</a>
         </h3>
         <p>L'ajout d'une ligue avec un id déjà existant va écraser la ligne et permet de mettre à jour le nom d'une
             ligue.</p>
@@ -36,11 +51,49 @@
             <input type="file" name="leaguesdata" accept=".csv" required>
             <input type="submit" value="Envoyer le fichier de leagues">
         </form>
-        <h2 class="title is-4"> -------------------------- </h2>
-        <h2 class="title is-4"> Visualiser les BOs et supprimer un match</h2>
+        <h2 class="title is-4"></h2>
+        <div class="column is-8 is-offset-2 has-text-centered">
+            <div class="box has-background-danger">
+                <h2 class="title is-4"> Visualiser/supprimer un/des BO(s).</h2>
+            </div>
+        </div>
         <a href="{{ url_for('auth.admin_show_games') }}">
             ➡️Voir les BOs
         </a>
+        <h2 class="title is-4"></h2>
+        <div class="column is-8 is-offset-2 has-text-centered">
+            <div class="box has-background-danger">
+                <h2 class="title is-4"> Visualiser/supprimer une/des ligue(s).</h2>
+            </div>
+        </div>
+        <a href="{{ url_for('auth.admin_show_leagues') }}">
+            ➡️Voir les ligues
+        </a>
+        <h2 class="title is-4"></h2>
+        <div class="column is-8 is-offset-2 has-text-centered">
+            <div class="box has-background-danger">
+                <h2 class="title is-4"> Visualiser/supprimer un/des utilisateur(s).</h2>
+            </div>
+        </div>
+        <a href="{{ url_for('auth.admin_show_users') }}">
+            ➡️Voir les utilisateurs
+        </a>
+        <h2 class="title is-4"></h2>
+        <form action="/admin_lock_signup" , method="post">
+            <div class="column is-8 is-offset-2 has-text-centered">
+                <div class="box has-background-warning">
+                    <h2 class="title is-4 has-text-dark"> Verrouiller les nouvelles inscriptions.</h2>
+                </div>
+            </div>
+            <tr>
+                🔒 Inscriptions verrouillées :
+            </tr>
+            <input type="checkbox" class="onoffswitch-checkbox" name="signup_status" {{'checked' if signup_locked}}>
+            <h2 class="title is-4"></h2>
+            <input class="button" type="submit" value="Confirmer"/>
+        </form>
+        <h2 class="title is-4"></h2>
+        <h2 class="title is-4"></h2>
     </div>
 </div>
 
