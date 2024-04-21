@@ -235,6 +235,7 @@ def pronos_show_league(leaguename):
     records=[]
     if pronos:
         pronos = pd.DataFrame(pronos)
+        pronos['editable'] = datetime.now() < pronos["game_datetime"]
         columns_to_integer = ['score_team_1', 'score_team_2', 'prono_team_1', 'prono_team_2']
         for col in columns_to_integer:
 
