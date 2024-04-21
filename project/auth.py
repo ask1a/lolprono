@@ -183,6 +183,9 @@ def pronos_update():
     pronos_teams = list(common_entries(pronos_team1, pronos_team2,pronos_bo, heure_pronos))
 
     for prono in pronos_teams:
+        # skip incomplete prono
+        if '' in prono:
+            continue
         # verification of the score and time of the bet
         if ((int(prono[1]) + int(prono[2]) <= int(prono[3])) and
             ((int(prono[1]) == (int(prono[3])//2 + 1)) or (int(prono[2]) == (int(prono[3])//2 + 1))) and
