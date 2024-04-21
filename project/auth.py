@@ -229,11 +229,14 @@ def pronos_show_league(leaguename):
              .order_by(Game.game_datetime)
              )
     pronos = db.session.execute(query).all()
-    pronos = pd.DataFrame(pronos)
-    columns_to_integer = ['score_team_1', 'score_team_2', 'prono_team_1', 'prono_team_2']
-    for col in columns_to_integer:
-        pronos[col] = pronos[col].astype('Int64')
-    records = pronos.to_dict("records")
+    records=[]
+    if pronos:
+        pronos = pd.DataFrame(pronos)
+        columns_to_integer = ['score_team_1', 'score_team_2', 'prono_team_1', 'prono_team_2']
+        for col in columns_to_integer:
+
+            pronos[col] = pronos[col].astype('Int64')
+        records = pronos.to_dict("records")
 
     return render_template('pronos.html', league_list=current_user_league_list, leaguename=leaguename,
                            leagueid=leagueid, records=records)
