@@ -10,6 +10,11 @@ main = Blueprint('main', __name__)
 def index():
     return render_template('index.html')
 
+@main.route('/')
+def home():
+    return redirect(url_for('main.index'))
+
+
 
 @main.route('/profile')
 @login_required
@@ -17,6 +22,7 @@ def profile():
     current_user_league_list = [e.leaguename for e in
                                 UserLeague.query.filter_by(userid=current_user.id).order_by(UserLeague.leagueid).all()]
     return render_template('profile.html', name=current_user.name, league_list=current_user_league_list)
+
 
 @main.route('/profile_unsubscribe_league/<leaguename>', methods=['POST'])
 @login_required
@@ -28,3 +34,5 @@ def profile_unsubscribe_league_post(leaguename):
     db.session.commit()
 
     return redirect(url_for('main.profile'))
+
+

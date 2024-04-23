@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+
+{% block content %}
+<nav class="navbar" role="navigation" aria-label="main navigation">
+    <div class="column is-4 is-offset-4 has-text-centered">
+        <h1 class="title has-text-white is-capitalized">
+            Admin
+        </h1>
+    </div>
+</nav>
+
+<div class="hero-body header-image">
+    <div class="container has-text-centered has-background-dark">
+        <div class="column is-8 is-offset-2">
+            <h2 class="title is-6 has-text-link">
+                <a href="{{ url_for('auth.admin') }}"> Retour à l'admin
+                </a>
+            </h2>
+            <h2 class="title is-4"> -------------------------- </h2>
+            <form action="/admin_delete_game" , method="post">
+                <table class="table is-striped is-hoverable is-fullwidth">
+                    <thead>
+                    {% for title in titles %}
+                    <th class="is-dark">
+                        {{title}}
+                    </th>
+                    {% endfor %}
+                    <th class="is-dark">
+                        Supprimer
+                    </th>
+                    </thead>
+                    <tbody>
+                    {% for dict_item in data %}
+                    <tr>
+                        {% for key, value in dict_item.items() %}
+                        <td>{{value}}</td>
+                        {% endfor %}
+                        <td>
+                            <input type="checkbox" name="todelete" value="{{dict_item.id}}">
+                        </td>
+                    </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+                <input class="button is-danger" type="submit" value="⚠️Confirmer Suppression⚠️"/>
+            </form>
+            <h2 class="title is-4"> -------------------------- </h2>
+            <h2 class="title is-6 has-text-link">
+                <a href="{{ url_for('auth.admin') }}"> Retour à l'admin</a>
+            </h2>
+        </div>
+    </div>
+</div>
+{% endblock %}

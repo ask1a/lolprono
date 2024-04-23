@@ -5,7 +5,7 @@
 <nav class="navbar" role="navigation" aria-label="main navigation">
     <div class="column is-4 is-offset-4 has-text-centered">
         <h1 class="title has-text-white is-capitalized">
-            Resultats & pronostics
+            Résultats & pronostics
         </h1>
     </div>
 </nav>
@@ -16,14 +16,14 @@
             <div class="dropdown-trigger">
                 <button class="button has-background-link has-text-white" aria-haspopup="true"
                         aria-controls="dropdown-menu4">
-                    <span>Selectionnez une ligue &#8964</span>
+                    <span>Sélectionnez une ligue &#8964;</span>
                 </button>
             </div>
             <div class="dropdown-menu" id="dropdown-menu4" role="menu">
                 <div class="dropdown-content has-background-dark">
                     <div class="dropdown-item">
                         {% for item in league_list %}
-                        <form method="POST" action="/pronos_show_league/{{item}}">
+                        <form method="POST" action="/pronos_show_league/{{ item }}">
                             <button class="button is-dark">{{ item }}</button>
                         </form>
                         {% endfor %}
@@ -32,18 +32,73 @@
             </div>
         </div>
         <h1 class="title has-text-white is-capitalized"></h1>
-        {% if leagueid==0 %}
+        {% if leagueid == 0 %}
         <div></div>
         {% else %}
         <div class="column is-4 is-offset-4">
             <div class="notification is-dark">
-                <h1 class="title has-text-white">Matchs du {{leaguename}}</h1>
+                <h1 class="title has-text-white">Matchs du {{ leaguename }}</h1>
             </div>
         </div>
-        {% for item in records %}
-        <div class="box has-background-dark has-text-white">
-            <h1 class="title is-4 has-text-white ">{{item}}</h1>
+        <h1 class="title has-text-white"></h1>
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        {% if 'Erreur' in messages[0] %}
+        <div class="notification is-danger">
+            {{ messages[0] }}
         </div>
+        {% else %}
+        <div class="notification is-primary">
+            {{ messages[0] }}
+        </div>
+        {% endif %}
+        {% endif %}
+        {% endwith %}
+        {% for item in records %}
+        {% if not item.editable %}
+        <div class="box has-background-dark has-text-white">
+            <div class="columns">
+                <div class="column is-size-5">{{ item.game_datetime }} (BO{{ item.bo }})</div>
+                <div class="column is-size-4">{{ item.team_1 }}</div>
+                <div class="column is-size-5">Score final : {{ item.score_team_1 }} - {{ item.score_team_2 }}</div>
+                <div class="column is-size-4">{{ item.team_2 }}</div>
+                <div class="column is-size-5">Ton prono : {{ item.prono_team_1 }} - {{ item.prono_team_2 }}</div>
+                <div class="column is-size-5">Points gagnés : {{ item.points }}</div>
+            </div>
+        </div>
+        {% elif item.editable %}
+        <div class="box has-background-grey-lighter has-text-dark">
+            <form method="POST" action="/pronos_update/{{ leaguename }}">
+                <div class="columns">
+                    <div class="column is-size-5">{{ item.game_datetime }} (BO{{ item.bo }})</div>
+                    <div class="column has-text-large is-size-4">{{ item.team_1 }}</div>
+                    <div class="column">
+                        <div class="columns">
+                            <div class="column">
+                                <input class="input is-medium" type="number"
+                                       name="gameidt1;{{ item.gameid }};{{ item.game_datetime }};{{ item.bo }}"
+                                       placeholder="{{ item.prono_team_1 }}"
+                                       min="0" max="{{ (item.bo // 2) + 1 }}" value="{{ item.prono_team_1 }}"
+                                       autofocus>
+                            </div>
+                            <div class="column">
+                                <input class="input is-medium" type="number"
+                                       name="gameidt2;{{ item.gameid }};{{ item.game_datetime }};{{ item.bo }}"
+                                       placeholder="{{ item.prono_team_2 }}"
+                                       min="0" max="{{ (item.bo // 2) + 1 }}" value="{{ item.prono_team_2 }}"
+                                       autofocus>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="column is-size-4">{{ item.team_2 }}</div>
+                    <div class="column is-size-5">Prono actuel : {{ item.prono_team_1 }} - {{ item.prono_team_2 }}</div>
+                    <div class="column">
+                        <button class="button is-link is-dark is-medium">Valider mon pronostic</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        {% endif %}
         {% endfor %}
         {% endif %}
     </div>
