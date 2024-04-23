@@ -86,7 +86,7 @@ def test_ligues_loadpage(client):
 def test_ligues_spring_add(client):
     assert login(client).status_code == 200
     response = client.post("/ligue_spring", follow_redirects=True)
-    assert response.text.__contains__("Résultats & pronostics")
+    assert response.text.__contains__("Déjà inscrit!")
 
 
 def test_pronos_loadpage(client):
