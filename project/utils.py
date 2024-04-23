@@ -22,12 +22,13 @@ def create_points_dataframe(pronos: pd.DataFrame):
     pronos = pronos.merge(game_odds, on='gameid')
     pronos['points'] = np.where(pronos['score_exact'] == 1, pronos['odds'] * (pronos['bo'] // 2 + 1), pronos['odds'])
     pronos['points'] = np.where(pronos['prono_correct'] == 1, pronos['points'], 0)
+
     return pronos
 
 
 def create_standing_table(pronos: pd.DataFrame) -> list:
     pronos = create_points_dataframe(pronos)
-
+    pronos = pronos.dropna()
     recap_score = pronos[['userid', 'username', 'prono_correct', 'score_exact', 'points']].groupby(
         ['userid', 'username']).sum()
     recap_score = recap_score.sort_values('points', ascending=False)

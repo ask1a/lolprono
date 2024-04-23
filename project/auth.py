@@ -174,7 +174,6 @@ def pronos():
 
 @auth.route('/pronos_update/<leaguename>', methods=['POST'])
 def pronos_update(leaguename):
-    heure_prono = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
     pronos_joueur = dict(request.form)
     pronos_team1 = {k.split(';')[1]: v for k, v in pronos_joueur.items() if 't1' in k}
     pronos_team2 = {k.split(';')[1]: v for k, v in pronos_joueur.items() if 't2' in k}
@@ -182,7 +181,7 @@ def pronos_update(leaguename):
     heure_pronos = {k.split(';')[1]: k.split(';')[2] for k, v in pronos_joueur.items() if 't1' in k}
     # creation of a list of tuples containing all the information needed to check before puting the score
     # in the database (gameid, score1, score2, bo and datetime)
-    pronos_teams = list(common_entries(pronos_team1, pronos_team2, pronos_bo, heure_pronos))
+    pronos_teams = list(common_entries(pronos_team1, pronos_team2, pronos_bo))
 
     for prono in pronos_teams:
         # skip incomplete prono
@@ -190,8 +189,7 @@ def pronos_update(leaguename):
             continue
         # verification of the score and time of the bet
         if ((int(prono[1]) + int(prono[2]) <= int(prono[3])) and
-                ((int(prono[1]) == (int(prono[3]) // 2 + 1)) or (int(prono[2]) == (int(prono[3]) // 2 + 1))) and
-                (datetime.strptime(heure_prono, '%Y-%m-%d %H:%M:%S') < datetime.strptime(prono[4], '%Y-%m-%d %H:%M:%S'))
+                ((int(prono[1]) == (int(prono[3]) // 2 + 1)) or (int(prono[2]) == (int(prono[3]) // 2 + 1)))
         ):
             # check if there is an existing prediction for this user and this game
             row = GameProno.query.filter_by(userid=current_user.id, gameid=prono[0]).first()
@@ -245,10 +243,30 @@ def pronos_show_league(leaguename):
         pronos['editable'] = datetime.now() < pronos["game_datetime"]
         pronos = pronos.replace(r'^\s*$', np.nan, regex=True)
         pronos = pronos.fillna(0)
-        pronos = create_points_dataframe(pronos)
+
         columns_to_integer = ['score_team_1', 'score_team_2', 'prono_team_1', 'prono_team_2']
+
+        query = (select(User.id, User.name
+                        , GameProno.gameid, GameProno.prono_team_1, GameProno.prono_team_2
+                        , Game.score_team_1, Game.score_team_2, Game.bo
+                        )
+                 .join(GameProno, User.id == GameProno.userid)
+                 .join(Game, Game.id == GameProno.gameid)
+                 .where(Game.leagueid == leagueid)
+                 )
+
+        table_points = db.session.execute(query).all()
+        table_points = pd.DataFrame(table_points, columns=['userid', 'username', 'gameid',
+                                               'prono_team_1', 'prono_team_2',
+                                               'score_team_1', 'score_team_2', 'bo'])
+        table_points = create_points_dataframe(table_points)
+
         for col in columns_to_integer:
             pronos[col] = pronos[col].astype('Int64')
+        pronos = pd.merge(pronos, table_points, on=['userid', 'username', 'gameid',
+                                               'prono_team_1', 'prono_team_2',
+                                               'score_team_1', 'score_team_2', 'bo'], how='left')
+        pronos = pronos.fillna(0)
         records = pronos.to_dict("records")
 
     return render_template('pronos.html', league_list=current_user_league_list, leaguename=leaguename,
