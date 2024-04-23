@@ -64,8 +64,8 @@
                 <div class="columns">
                     <div class="column">{{item.game_datetime}} (BO{{item.bo}})</div>
                     <div class="column">{{item.team_1}}</div>
-                    <div class="column">{{item.score_team_1}} ({{item.prono_team_1}})</div>
-                    <div class="column">({{item.prono_team_2}}) {{item.score_team_2}}</div>
+                <div class="column">score final : {{ item.score_team_1 }} - {{ item.score_team_2 }}</div>
+                <div class="column">ton prono : {{ item.prono_team_1 }} - {{ item.prono_team_2 }}</div>
                     <div class="column">{{item.team_2}}</div>
                     <div class="column">Points gagnés : {{ item.points | int }}</div>
                 </div>
