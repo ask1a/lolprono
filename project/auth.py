@@ -11,12 +11,14 @@ from .utils import create_standing_table, create_points_dataframe
 
 auth = Blueprint('auth', __name__)
 
+
 def common_entries(*dcts):
-    #function used to combine several dictionaries into a list of tuple using list() with common key on first tuple index
+    # function used to combine several dictionaries into a list of tuple using list() with common key on first tuple index
     if not dcts:
         return
     for i in set(dcts[0]).intersection(*dcts[1:]):
         yield (i,) + tuple(d[i] for d in dcts)
+
 
 def redirect_not_allowed_admin_account(func):
     def wrapper():
@@ -41,8 +43,6 @@ def delete_usertest_post():
         db.session.commit()
         return 'ok'
     return 'ko'
-
-
 
 
 @auth.route('/login')
@@ -170,7 +170,8 @@ def pronos():
     current_user_league_list = get_current_user_league_list()
     return render_template('pronos.html', league_list=current_user_league_list, leagueid=0)
 
-@auth.route('/pronos_update',methods=['POST'])
+
+@auth.route('/pronos_update', methods=['POST'])
 def pronos_update():
     heure_prono = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
     pronos_joueur = dict(request.form)
@@ -178,9 +179,9 @@ def pronos_update():
     pronos_team2 = {k.split(';')[1]: v for k, v in pronos_joueur.items() if 't2' in k}
     pronos_bo = {k.split(';')[1]: k.split(';')[3] for k, v in pronos_joueur.items() if 't1' in k}
     heure_pronos = {k.split(';')[1]: k.split(';')[2] for k, v in pronos_joueur.items() if 't1' in k}
-    #creation of a list of tuples containing all the information needed to check before puting the score
+    # creation of a list of tuples containing all the information needed to check before puting the score
     # in the database (gameid, score1, score2, bo and datetime)
-    pronos_teams = list(common_entries(pronos_team1, pronos_team2,pronos_bo, heure_pronos))
+    pronos_teams = list(common_entries(pronos_team1, pronos_team2, pronos_bo, heure_pronos))
 
     for prono in pronos_teams:
         # skip incomplete prono
@@ -188,8 +189,8 @@ def pronos_update():
             continue
         # verification of the score and time of the bet
         if ((int(prono[1]) + int(prono[2]) <= int(prono[3])) and
-            ((int(prono[1]) == (int(prono[3])//2 + 1)) or (int(prono[2]) == (int(prono[3])//2 + 1))) and
-            (datetime.strptime(heure_prono, '%Y-%m-%d %H:%M:%S') < datetime.strptime(prono[4], '%Y-%m-%d %H:%M:%S'))
+                ((int(prono[1]) == (int(prono[3]) // 2 + 1)) or (int(prono[2]) == (int(prono[3]) // 2 + 1))) and
+                (datetime.strptime(heure_prono, '%Y-%m-%d %H:%M:%S') < datetime.strptime(prono[4], '%Y-%m-%d %H:%M:%S'))
         ):
             # check if there is an existing prediction for this user and this game
             row = GameProno.query.filter_by(userid=current_user.id, gameid=prono[0]).first()
@@ -208,7 +209,6 @@ def pronos_update():
                                       prono_team_2=int(prono[2]))
                 db.session.add(new_prono)
             db.session.commit()
-
 
     current_user_league_list = get_current_user_league_list()
     return render_template('pronos.html', league_list=current_user_league_list, leagueid=0)
@@ -232,7 +232,7 @@ def pronos_show_league(leaguename):
              .order_by(Game.game_datetime)
              )
     pronos = db.session.execute(query).all()
-    records=[]
+    records = []
     if pronos:
         pronos = pd.DataFrame(pronos)
         pronos['editable'] = datetime.now() < pronos["game_datetime"]
@@ -240,7 +240,6 @@ def pronos_show_league(leaguename):
         pronos = create_points_dataframe(pronos)
         columns_to_integer = ['score_team_1', 'score_team_2', 'prono_team_1', 'prono_team_2']
         for col in columns_to_integer:
-
             pronos[col] = pronos[col].astype('Int64')
         records = pronos.to_dict("records")
 
@@ -272,7 +271,7 @@ def classements_show_ranking(leaguename):
     pronos = db.session.execute(query).all()
     pronos = pd.DataFrame(pronos, columns=['userid', 'username', 'gameid',
                                            'prono_team_1', 'prono_team_2',
-                                           'score_team_1', 'score_team_2','bo'])
+                                           'score_team_1', 'score_team_2', 'bo'])
     recap_score = create_standing_table(pronos)
 
     titles = ['Pseudo', 'Bons pronos', 'Pronos exacts', 'Points']
