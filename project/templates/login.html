@@ -14,9 +14,15 @@
         <div class="column is-4 is-offset-4">
             {% with messages = get_flashed_messages() %}
             {% if messages %}
+            {% if messages[0].__contains__('réussie') %}
+            <div class="notification is-primary">
+                {{ messages[0] }}
+            </div>
+            {% else %}
             <div class="notification is-danger">
                 {{ messages[0] }}
             </div>
+            {% endif %}
             {% endif %}
             {% endwith %}
             <div class="box">

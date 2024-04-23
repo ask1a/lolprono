@@ -100,7 +100,7 @@ def signup_post():
     # add the new user to the database
     db.session.add(new_user)
     db.session.commit()
-
+    flash("Inscription réussie! 👍")
     # code to validate and add user to database goes here
     return redirect(url_for('auth.login'))
 
