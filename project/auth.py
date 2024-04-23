@@ -262,12 +262,13 @@ def pronos_show_league(leaguename):
                                                'prono_team_1', 'prono_team_2',
                                                'score_team_1', 'score_team_2', 'bo'])
         table_points = create_points_dataframe(table_points)
+        table_points = table_points.replace(r'^\s*$', np.nan, regex=True)
+        table_points = table_points.fillna(0)
 
         for col in columns_to_integer:
             pronos[col] = pronos[col].astype('Int64')
-        pronos = pd.merge(pronos, table_points, on=['userid', 'username', 'gameid',
-                                               'prono_team_1', 'prono_team_2',
-                                               'score_team_1', 'score_team_2', 'bo'], how='left')
+            table_points[col] = table_points[col].astype('Int64')
+        pronos = pd.merge(pronos, table_points, on=['userid', 'username', 'gameid','prono_team_1', 'prono_team_2', 'score_team_1', 'score_team_2', 'bo'], how='left')
         pronos = pronos.fillna(0)
         records = pronos.to_dict("records")
 
