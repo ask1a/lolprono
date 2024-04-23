@@ -122,7 +122,7 @@ def add_userleague_row(leagueid, leaguename, userid):
     # add the new userleague to the database
     db.session.add(new_userleague)
     db.session.commit()
-    return redirect(url_for('auth.pronos'))
+    return redirect(url_for('auth.ligues'))
 
 
 def is_registered_in_league(leagueid):
