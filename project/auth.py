@@ -108,7 +108,10 @@ def signup_post():
 @auth.route('/ligues')
 @login_required
 def ligues():
-    return render_template('ligues.html', league1=is_registered_in_league(1), league2=is_registered_in_league(2))
+    return render_template('ligues.html',
+                           league1=is_registered_in_league(1),
+                           league2=is_registered_in_league(2),
+                           league3=is_registered_in_league(3))
 
 
 def add_userleague_row(leagueid, leaguename, userid):
@@ -150,6 +153,16 @@ def ligue_summer_post():
     userid = current_user.id
     leagueid = 2
     leaguename = "LEC summer 2024"
+
+    return add_userleague_row(leagueid, leaguename, userid)
+
+
+@auth.route('/ligue_msi_2024', methods=['POST'])
+@login_required
+def ligue_msi_2024_post():
+    userid = current_user.id
+    leagueid = 3
+    leaguename = "Mid-Season Invitational 2024"
 
     return add_userleague_row(leagueid, leaguename, userid)
 
@@ -216,9 +229,8 @@ def pronos_update(leaguename):
         else:
             flash("🧐 Erreur, ton pronostic est invalide, pense à bien tenir compte du type de BO 👨‍🏫.")
 
-
     current_user_league_list = get_current_user_league_list()
-    return redirect(url_for('auth.pronos_show_league', leaguename=leaguename),307)
+    return redirect(url_for('auth.pronos_show_league', leaguename=leaguename), 307)
     # return render_template('pronos.html', league_list=current_user_league_list, leagueid=0)
 
 
@@ -260,8 +272,8 @@ def pronos_show_league(leaguename):
 
         table_points = db.session.execute(query).all()
         table_points = pd.DataFrame(table_points, columns=['userid', 'username', 'gameid',
-                                               'prono_team_1', 'prono_team_2',
-                                               'score_team_1', 'score_team_2', 'bo'])
+                                                           'prono_team_1', 'prono_team_2',
+                                                           'score_team_1', 'score_team_2', 'bo'])
         table_points = create_points_dataframe(table_points)
         table_points = table_points.replace(r'^\s*$', np.nan, regex=True)
         table_points = table_points.fillna(0)
@@ -269,7 +281,9 @@ def pronos_show_league(leaguename):
         for col in columns_to_integer:
             pronos[col] = pronos[col].astype('Int64')
             table_points[col] = table_points[col].astype('Int64')
-        pronos = pd.merge(pronos, table_points, on=['userid', 'username', 'gameid','prono_team_1', 'prono_team_2', 'score_team_1', 'score_team_2', 'bo'], how='left')
+        pronos = pd.merge(pronos, table_points,
+                          on=['userid', 'username', 'gameid', 'prono_team_1', 'prono_team_2', 'score_team_1',
+                              'score_team_2', 'bo'], how='left')
         pronos = pronos.fillna(0)
         records = pronos.to_dict("records")
 
