@@ -7,7 +7,7 @@ from sqlalchemy import select, and_, update
 import pandas as pd
 import io
 from datetime import datetime, timedelta
-from .utils import create_standing_table
+from .utils import create_standing_table, create_points_dataframe
 
 auth = Blueprint('auth', __name__)
 
@@ -219,7 +219,7 @@ def pronos_update():
 def pronos_show_league(leaguename):
     leagueid = get_leagueid_from_leaguename(leaguename)
     current_user_league_list = get_current_user_league_list()
-    query = (select(User.id.label("userid")
+    query = (select(User.id.label("userid"), User.name.label("username")
                     , Game.score_team_1, Game.score_team_2, Game.leagueid, Game.bo
                     , Game.game_datetime, Game.team_1, Game.team_2, Game.id.label("gameid")
                     , GameProno.prono_team_1, GameProno.prono_team_2
@@ -242,8 +242,12 @@ def pronos_show_league(leaguename):
             pronos[col] = pronos[col].astype('Int64')
         records = pronos.to_dict("records")
 
+    pronos = pronos.fillna(0)
+    recap_points = create_points_dataframe(pronos[pronos['editable']==False])
+    print(recap_points['gameid'])
+    print(recap_points['points'])
     return render_template('pronos.html', league_list=current_user_league_list, leaguename=leaguename,
-                           leagueid=leagueid, records=records)
+                           leagueid=leagueid, records=records, datetime=datetime)
 
 
 @auth.route('/classements')

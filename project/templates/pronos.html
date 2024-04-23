@@ -42,41 +42,49 @@
         </div>
         <form method="POST" action="/pronos_update">
             <button class="button is-link is-dark is-medium">Valider mes pronostics</button>
-                <h1 class="title has-text-white">                </h1>
+            <h1 class="title has-text-white"></h1>
             {% for item in records %}
+            {% if not item.editable %}
             <div class="box has-background-dark has-text-white">
                 <div class="columns">
                     <div class="column">{{item.game_datetime}} (BO{{item.bo}})</div>
                     <div class="column">{{item.team_1}}</div>
-                    <div class="column">{{item.score_team_1}}</div>
-                    <div class="column">{{item.score_team_2}}</div>
+                    <div class="column">{{item.score_team_1}} ({{item.prono_team_1}})</div>
+                    <div class="column">({{item.prono_team_2}}) {{item.score_team_2}}</div>
                     <div class="column">{{item.team_2}}</div>
-                    <div class="column">Points</div>
-                </div>
-                <div class="columns has-background-grey-lighter has-text-dark">
-                    <div class="column"></div>
-                    <div class="column has-text-large">Mon pronostic : </div>
-                    {% if item.editable %}
-                    <div class="column">
-                                <input class="input is-small" type="number" name="gameidt1;{{item.gameid}};{{item.game_datetime}};{{item.bo}}" placeholder="{{item.prono_team_1}}"
-                                       min="0"  max="{{(item.bo//2)+1}}"  value="{{item.prono_team_1}}"
-                                       autofocus="">
-                    </div>
-                    <div class="column">
-                                <input class="input is-small" type="number" name="gameidt2;{{item.gameid}};{{item.game_datetime}};{{item.bo}}" placeholder="{{item.prono_team_2}}"
-                        min="0" max="{{(item.bo//2)+1}}" value="{{item.prono_team_2}}"
-                                       autofocus="">
-                    </div>
-                    <div class="column">???</div>
-                    {% else %}
-                    <div class="column">{{item.prono_team_1}}</div>
-                    <div class="column">{{item.prono_team_2}}</div>
-                    <div class="column">afficher points</div>
-                    {% endif %}
-                    <div class="column">
-                    </div>
+                    <div class="column">afficher points : ?</div>
                 </div>
             </div>
+            {% elif item.editable %}
+            <div class="box has-background-grey-lighter has-text-dark">
+                <div class="columns">
+                    <div class="column">{{item.game_datetime}} (BO{{item.bo}})</div>
+                    <div class="column has-text-large">{{item.team_1}}</div>
+                    <div class="column">
+                        <input class="input is-small" type="number"
+                               name="gameidt1;{{item.gameid}};{{item.game_datetime}};{{item.bo}}"
+                               placeholder="{{item.prono_team_1}}"
+                               min="0" max="{{(item.bo//2)+1}}" value="{{item.prono_team_1}}"
+                               autofocus="">
+                    </div>
+                    <div class="column">
+                        <input class="input is-small" type="number"
+                               name="gameidt2;{{item.gameid}};{{item.game_datetime}};{{item.bo}}"
+                               placeholder="{{item.prono_team_2}}"
+                               min="0" max="{{(item.bo//2)+1}}" value="{{item.prono_team_2}}"
+                               autofocus="">
+                    </div>
+                    <div class="column">{{item.team_2}}</div>
+                    <div class="column">{% set difference_seconds = (item.game_datetime - datetime.utcnow()).total_seconds() %}
+                                        {% set days = difference_seconds // 86400 %}
+                                        {% set hours = (difference_seconds % 86400) // 3600 %}
+                                        {% set minutes = (difference_seconds % 3600) // 60 %}
+                                        {% set seconds = difference_seconds % 60 %}
+                                        Temps restant : {{ "%02d:%02d:%02d:%02d" | format(days, hours, minutes, seconds) }}
+                                    </div>
+                </div>
+            </div>
+            {% endif %}
             {% endfor %}
         </form>
         {% endif %}
