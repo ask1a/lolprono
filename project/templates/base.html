@@ -44,13 +44,14 @@
                     Classements
                 </a>
                 {% endif %}
+            </div>
+            <div class="navbar-end">
                 {% if current_user.is_authenticated %}
-                <a href="{{ url_for('auth.logout') }}" class="navbar-item">
+                <a href="{{ url_for('auth.logout') }}" class="navbar-item has-background-danger">
                     Déconnexion
                 </a>
                 {% endif %}
             </div>
-        </div>
         </div>
     </nav>
     {% block content %}

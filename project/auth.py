@@ -3,13 +3,22 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from .models import User, UserLeague, Game, GameProno, League, UserTableLocked
 from flask_login import login_user, logout_user, login_required, current_user
 from . import db
-from sqlalchemy import select
+from sqlalchemy import select, and_, update
 import pandas as pd
+import numpy as np
 import io
 from datetime import datetime, timedelta
-from .utils import create_standing_table
+from .utils import create_standing_table, create_points_dataframe
 
 auth = Blueprint('auth', __name__)
+
+
+def common_entries(*dcts):
+    # function used to combine several dictionaries into a list of tuple using list() with common key on first tuple index
+    if not dcts:
+        return
+    for i in set(dcts[0]).intersection(*dcts[1:]):
+        yield (i,) + tuple(d[i] for d in dcts)
 
 
 def redirect_not_allowed_admin_account(func):
@@ -91,7 +100,7 @@ def signup_post():
     # add the new user to the database
     db.session.add(new_user)
     db.session.commit()
-
+    flash("Inscription réussie! 👍")
     # code to validate and add user to database goes here
     return redirect(url_for('auth.login'))
 
@@ -99,7 +108,10 @@ def signup_post():
 @auth.route('/ligues')
 @login_required
 def ligues():
-    return render_template('ligues.html', league1=is_registered_in_league(1), league2=is_registered_in_league(2))
+    return render_template('ligues.html',
+                           league1=is_registered_in_league(1),
+                           league2=is_registered_in_league(2),
+                           league3=is_registered_in_league(3))
 
 
 def add_userleague_row(leagueid, leaguename, userid):
@@ -113,7 +125,8 @@ def add_userleague_row(leagueid, leaguename, userid):
     # add the new userleague to the database
     db.session.add(new_userleague)
     db.session.commit()
-    return redirect(url_for('auth.pronos'))
+    flash('Ligue ajoutée! 🥳')
+    return redirect(url_for('auth.ligues'))
 
 
 def is_registered_in_league(leagueid):
@@ -144,6 +157,16 @@ def ligue_summer_post():
     return add_userleague_row(leagueid, leaguename, userid)
 
 
+@auth.route('/ligue_msi_2024', methods=['POST'])
+@login_required
+def ligue_msi_2024_post():
+    userid = current_user.id
+    leagueid = 3
+    leaguename = "Mid-Season Invitational 2024"
+
+    return add_userleague_row(leagueid, leaguename, userid)
+
+
 def get_current_user_league_list():
     current_user_league_list = [e.leaguename for e in
                                 UserLeague.query.filter_by(userid=current_user.id).order_by(UserLeague.leagueid).all()]
@@ -163,18 +186,107 @@ def pronos():
     return render_template('pronos.html', league_list=current_user_league_list, leagueid=0)
 
 
+@auth.route('/pronos_update/<leaguename>', methods=['POST'])
+def pronos_update(leaguename):
+    heure_prono = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+    pronos_joueur = dict(request.form)
+    pronos_team1 = {k.split(';')[1]: v for k, v in pronos_joueur.items() if 't1' in k}
+    pronos_team2 = {k.split(';')[1]: v for k, v in pronos_joueur.items() if 't2' in k}
+    pronos_bo = {k.split(';')[1]: k.split(';')[3] for k, v in pronos_joueur.items() if 't1' in k}
+    heure_pronos = {k.split(';')[1]: k.split(';')[2] for k, v in pronos_joueur.items() if 't1' in k}
+    # creation of a list of tuples containing all the information needed to check before puting the score
+    # in the database (gameid, score1, score2, bo and datetime)
+    pronos_teams = list(common_entries(pronos_team1, pronos_team2, pronos_bo, heure_pronos))
+
+    for prono in pronos_teams:
+        # skip incomplete prono
+        if '' in prono:
+            continue
+        # verification of the score and time of the bet
+        if ((int(prono[1]) + int(prono[2]) <= int(prono[3])) and
+                ((int(prono[1]) == (int(prono[3]) // 2 + 1)) or (int(prono[2]) == (int(prono[3]) // 2 + 1))) and
+                (datetime.strptime(heure_prono, '%Y-%m-%d %H:%M:%S') < datetime.strptime(prono[4], '%Y-%m-%d %H:%M:%S'))
+        ):
+            # check if there is an existing prediction for this user and this game
+            row = GameProno.query.filter_by(userid=current_user.id, gameid=prono[0]).first()
+
+            if row:
+                # Update existing prediction
+                db.session.execute(
+                    update(GameProno)
+                    .where(GameProno.userid == current_user.id)
+                    .where(GameProno.gameid == prono[0])
+                    .values(prono_team_1=int(prono[1]), prono_team_2=int(prono[2]))
+                )
+                flash("Pronostic mis à jour! 👌")
+            else:
+                # Add new prediction
+                new_prono = GameProno(userid=current_user.id, gameid=prono[0], prono_team_1=int(prono[1]),
+                                      prono_team_2=int(prono[2]))
+                db.session.add(new_prono)
+                flash("Pronostic mis à jour! 👌")
+            db.session.commit()
+        else:
+            flash("🧐 Erreur, ton pronostic est invalide, pense à bien tenir compte du type de BO 👨‍🏫.")
+
+    return redirect(url_for('auth.pronos_show_league', leaguename=leaguename), 307)
+
+
 @auth.route('/pronos_show_league/<leaguename>', methods=['POST'])
 @login_required
 def pronos_show_league(leaguename):
     leagueid = get_leagueid_from_leaguename(leaguename)
     current_user_league_list = get_current_user_league_list()
-    games = Game.query.filter_by(leagueid=leagueid).order_by(Game.game_datetime).all()
-    records = [u.__dict__ for u in games]
-    for r in records:
-        r.pop('_sa_instance_state')
+    query = (select(User.id.label("userid"), User.name.label("username")
+                    , Game.score_team_1, Game.score_team_2, Game.leagueid, Game.bo
+                    , Game.game_datetime, Game.team_1, Game.team_2, Game.id.label("gameid")
+                    , GameProno.prono_team_1, GameProno.prono_team_2
+                    )
+             .join(UserLeague, UserLeague.userid == User.id)
+             .join(Game, UserLeague.leagueid == Game.leagueid)
+             .join(GameProno, and_(GameProno.userid == User.id, GameProno.gameid == Game.id), isouter=True)
+             .where(Game.leagueid == leagueid)
+             .where(current_user.id == User.id)
+             .order_by(Game.game_datetime.desc())
+             )
+    pronos = db.session.execute(query).all()
+    records = []
+    if pronos:
+        pronos = pd.DataFrame(pronos)
+        pronos['editable'] = datetime.now() < pronos["game_datetime"]
+        pronos = pronos.replace(r'^\s*$', np.nan, regex=True)
+        pronos = pronos.fillna(0)
+
+        columns_to_integer = ['score_team_1', 'score_team_2', 'prono_team_1', 'prono_team_2']
+
+        query = (select(User.id, User.name
+                        , GameProno.gameid, GameProno.prono_team_1, GameProno.prono_team_2
+                        , Game.score_team_1, Game.score_team_2, Game.bo
+                        )
+                 .join(GameProno, User.id == GameProno.userid)
+                 .join(Game, Game.id == GameProno.gameid)
+                 .where(Game.leagueid == leagueid)
+                 )
+
+        table_points = db.session.execute(query).all()
+        table_points = pd.DataFrame(table_points, columns=['userid', 'username', 'gameid',
+                                                           'prono_team_1', 'prono_team_2',
+                                                           'score_team_1', 'score_team_2', 'bo'])
+        table_points = create_points_dataframe(table_points)
+        table_points = table_points.replace(r'^\s*$', np.nan, regex=True)
+        table_points = table_points.fillna(0)
+
+        for col in columns_to_integer:
+            pronos[col] = pronos[col].astype('Int64')
+            table_points[col] = table_points[col].astype('Int64')
+        pronos = pd.merge(pronos, table_points,
+                          on=['userid', 'username', 'gameid', 'prono_team_1', 'prono_team_2', 'score_team_1',
+                              'score_team_2', 'bo'], how='left')
+        pronos = pronos.fillna(0)
+        records = pronos.to_dict("records")
 
     return render_template('pronos.html', league_list=current_user_league_list, leaguename=leaguename,
-                           leagueid=leagueid, records=records)
+                           leagueid=leagueid, records=records, datetime=datetime)
 
 
 @auth.route('/classements')
@@ -201,15 +313,13 @@ def classements_show_ranking(leaguename):
     pronos = db.session.execute(query).all()
     pronos = pd.DataFrame(pronos, columns=['userid', 'username', 'gameid',
                                            'prono_team_1', 'prono_team_2',
-                                           'score_team_1', 'score_team_2','bo'])
+                                           'score_team_1', 'score_team_2', 'bo'])
     recap_score = create_standing_table(pronos)
 
     titles = ['Pseudo', 'Bons pronos', 'Pronos exacts', 'Points']
     return render_template('classements.html', leagueid=leagueid, league_list=current_user_league_list,
                            recap_score=recap_score,
                            titles=titles)
-
-
 
 
 @auth.route('/admin')
