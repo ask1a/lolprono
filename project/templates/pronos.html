@@ -91,7 +91,7 @@
                     </div>
                     <div class="column">{{item.team_2}}</div>
                     <div class="column">{% set difference_seconds = (item.game_datetime -
-                        datetime.utcnow()).total_seconds() %}
+                        datetime.today()).total_seconds() %}
                         {% set days = difference_seconds // 86400 %}
                         {% set hours = (difference_seconds % 86400) // 3600 %}
                         {% set minutes = (difference_seconds % 3600) // 60 %}
