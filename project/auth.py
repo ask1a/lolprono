@@ -204,16 +204,16 @@ def pronos_update(leaguename):
                     .where(GameProno.gameid == prono[0])
                     .values(prono_team_1=int(prono[1]), prono_team_2=int(prono[2]))
                 )
-                flash("Pronostic(s) mis à jour! :)")
+                flash("Pronostic mis à jour! 👌")
             else:
                 # Add new prediction
                 new_prono = GameProno(userid=current_user.id, gameid=prono[0], prono_team_1=int(prono[1]),
                                       prono_team_2=int(prono[2]))
                 db.session.add(new_prono)
-                flash("Pronostic(s) mis à jour! :)")
+                flash("Pronostic mis à jour! 👌")
             db.session.commit()
         else:
-            flash("Erreur, au moins un des pronostic(s) est invalide, pensez à bien tenir compte du type de BO.")
+            flash("🧐 Erreur, ton pronostic est invalide, pense à bien tenir compte du type de BO 👨‍🏫.")
 
 
     current_user_league_list = get_current_user_league_list()
@@ -236,7 +236,7 @@ def pronos_show_league(leaguename):
              .join(GameProno, and_(GameProno.userid == User.id, GameProno.gameid == Game.id), isouter=True)
              .where(Game.leagueid == leagueid)
              .where(current_user.id == User.id)
-             .order_by(Game.game_datetime)
+             .order_by(Game.game_datetime.desc())
              )
     pronos = db.session.execute(query).all()
     records = []
