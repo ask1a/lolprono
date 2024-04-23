@@ -174,6 +174,7 @@ def pronos():
 
 @auth.route('/pronos_update/<leaguename>', methods=['POST'])
 def pronos_update(leaguename):
+    heure_prono = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
     pronos_joueur = dict(request.form)
     pronos_team1 = {k.split(';')[1]: v for k, v in pronos_joueur.items() if 't1' in k}
     pronos_team2 = {k.split(';')[1]: v for k, v in pronos_joueur.items() if 't2' in k}
@@ -181,7 +182,7 @@ def pronos_update(leaguename):
     heure_pronos = {k.split(';')[1]: k.split(';')[2] for k, v in pronos_joueur.items() if 't1' in k}
     # creation of a list of tuples containing all the information needed to check before puting the score
     # in the database (gameid, score1, score2, bo and datetime)
-    pronos_teams = list(common_entries(pronos_team1, pronos_team2, pronos_bo))
+    pronos_teams = list(common_entries(pronos_team1, pronos_team2, pronos_bo, heure_pronos))
 
     for prono in pronos_teams:
         # skip incomplete prono
@@ -189,7 +190,8 @@ def pronos_update(leaguename):
             continue
         # verification of the score and time of the bet
         if ((int(prono[1]) + int(prono[2]) <= int(prono[3])) and
-                ((int(prono[1]) == (int(prono[3]) // 2 + 1)) or (int(prono[2]) == (int(prono[3]) // 2 + 1)))
+                ((int(prono[1]) == (int(prono[3]) // 2 + 1)) or (int(prono[2]) == (int(prono[3]) // 2 + 1))) and
+                (datetime.strptime(heure_prono, '%Y-%m-%d %H:%M:%S') < datetime.strptime(prono[4], '%Y-%m-%d %H:%M:%S'))
         ):
             # check if there is an existing prediction for this user and this game
             row = GameProno.query.filter_by(userid=current_user.id, gameid=prono[0]).first()

@@ -58,35 +58,40 @@
         {% if not item.editable %}
         <div class="box has-background-dark has-text-white">
             <div class="columns">
-                <div class="column">{{ item.game_datetime }} (BO{{ item.bo }})</div>
-                <div class="column">{{ item.team_1 }}</div>
-                <div class="column">score final : {{ item.score_team_1 }} - {{ item.score_team_2 }}</div>
-                <div class="column">ton prono : {{ item.prono_team_1 }} - {{ item.prono_team_2 }}</div>
-                <div class="column">{{ item.team_2 }}</div>
-                <div class="column">Points gagnés : {{ item.points }}</div>
+                <div class="column is-size-5">{{ item.game_datetime }} (BO{{ item.bo }})</div>
+                <div class="column is-size-5">{{ item.team_1 }}</div>
+                <div class="column is-size-5">Score final : {{ item.score_team_1 }} - {{ item.score_team_2 }}</div>
+                <div class="column is-size-5">Ton prono : {{ item.prono_team_1 }} - {{ item.prono_team_2 }}</div>
+                <div class="column is-size-5">{{ item.team_2 }}</div>
+                <div class="column is-size-5">Points gagnés : {{ item.points }}</div>
             </div>
         </div>
         {% elif item.editable %}
         <div class="box has-background-grey-lighter has-text-dark">
             <form method="POST" action="/pronos_update/{{ leaguename }}">
                 <div class="columns">
-                    <div class="column">{{ item.game_datetime }} (BO{{ item.bo }})</div>
-                    <div class="column has-text-large">{{ item.team_1 }}</div>
+                    <div class="column is-size-5">{{ item.game_datetime }} (BO{{ item.bo }})</div>
+                    <div class="column has-text-large is-size-4">{{ item.team_1 }}</div>
                     <div class="column">
-                        <input class="input is-small" type="number"
-                               name="gameidt1;{{ item.gameid }};{{ item.game_datetime }};{{ item.bo }}"
-                               placeholder="{{ item.prono_team_1 }}"
-                               min="0" max="{{ (item.bo // 2) + 1 }}" value="{{ item.prono_team_1 }}"
-                               autofocus>
+                        <div class="columns">
+                            <div class="column">
+                                <input class="input is-medium" type="number"
+                                       name="gameidt1;{{ item.gameid }};{{ item.game_datetime }};{{ item.bo }}"
+                                       placeholder="{{ item.prono_team_1 }}"
+                                       min="0" max="{{ (item.bo // 2) + 1 }}" value="{{ item.prono_team_1 }}"
+                                       autofocus>
+                            </div>
+                            <div class="column">
+                                <input class="input is-medium" type="number"
+                                       name="gameidt2;{{ item.gameid }};{{ item.game_datetime }};{{ item.bo }}"
+                                       placeholder="{{ item.prono_team_2 }}"
+                                       min="0" max="{{ (item.bo // 2) + 1 }}" value="{{ item.prono_team_2 }}"
+                                       autofocus>
+                            </div>
+                        </div>
                     </div>
-                    <div class="column">
-                        <input class="input is-small" type="number"
-                               name="gameidt2;{{ item.gameid }};{{ item.game_datetime }};{{ item.bo }}"
-                               placeholder="{{ item.prono_team_2 }}"
-                               min="0" max="{{ (item.bo // 2) + 1 }}" value="{{ item.prono_team_2 }}"
-                               autofocus>
-                    </div>
-                    <div class="column">{{ item.team_2 }}</div>
+                    <div class="column is-size-5">Prono actuel : {{ item.prono_team_1 }} - {{ item.prono_team_2 }}</div>
+                    <div class="column is-size-4">{{ item.team_2 }}</div>
                     <div class="column">
                         <button class="button is-link is-dark is-medium">Valider mon pronostic</button>
                     </div>
