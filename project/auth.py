@@ -5,6 +5,7 @@ from flask_login import login_user, logout_user, login_required, current_user
 from . import db
 from sqlalchemy import select, and_, update
 import pandas as pd
+import numpy as np
 import io
 from datetime import datetime, timedelta
 from .utils import create_standing_table, create_points_dataframe
@@ -242,6 +243,7 @@ def pronos_show_league(leaguename):
     if pronos:
         pronos = pd.DataFrame(pronos)
         pronos['editable'] = datetime.now() < pronos["game_datetime"]
+        pronos = pronos.replace(r'^\s*$', np.nan, regex=True)
         pronos = pronos.fillna(0)
         pronos = create_points_dataframe(pronos)
         columns_to_integer = ['score_team_1', 'score_team_2', 'prono_team_1', 'prono_team_2']
