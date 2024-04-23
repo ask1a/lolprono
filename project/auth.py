@@ -122,6 +122,7 @@ def add_userleague_row(leagueid, leaguename, userid):
     # add the new userleague to the database
     db.session.add(new_userleague)
     db.session.commit()
+    flash('Ligue ajoutée! 🥳')
     return redirect(url_for('auth.ligues'))
 
 

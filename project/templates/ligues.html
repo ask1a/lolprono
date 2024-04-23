@@ -14,6 +14,14 @@
         <div class="columns">
             <div class="column"></div>
             <div class="column">
+                {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                <div class="notification is-primary">
+                    {{ messages[0] }}
+                </div>
+                {% endif %}
+                {% endwith %}
+
                 <div class="box has-background-dark">
                     <form method="POST" action="/ligue_spring">
                         <div class="columns">
