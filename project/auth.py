@@ -229,9 +229,7 @@ def pronos_update(leaguename):
         else:
             flash("🧐 Erreur, ton pronostic est invalide, pense à bien tenir compte du type de BO 👨‍🏫.")
 
-    current_user_league_list = get_current_user_league_list()
     return redirect(url_for('auth.pronos_show_league', leaguename=leaguename), 307)
-    # return render_template('pronos.html', league_list=current_user_league_list, leagueid=0)
 
 
 @auth.route('/pronos_show_league/<leaguename>', methods=['POST'])
