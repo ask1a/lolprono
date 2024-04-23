@@ -171,8 +171,8 @@ def pronos():
     return render_template('pronos.html', league_list=current_user_league_list, leagueid=0)
 
 
-@auth.route('/pronos_update', methods=['POST'])
-def pronos_update():
+@auth.route('/pronos_update/<leaguename>', methods=['POST'])
+def pronos_update(leaguename):
     heure_prono = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
     pronos_joueur = dict(request.form)
     pronos_team1 = {k.split(';')[1]: v for k, v in pronos_joueur.items() if 't1' in k}
@@ -203,15 +203,21 @@ def pronos_update():
                     .where(GameProno.gameid == prono[0])
                     .values(prono_team_1=int(prono[1]), prono_team_2=int(prono[2]))
                 )
+                flash("Pronostic(s) mis à jour! :)")
             else:
                 # Add new prediction
                 new_prono = GameProno(userid=current_user.id, gameid=prono[0], prono_team_1=int(prono[1]),
                                       prono_team_2=int(prono[2]))
                 db.session.add(new_prono)
+                flash("Pronostic(s) mis à jour! :)")
             db.session.commit()
+        else:
+            flash("Erreur, au moins un des pronostic(s) est invalide, pensez à bien tenir compte du type de BO.")
+
 
     current_user_league_list = get_current_user_league_list()
-    return render_template('pronos.html', league_list=current_user_league_list, leagueid=0)
+    return redirect(url_for('auth.pronos_show_league', leaguename=leaguename),307)
+    # return render_template('pronos.html', league_list=current_user_league_list, leagueid=0)
 
 
 @auth.route('/pronos_show_league/<leaguename>', methods=['POST'])

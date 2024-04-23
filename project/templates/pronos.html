@@ -40,8 +40,23 @@
                 <h1 class="title has-text-white">Matchs du {{leaguename}}</h1>
             </div>
         </div>
-        <form method="POST" action="/pronos_update">
+        <form method="POST" action="/pronos_update/{{leaguename}}">
             <button class="button is-link is-dark is-medium">Valider mes pronostics</button>
+
+            {% with messages = get_flashed_messages() %}
+            {% if messages %}
+            {% if messages[0].__contains__('Erreur') %}
+            <div class="notification is-danger">
+                {{ messages[0] }}
+            </div>
+            {% else %}
+            <div class="notification is-primary">
+                {{ messages[0] }}
+            </div>
+            {% endif %}
+            {% endif %}
+            {% endwith %}
+
             <h1 class="title has-text-white"></h1>
             {% for item in records %}
             {% if not item.editable %}
@@ -75,13 +90,14 @@
                                autofocus="">
                     </div>
                     <div class="column">{{item.team_2}}</div>
-                    <div class="column">{% set difference_seconds = (item.game_datetime - datetime.utcnow()).total_seconds() %}
-                                        {% set days = difference_seconds // 86400 %}
-                                        {% set hours = (difference_seconds % 86400) // 3600 %}
-                                        {% set minutes = (difference_seconds % 3600) // 60 %}
-                                        {% set seconds = difference_seconds % 60 %}
-                                        Temps restant : {{ "%02d:%02d:%02d:%02d" | format(days, hours, minutes, seconds) }}
-                                    </div>
+                    <div class="column">{% set difference_seconds = (item.game_datetime -
+                        datetime.utcnow()).total_seconds() %}
+                        {% set days = difference_seconds // 86400 %}
+                        {% set hours = (difference_seconds % 86400) // 3600 %}
+                        {% set minutes = (difference_seconds % 3600) // 60 %}
+                        {% set seconds = difference_seconds % 60 %}
+                        Temps restant : {{ "%02d:%02d:%02d:%02d" | format(days, hours, minutes, seconds) }}
+                    </div>
                 </div>
             </div>
             {% endif %}
