@@ -236,16 +236,14 @@ def pronos_show_league(leaguename):
     if pronos:
         pronos = pd.DataFrame(pronos)
         pronos['editable'] = datetime.now() < pronos["game_datetime"]
+        pronos = pronos.fillna(0)
+        pronos = create_points_dataframe(pronos)
         columns_to_integer = ['score_team_1', 'score_team_2', 'prono_team_1', 'prono_team_2']
         for col in columns_to_integer:
 
             pronos[col] = pronos[col].astype('Int64')
         records = pronos.to_dict("records")
 
-    pronos = pronos.fillna(0)
-    recap_points = create_points_dataframe(pronos[pronos['editable']==False])
-    print(recap_points['gameid'])
-    print(recap_points['points'])
     return render_template('pronos.html', league_list=current_user_league_list, leaguename=leaguename,
                            leagueid=leagueid, records=records, datetime=datetime)
 

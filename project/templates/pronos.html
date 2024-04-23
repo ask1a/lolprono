@@ -52,7 +52,7 @@
                     <div class="column">{{item.score_team_1}} ({{item.prono_team_1}})</div>
                     <div class="column">({{item.prono_team_2}}) {{item.score_team_2}}</div>
                     <div class="column">{{item.team_2}}</div>
-                    <div class="column">afficher points : ?</div>
+                    <div class="column">Points gagnés : {{ item.points | int }}</div>
                 </div>
             </div>
             {% elif item.editable %}

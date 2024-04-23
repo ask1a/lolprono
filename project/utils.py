@@ -42,7 +42,7 @@ def create_standing_table(pronos: pd.DataFrame) -> list:
     # pronos = pronos.merge(game_odds, on='gameid')
     # pronos['points'] = np.where(pronos['score_exact']==1,pronos['odds'] * (pronos['bo'] // 2 + 1),pronos['odds'])
     # pronos['points'] = np.where(pronos['prono_correct']==1,pronos['points'],0)
-    create_points_dataframe(pronos)
+    pronos = create_points_dataframe(pronos)
 
     recap_score = pronos[['userid', 'username', 'prono_correct', 'score_exact', 'points']].groupby(
         ['userid', 'username']).sum()
