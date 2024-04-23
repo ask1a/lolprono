@@ -21,6 +21,12 @@
                 </h2>
             </div>
 
+            {% if league_list==[] %}
+            <div class="box has-background-dark has-text-white">
+                <p>Aucune ligue suivie!</p>
+                <a href="{{ url_for('auth.ligues') }}" class="button is-link">Ajouter une ligue.</a>
+            </div>
+            {% endif %}
             {% for item in league_list %}
             <div class="box has-background-dark has-text-white">
                 <form method="POST" action="/profile_unsubscribe_league/{{item}}">
