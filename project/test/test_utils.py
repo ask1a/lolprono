@@ -1,5 +1,20 @@
 import project.utils as u
 import pandas as pd
+import numpy as np
+
+
+def test_eval_team_win():
+    # Créez un DataFrame de test
+    data = {
+        'score_team_1': [1, 2, 3],
+        'score_team_2': [2, 2, 2]
+    }
+    df = pd.DataFrame(data)
+
+    # Testez l'évaluation des équipes gagnantes
+    result = u.eval_team_win(df, 'score_team_1', 'score_team_2')
+    expected_result = np.array(['team_2', '', 'team_1'])
+    np.testing.assert_array_equal(result, expected_result)
 
 
 def test_create_standing_table():
