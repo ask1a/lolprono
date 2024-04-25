@@ -53,7 +53,7 @@ def login():
 
 @auth.route('/login', methods=['POST'])
 def login_post():
-    email = request.form.get('email')
+    email = request.form.get('email').lower()
     password = request.form.get('password')
     remember = True if request.form.get('remember') else False
 
@@ -77,7 +77,7 @@ def signup():
 
 @auth.route('/signup', methods=['POST'])
 def signup_post():
-    email = request.form.get('email')
+    email = request.form.get('email').lower()
     name = request.form.get('name')
     password = request.form.get('password')
     user = User.query.filter_by(
