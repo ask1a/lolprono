@@ -8,7 +8,6 @@ import pandas as pd
 import requests
 
 from bs4 import BeautifulSoup
-from sqlalchemy import select
 
 
 def check_league(league_name, leagues):
