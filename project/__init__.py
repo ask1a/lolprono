@@ -6,16 +6,17 @@ from flask_login import LoginManager
 db = SQLAlchemy()
 
 
-def create_app():
+def create_app(test_config=None):
     app = Flask(__name__)
 
+    if test_config is not None:
+        app.config['DEBUG'] = True
+        app.config['TESTING'] = True
     app.config['SECRET_KEY'] = 'secret-key-goes-here'
     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db.sqlite'
 
     db.init_app(app)
-
-    from . import models
-
+    from . import models # noqa
     with app.app_context():
         db.create_all()
 

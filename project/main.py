@@ -1,7 +1,7 @@
-from flask import Blueprint, render_template, redirect, url_for, request
+from flask import Blueprint, render_template, redirect, url_for
 from flask_login import login_required, current_user
 from . import db
-from .models import UserLeague, Game
+from .models import UserLeague
 
 main = Blueprint('main', __name__)
 
@@ -9,6 +9,11 @@ main = Blueprint('main', __name__)
 @main.route('/index')
 def index():
     return render_template('index.html')
+
+@main.route('/')
+def home():
+    return redirect(url_for('main.index'))
+
 
 
 @main.route('/profile')

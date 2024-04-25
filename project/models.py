@@ -9,6 +9,12 @@ class User(UserMixin, db.Model):
     password = db.Column(db.String(100))
     name = db.Column(db.String(1000))
 
+class UserTableLocked(db.Model):
+    """Manage users infos"""
+    id = db.Column(db.Integer, primary_key=True)  # primary keys are required by SQLAlchemy
+    status = db.Column(db.Integer, unique=False)
+
+
 class League(db.Model):
     """Manage leagues infos"""
     id = db.Column(db.Integer, primary_key=True)  # primary keys are required by SQLAlchemy
