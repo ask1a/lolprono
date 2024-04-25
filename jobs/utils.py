@@ -25,7 +25,7 @@ def check_league(league_name: str, leagues: list[str]) -> bool:
             return True
     return False   
 
-def assign_league_id(league_name, leagues_df):
+def assign_league_id(league_name: str, leagues_df: pd.DataFrame):
     '''
     Assign the correct leagueid used in a Lambda Function.
     This is comparing 2 strings between them. Not ideal, but it works.
@@ -40,7 +40,7 @@ def assign_league_id(league_name, leagues_df):
             return leagues_df[leagues_df['leaguename'] == l]['id'].values[0]
     return -1   
 
-def clean_schedule(df):
+def clean_schedule(df: pd.DataFrame) -> pd.DataFrame:
     '''
     Function to clean Schedule DF before inserting it in DB
     
@@ -89,7 +89,7 @@ def clean_schedule(df):
     df = df[['leagueid','bo', 'game_datetime', 'team_1', 'team_2']]
     return df
 
-def clean_results(df):
+def clean_results(df: pd.DataFrame) -> pd.DataFrame:
     '''
     Function to clean results DF before updating DB
     
@@ -121,7 +121,7 @@ def clean_results(df):
     return df
     
 
-def get_game_schedule_dataframe():
+def get_game_schedule_dataframe() -> pd.DataFrame:
     
     '''
     Function to fetch future LOL games from the e-sportstats.com website and place it into a dataframe.
@@ -208,7 +208,7 @@ def get_game_schedule_dataframe():
     return game_list
 
 
-def get_game_results_dataframe():
+def get_game_results_dataframe() -> pd.DataFrame:
     '''
     Function to fetch LOL games results from the e-sportstats.com website and place it into a dataframe.
     
@@ -272,7 +272,7 @@ def get_game_results_dataframe():
     return game_list
 
 
-def insert_future_games(df):
+def insert_future_games(df: pd.DataFrame) -> None:
     '''
     Insert the new games in the database
     
@@ -283,7 +283,7 @@ def insert_future_games(df):
     con_instance = sqlite3.connect("instance/db.sqlite")
     df.to_sql(name='game', con=con_instance, if_exists='append', index=False)
     
-def update_game_results(df):
+def update_game_results(df: pd.DataFrame) -> None:
     '''
     Update Games' results in the database
     
