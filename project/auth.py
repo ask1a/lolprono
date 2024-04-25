@@ -317,7 +317,8 @@ def classements_show_ranking(leaguename):
     recap_score = create_standing_table(pronos)
 
     titles = ['Pseudo', 'Bons pronos', 'Pronos exacts', 'Points']
-    return render_template('classements.html', leagueid=leagueid, league_list=current_user_league_list,
+    return render_template('classements.html', leagueid=leagueid, leaguename=leaguename,
+                           league_list=current_user_league_list,
                            recap_score=recap_score,
                            titles=titles)
 
