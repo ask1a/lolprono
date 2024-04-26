@@ -54,38 +54,63 @@
         {% if not item.editable %}
         {% if item.prono_correct %}
         {% if item.score_exact %}
-        <div class="box has-background-success has-text-white">
+        <div class="box has-background-warning has-text-white">
             {% elif not item.score_exact %}
-            <div class="box has-background-link has-text-white">
+            <div class="box has-background-success has-text-white">
                 {% endif %}
                 {% elif not item.prono_correct %}
                 <div class="box has-background-danger has-text-white">
                     {% endif %}
-                    <div class="columns">
-                        <div class="column is-size-5">{{ item.game_datetime }} (BO{{ item.bo }})</div>
-                        {% if item.score_team_win == 'team_1' %}
-                        <div class="column is-size-4 has-text-weight-bold">{{ item.team_1 }} ⚪</div>
-                        {% else %}
-                        <div class="column is-size-4">{{ item.team_1 }}</div>
-                        {% endif %}
-                        <div class="column is-size-5">Score final : {{ item.score_team_1 }} - {{ item.score_team_2 }}
+                    <form method="POST" action="/pronos_resume/{{ gameid }}">
+                        <div class="columns">
+                            <div class="column is-size-5">{{ item.game_datetime }} (BO{{ item.bo }})</div>
+                            {% if item.score_team_win == 'team_1' %}
+                            <div class="column is-size-5">
+                                <img src="/static/logos/{{ item.logo_team_1 }}" alt="{{ item.team_1 }}">
+                            </div>
+                            <div class="column is-size-5 has-text-weight-bold">{{ item.team_1 }} ⚪</div>
+                            {% else %}
+                            <div class="column">
+                                <img src="/static/logos/{{ item.logo_team_1 }}" alt="{{ item.team_1 }}"></div>
+                            <div class="column is">{{ item.team_1 }}</div>
+                            {% endif %}
+                            <div class="column is-size-4">{{ item.score_team_1 }} - {{
+                                item.score_team_2 }}
+                            </div>
+                            {% if item.score_team_win == 'team_2' %}
+                            <div class="column is-size-5 has-text-weight-bold">{{ item.team_2 }} ⚪</div>
+                            <div class="column is-size-5">
+                                <img src="/static/logos/{{ item.logo_team_2 }}" alt="{{ item.team_2 }}">
+                            </div>
+                            {% else %}
+                            <div class="column is-size-5">{{ item.team_2 }}</div>
+                            <div class="column">
+                                <img src="/static/logos/{{ item.logo_team_2 }}" alt="{{ item.team_2 }}"></div>
+                            {% endif %}
+                            <div class="column is-flex-direction-column">
+                                <div class="is-size-5">Ton prono :</div>
+                                <div class="mt-3 is-size-5">{{ item.prono_team_1 }} - {{ item.prono_team_2 }}</div>
+                            </div>
+                            <div class="column is-flex-direction-column">
+                                <div class="is-size-5 has-background-grey-lighter has-text-grey-darker">Pts: {{
+                                    item.points }}
+                                </div>
+                                <div class="mt-3">
+                                    <button class="button is-link is-dark is-medium">Voir les pronostics</button>
+                                </div>
+                            </div>
                         </div>
-                        {% if item.score_team_win == 'team_2' %}
-                        <div class="column is-size-4 has-text-weight-bold">⚪ {{ item.team_2 }}</div>
-                        {% else %}
-                        <div class="column is-size-4">{{ item.team_2 }}</div>
-                        {% endif %}
-                        <div class="column is-size-5">Ton prono : {{ item.prono_team_1 }} - {{ item.prono_team_2 }}
-                        </div>
-                        <div class="column is-size-5">Points gagnés : {{ item.points }}</div>
-                    </div>
+                    </form>
                 </div>
                 {% elif item.editable %}
-                <div class="box has-background-grey-lighter has-text-dark">
+                <div class="box has-background-grey-lighter has-text-dark is-multiline">
                     <form method="POST" action="/pronos_update/{{ leaguename }}">
                         <div class="columns">
                             <div class="column is-size-5">{{ item.game_datetime }} (BO{{ item.bo }})</div>
-                            <div class="column has-text-large is-size-4">{{ item.team_1 }}</div>
+                            <div class="column">
+                                <img src="/static/logos/{{ item.logo_team_1 }}" alt="{{ item.team_1 }}"></div>
+                            <div class="column is-size-5">{{ item.team_1 }}
+                            </div>
                             <div class="column">
                                 <div class="columns">
                                     <div class="column">
@@ -104,7 +129,9 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="column is-size-4">{{ item.team_2 }}</div>
+                            <div class="column is-size-5">{{ item.team_2 }}</div>
+                            <div class="column">
+                                <img src="/static/logos/{{ item.logo_team_2 }}" alt="{{ item.team_2 }}"></div>
                             <div class="column is-size-5">Prono actuel : {{ item.prono_team_1 }} - {{ item.prono_team_2
                                 }}
                             </div>

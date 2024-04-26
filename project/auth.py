@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, redirect, url_for, request, flash
 from werkzeug.security import generate_password_hash, check_password_hash
-from .models import User, UserLeague, Game, GameProno, League, UserTableLocked
+from .models import User, UserLeague, Game, GameProno, League, UserTableLocked, Teams
 from flask_login import login_user, logout_user, login_required, current_user
 from . import db
 from sqlalchemy import select, and_, update
@@ -283,7 +283,18 @@ def pronos_show_league(leaguename):
                           on=['userid', 'username', 'gameid', 'prono_team_1', 'prono_team_2', 'score_team_1',
                               'score_team_2', 'bo'], how='left')
         pronos = pronos.fillna(0)
+
         records = pronos.to_dict("records")
+
+        #ajout des logos dans l'item records
+        query = (select(Teams.long_label, Teams.logo_url))
+        logos = db.session.execute(query).all()
+        logos = pd.DataFrame(logos, columns=['long_label', 'logo_url'])
+        logos = logos.set_index('long_label')['logo_url'].to_dict()
+        for item in records:
+            item['logo_team_1'] = logos[item['team_1']]
+            item['logo_team_2'] = logos[item['team_2']]
+
 
     return render_template('pronos.html', league_list=current_user_league_list, leaguename=leaguename,
                            leagueid=leagueid, records=records, datetime=datetime)
