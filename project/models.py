@@ -50,7 +50,7 @@ class Teams(db.Model):
     """Manage teams infos"""
     id = db.Column(db.Integer, primary_key=True)  # primary keys are required by SQLAlchemy
     short_label = db.Column(db.String(10), unique=True, nullable=False)
-    long_label = db.Column(db.String(20), unique=True, nullable=False)
+    long_label = db.Column(db.String(50), unique=True, nullable=False)
     region = db.Column(db.String(20), unique=False, nullable=False)
-    logo_url = db.Column(db.String(50), unique=True, nullable=False)
+    logo_url = db.Column(db.String(20), unique=True, nullable=False)
 
