@@ -179,7 +179,7 @@ def get_leagueid_from_leaguename(leaguename):
     return leagueid
 
 
-@auth.route('/pronos', methods=['POST'])
+@auth.route('/pronos')
 @login_required
 def pronos():
     current_user_league_list = get_current_user_league_list()

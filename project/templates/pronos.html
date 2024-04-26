@@ -74,8 +74,9 @@
                                 <img src="/static/logos/{{ item.logo_team_1 }}" alt="{{ item.team_1 }}"></div>
                             <div class="column is">{{ item.team_1 }}</div>
                             {% endif %}
-                            <div class="column is-size-4">{{ item.score_team_1 }} - {{
-                                item.score_team_2 }}
+                            <div class="column is-flex-direction-column">
+                                <div class="is-size-5">Score final :</div>
+                                <div class="mt-3 is-size-5">{{ item.score_team_1 }} - {{ item.score_team_2 }}</div>
                             </div>
                             {% if item.score_team_win == 'team_2' %}
                             <div class="column is-size-5 has-text-weight-bold">{{ item.team_2 }} ⚪</div>
@@ -146,5 +147,6 @@
                 {% endif %}
             </div>
         </div>
-
-        {% endblock %}
+    </div>
+</div>
+{% endblock %}
