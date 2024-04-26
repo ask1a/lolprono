@@ -10,7 +10,7 @@ import requests
 from bs4 import BeautifulSoup
 
 
-def check_league(league_name: str, leagues: list[str]) -> bool:
+def check_league(league_name: str, leagues: list[str]) -> int:
     '''
     Check if a league in leagues is in the x, used in a Lambda Function.
     This is comparing 2 strings between them. Not ideal, but it works.
@@ -20,10 +20,10 @@ def check_league(league_name: str, leagues: list[str]) -> bool:
     x: String
     leagues: list of strings
     '''
-    for l in leagues:
-        if l in league_name: 
-            return True
-    return False   
+    for league in leagues:
+        if league in league_name: 
+            return 'keep'
+    return 'discard'   
 
 def assign_league_id(league_name: str, leagues_df: pd.DataFrame):
     '''
@@ -35,9 +35,9 @@ def assign_league_id(league_name: str, leagues_df: pd.DataFrame):
     x: String
     leagues_df: Pandas DataFrame containing leagueid and leaguename
     '''
-    for l in leagues_df['leaguename'].unique():
-        if l in league_name: 
-            return leagues_df[leagues_df['leaguename'] == l]['id'].values[0]
+    for league in leagues_df['leaguename'].unique():
+        if league in league_name: 
+            return leagues_df[leagues_df['leaguename'] == league]['id'].values[0]
     return -1   
 
 def clean_schedule(df: pd.DataFrame) -> pd.DataFrame:
@@ -58,7 +58,7 @@ def clean_schedule(df: pd.DataFrame) -> pd.DataFrame:
     df['leagueid'] = df['league_name'].apply(
         lambda x: assign_league_id(x, leagues)
     )
-    df = df[df['keep'] == True]
+    df = df[df['keep'] == 'keep']
     # Drop if team name is unknown
     df = df[df['team_1'] != 'unknown']
     df = df[df['team_2'] != 'unknown']
@@ -171,11 +171,11 @@ def get_game_schedule_dataframe() -> pd.DataFrame:
             try:
                 # If the regex breaks it means that the team names aren't available yet.  
                 team_1 = re.findall('(?<=name-first" title=")(.*?)(?=">)', game)[0]
-            except:
+            except IndexError:
                 team_1 = 'unknown'
             try:
                 team_2 = re.findall('(?<=name-second" title=")(.*?)(?=">)', game)[0]
-            except:
+            except IndexError:
                 team_2 = 'unknown'
             # Creating a 1 line dataframe with the infos of the game
             game_fetched = pd.DataFrame({
