@@ -61,7 +61,7 @@
                 {% elif not item.prono_correct %}
                 <div class="box has-background-danger has-text-white">
                     {% endif %}
-                    <form method="POST" action="/pronos_resume/{{ gameid }}">
+                    <form method="POST" action="/pronos_resume/{{item.gameid}}">
                         <div class="columns">
                             <div class="column is-size-5">{{ item.game_datetime }} (BO{{ item.bo }})</div>
                             {% if item.score_team_win == 'team_1' %}

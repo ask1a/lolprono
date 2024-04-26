@@ -286,7 +286,7 @@ def pronos_show_league(leaguename):
 
         records = pronos.to_dict("records")
 
-        #ajout des logos dans l'item records
+        # ajout des logos dans l'item records
         query = (select(Teams.long_label, Teams.logo_url))
         logos = db.session.execute(query).all()
         logos = pd.DataFrame(logos, columns=['long_label', 'logo_url'])
@@ -295,9 +295,32 @@ def pronos_show_league(leaguename):
             item['logo_team_1'] = logos[item['team_1']]
             item['logo_team_2'] = logos[item['team_2']]
 
-
     return render_template('pronos.html', league_list=current_user_league_list, leaguename=leaguename,
                            leagueid=leagueid, records=records, datetime=datetime)
+
+
+@auth.route('/pronos_resume/<gameid>', methods=['POST'])
+@login_required
+def show_game_pronos(gameid):
+    query = (select(User.id, User.name
+                    , GameProno.gameid, GameProno.prono_team_1, GameProno.prono_team_2
+                    , Game.score_team_1, Game.score_team_2, Game.bo
+                    )
+             .join(GameProno, User.id == GameProno.userid)
+             .join(Game, Game.id == GameProno.gameid)
+             .where(Game.id == gameid)
+             )
+
+    pronos = db.session.execute(query).all()
+    pronos = pd.DataFrame(pronos, columns=['userid', 'username', 'gameid',
+                                           'prono_team_1', 'prono_team_2',
+                                           'score_team_1', 'score_team_2', 'bo'])
+    recap_score = create_points_dataframe(pronos)
+    liste_a_supprimer = ['userid', 'gameid', 'prono_team_win', 'score_team_win', 'prono_correct', 'score_exact', 'nb_pronos_corrects', 'nb_pronos', 'odds']
+    recap_score = recap_score.drop(liste_a_supprimer, axis=1)
+    recap_score = recap_score.to_dict("records")
+    titles = ['Pseudo', 'prono_team_1', 'prono_team_2', 'score_team_1', 'score_team_2', 'BO', 'Points', ]
+    return render_template('pronos_resume.html', recap_score=recap_score, titles=titles)
 
 
 @auth.route('/classements')
