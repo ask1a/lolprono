@@ -39,11 +39,11 @@ def create_standing_table(pronos: pd.DataFrame) -> list:
     return recap_score
 
 
-def random_digit():
+def random_digit()->str:
     return str(random.choice(list(range(10))))
 
 
-def validation_email_body(code):
+def validation_email_body(code:str)->str:
     return "Code de validation : " + code
 
 
@@ -86,19 +86,22 @@ def send_email_validation(mail_to):
     return None
 
 
-import smtplib
-try:
-    print("server connection")
-    server = smtplib.SMTP('pro2.mail.ovh.net', 587)
-    server.set_debuglevel(1)
-    print("server login")
-    server.login("monom@domaine.com", "password")
-    print("send mail")
-
-    msg = r"Hello de lu!"
-    server.sendmail("askiavanr@gmail.com", "test", msg)
-    server.quit()
-
-except:
-    print("error")
-
+# import smtplib
+# try:
+#     print("server connection")
+#     #server = smtplib.SMTP('pro2.mail.ovh.net', 587)
+#     #server = smtplib.SMTP('ssl0.ovh.net', 587)
+# #    server = smtplib.SMTP('ssl0.ovh.net', 465)
+#     server = smtplib.SMTP('ns0.ovh.net', 5025)
+#     server.set_debuglevel(1)
+#     print("server login")
+#     server.login("askia.vanryckeghem@lagrossedonnee.fr", "Slam14dunk14!")
+#     print("send mail")
+#
+#     msg = r"Hello de lu!"
+#     server.sendmail("skiaa@hotmail.com", "areumax", msg)
+#     server.quit()
+#
+# except:
+#     print("error")
+#
