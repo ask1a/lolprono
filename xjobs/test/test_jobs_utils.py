@@ -51,7 +51,7 @@ def test_get_game_schedule_dataframe(html_content, expected_df_for_get_game_sche
 def test_clean_schedule(expected_df_for_get_game_schedule_dataframe,expected_df_for_clean_schedule):
     home = Path(__file__).resolve().parent.parent.parent
     db_path = home / 'instance/db.sqlite'
-    rslt_df = utils.clean_schedule(expected_df_for_get_game_schedule_dataframe,db_path)
+    rslt_df = utils.clean_schedule(expected_df_for_get_game_schedule_dataframe,db_path,True)
     expected_df = expected_df_for_clean_schedule
 
     assert_frame_equal(rslt_df.reset_index(drop=True), expected_df.reset_index(drop=True), check_dtype=False)
