@@ -6,6 +6,14 @@ import pandas as pd
 
 app_test = create_app('testing')
 
+g2_win_expected_html = """                    <div class="column is-size-5">2024-04-07 17:00:00 (BO5)</div>
+                    <div class="column">
+                        <img src="/static/logos/None" alt="G2 Esports">
+                    </div>
+                    
+                    <div class="column is-size-5 has-text-weight-bold">G2 Esports ✅</div>
+"""
+
 
 @pytest.fixture
 def client():
@@ -16,7 +24,7 @@ def client():
 @pytest.fixture(scope='session')
 def csv_gamesdata(tmpdir_factory):
     pd.DataFrame(
-        {'leagueid': [1, 1], 'bo': [5, 3], 'game_datetime': ['2024-04-07T17:00:00', '2034-04-07T17:00:00'],
+        {'id': [1, 22],'leagueid': [1, 1], 'bo': [5, 3], 'game_datetime': ['2024-04-07T17:00:00', '2034-04-07T17:00:00'],
          'team_1': ['G2 Esports', 'GiantX'],
          'team_2': ['Team BDS', 'Fnatic'],
          'score_team_1': [3, None], 'score_team_2': [1, None]}).to_csv('./game_table_exemple.csv', index=False)
@@ -140,6 +148,17 @@ def test_pronos_update_success(client):
         [('gameidt1;6;2034-04-07 17:00:00;3', '2'), ('gameidt2;6;2034-04-07 17:00:00;3', '0')]), follow_redirects=True)
     assert response.text.__contains__("Pronostic mis à jour!")
 
+
+def test_pronos_show_league_team_win_g2(client):
+    assert login(client).status_code == 200
+    response = client.post("/pronos_show_league/LEC spring 2024", follow_redirects=True)
+    assert (response.text.__contains__("Matchs du LEC spring 2024")) & (
+        response.text.__contains__(g2_win_expected_html))
+
+def test_pronos_resume_game(client):
+    assert login(client).status_code == 200
+    response = client.post("/pronos_resume/1", follow_redirects=True)
+    assert (response.text.__contains__("Résumé Pronos"))
 
 def test_classements_loadpage(client):
     assert login(client).status_code == 200
