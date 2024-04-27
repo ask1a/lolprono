@@ -10,7 +10,7 @@ import requests
 from bs4 import BeautifulSoup
 
 
-def check_league(league_name: str, leagues: list[str]) -> int:
+def check_league(league_name: str, leagues: list[str]) -> str:
     '''
     Check if a league in leagues is in the x, used in a Lambda Function.
     This is comparing 2 strings between them. Not ideal, but it works.
@@ -25,7 +25,7 @@ def check_league(league_name: str, leagues: list[str]) -> int:
             return 'keep'
     return 'discard'   
 
-def assign_league_id(league_name: str, leagues_df: pd.DataFrame):
+def assign_league_id(league_name: str, leagues_df: pd.DataFrame)->int:
     '''
     Assign the correct leagueid used in a Lambda Function.
     This is comparing 2 strings between them. Not ideal, but it works.
