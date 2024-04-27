@@ -73,23 +73,30 @@ def clean_schedule(df: pd.DataFrame, db_path:str="instance/db.sqlite") -> pd.Dat
             date(game_datetime) >= current_date 
     '''
     future_games = pd.read_sql_query(query, con)
-    print(future_games)
     # Formatting datetime as a string to permit merge:
     df['game_datetime'] = df['game_datetime'].apply(lambda x:
         x.strftime('%Y-%m-%d %H:%M:%S')
     )
     df['game_datetime'] = df['game_datetime'].astype(object)
-    print(df.dtypes)
+    print('before merge')
+    print(df)
+
     df= df.merge(future_games, how='left',
         left_on=['game_datetime', 'team_1', 'team_2'],
         right_on=['db_datetime', 'db_team_1', 'db_team_2']
     )
+    print('after merge')
+    print(df)
     # Keeping only games that are not yet inserted
     df = df[df['db_datetime'].isna()]
+    print('Keeping only games that are not yet inserted')
+    print(df)
     # Only getting the number of games
     df['bo'] = df['bo'].apply(lambda x: int(x[-1]))
     # Reordering dataframe to match destination table.
     df = df[['leagueid','bo', 'game_datetime', 'team_1', 'team_2']]
+    print('eordering dataframe to match destination tabl')
+    print(df)
     return df
 
 def clean_results(df: pd.DataFrame, db_path:str="instance/db.sqlite") -> pd.DataFrame:
