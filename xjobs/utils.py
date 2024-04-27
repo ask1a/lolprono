@@ -73,10 +73,12 @@ def clean_schedule(df: pd.DataFrame, db_path:str="instance/db.sqlite") -> pd.Dat
             date(game_datetime) >= current_date 
     '''
     future_games = pd.read_sql_query(query, con)
+    print(future_games)
     # Formatting datetime as a string to permit merge:
     df['game_datetime'] = df['game_datetime'].apply(lambda x:
         x.strftime('%Y-%m-%d %H:%M:%S')
     )
+    print(df.dtypes)
     df= df.merge(future_games, how='left',
         left_on=['game_datetime', 'team_1', 'team_2'],
         right_on=['db_datetime', 'db_team_1', 'db_team_2']
