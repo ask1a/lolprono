@@ -42,7 +42,7 @@ def test_assign_league_id():
 
 
 def test_get_game_schedule_dataframe(html_content, expected_df_for_get_game_schedule_dataframe):
-    rslt_df = utils.get_game_schedule_dataframe(html_content)
+    rslt_df = utils.get_game_schedule_dataframe(html_content, testing=True)
     expected_df = expected_df_for_get_game_schedule_dataframe
 
     assert_frame_equal(rslt_df.reset_index(drop=True), expected_df.reset_index(drop=True), check_dtype=False)

@@ -120,7 +120,7 @@ def clean_results(df: pd.DataFrame, db_path:str="instance/db.sqlite") -> pd.Data
     df = df[['leagueid','bo', 'game_date', 'team_1', 'team_2', 'score_team_1', 'score_team_2']]
     return df
     
-def get_game_schedule_dataframe(html_content=None) -> pd.DataFrame:
+def get_game_schedule_dataframe(html_content=None, testing=False) -> pd.DataFrame:
     
     '''
     Function to fetch future LOL games from the e-sportstats.com website and place it into a dataframe.
@@ -149,8 +149,12 @@ def get_game_schedule_dataframe(html_content=None) -> pd.DataFrame:
         # Converting element to a string to ease regex usage: 
         # (Maybe not necessary)
         game = str(game)
-        today = datetime.date.today()
-        tomorrow = today + datetime.timedelta(days=1)
+        if testing:
+            today = datetime.date(2024, 4, 27)
+            tomorrow = datetime.date(2024, 4, 28)
+        else:
+            today = datetime.date.today()
+            tomorrow = today + datetime.timedelta(days=1)
         # If element is status, it gives us the date
         if '<div class="tournament__status">' in game:
             game_date = re.findall('(?<=span>\n)(.*?)(?=\n)', game.strip())[0]
