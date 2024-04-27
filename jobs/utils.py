@@ -120,7 +120,7 @@ def clean_results(df: pd.DataFrame) -> pd.DataFrame:
     df = df[['leagueid','bo', 'game_date', 'team_1', 'team_2', 'score_team_1', 'score_team_2']]
     return df
     
-def get_game_schedule_dataframe() -> pd.DataFrame:
+def get_game_schedule_dataframe(html_content=None) -> pd.DataFrame:
     
     '''
     Function to fetch future LOL games from the e-sportstats.com website and place it into a dataframe.
@@ -130,10 +130,13 @@ def get_game_schedule_dataframe() -> pd.DataFrame:
     None
     '''
     # Fetching HTML
-    html = requests.get('https://e-sportstats.com/lol/matches')
-    html_content = BeautifulSoup(html.content) 
-    # Reaching div containnint games schedule
-    content = html_content.body.main.find('div', class_='tournaments__list')
+    if html_content:
+        html_content_bs = BeautifulSoup(html_content)
+    else:
+        html = requests.get('https://e-sportstats.com/lol/matches')
+        html_content_bs = BeautifulSoup(html.content)
+    # Reaching div containning games schedule
+    content = html_content_bs.body.main.find('div', class_='tournaments__list')
     # Inserting all elements in a list
     games = content.find_all('div')
     
