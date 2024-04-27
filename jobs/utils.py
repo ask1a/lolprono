@@ -21,7 +21,7 @@ def check_league(league_name: str, leagues: list[str]) -> str:
     leagues: list of strings
     '''
     for league in leagues:
-        if league in league_name: 
+        if league_name in league: #invert condition?
             return 'keep'
     return 'discard'   
 
