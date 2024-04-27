@@ -120,7 +120,6 @@ def clean_results(df: pd.DataFrame) -> pd.DataFrame:
     df = df[['leagueid','bo', 'game_date', 'team_1', 'team_2', 'score_team_1', 'score_team_2']]
     return df
     
-
 def get_game_schedule_dataframe() -> pd.DataFrame:
     
     '''
@@ -139,7 +138,7 @@ def get_game_schedule_dataframe() -> pd.DataFrame:
     games = content.find_all('div')
     
     # Creating the shape a of finale DataFrame
-    game_list = pd.DataFrame(
+    game_table = pd.DataFrame(
         columns=['league_name', 'game_date', 'game_time', 'bo', 'team_1', 'team_2', ]
     )
     
@@ -192,25 +191,24 @@ def get_game_schedule_dataframe() -> pd.DataFrame:
                 'team_2': [team_2]
             })
             # Adding it to the main dataframe.
-            game_list = pd.concat([game_list, game_fetched])
+            game_table = pd.concat([game_table, game_fetched])
     
     # Cleaning the Dataframe
     # Removing "Today" from the time string
-    game_list['game_time'] = game_list['game_time'].apply(lambda x: x.replace(', Today', ''))
-    game_list['game_time'] = game_list['game_time'].apply(lambda x: x.replace(', Tomorrow', ''))
+    game_table['game_time'] = game_table['game_time'].apply(lambda x: x.replace(', Today', ''))
+    game_table['game_time'] = game_table['game_time'].apply(lambda x: x.replace(', Tomorrow', ''))
     # Concatenating date and time to get the datetime.
-    game_list['game_datetime'] = game_list['game_time'] + ' - ' + game_list['game_date']
+    game_table['game_datetime'] = game_table['game_time'] + ' - ' + game_table['game_date']
     # Converting datetime string to datetime format
-    game_list['game_datetime'] = game_list['game_datetime'].apply(
+    game_table['game_datetime'] = game_table['game_datetime'].apply(
         lambda x: datetime.datetime.strptime(x, '%I:%M %p - %A, %B %d, %Y')
     )
     # Dropping unused columns
-    game_list = game_list.drop(['game_date', 'game_time'], axis=1)
+    game_table = game_table.drop(['game_date', 'game_time'], axis=1)
     # Reseting indexes
-    game_list.reset_index(drop=True)        
+    game_table.reset_index(drop=True)        
     
-    return game_list
-
+    return game_table
 
 def get_game_results_dataframe() -> pd.DataFrame:
     '''
@@ -229,7 +227,7 @@ def get_game_results_dataframe() -> pd.DataFrame:
     games = content.find_all('div')
     
     # Creating the shape a of finale DataFrame
-    game_list = pd.DataFrame(
+    game_table = pd.DataFrame(
         columns=['league_name', 'game_date', 'game_time', 'bo', 'team_1', 'team_2', 'score']
     )
     
@@ -269,12 +267,11 @@ def get_game_results_dataframe() -> pd.DataFrame:
                 'score': [score]
             })
             # Adding it to the main dataframe.
-            game_list = pd.concat([game_list, game_fetched])
+            game_table = pd.concat([game_table, game_fetched])
     
     # Reseting indexes
-    game_list.reset_index(drop=True)        
-    return game_list
-
+    game_table.reset_index(drop=True)        
+    return game_table
 
 def insert_future_games(df: pd.DataFrame) -> None:
     '''
