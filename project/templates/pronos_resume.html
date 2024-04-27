@@ -23,7 +23,7 @@
                 <div class="column"></div>
                 <div class="column"></div>
                 <div class="column"></div>
-                <form action="/pronos">
+                <form  method="POST" action="/pronos_show_league/{{score_final.leaguename}}">
                     <div class="column">
                         <button class="button is-link is-dark is-medium">Retour sur page pronos</button>
                     </div>
@@ -31,6 +31,7 @@
                     <div class="column"></div>
                     <div class="column"></div>
                 </form>
+
             </div>
             <tfoot>
             {% for title in titles %}
@@ -49,14 +50,6 @@
             {% endfor %}
             </tbody>
         </table>
-    </div>
-
-    <div class="column is-8 is-offset-2">
-        <form method="POST" action="/pronos">
-            <div class="column">
-                <button class="button is-link is-dark is-medium">Retour sur page pronos</button>
-            </div>
-        </form>
     </div>
 </div>
 {% endblock %}

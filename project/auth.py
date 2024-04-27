@@ -281,10 +281,10 @@ def pronos_show_league(leaguename):
             pronos_form[col] = pronos_form[col].astype('Int64')
             table_points[col] = table_points[col].astype('Int64')
         pronos_form = pd.merge(pronos_form, table_points,
-                          on=['userid', 'username', 'gameid', 'prono_team_1', 'prono_team_2', 'score_team_1',
-                              'score_team_2', 'bo'], how='left')
+                               on=['userid', 'username', 'gameid', 'prono_team_1', 'prono_team_2', 'score_team_1',
+                                   'score_team_2', 'bo'], how='left')
         pronos_form = pronos_form.drop(columns='score_team_win')
-        pronos_form['score_team_win'] = eval_team_win(pronos_form,'score_team_1','score_team_2')
+        pronos_form['score_team_win'] = eval_team_win(pronos_form, 'score_team_1', 'score_team_2')
         pronos_form = pronos_form.fillna(0)
 
         records = pronos_form.to_dict("records")
@@ -297,6 +297,7 @@ def pronos_show_league(leaguename):
         for item in records:
             item['logo_team_1'] = logos.get(item.get('team_1'))
             item['logo_team_2'] = logos.get(item.get('team_2'))
+
     return render_template('pronos.html', league_list=current_user_league_list, leaguename=leaguename,
                            leagueid=leagueid, records=records, datetime=datetime)
 
@@ -307,23 +308,39 @@ def show_game_pronos(gameid):
     query = (select(User.id, User.name
                     , GameProno.gameid, GameProno.prono_team_1, GameProno.prono_team_2
                     , Game.score_team_1, Game.score_team_2, Game.bo
+                    , Game.team_1, Game.team_2
+                    , League.id, League.leaguename
                     )
              .join(GameProno, User.id == GameProno.userid)
              .join(Game, Game.id == GameProno.gameid)
+             .join(League, Game.leagueid == League.id)
              .where(Game.id == gameid)
              )
 
     pronos = db.session.execute(query).all()
     pronos = pd.DataFrame(pronos, columns=['userid', 'username', 'gameid',
                                            'prono_team_1', 'prono_team_2',
-                                           'score_team_1', 'score_team_2', 'bo'])
+                                           'score_team_1', 'score_team_2', 'bo', 'team_1', 'team_2', 'leagueid',
+                                           'leaguename'])
+
     recap_score = create_points_dataframe(pronos)
+
     liste_a_supprimer = ['userid', 'gameid', 'prono_team_win', 'score_team_win', 'prono_correct', 'score_exact',
-                         'nb_pronos_corrects', 'nb_pronos', 'odds']
+                         'nb_pronos_corrects', 'nb_pronos', 'odds', 'score_team_1', 'score_team_2', 'bo', 'team_1',
+                         'team_2', 'leagueid', 'leaguename']
+
     recap_score = recap_score.drop(liste_a_supprimer, axis=1)
     recap_score = recap_score.to_dict("records")
-    titles = ['Pseudo', 'prono_team_1', 'prono_team_2', 'score_team_1', 'score_team_2', 'BO', 'Points', ]
-    return render_template('pronos_resume.html', recap_score=recap_score, titles=titles)
+
+    score_final = {'team_1':pronos['team_1'][0], 'score_team_1':pronos['score_team_1'][0], 'score_team_2':pronos['score_team_2'][0], 'team_2':pronos['team_2'][0],
+                   'leaguename':pronos['leaguename'][0]}
+
+    titles = ['Pseudo']
+    titles.append(pronos['team_1'][0])
+    titles.append(pronos['team_2'][0])
+    titles.append('Points')
+
+    return render_template('pronos_resume.html', recap_score=recap_score, titles=titles, score_final=score_final)
 
 
 @auth.route('/classements')
@@ -535,5 +552,3 @@ def admin_lock_signup():
 def logout():
     logout_user()
     return redirect(url_for('main.index'))
-
-
