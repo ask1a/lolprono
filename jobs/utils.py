@@ -40,7 +40,7 @@ def assign_league_id(leagues_df: pd.DataFrame, league_name: str)->int:
             return leagues_df[leagues_df['leaguename'] == league]['id'].values[0]
     return -1   
 
-def clean_schedule(df: pd.DataFrame) -> pd.DataFrame:
+def clean_schedule(df: pd.DataFrame, db_path:str="instance/db.sqlite") -> pd.DataFrame:
     '''
     Function to clean Schedule DF before inserting it in DB
     
@@ -49,7 +49,7 @@ def clean_schedule(df: pd.DataFrame) -> pd.DataFrame:
     df: Pandas DataFrame containing games' informations.
     '''
     # Fetch leagues from instance database.
-    con = sqlite3.connect("instance/db.sqlite")
+    con = sqlite3.connect(db_path)
     leagues = pd.read_sql_query("SELECT * FROM league", con)
     # If the league is in the list, we're keeping the games
     df['keep'] = df['league_name'].apply(
@@ -89,7 +89,7 @@ def clean_schedule(df: pd.DataFrame) -> pd.DataFrame:
     df = df[['leagueid','bo', 'game_datetime', 'team_1', 'team_2']]
     return df
 
-def clean_results(df: pd.DataFrame) -> pd.DataFrame:
+def clean_results(df: pd.DataFrame, db_path:str="instance/db.sqlite") -> pd.DataFrame:
     '''
     Function to clean results DF before updating DB
     
@@ -101,7 +101,7 @@ def clean_results(df: pd.DataFrame) -> pd.DataFrame:
     df['score_team_1'] = df['score'].apply(lambda x: x[0][0])
     df['score_team_2'] = df['score'].apply(lambda x: x[0][-1])
     # Fetch leagues from instance database.
-    con = sqlite3.connect("instance/db.sqlite")
+    con = sqlite3.connect(db_path)
     leagues = pd.read_sql_query("SELECT * FROM league", con)
     # If the league is in the list, we're keeping the games
     df['keep'] = df['league_name'].apply(
