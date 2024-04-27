@@ -161,8 +161,12 @@ def get_game_schedule_dataframe() -> pd.DataFrame:
             league = re.findall('(?<=alt=")(.*?)(?=" )', game)[0]
         # If element is Item, it gives us the game.
         if '<div class="tournament__item">' in game: 
+            if 'In Play' in game:
+                continue
             # Removing string -today, because its concatenated to time, and makes the regex break.
-            game = game.replace('-today', '')
+            if '-today' in game:
+                game = game.replace('-today', '')
+                game_date = today.strftime('%A, %B %d, %Y')
             game = game.replace('-tomorrow', '')
             # Find game time
             game_time = re.findall('(?<=match__time">\n)(.*?)(?=\n)', game)[0]
