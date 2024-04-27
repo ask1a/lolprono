@@ -10,30 +10,30 @@ import requests
 from bs4 import BeautifulSoup
 
 
-def check_league(league_name: str, leagues: list[str]) -> str:
+def check_league(leagues: list[str], league_name: str) -> str:
     '''
-    Check among leagues if one item is contains in the league_name, used in a Lambda Function.
+    Check among leagues' items if one is contained in the league_name, used in a Lambda Function.
     This is comparing 2 strings between them. Not ideal, but it works.
     
     parameters:
     -----------
-    x: String
     leagues: list of strings
+    league_name: String
     '''
     for league in leagues:
         if league in league_name and league_name!='': #invert condition?
             return 'keep'
     return 'discard'   
 
-def assign_league_id(league_name: str, leagues_df: pd.DataFrame)->int:
+def assign_league_id(leagues_df: pd.DataFrame, league_name: str)->int:
     '''
     Assign the correct leagueid used in a Lambda Function.
     This is comparing 2 strings between them. Not ideal, but it works.
     
     parameters:
     -----------
-    x: String
     leagues_df: Pandas DataFrame containing leagueid and leaguename
+    league_name: String
     '''
     for league in leagues_df['leaguename'].unique():
         if league in league_name: 
@@ -53,10 +53,10 @@ def clean_schedule(df: pd.DataFrame) -> pd.DataFrame:
     leagues = pd.read_sql_query("SELECT * FROM league", con)
     # If the league is in the list, we're keeping the games
     df['keep'] = df['league_name'].apply(
-        lambda x: check_league(x, leagues.leaguename.unique())
+        lambda x: check_league(leagues.leaguename.unique(),x )
     )
     df['leagueid'] = df['league_name'].apply(
-        lambda x: assign_league_id(x, leagues)
+        lambda x: assign_league_id(leagues, x)
     )
     df = df[df['keep'] == 'keep']
     # Drop if team name is unknown
@@ -105,10 +105,10 @@ def clean_results(df: pd.DataFrame) -> pd.DataFrame:
     leagues = pd.read_sql_query("SELECT * FROM league", con)
     # If the league is in the list, we're keeping the games
     df['keep'] = df['league_name'].apply(
-        lambda x: check_league(x, leagues.leaguename.unique())
+        lambda x: check_league(leagues.leaguename.unique(), x)
     )
     df['leagueid'] = df['league_name'].apply(
-        lambda x: assign_league_id(x, leagues)
+        lambda x: assign_league_id(leagues, x)
     )
     # Formating Date:
     df['game_date'] = df['game_date'].apply(
