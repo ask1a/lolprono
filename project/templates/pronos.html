@@ -56,7 +56,7 @@
             <form method="POST" action="/pronos_resume/{{item.gameid}}">
                 <div class="columns">
                     <div class="column is-size-5">{{ item.game_datetime }} (BO{{ item.bo }})</div>
-                    <div class="column is-size-5">
+                    <div class="column">
                         <img src="/static/logos/{{ item.logo_team_1 }}" alt="{{ item.team_1 }}">
                     </div>
                     {% if item.score_team_win == 'team_1' %}

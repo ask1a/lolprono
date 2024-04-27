@@ -8,7 +8,7 @@ import pandas as pd
 import numpy as np
 import io
 from datetime import datetime, timedelta
-from .utils import create_standing_table, create_points_dataframe
+from .utils import create_standing_table, create_points_dataframe, eval_team_win
 
 auth = Blueprint('auth', __name__)
 
@@ -280,12 +280,11 @@ def pronos_show_league(leaguename):
         for col in columns_to_integer:
             pronos_form[col] = pronos_form[col].astype('Int64')
             table_points[col] = table_points[col].astype('Int64')
-        print(pronos_form)
-        print(table_points)
         pronos_form = pd.merge(pronos_form, table_points,
                           on=['userid', 'username', 'gameid', 'prono_team_1', 'prono_team_2', 'score_team_1',
                               'score_team_2', 'bo'], how='left')
-        print(pronos_form)
+        pronos_form = pronos_form.drop(columns='score_team_win')
+        pronos_form['score_team_win'] = eval_team_win(pronos_form,'score_team_1','score_team_2')
         pronos_form = pronos_form.fillna(0)
 
         records = pronos_form.to_dict("records")
