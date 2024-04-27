@@ -10,7 +10,7 @@ import requests
 from bs4 import BeautifulSoup
 
 
-def check_league(league_name: str, leagues: list[str]) -> int:
+def check_league(league_name: str, leagues: list[str]) -> str:
     '''
     Check if a league in leagues is in the x, used in a Lambda Function.
     This is comparing 2 strings between them. Not ideal, but it works.
