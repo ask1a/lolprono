@@ -56,15 +56,13 @@
             <form method="POST" action="/pronos_resume/{{item.gameid}}">
                 <div class="columns">
                     <div class="column is-size-5">{{ item.game_datetime }} (BO{{ item.bo }})</div>
-                    {% if item.score_team_win == 'team_1' %}
                     <div class="column is-size-5">
                         <img src="/static/logos/{{ item.logo_team_1 }}" alt="{{ item.team_1 }}">
                     </div>
+                    {% if item.score_team_win == 'team_1' %}
                     <div class="column is-size-5 has-text-weight-bold">{{ item.team_1 }} ✅</div>
                     {% else %}
-                    <div class="column">
-                        <img src="/static/logos/{{ item.logo_team_1 }}" alt="{{ item.team_1 }}"></div>
-                    <div class="column is">{{ item.team_1 }}</div>
+                    <div class="column">{{ item.team_1 }}</div>
                     {% endif %}
                     <div class="column is-flex-direction-column">
                         <div class="is-size-5">Score final :</div>
@@ -72,14 +70,11 @@
                     </div>
                     {% if item.score_team_win == 'team_2' %}
                     <div class="column is-size-5 has-text-weight-bold">{{ item.team_2 }} ✅</div>
-                    <div class="column is-size-5">
-                        <img src="/static/logos/{{ item.logo_team_2 }}" alt="{{ item.team_2 }}">
-                    </div>
                     {% else %}
-                    <div class="column is-size-5">{{ item.team_2 }}</div>
+                    <div class="column">{{ item.team_2 }}</div>
+                    {% endif %}
                     <div class="column">
                         <img src="/static/logos/{{ item.logo_team_2 }}" alt="{{ item.team_2 }}"></div>
-                    {% endif %}
                     <div class="column is-flex-direction-column">
                         <div class="is-size-5">Ton prono :</div>
                         <div class="mt-3 is-size-5">{{ item.prono_team_1 }} - {{ item.prono_team_2 }}</div>

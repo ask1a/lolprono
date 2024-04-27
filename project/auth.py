@@ -250,13 +250,13 @@ def pronos_show_league(leaguename):
              .where(current_user.id == User.id)
              .order_by(Game.game_datetime.desc())
              )
-    pronos = db.session.execute(query).all()
+    pronos_form = db.session.execute(query).all()
     records = []
-    if pronos:
-        pronos = pd.DataFrame(pronos)
-        pronos['editable'] = datetime.now() < pronos["game_datetime"]
-        pronos = pronos.replace(r'^\s*$', np.nan, regex=True)
-        pronos = pronos.fillna(0)
+    if pronos_form:
+        pronos_form = pd.DataFrame(pronos_form)
+        pronos_form['editable'] = datetime.now() < pronos_form["game_datetime"]
+        pronos_form = pronos_form.replace(r'^\s*$', np.nan, regex=True)
+        pronos_form = pronos_form.fillna(0)
 
         columns_to_integer = ['score_team_1', 'score_team_2', 'prono_team_1', 'prono_team_2']
 
@@ -278,14 +278,17 @@ def pronos_show_league(leaguename):
         table_points = table_points.fillna(0)
 
         for col in columns_to_integer:
-            pronos[col] = pronos[col].astype('Int64')
+            pronos_form[col] = pronos_form[col].astype('Int64')
             table_points[col] = table_points[col].astype('Int64')
-        pronos = pd.merge(pronos, table_points,
+        print(pronos_form)
+        print(table_points)
+        pronos_form = pd.merge(pronos_form, table_points,
                           on=['userid', 'username', 'gameid', 'prono_team_1', 'prono_team_2', 'score_team_1',
                               'score_team_2', 'bo'], how='left')
-        pronos = pronos.fillna(0)
+        print(pronos_form)
+        pronos_form = pronos_form.fillna(0)
 
-        records = pronos.to_dict("records")
+        records = pronos_form.to_dict("records")
 
         # ajout des logos dans l'item records
         query = (select(Teams.long_label, Teams.logo_url))
@@ -295,7 +298,6 @@ def pronos_show_league(leaguename):
         for item in records:
             item['logo_team_1'] = logos.get(item.get('team_1'))
             item['logo_team_2'] = logos.get(item.get('team_2'))
-
     return render_template('pronos.html', league_list=current_user_league_list, leaguename=leaguename,
                            leagueid=leagueid, records=records, datetime=datetime)
 
@@ -317,7 +319,8 @@ def show_game_pronos(gameid):
                                            'prono_team_1', 'prono_team_2',
                                            'score_team_1', 'score_team_2', 'bo'])
     recap_score = create_points_dataframe(pronos)
-    liste_a_supprimer = ['userid', 'gameid', 'prono_team_win', 'score_team_win', 'prono_correct', 'score_exact', 'nb_pronos_corrects', 'nb_pronos', 'odds']
+    liste_a_supprimer = ['userid', 'gameid', 'prono_team_win', 'score_team_win', 'prono_correct', 'score_exact',
+                         'nb_pronos_corrects', 'nb_pronos', 'odds']
     recap_score = recap_score.drop(liste_a_supprimer, axis=1)
     recap_score = recap_score.to_dict("records")
     titles = ['Pseudo', 'prono_team_1', 'prono_team_2', 'score_team_1', 'score_team_2', 'BO', 'Points', ]
@@ -533,3 +536,5 @@ def admin_lock_signup():
 def logout():
     logout_user()
     return redirect(url_for('main.index'))
+
+
