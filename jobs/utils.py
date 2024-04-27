@@ -25,7 +25,7 @@ def check_league(league_name: str, leagues: list[str]) -> str:
             return 'keep'
     return 'discard'   
 
-def assign_league_id(league_name: str, leagues_df: pd.DataFrame):
+def assign_league_id(league_name: str, leagues_df: pd.DataFrame)->int:
     '''
     Assign the correct leagueid used in a Lambda Function.
     This is comparing 2 strings between them. Not ideal, but it works.
