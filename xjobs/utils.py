@@ -77,9 +77,6 @@ def clean_schedule(df: pd.DataFrame, db_path:str="instance/db.sqlite") -> pd.Dat
     df['game_datetime'] = df['game_datetime'].apply(lambda x:
         x.strftime('%Y-%m-%d %H:%M:%S')
     )
-    print(future_games)
-    print(future_games)
-    print(future_games)
     df= df.merge(future_games, how='left',
         left_on=['game_datetime', 'team_1', 'team_2'],
         right_on=['db_datetime', 'db_team_1', 'db_team_2']
@@ -154,10 +151,9 @@ def get_game_schedule_dataframe(html_content=None, testing=False) -> pd.DataFram
         game = str(game)
         if testing:
             today = datetime.date(2024, 4, 27)
-            tomorrow = datetime.date(2024, 4, 28)
         else:
             today = datetime.date.today()
-            tomorrow = today + datetime.timedelta(days=1)
+        tomorrow = today + datetime.timedelta(days=1)
         # If element is status, it gives us the date
         if '<div class="tournament__status">' in game:
             game_date = re.findall('(?<=span>\n)(.*?)(?=\n)', game.strip())[0]
