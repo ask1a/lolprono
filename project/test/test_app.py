@@ -92,7 +92,7 @@ def test_ligues_spring_add(client):
 def test_pronos_loadpage(client):
     assert login(client).status_code == 200
     response = client.get("/pronos", follow_redirects=True)
-    assert response.text.__contains__("Résultats & pronostics")
+    assert (response.text.__contains__("Résultats & pronostics")) & (response.text.__contains__("LEC spring 2024"))
 
 
 def test_pronos_show_league(client):

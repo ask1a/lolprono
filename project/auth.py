@@ -293,8 +293,8 @@ def pronos_show_league(leaguename):
         logos = pd.DataFrame(logos, columns=['long_label', 'logo_url'])
         logos = logos.set_index('long_label')['logo_url'].to_dict()
         for item in records:
-            item['logo_team_1'] = logos[item['team_1']]
-            item['logo_team_2'] = logos[item['team_2']]
+            item['logo_team_1'] = logos.get(item.get('team_1'))
+            item['logo_team_2'] = logos.get(item.get('team_2'))
 
     return render_template('pronos.html', league_list=current_user_league_list, leaguename=leaguename,
                            leagueid=leagueid, records=records, datetime=datetime)
