@@ -187,6 +187,7 @@ def pronos():
 
 
 @auth.route('/pronos_update/<leaguename>', methods=['POST'])
+@login_required
 def pronos_update(leaguename):
     heure_prono = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
     pronos_joueur = dict(request.form)
