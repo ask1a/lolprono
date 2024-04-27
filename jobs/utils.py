@@ -12,7 +12,7 @@ from bs4 import BeautifulSoup
 
 def check_league(league_name: str, leagues: list[str]) -> str:
     '''
-    Check if a league in leagues is in the x, used in a Lambda Function.
+    Check among leagues if one item is contains in the league_name, used in a Lambda Function.
     This is comparing 2 strings between them. Not ideal, but it works.
     
     parameters:
@@ -21,7 +21,7 @@ def check_league(league_name: str, leagues: list[str]) -> str:
     leagues: list of strings
     '''
     for league in leagues:
-        if league_name in league: #invert condition?
+        if league in league_name and league_name!='': #invert condition?
             return 'keep'
     return 'discard'   
 
