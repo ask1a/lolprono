@@ -47,6 +47,20 @@ def test_assign_league_id():
     assert test_scrap.assign_league_id('MLS') == -1
 
 
+def test_identifty_team_names(expected_df_for_clean_schedule):
+    test_scrap = utils.Scrap(test_job=True)
+    test_df = pd.DataFrame(
+        {
+            'leagueid': [3, 3, 3, 3], 'bo': [3, 3, 3, 3],
+            'game_datetime': ['2024-05-01 08:00:00', '2024-05-01 11:00:00', '2024-05-02 08:00:00',
+            '2024-05-02 11:00:00'], 'team_1': ['FLY', 'T1', 'FNC', 'TES'],
+            'team_2': ['PSG', 'EST', 'GAM', 'LLL']
+        }
+    )
+    test_df = test_scrap.identifty_team_names(test_df)
+    assert_frame_equal(test_df.reset_index(drop=True), expected_df_for_clean_schedule.reset_index(drop=True), check_dtype=False)
+
+
 def test_get_game_schedule_dataframe(html_content, expected_df_for_get_game_schedule_dataframe):
     test_scrap = utils.Scrap(test_job=True)
     rslt_df = test_scrap.get_game_schedule_dataframe(html_content)
