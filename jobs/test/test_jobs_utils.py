@@ -7,7 +7,7 @@ from pathlib import Path
 
 
 def test_check_league():
-    # Declaring call
+    # Declaring class
     test_scrap = utils.Scrap(test_job=True)
     # Test case 1: League name contains a valid league
     test_scrap.leagues = pd.DataFrame({'leaguename': ['Mid-Season Invitational 2024']})

@@ -15,10 +15,10 @@ class Scrap():
 
     def __init__(self, test_job=None) -> None:
         if test_job:
-            home = Path(__file__).resolve().parent.parent.parent
-            db_path = home / 'instance/db.sqlite'
-            self.conn = sqlite3.connect(db_path)
-            self.cursor = self.conn.cursor()
+            # home = Path(__file__).resolve().parent.parent.parent
+            # db_path = home / 'instance\\db.sqlite'
+            self.conn = None
+            self.cursor = None
             self.today = datetime.date(2024, 4, 27)
             self.leagues = None
         else:
