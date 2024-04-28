@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="hero-body header-image">
+    <div class="container is-max-desktop has-text-centered">
+        <div class="center-content">
+            <h1 class="title is-1 has-background-grey-dark">
+                <div class="is-size-3">Match terminé</div>
+                <div class="is-size-3">Score final :</div>
+                <div class="columns">
+                    <div class="column">
+                        <img src="/static/logos/{{ tableau_score.logo_team_1 }}" alt="{{ tableau_score.team_1 }}"
+                             style="width: auto; height: 100px;"></div>
+                    <div class="column">{{ tableau_score.team_1 }}</div>
+                    <div class="column"> {{ tableau_score.score_team_1 }} - {{ tableau_score.score_team_2 }}
+                    </div>
+                    <div class="column">{{ tableau_score.team_2 }}</div>
+                    <div class="column">
+                        <img src="/static/logos/{{ tableau_score.logo_team_2 }}" alt="{{ tableau_score.team_2 }}"
+                             style="width: auto; height: 100px;"></div>
+                </div>
+            </h1>
+            <h2 class="container is-max-desktop has-text-centered">
+                <form method="POST" action="/pronos_show_league/{{tableau_score.leaguename}}">
+                    <div class="column">
+                        <button class="button is-info is-dark is-medium">Retour sur page pronos</button>
+                    </div>
+                </form>
+            </h2>
+            <h3 class="container is-max-desktop has-text-centered">.
+            </h3>
+            <div class="container is-max-desktop">
+                    <table class="table is-striped is-hoverable is-fullwidth has-text-centered is-size-5" autofocus>
+                        <thead>
+                        {% for title in titles %}
+                        <th class="is-dark">{{ title }}</th>
+                        {% endfor %}
+                        </thead>
+                        <tfoot>
+                        {% for title in titles %}
+                        <th>{{ title }}</th>
+                        {% endfor %}
+                        </tfoot>
+                        <tbody>
+                        {% for dict_item in recap_score %}
+                        <tr>
+                            {% for key, value in dict_item.items() %}
+                            <td>{{ value }}</td>
+                            {% endfor %}
+                        </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+            </div>
+        </div>
+    </div>
+</div>
+<
+
+{% endblock %}

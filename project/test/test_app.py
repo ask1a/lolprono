@@ -6,11 +6,38 @@ import pandas as pd
 
 app_test = create_app('testing')
 
+g2_win_expected_html = """                    <div class="column is-size-5">2024-04-07 17:00:00 (BO5)</div>
+                    <div class="column">
+                        <img src="/static/logos/g2.png" alt="G2 Esports" style="width: auto; height: 50px;">
+                    </div>
+                    
+                    <div class="column is-size-5 has-text-weight-bold">G2 Esports ✅</div>
+"""
+
 
 @pytest.fixture
 def client():
     with app_test.test_client() as client:
         yield client
+
+
+@pytest.fixture(scope='session')
+def csv_gamesdata(tmpdir_factory):
+    pd.DataFrame(
+        {'id': [1, 22],'leagueid': [1, 1], 'bo': [5, 3], 'game_datetime': ['2024-04-07T17:00:00', '2034-04-07T17:00:00'],
+         'team_1': ['G2 Esports', 'GiantX'],
+         'team_2': ['Team BDS', 'Fnatic'],
+         'score_team_1': [3, None], 'score_team_2': [1, None]}).to_csv('./game_table_exemple.csv', index=False)
+    gamesdata = "./game_table_exemple.csv"
+    return (open(gamesdata, 'rb'), gamesdata)
+
+
+@pytest.fixture(scope='session')
+def csv_leaguesdata(tmpdir_factory):
+    pd.DataFrame({'id': [1, 2], 'leaguename': ['LEC spring 2024', 'LEC summer 2024']}).to_csv(
+        './league_table_exemple.csv', index=False)
+    leaguesdata = "./league_table_exemple.csv"
+    return (open(leaguesdata, 'rb'), leaguesdata)
 
 
 def test_index_loadpage(client):
@@ -89,10 +116,22 @@ def test_ligues_spring_add(client):
     assert response.text.__contains__("Déjà inscrit!")
 
 
+def test_admin_add_games(client, csv_gamesdata):
+    assert login(client).status_code == 200
+    response = client.post("/admin_add_games", data={'gamesdata': csv_gamesdata},
+                           follow_redirects=True)
+    assert response.text.__contains__("Fichier de bo ajouté")
+
+def test_admin_add_leagues(client, csv_leaguesdata):
+    assert login(client).status_code == 200
+    response = client.post("/admin_add_leagues", data={'leaguesdata': csv_leaguesdata},
+                           follow_redirects=True)
+    assert response.text.__contains__("Fichier de league ajouté!")
+
 def test_pronos_loadpage(client):
     assert login(client).status_code == 200
     response = client.get("/pronos", follow_redirects=True)
-    assert response.text.__contains__("Résultats & pronostics")
+    assert (response.text.__contains__("Résultats & pronostics")) & (response.text.__contains__("LEC spring 2024"))
 
 
 def test_pronos_show_league(client):
@@ -100,6 +139,37 @@ def test_pronos_show_league(client):
     response = client.post("/pronos_show_league/LEC spring 2024", follow_redirects=True)
     assert response.text.__contains__("Matchs du LEC spring 2024")
 
+
+def test_pronos_update_fail(client):
+    assert login(client).status_code == 200
+    response = client.post("/pronos_update/LEC spring 2024", data=dict(
+        [('gameidt1;6;2034-04-07 17:00:00;3', '0'), ('gameidt2;6;2034-04-07 17:00:00;3', '0')]), follow_redirects=True)
+    assert response.text.__contains__("Erreur, ton pronostic est invalide, pense à bien tenir compte du ")
+
+
+def test_pronos_update_success(client):
+    assert login(client).status_code == 200
+    response = client.post("/pronos_update/LEC spring 2024", data=dict(
+        [('gameidt1;6;2034-04-07 17:00:00;3', '2'), ('gameidt2;6;2034-04-07 17:00:00;3', '0')]), follow_redirects=True)
+    assert response.text.__contains__("Pronostic mis à jour!")
+
+
+def test_admin_update_table_teams(client):
+    assert login(client).status_code == 200
+    response = client.get("/admin_update_table_teams", follow_redirects=True)
+    assert response.status_code == 200
+
+
+def test_pronos_show_league_team_win_g2(client):
+    assert login(client).status_code == 200
+    response = client.post("/pronos_show_league/LEC spring 2024", follow_redirects=True)
+    assert (response.text.__contains__("Matchs du LEC spring 2024")) & (
+        response.text.__contains__(g2_win_expected_html))
+
+def test_pronos_resume_game(client):
+    assert login(client).status_code == 200
+    response = client.post("/pronos_resume/1", follow_redirects=True)
+    assert (response.text.__contains__("Score final"))
 
 def test_classements_loadpage(client):
     assert login(client).status_code == 200
@@ -132,37 +202,6 @@ def test_admin_loadpage_allowed(client):
     assert response.text.__contains__("Admin")
 
 
-@pytest.fixture(scope='session')
-def csv_gamesdata(tmpdir_factory):
-    pd.DataFrame(
-        {'leagueid': [1], 'bo': [5], 'game_datetime': ['2024-04-07T17:00:00'], 'team_1': ['G2 Esports'],
-         'team_2': ['Team BDS'],
-         'score_team_1': [3], 'score_team_2': [1]}).to_csv('./game_table_exemple.csv', index=False)
-    gamesdata = "./game_table_exemple.csv"
-    return (open(gamesdata, 'rb'), gamesdata)
-
-
-@pytest.fixture(scope='session')
-def csv_leaguesdata(tmpdir_factory):
-    pd.DataFrame({'id': [1, 2], 'leaguename': ['LEC spring 2024', 'LEC summer 2024']}).to_csv(
-        './league_table_exemple.csv', index=False)
-    leaguesdata = "./league_table_exemple.csv"
-    return (open(leaguesdata, 'rb'), leaguesdata)
-
-
-# import os
-def test_admin_add_games(client, csv_gamesdata):
-    assert login(client).status_code == 200
-    response = client.post("/admin_add_games", data={'gamesdata': csv_gamesdata},
-                           follow_redirects=True)
-    assert response.text.__contains__("Fichier de bo ajouté")
-
-
-def test_admin_add_leagues(client, csv_leaguesdata):
-    assert login(client).status_code == 200
-    response = client.post("/admin_add_leagues", data={'leaguesdata': csv_leaguesdata},
-                           follow_redirects=True)
-    assert response.text.__contains__("Fichier de league ajouté!")
 
 
 def test_admin_show_games_loadpage(client):
