@@ -158,7 +158,7 @@ def test_pronos_show_league_team_win_g2(client):
 def test_pronos_resume_game(client):
     assert login(client).status_code == 200
     response = client.post("/pronos_resume/1", follow_redirects=True)
-    assert (response.text.__contains__("Résumé Pronos"))
+    assert (response.text.__contains__("Score final"))
 
 def test_classements_loadpage(client):
     assert login(client).status_code == 200
