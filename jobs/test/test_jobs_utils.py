@@ -1,4 +1,4 @@
-from xjobs import utils
+from jobs import utils
 import pandas as pd
 from pandas.testing import assert_frame_equal
 from pandas import Timestamp
@@ -60,7 +60,7 @@ def test_clean_schedule(expected_df_for_get_game_schedule_dataframe,expected_df_
 @pytest.fixture
 def html_content():
     home = Path(__file__).resolve().parent.parent.parent
-    file_path = home / 'xjobs/test/esportstats_matchs.bin'
+    file_path = home / 'jobs/test/esportstats_matchs.bin'
     with open(file_path, "rb") as f:
         html_content_byte = f.read()
     return html_content_byte
