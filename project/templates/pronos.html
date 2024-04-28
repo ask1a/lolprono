@@ -11,7 +11,7 @@
 </nav>
 
 <div class="hero-body header-image">
-    <div class="container has-text-centered">
+    <div class="container is-max-desktop has-text-centered">
         <nav class="breadcrumb is-centered" aria-label="breadcrumbs">
             <ul>
                 {% for item in league_list %}
@@ -52,22 +52,65 @@
         {% endwith %}
         {% for item in records %}
         {% if not item.editable %}
-        <div class="box has-background-dark has-text-white">
-            <div class="columns">
-                <div class="column is-size-5">{{ item.game_datetime }} (BO{{ item.bo }})</div>
-                <div class="column is-size-4">{{ item.team_1 }}</div>
-                <div class="column is-size-5">Score final : {{ item.score_team_1 }} - {{ item.score_team_2 }}</div>
-                <div class="column is-size-4">{{ item.team_2 }}</div>
-                <div class="column is-size-5">Ton prono : {{ item.prono_team_1 }} - {{ item.prono_team_2 }}</div>
-                <div class="column is-size-5">Points gagnés : {{ item.points }}</div>
-            </div>
+        <div class="box has-background-grey-dark has-text-white is-multiline">
+            <form method="POST" action="/pronos_resume/{{item.gameid}}">
+                <div class="columns">
+                    <div class="column is-size-5">{{ item.game_datetime }} (BO{{ item.bo }})</div>
+                    <div class="column">
+                        <img src="/static/logos/{{ item.logo_team_1 }}" alt="{{ item.team_1 }}" style="width: auto; height: 50px;">
+                    </div>
+                    {% if item.score_team_win == 'team_1' %}
+                    <div class="column is-size-5 has-text-weight-bold">{{ item.team_1 }} ✅</div>
+                    {% else %}
+                    <div class="column">{{ item.team_1 }}</div>
+                    {% endif %}
+                    <div class="column is-flex-direction-column">
+                        <div class="is-size-5">Score final :</div>
+                        <div class="mt-3 is-size-5">{{ item.score_team_1 }} - {{ item.score_team_2 }}</div>
+                    </div>
+                    {% if item.score_team_win == 'team_2' %}
+                    <div class="column is-size-5 has-text-weight-bold">{{ item.team_2 }} ✅</div>
+                    {% else %}
+                    <div class="column">{{ item.team_2 }}</div>
+                    {% endif %}
+                    <div class="column">
+                        <img src="/static/logos/{{ item.logo_team_2 }}" alt="{{ item.team_2 }}" style="width: auto; height: 50px;"></div>
+                    <div class="column is-flex-direction-column">
+                        <div class="is-size-5">Ton prono :</div>
+                        <div class="mt-3 is-size-5">{{ item.prono_team_1 }} - {{ item.prono_team_2 }}</div>
+                    </div>
+                    <div class="column is-flex-direction-column">
+                        {% if item.prono_correct %}
+                        {% if item.score_exact %}
+                        <div class="is-size-5 has-background-success has-text-white">Pts: {{
+                            item.points }}
+                        </div>
+                        {% elif not item.score_exact %}
+                        <div class="is-size-5 has-background-warning has-text-white">Pts: {{
+                            item.points }}
+                        </div>
+                        {% endif %}
+                        {% elif not item.prono_correct %}
+                        <div class="is-size-5 has-background-danger has-text-white">Pts: {{
+                            item.points }}
+                        </div>
+                        {% endif %}
+                        <div class="mt-3">
+                            <button class="button is-link is-dark is-medium">Voir les pronostics</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
         </div>
         {% elif item.editable %}
-        <div class="box has-background-grey-lighter has-text-dark">
+        <div class="box has-background-grey-lighter has-text-dark is-multiline">
             <form method="POST" action="/pronos_update/{{ leaguename }}">
                 <div class="columns">
                     <div class="column is-size-5">{{ item.game_datetime }} (BO{{ item.bo }})</div>
-                    <div class="column has-text-large is-size-4">{{ item.team_1 }}</div>
+                    <div class="column">
+                        <img src="/static/logos/{{ item.logo_team_1 }}" alt="{{ item.team_1 }}" style="width: auto; height: 50px;"></div>
+                    <div class="column is-size-5">{{ item.team_1 }}
+                    </div>
                     <div class="column">
                         <div class="columns">
                             <div class="column">
@@ -86,8 +129,12 @@
                             </div>
                         </div>
                     </div>
-                    <div class="column is-size-4">{{ item.team_2 }}</div>
-                    <div class="column is-size-5">Prono actuel : {{ item.prono_team_1 }} - {{ item.prono_team_2 }}</div>
+                    <div class="column is-size-5">{{ item.team_2 }}</div>
+                    <div class="column">
+                        <img src="/static/logos/{{ item.logo_team_2 }}" alt="{{ item.team_2 }}" style="width: auto; height: 50px;"></div>
+                    <div class="column is-size-5">Prono actuel : {{ item.prono_team_1 }} - {{ item.prono_team_2
+                        }}
+                    </div>
                     <div class="column">
                         <button class="button is-link is-dark is-medium">Valider mon pronostic</button>
                     </div>
@@ -99,5 +146,6 @@
         {% endif %}
     </div>
 </div>
-
+</div>
+</div>
 {% endblock %}
