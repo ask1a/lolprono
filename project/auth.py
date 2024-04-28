@@ -321,6 +321,7 @@ def show_game_pronos(gameid):
     liste_a_supprimer = ['userid', 'gameid', 'prono_team_win', 'score_team_win', 'prono_correct', 'score_exact',
                          'nb_pronos_corrects', 'nb_pronos', 'odds', 'score_team_1', 'score_team_2', 'bo']
     recap_score = recap_score.drop(liste_a_supprimer, axis=1)
+    recap_score = recap_score.sort_values('points', ascending=False)
     recap_score = recap_score.to_dict("records")
 
     query = (select(Game.id, Game.leagueid, Game.team_1, Game.team_2
