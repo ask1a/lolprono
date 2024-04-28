@@ -1,21 +1,22 @@
-INSERT INTO "main"."teams" ("id", "short_label", "long_label", "region", "logo_url") VALUES ('1', 'FNC', 'Fnatic', 'LEC', 'fnatic.png');
-INSERT INTO "main"."teams" ("id", "short_label", "long_label", "region", "logo_url") VALUES ('2', 'G2', 'G2 Esports', 'LEC', 'g2.png');
-INSERT INTO "main"."teams" ("id", "short_label", "long_label", "region", "logo_url") VALUES ('3', 'VIT', 'Vitality', 'LEC', 'vitality.png');
-INSERT INTO "main"."teams" ("id", "short_label", "long_label", "region", "logo_url") VALUES ('4', 'BDS', 'Team BDS', 'LEC', 'bds.png');
-INSERT INTO "main"."teams" ("id", "short_label", "long_label", "region", "logo_url") VALUES ('5', 'MDK', 'MAD Lions KOI', 'LEC', 'mad.png');
-INSERT INTO "main"."teams" ("id", "short_label", "long_label", "region", "logo_url") VALUES ('6', 'TH', 'Team Heretics', 'LEC', 'th.png');
-INSERT INTO "main"."teams" ("id", "short_label", "long_label", "region", "logo_url") VALUES ('7', 'RGE', 'Rogue', 'LEC', 'rogue.png');
-INSERT INTO "main"."teams" ("id", "short_label", "long_label", "region", "logo_url") VALUES ('8', 'KC', 'Karmine Corp', 'LEC', 'kc.png');
-INSERT INTO "main"."teams" ("id", "short_label", "long_label", "region", "logo_url") VALUES ('9', 'SK', 'SK Gaming', 'LEC', 'sk.png');
-INSERT INTO "main"."teams" ("id", "short_label", "long_label", "region", "logo_url") VALUES ('10', 'GX', 'GiantX', 'LEC', 'gx.png');
-INSERT INTO "main"."teams" ("id", "short_label", "long_label", "region", "logo_url") VALUES ('11', 'PSG', 'PSG Talon', 'PCS', 'psg.png');
-INSERT INTO "main"."teams" ("id", "short_label", "long_label", "region", "logo_url") VALUES ('12', 'T1', 'T1', 'LCK', 't1.png');
-INSERT INTO "main"."teams" ("id", "short_label", "long_label", "region", "logo_url") VALUES ('13', 'EST', 'Estral Esport', 'LLA', 'est.png');
-INSERT INTO "main"."teams" ("id", "short_label", "long_label", "region", "logo_url") VALUES ('14', 'FLY', 'Flyquest', 'LCS', 'fly.png');
-INSERT INTO "main"."teams" ("id", "short_label", "long_label", "region", "logo_url") VALUES ('15', 'GAM', 'GAM Esport', 'VCS', 'gam.png');
-INSERT INTO "main"."teams" ("id", "short_label", "long_label", "region", "logo_url") VALUES ('16', 'TES', 'Top Esport', 'LPL', 'tes.png');
-INSERT INTO "main"."teams" ("id", "short_label", "long_label", "region", "logo_url") VALUES ('17', 'GEN', 'Gen.G', 'LCK', 'gg.png');
-INSERT INTO "main"."teams" ("id", "short_label", "long_label", "region", "logo_url") VALUES ('18', 'BLG', 'BiliBili Gaming', 'LPL', 'bili.png');
-INSERT INTO "main"."teams" ("id", "short_label", "long_label", "region", "logo_url") VALUES ('19', 'LLL', 'Loud', 'CBL', 'loud.png');
-INSERT INTO "main"."teams" ("id", "short_label", "long_label", "region", "logo_url") VALUES ('20', 'DK', 'Dplus Kia', 'LCK', 'dk.png');
-INSERT INTO "main"."teams" ("id", "short_label", "long_label", "region", "logo_url") VALUES ('21', 'TL', 'Team Liquid', 'LCS', 'tl.png');
+id,short_label,long_label,region_league,logo_url
+1,FNC,Fnatic,LEC,fnatic.png
+2,G2,G2 Esports,LEC,g2.png
+3,VIT,Vitality,LEC,vitality.png
+4,BDS,Team BDS,LEC,bds.png
+5,MDK,MAD Lions KOI,LEC,mad.png
+6,TH,Team Heretics,LEC,th.png
+7,RGE,Rogue,LEC,rogue.png
+8,KC,Karmine Corp,LEC,kc.png
+9,SK,SK Gaming,LEC,sk.png
+10,GX,GiantX,LEC,gx.png
+11,PSG,PSG Talon,PCS,psg.png
+12,T1,T1,LCK,t1.png
+13,EST,Estral Esport,LLA,est.png
+14,FLY,Flyquest,LCS,fly.png
+15,GAM,GAM Esport,VCS,gam.png
+16,TES,Top Esport,LPL,tes.png
+17,GEN,Gen.G,LCK,gg.png
+18,BLG,BiliBili Gaming,LPL,bili.png
+19,LLL,Loud,CBL,loud.png
+20,DK,Dplus Kia,LCK,dk.png
+21,TL,Team Liquid,LCS,tl.png

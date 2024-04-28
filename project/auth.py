@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, redirect, url_for, request, flash
 from werkzeug.security import generate_password_hash, check_password_hash
-from .models import User, UserLeague, Game, GameProno, League, UserTableLocked, Teams
+from .models import User, UserLeague, Game, GameProno, League, UserTableLocked, Teams, add_teams_values
 from flask_login import login_user, logout_user, login_required, current_user
 from . import db
 from sqlalchemy import select, and_, update
@@ -526,6 +526,13 @@ def admin_delete_league():
 @redirect_not_allowed_admin_account
 def admin_delete_user():
     return admin_delete_from(User)
+
+@auth.route('/admin_update_table_teams')
+@login_required
+@redirect_not_allowed_admin_account
+def admin_update_table_teams():
+    add_teams_values()
+    return redirect(url_for('auth.admin'))
 
 
 def admin_delete_from(table):

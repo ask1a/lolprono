@@ -122,6 +122,11 @@ def test_admin_add_games(client, csv_gamesdata):
                            follow_redirects=True)
     assert response.text.__contains__("Fichier de bo ajouté")
 
+def test_admin_add_leagues(client, csv_leaguesdata):
+    assert login(client).status_code == 200
+    response = client.post("/admin_add_leagues", data={'leaguesdata': csv_leaguesdata},
+                           follow_redirects=True)
+    assert response.text.__contains__("Fichier de league ajouté!")
 
 def test_pronos_loadpage(client):
     assert login(client).status_code == 200
@@ -147,6 +152,12 @@ def test_pronos_update_success(client):
     response = client.post("/pronos_update/LEC spring 2024", data=dict(
         [('gameidt1;6;2034-04-07 17:00:00;3', '2'), ('gameidt2;6;2034-04-07 17:00:00;3', '0')]), follow_redirects=True)
     assert response.text.__contains__("Pronostic mis à jour!")
+
+
+def test_admin_update_table_teams(client):
+    assert login(client).status_code == 200
+    response = client.get("/admin_update_table_teams", follow_redirects=True)
+    assert response.status_code == 200
 
 
 def test_pronos_show_league_team_win_g2(client):
@@ -191,11 +202,6 @@ def test_admin_loadpage_allowed(client):
     assert response.text.__contains__("Admin")
 
 
-def test_admin_add_leagues(client, csv_leaguesdata):
-    assert login(client).status_code == 200
-    response = client.post("/admin_add_leagues", data={'leaguesdata': csv_leaguesdata},
-                           follow_redirects=True)
-    assert response.text.__contains__("Fichier de league ajouté!")
 
 
 def test_admin_show_games_loadpage(client):
