@@ -48,16 +48,16 @@ def test_assign_league_id():
 
 
 def test_get_game_schedule_dataframe(html_content, expected_df_for_get_game_schedule_dataframe):
-    rslt_df = utils.get_game_schedule_dataframe(html_content, testing=True)
+    test_scrap = utils.Scrap(test_job=True)
+    rslt_df = test_scrap.get_game_schedule_dataframe(html_content)
     expected_df = expected_df_for_get_game_schedule_dataframe
 
     assert_frame_equal(rslt_df.reset_index(drop=True), expected_df.reset_index(drop=True), check_dtype=False)
 
 
 def test_clean_schedule(expected_df_for_get_game_schedule_dataframe,expected_df_for_clean_schedule):
-    home = Path(__file__).resolve().parent.parent.parent
-    db_path = home / 'instance/db.sqlite'
-    rslt_df = utils.clean_schedule(expected_df_for_get_game_schedule_dataframe,db_path,True)
+    test_scrap = utils.Scrap(test_job=True)
+    rslt_df = test_scrap.clean_schedule(expected_df_for_get_game_schedule_dataframe)
     expected_df = expected_df_for_clean_schedule
 
     assert_frame_equal(rslt_df.reset_index(drop=True), expected_df.reset_index(drop=True), check_dtype=False)
