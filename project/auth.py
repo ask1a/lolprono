@@ -336,7 +336,8 @@ def show_game_pronos(gameid):
                                  columns=['id', 'gameid', 'team_1', 'team_2', 'score_team_1', 'score_team_2',
                                           'leagueid', 'leaguename'])
     tableau_score = tableau_score.to_dict('records')
-    tableau_score = tableau_score[0]
+    for item in tableau_score:
+        tableau_score = item
 
     query = (select(Teams.long_label, Teams.logo_url))
     logos = db.session.execute(query).all()
@@ -346,8 +347,8 @@ def show_game_pronos(gameid):
     tableau_score['logo_team_2'] = logos.get(tableau_score.get('team_2'))
 
     titles = ['Pseudo']
-    titles.append(tableau_score['team_1'])
-    titles.append(tableau_score['team_2'])
+    titles.append(tableau_score.get('team_1'))
+    titles.append(tableau_score.get('team_2'))
     titles.append('Points')
 
     return render_template('pronos_resume.html', recap_score=recap_score, titles=titles, tableau_score=tableau_score)
