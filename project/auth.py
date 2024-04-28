@@ -336,8 +336,7 @@ def show_game_pronos(gameid):
                                  columns=['id', 'gameid', 'team_1', 'team_2', 'score_team_1', 'score_team_2',
                                           'leagueid', 'leaguename'])
     tableau_score = tableau_score.to_dict('records')
-    for item in tableau_score:
-        tableau_score = item
+    tableau_score = tableau_score[0]
 
     query = (select(Teams.long_label, Teams.logo_url))
     logos = db.session.execute(query).all()

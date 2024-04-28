@@ -1,5 +1,5 @@
 INSERT INTO "main"."teams" ("id", "short_label", "long_label", "region", "logo_url") VALUES ('1', 'FNC', 'Fnatic', 'LEC', 'fnatic.png');
-INSERT INTO "main"."teams" ("id", "short_label", "long_label", "region", "logo_url") VALUES ('2', 'G2', 'G2 Esport', 'LEC', 'g2.png');
+INSERT INTO "main"."teams" ("id", "short_label", "long_label", "region", "logo_url") VALUES ('2', 'G2', 'G2 Esports', 'LEC', 'g2.png');
 INSERT INTO "main"."teams" ("id", "short_label", "long_label", "region", "logo_url") VALUES ('3', 'VIT', 'Vitality', 'LEC', 'vitality.png');
 INSERT INTO "main"."teams" ("id", "short_label", "long_label", "region", "logo_url") VALUES ('4', 'BDS', 'Team BDS', 'LEC', 'bds.png');
 INSERT INTO "main"."teams" ("id", "short_label", "long_label", "region", "logo_url") VALUES ('5', 'MDK', 'MAD Lions KOI', 'LEC', 'mad.png');
