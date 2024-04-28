@@ -54,7 +54,6 @@ def test_get_game_schedule_dataframe(html_content, expected_df_for_get_game_sche
 
     assert_frame_equal(rslt_df.reset_index(drop=True), expected_df.reset_index(drop=True), check_dtype=False)
 
-
 def test_clean_schedule(expected_df_for_get_game_schedule_dataframe,expected_df_for_clean_schedule):
     test_scrap = utils.Scrap(test_job=True)
     rslt_df = test_scrap.clean_schedule(expected_df_for_get_game_schedule_dataframe)
@@ -78,8 +77,8 @@ def expected_df_for_clean_schedule():
         {
             'leagueid': [3, 3, 3, 3], 'bo': [3, 3, 3, 3],
             'game_datetime': ['2024-05-01 08:00:00', '2024-05-01 11:00:00', '2024-05-02 08:00:00',
-            '2024-05-02 11:00:00'], 'team_1': ['FLY', 'T1', 'FNC', 'TES'],
-            'team_2': ['PSG', 'EST', 'GAM', 'LLL']
+            '2024-05-02 11:00:00'], 'team_1': ['Flyquest', 'T1', 'Fnatic', 'Top Esport'],
+            'team_2': ['PSG Talon', 'Estral Esport', 'GAM Esport', 'Loud']
         }
     )
 

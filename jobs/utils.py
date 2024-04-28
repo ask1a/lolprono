@@ -15,14 +15,12 @@ class Scrap():
 
     def __init__(self, test_job=None) -> None:
         if test_job:
-            # home = Path(__file__).resolve().parent.parent.parent
-            # db_path = home / 'instance\\db.sqlite'
             self.conn = None
             self.cursor = None
             self.today = datetime.date(2024, 4, 27)
-            self.leagues = None
+            self.leagues = pd.DataFrame({'id': [3], 'leaguename': ['Mid-Season Invitational 2024']})
         else:
-            self.conn = sqlite3.connect("instance/db.sqlite")
+            self.conn = sqlite3.connect('instance/db.sqlite')
             self.cursor = self.conn.cursor()
             self.today = datetime.date.today()
             self.leagues = pd.read_sql_query("SELECT * FROM league", self.conn)
@@ -36,7 +34,18 @@ class Scrap():
         -----------
         df: Pandas Dataframes
         '''
-        teams = pd.read_sql_query("SELECT DISTINCT short_label, long_label FROM teams", self.conn)
+        if self.conn:
+            teams = pd.read_sql_query("SELECT DISTINCT short_label, long_label FROM teams", self.conn)
+        else:
+            teams = pd.DataFrame(
+                {
+                    'short_label': ['FLY', 'T1', 'FNC', 'TES', 'PSG', 'EST', 'GAM', 'LLL'],
+                    'long_label': [
+                        'Flyquest', 'T1', 'Fnatic', 'Top Esport',
+                        'PSG Talon', 'Estral Esport', 'GAM Esport', 'Loud'
+                    ]
+                }
+            )
         for column in ['team_1', 'team_2']:
             df = df.merge(teams, how='left', left_on=column, right_on='short_label')
             df[column] = df['long_label']
@@ -288,9 +297,8 @@ class Scrap():
             lambda x: self.assign_league_id(x)
         )
         df = df[df['keep'] == 'keep']
-        # Drop if team name is unknown
-        df = df[df['team_1'] != 'unknown']
-        df = df[df['team_2'] != 'unknown']
+        # Drop if team name if we don't have it.
+        df =df.dropna()
         # Fetch existing games
         query = '''
             SELECT distinct
@@ -301,7 +309,12 @@ class Scrap():
             WHERE
                 date(game_datetime) >= current_date
         '''
-        future_games = pd.read_sql_query(query, self.conn)
+        if self.conn:
+            future_games = pd.read_sql_query(query, self.conn)
+        else:
+            future_games = pd.DataFrame(
+                {'db_datetime': [], 'db_team_1': [], 'db_team_2':[]}
+            )
         # Formatting datetime as a string to permit merge:
         df['game_datetime'] = df['game_datetime'].apply(lambda x:
             x.strftime('%Y-%m-%d %H:%M:%S')
@@ -328,6 +341,8 @@ class Scrap():
         '''
         # Getting Long names:
         df = self.identifty_team_names(df)
+        # Drop if team name if we don't have it.
+        df =df.dropna()
         # Formatting Score
         df['score_team_1'] = df['score'].apply(lambda x: x[0][0])
         df['score_team_2'] = df['score'].apply(lambda x: x[0][-1])
