@@ -3,8 +3,6 @@ import datetime
 import re
 import sqlite3
 
-from pathlib import Path
-
 # Community Librairies
 import pandas as pd
 import requests
