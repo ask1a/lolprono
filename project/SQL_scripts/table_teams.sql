@@ -9,7 +9,7 @@ INSERT INTO "main"."teams" ("id", "short_label", "long_label", "region", "logo_u
 INSERT INTO "main"."teams" ("id", "short_label", "long_label", "region", "logo_url") VALUES ('9', 'SK', 'SK Gaming', 'LEC', 'sk.png');
 INSERT INTO "main"."teams" ("id", "short_label", "long_label", "region", "logo_url") VALUES ('10', 'GX', 'GiantX', 'LEC', 'gx.png');
 INSERT INTO "main"."teams" ("id", "short_label", "long_label", "region", "logo_url") VALUES ('11', 'PSG', 'PSG Talon', 'PCS', 'psg.png');
-INSERT INTO "main"."teams" ("id", "short_label", "long_label", "region", "logo_url") VALUES ('12', 'T1', 'T1', 'LEC', 't1.png');
+INSERT INTO "main"."teams" ("id", "short_label", "long_label", "region", "logo_url") VALUES ('12', 'T1', 'T1', 'LCK', 't1.png');
 INSERT INTO "main"."teams" ("id", "short_label", "long_label", "region", "logo_url") VALUES ('13', 'EST', 'Estral Esport', 'LLA', 'est.png');
 INSERT INTO "main"."teams" ("id", "short_label", "long_label", "region", "logo_url") VALUES ('14', 'FLY', 'Flyquest', 'LCS', 'fly.png');
 INSERT INTO "main"."teams" ("id", "short_label", "long_label", "region", "logo_url") VALUES ('15', 'GAM', 'GAM Esport', 'VCS', 'gam.png');
