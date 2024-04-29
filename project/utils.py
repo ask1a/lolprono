@@ -47,27 +47,27 @@ def validation_email_body(code:str)->str:
     return "Code de validation : " + code
 
 
-def send_email(mail_to, mail_subject, mail_body):
-    username = "lolprono.alerte@outlook.fr"
-    password = os.getenv('PASS_EMAIL')
-    mail_from = "lolprono.alerte@outlook.fr"
-    mail_to = mail_to
-    mail_subject = mail_subject
-    mail_body = mail_body
+# def send_email(mail_to, mail_subject, mail_body):
+#     username = "lolprono.alerte@outlook.fr"
+#     password = os.getenv('PASS_EMAIL')
+#     mail_from = "lolprono.alerte@outlook.fr"
+#     mail_to = mail_to
+#     mail_subject = mail_subject
+#     mail_body = mail_body
+#
+#     mimemsg = MIMEMultipart()
+#     mimemsg['From'] = mail_from
+#     mimemsg['To'] = mail_to
+#     mimemsg['Subject'] = mail_subject
+#     mimemsg.attach(MIMEText(mail_body, 'plain'))
+#     connection = smtplib.SMTP(host='smtp.office365.com', port=587)
+#     connection.starttls()
+#     connection.login(username, password)
+#     connection.send_message(mimemsg)
+#     connection.quit()
 
-    mimemsg = MIMEMultipart()
-    mimemsg['From'] = mail_from
-    mimemsg['To'] = mail_to
-    mimemsg['Subject'] = mail_subject
-    mimemsg.attach(MIMEText(mail_body, 'plain'))
-    connection = smtplib.SMTP(host='smtp.office365.com', port=587)
-    connection.starttls()
-    connection.login(username, password)
-    connection.send_message(mimemsg)
-    connection.quit()
 
-
-def write_signup_code(email, code):
+def write_signup_code(email:str, code:str)->None:
     row = SignupCode.query.filter(SignupCode.email == email).first()
     if row:
         db.session.delete(row)
@@ -79,7 +79,7 @@ def write_signup_code(email, code):
     return None
 
 
-def send_email_validation(mail_to):
+def send_email_validation(mail_to:str)->None:
     code = ''.join([random_digit() for i in range(6)])
     send_email(mail_to, "Votre code de validation d'inscription.", validation_email_body(code))
     write_signup_code(mail_to, code)
@@ -105,3 +105,44 @@ def send_email_validation(mail_to):
 # except:
 #     print("error")
 #
+import boto3
+from botocore.exceptions import ClientError
+
+
+def send_email(mail_to:str, mail_subject:str, mail_body:str)->None:
+    SENDER = "contact@lolprono.fr"
+    RECIPIENT = mail_to
+    AWS_REGION = "us-east-1"
+    SUBJECT = mail_subject
+    BODY_TEXT = mail_body
+    CHARSET = "UTF-8"
+    # create client SES
+    client = boto3.client('ses', region_name=AWS_REGION)
+    try:
+        response = client.send_email(
+            Destination={
+                'ToAddresses': [
+                    RECIPIENT,
+                ],
+            },
+            Message={
+                'Body': {
+                    'Text': {
+                        'Charset': CHARSET,
+                        'Data': BODY_TEXT,
+                    },
+                },
+                'Subject': {
+                    'Charset': CHARSET,
+                    'Data': SUBJECT,
+                },
+            },
+            Source=SENDER
+        )
+    except ClientError as e:
+        print(e.response['Error']['Message'])
+    else:
+        print('Email sent! Message ID:')
+        print(response['MessageId'])
+
+
