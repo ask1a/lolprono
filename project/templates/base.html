@@ -40,6 +40,11 @@
                 </a>
                 {% endif %}
                 {% if current_user.is_authenticated %}
+                <a href="{{ url_for('auth.show_group') }}" class="navbar-item">
+                    Groupe
+                </a>
+                {% endif %}
+                {% if current_user.is_authenticated %}
                 <a href="{{ url_for('auth.classements') }}" class="navbar-item">
                     Classements
                 </a>

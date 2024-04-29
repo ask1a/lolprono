@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<nav class="navbar" role="navigation" aria-label="main navigation">
+    <div class="column is-4 is-offset-4 has-text-centered">
+        <h1 class="title has-text-white is-capitalized">
+            Groupe de Pronosticeurs
+        </h1>
+    </div>
+</nav>
+
+<div class="hero-body header-image">
+    <div class="container is-max-desktop has-text-centered">
+        <nav class="breadcrumb is-centered" aria-label="breadcrumbs">
+                {% if not groupe %}
+                <form method="POST" action="/create_group">
+                    <div>
+                        <button class="button is-success is-dark is-large">Créer un groupe</button>
+                    </div>
+                </form>
+                <form method="POST" action="/show_groups" style="margin-top: 5em;">
+                    <div>
+                        <button class="button is-link is-dark is-large">Voir les groupes existants</button>
+                    </div>
+                </form>
+                {% elif groupe %}
+                <form method="POST" action="/quit_group">
+                    <div>
+                        Montrer le groupe avec ses membres et des stats sur les % de bons pronos/% score exact sur
+                        chaque ligue ?
+                    </div>
+                    <div>
+                        <button class="button is-danger is-dark is-medium">Quitter le groupe</button>
+                    </div>
+                </form>
+                {%endif%}
+        </nav>
+    </div>
+</div>
+{% endblock %}

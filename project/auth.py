@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, redirect, url_for, request, flash
 from werkzeug.security import generate_password_hash, check_password_hash
-from .models import User, UserLeague, Game, GameProno, League, UserTableLocked, Teams, add_teams_values
+from .models import User, UserLeague, Game, GameProno, League, UserTableLocked, Teams, add_teams_values, Groupe
 from flask_login import login_user, logout_user, login_required, current_user
 from . import db
 from sqlalchemy import select, and_, update
@@ -353,6 +353,14 @@ def show_game_pronos(gameid):
 
     return render_template('pronos_resume.html', recap_score=recap_score, titles=titles, tableau_score=tableau_score)
 
+@auth.route('/groupe')
+@login_required
+def show_group():
+    user_groupe = Groupe.query.filter_by(userid=current_user.id).all()
+    if len(user_groupe) ==0:
+        return render_template('groupe.html', groupe=False)
+    else:
+        return render_template('groupe.html', groupe=True)
 
 @auth.route('/classements')
 @login_required

@@ -48,6 +48,13 @@ class GameProno(db.Model):
     prono_team_1 = db.Column(db.Integer, unique=False, nullable=True)
     prono_team_2 = db.Column(db.Integer, unique=False, nullable=True)
 
+class Groupe(db.Model):
+	"""Manage groupe infos"""
+	id = db.Column(db.Integer, primary_key=True)  # primary keys are required by SQLAlchemy
+	userid = db.Column(db.Integer, db.ForeignKey('user.id'), unique=True, nullable=False)
+	name = db.Column(db.String(30), unique=True, nullable=False)
+
+
 class Teams(db.Model):
     """Manage teams infos"""
     id = db.Column(db.Integer, primary_key=True)  # primary keys are required by SQLAlchemy
