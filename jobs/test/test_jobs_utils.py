@@ -81,7 +81,9 @@ def test_clean_schedule(expected_df_for_get_game_schedule_dataframe,expected_df_
 def test_clean_results(expected_df_for_get_game_results_dataframe, expected_df_for_clean_results):
     test_scrap = utils.Scrap(test_job=True)
     rslt_df = test_scrap.clean_results(expected_df_for_get_game_results_dataframe)
+    print(rslt_df)
     expected_df = expected_df_for_clean_results
+    print(expected_df)
 
     assert_frame_equal(rslt_df.reset_index(drop=True), expected_df.reset_index(drop=True), check_dtype=False)
 
@@ -90,8 +92,6 @@ def test_get_game_results_dataframe(html_content_results, expected_df_for_get_ga
     test_scrap = utils.Scrap(test_job=True)
     results_df = test_scrap.get_game_results_dataframe(html_content_results)
     results_expected_df = expected_df_for_get_game_results_dataframe
-    print(results_df)
-    print(results_expected_df)
     assert_frame_equal(results_df.reset_index(drop=True), results_expected_df.reset_index(drop=True), check_dtype=False)
 
 
@@ -106,7 +106,7 @@ def html_content_schedule():
 @pytest.fixture
 def html_content_results():
     home = Path(__file__).resolve().parent.parent.parent
-    file_path = home / 'jobs/test/LoLMatches.txt'
+    file_path = home / 'jobs/test/lol_esport_matches.txt'
     with open(file_path, "r", encoding='utf-8') as f:
         html_content_byte = f.read()
     return html_content_byte
@@ -131,8 +131,8 @@ def expected_df_for_clean_results():
             'leagueid': [3, 3], 'bo': [3, 3],
             'game_date': ['2024-04-26', '2024-04-26'], 'team_1': ['T1', 'Flyquest'],
             'team_2': ['Estral Esport', 'PSG Talon'],
-            'score_team_1': [2, 2],
-            'score_team_0': [0, 1]
+            'score_team_1': ['2', '2'],
+            'score_team_2': ['0', '1']
         }
     )
 
