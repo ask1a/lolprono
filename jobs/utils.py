@@ -215,7 +215,7 @@ class Scrap():
 
         return game_table
 
-    def get_game_results_dataframe(self) -> pd.DataFrame:
+    def get_game_results_dataframe(self, html_content=None) -> pd.DataFrame:
         '''
         Function to fetch LOL games results from the e-sportstats.com website and place it into a dataframe.
 
@@ -223,17 +223,21 @@ class Scrap():
         -----------
         None
         '''
+
         # Fetching HTML
-        html = requests.get('https://e-sportstats.com/lol/matches-results')
-        html_content = BeautifulSoup(html.content)
+        if html_content:
+            html_content_bs = BeautifulSoup(html_content)
+        else:
+            html = requests.get('https://e-sportstats.com/lol/matches-results')
+            html_content_bs = BeautifulSoup(html.content)
         # Reaching div containnint games schedule
-        content = html_content.body.main.find('div', class_='tournaments__list')
+        content = html_content_bs.body.main.find('div', class_='tournaments__list')
         # Inserting all elements in a list
         games = content.find_all('div')
 
         # Creating the shape a of finale DataFrame
         game_table = pd.DataFrame(
-            columns=['league_name', 'game_date', 'game_time', 'bo', 'team_1', 'team_2', 'score']
+            columns=['league_name', 'game_date', 'bo', 'team_1', 'team_2', 'score']
         )
 
         yesterday = self.today - datetime.timedelta(days=1)

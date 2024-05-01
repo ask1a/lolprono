@@ -4,6 +4,7 @@ from pandas.testing import assert_frame_equal
 from pandas import Timestamp
 import pytest
 from pathlib import Path
+import numpy as np
 
 
 def test_check_league():
@@ -61,12 +62,13 @@ def test_identifty_team_names(expected_df_for_clean_schedule):
     assert_frame_equal(test_df.reset_index(drop=True), expected_df_for_clean_schedule.reset_index(drop=True), check_dtype=False)
 
 
-def test_get_game_schedule_dataframe(html_content, expected_df_for_get_game_schedule_dataframe):
+def test_get_game_schedule_dataframe(html_content_schedule, expected_df_for_get_game_schedule_dataframe):
     test_scrap = utils.Scrap(test_job=True)
-    rslt_df = test_scrap.get_game_schedule_dataframe(html_content)
+    rslt_df = test_scrap.get_game_schedule_dataframe(html_content_schedule)
     expected_df = expected_df_for_get_game_schedule_dataframe
 
     assert_frame_equal(rslt_df.reset_index(drop=True), expected_df.reset_index(drop=True), check_dtype=False)
+
 
 def test_clean_schedule(expected_df_for_get_game_schedule_dataframe,expected_df_for_clean_schedule):
     test_scrap = utils.Scrap(test_job=True)
@@ -76,14 +78,46 @@ def test_clean_schedule(expected_df_for_get_game_schedule_dataframe,expected_df_
     assert_frame_equal(rslt_df.reset_index(drop=True), expected_df.reset_index(drop=True), check_dtype=False)
 
 
+def test_clean_results(expected_df_for_get_game_results_dataframe, expected_df_for_clean_results):
+    test_scrap = utils.Scrap(test_job=True)
+    rslt_df = test_scrap.clean_results(expected_df_for_get_game_results_dataframe)
+    expected_df = expected_df_for_clean_results
+
+    assert_frame_equal(rslt_df.reset_index(drop=True), expected_df.reset_index(drop=True), check_dtype=False)
+
+
+def test_get_game_results_dataframe(html_content_results, expected_df_for_get_game_results_dataframe):
+    test_scrap = utils.Scrap(test_job=True)
+    results_df = test_scrap.get_game_results_dataframe(html_content_results)
+    results_expected_df = expected_df_for_get_game_results_dataframe
+    print(results_df)
+    print(results_expected_df)
+    assert_frame_equal(results_df.reset_index(drop=True), results_expected_df.reset_index(drop=True), check_dtype=False)
+
+
+def test_clean_results(expected_df_for_get_game_schedule_dataframe,expected_df_for_clean_schedule):
+    test_scrap = utils.Scrap(test_job=True)
+    rslt_df = test_scrap.clean_schedule(expected_df_for_get_game_schedule_dataframe)
+    expected_df = expected_df_for_clean_schedule
+
+    assert_frame_equal(rslt_df.reset_index(drop=True), expected_df.reset_index(drop=True), check_dtype=False)
+
+
 @pytest.fixture
-def html_content():
+def html_content_schedule():
     home = Path(__file__).resolve().parent.parent.parent
     file_path = home / 'jobs/test/esportstats_matchs.bin'
     with open(file_path, "rb") as f:
         html_content_byte = f.read()
     return html_content_byte
 
+@pytest.fixture
+def html_content_results():
+    home = Path(__file__).resolve().parent.parent.parent
+    file_path = home / 'jobs/test/LolMatches.html'
+    with open(file_path, "r", encoding='utf-8') as f:
+        html_content_byte = f.read()
+    return html_content_byte
 
 @pytest.fixture
 def expected_df_for_clean_schedule():
@@ -93,6 +127,20 @@ def expected_df_for_clean_schedule():
             'game_datetime': ['2024-05-01 08:00:00', '2024-05-01 11:00:00', '2024-05-02 08:00:00',
             '2024-05-02 11:00:00'], 'team_1': ['Flyquest', 'T1', 'Fnatic', 'Top Esport'],
             'team_2': ['PSG Talon', 'Estral Esport', 'GAM Esport', 'Loud']
+
+        }
+    )
+
+
+@pytest.fixture
+def expected_df_for_clean_results():
+    return pd.DataFrame(
+        {
+            'leagueid': [3, 3], 'bo': [3, 3],
+            'game_date': ['2024-04-26', '2024-04-26'], 'team_1': ['T1', 'Flyquest'],
+            'team_2': ['Estral Esport', 'PSG Talon'],
+            'score_team_1': [2, 2],
+            'score_team_0': [0, 1]
         }
     )
 
@@ -173,5 +221,252 @@ def expected_df_for_get_game_schedule_dataframe():
                     Timestamp('2024-05-07 06:00:00'), Timestamp('2024-05-07 08:00:00'),
                     Timestamp('2024-05-07 10:00:00'), Timestamp('2024-05-07 09:00:00'),
                     Timestamp('2024-05-07 16:00:00'), Timestamp('2024-05-07 19:00:00')]
+            }
+        )
+
+@pytest.fixture
+def expected_df_for_get_game_results_dataframe():
+    return pd.DataFrame(
+        {'league_name':
+            [
+                'Mid-Season Invitational 2024 Play-In: Group A',
+                'Mid-Season Invitational 2024 Play-In: Group A',
+                'LDL Split 2 2024 Group B',
+                'LDL Split 2 2024 Group A',
+                'LDL Split 2 2024 Group A',
+                'LDL Split 2 2024 Group B',
+                'LDL Split 2 2024 Group B',
+                'LDL Split 2 2024 Group A',
+                'LDL Split 2 2024 Group A',
+                'LDL Split 2 2024 Group A',
+                'LDL Split 2 2024 Group B',
+                'CBLOL Academy Split 1 2024 Playoffs',
+                'EMEA Masters Spring 2024 Playoffs',
+                'LDL Split 2 2024 Group A',
+                'LDL Split 2 2024 Group A',
+                'LDL Split 2 2024 Group B',
+                'LCO Split 1 2024 Playoffs',
+                'CBLOL Academy Split 1 2024 Playoffs',
+                'LDL Split 2 2024 Group B',
+                'LDL Split 2 2024 Group B',
+                'LDL Split 2 2024 Group A',
+                'CBLOL Academy Split 1 2024 Playoffs',
+                'EMEA Masters Spring 2024 Playoffs',
+                'LDL Split 2 2024 Group A',
+                'LDL Split 2 2024 Group A',
+                'LDL Split 2 2024 Group B',
+                'CBLOL Academy Split 1 2024 Playoffs',
+                'EMEA Masters Spring 2024 Playoffs',
+                'LDL Split 2 2024 Group A',
+                'LDL Split 2 2024 Group A',
+                'LDL Split 2 2024 Group B',
+                'LDL Split 2 2024 Group A',
+                'LDL Split 2 2024 Group B',
+                'LDL Split 2 2024 Group B',
+                'EMEA Masters Spring 2024 Playoffs',
+                'EMEA Masters Spring 2024 Playoffs',
+                'EMEA Masters Spring 2024 Playoffs',
+                'EMEA Masters Spring 2024 Playoffs'
+            ],
+            'game_date': [
+                'Friday, April 26, 2024',
+                'Friday, April 26, 2024',
+                'Friday, April 26, 2024',
+                'Friday, April 26, 2024',
+                'Friday, April 26, 2024',
+                'Friday, April 26, 2024',
+                'Friday, April 26, 2024',
+                'Friday, April 26, 2024',
+                'Monday, April 29, 2024',
+                'Monday, April 29, 2024',
+                'Monday, April 29, 2024',
+                'Sunday, April 28, 2024',
+                'Sunday, April 28, 2024',
+                'Sunday, April 28, 2024',
+                'Sunday, April 28, 2024',
+                'Sunday, April 28, 2024',
+                'Sunday, April 28, 2024',
+                'Saturday, April 27, 2024',
+                'Saturday, April 27, 2024',
+                'Saturday, April 27, 2024',
+                'Saturday, April 27, 2024',
+                'Friday, April 26, 2024',
+                'Friday, April 26, 2024',
+                'Friday, April 26, 2024',
+                'Friday, April 26, 2024',
+                'Friday, April 26, 2024',
+                'Thursday, April 25, 2024',
+                'Thursday, April 25, 2024',
+                'Thursday, April 25, 2024',
+                'Thursday, April 25, 2024',
+                'Thursday, April 25, 2024',
+                'Wednesday, April 24, 2024',
+                'Wednesday, April 24, 2024',
+                'Wednesday, April 24, 2024',
+                'Tuesday, April 23, 2024',
+                'Tuesday, April 23, 2024',
+                'Monday, April 22, 2024',
+                'Monday, April 22, 2024'
+            ],
+            'bo': [
+                'BO3',
+                'BO3',
+                'BO3',
+                'BO3',
+                'BO3',
+                'BO3',
+                'BO3',
+                'BO3',
+                'BO3',
+                'BO3',
+                'BO3',
+                'BO5',
+                'BO5',
+                'BO3',
+                'BO3',
+                'BO3',
+                'BO5',
+                'BO5',
+                'BO3',
+                'BO3',
+                'BO3',
+                'BO5',
+                'BO5',
+                'BO3',
+                'BO3',
+                'BO3',
+                'BO5',
+                'BO5',
+                'BO3',
+                'BO3',
+                'BO3',
+                'BO3',
+                'BO3',
+                'BO3',
+                'BO5',
+                'BO5',
+                'BO5',
+                'BO5'
+                ],
+                'team_1': [
+                    'T1',
+                    'FLY',
+                    'RAP',
+                    'LGDY',
+                    'OMG.A',
+                    'MAX',
+                    'WEA',
+                    'TT.Y',
+                    'FPB',
+                    'IGY',
+                    'WBG.Y',
+                    'VKS.A',
+                    'ES',
+                    'TT.Y',
+                    'BLGJ',
+                    'TESC',
+                    'ANC',
+                    'PNG.A',
+                    'JJH',
+                    'RAP',
+                    'JDM',
+                    'LLL.A',
+                    'BDS.A',
+                    'TT.Y',
+                    'IGY',
+                    'MAX',
+                    'PNG.A',
+                    'ES',
+                    'EDGY',
+                    'BLGJ',
+                    'WBG.Y',
+                    'LNGA',
+                    'JJH',
+                    'TESC',
+                    'KCB',
+                    'ES',
+                    'BDS.A',
+                    'SKP'
+                ],
+                'team_2': [
+                    'EST',
+                    'PSG',
+                    'WBG.Y',
+                    'FPB',
+                    'IGY',
+                    'AL.Y',
+                    'UPA',
+                    'JDM',
+                    'LNGA',
+                    'EDGY',
+                    'JJH',
+                    'PNG.A',
+                    'BJK',
+                    'RYL',
+                    'OMG.A',
+                    'AL.Y',
+                    'GZ',
+                    'KBM.A',
+                    'UPA',
+                    'WEA',
+                    'EDGY',
+                    'KBM.A',
+                    'BJK',
+                    'FPB',
+                    'LNGA',
+                    'TESC',
+                    'VKS.A',
+                    'GK',
+                    'OMG.A',
+                    'LGDY',
+                    'MJ',
+                    'JDM',
+                    'MAX',
+                    'WEA',
+                    'GK',
+                    'NGX',
+                    'OA',
+                    'BJK'
+                ],
+                'score': [
+                    ('2:0', ''),
+                    ('2:1', ''),
+                    ('0:2', ''),
+                    ('1:2', ''),
+                    ('0:2', ''),
+                    ('2:0', ''),
+                    ('0:2', ''),
+                    ('2:1', ''),
+                    ('1:2', ''),
+                    ('0:2', ''),
+                    ('2:1', ''),
+                    ('1:3', ''),
+                    ('3:1', ''),
+                    ('1:2', ''),
+                    ('1:2', ''),
+                    ('2:0', ''),
+                    ('1:3', ''),
+                    ('3:1', ''),
+                    ('1:2', ''),
+                    ('1:2', ''),
+                    ('0:2', ''),
+                    ('0:3', ''),
+                    ('2:3', ''),
+                    ('0:2', ''),
+                    ('2:1', ''),
+                    ('0:2', ''),
+                    ('1:3', ''),
+                    ('3:1', ''),
+                    ('2:0', ''),
+                    ('2:1', ''),
+                    ('2:1', ''),
+                    ('0:2', ''),
+                    ('0:2', ''),
+                    ('2:1', ''),
+                    ('2:3', ''),
+                    ('3:1', ''),
+                    ('3:0', ''),
+                    ('2:3', '')
+                ]
             }
         )
