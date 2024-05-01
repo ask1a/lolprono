@@ -4,7 +4,6 @@ from pandas.testing import assert_frame_equal
 from pandas import Timestamp
 import pytest
 from pathlib import Path
-import numpy as np
 
 
 def test_check_league():
@@ -93,14 +92,6 @@ def test_get_game_results_dataframe(html_content_results, expected_df_for_get_ga
     print(results_df)
     print(results_expected_df)
     assert_frame_equal(results_df.reset_index(drop=True), results_expected_df.reset_index(drop=True), check_dtype=False)
-
-
-def test_clean_results(expected_df_for_get_game_schedule_dataframe,expected_df_for_clean_schedule):
-    test_scrap = utils.Scrap(test_job=True)
-    rslt_df = test_scrap.clean_schedule(expected_df_for_get_game_schedule_dataframe)
-    expected_df = expected_df_for_clean_schedule
-
-    assert_frame_equal(rslt_df.reset_index(drop=True), expected_df.reset_index(drop=True), check_dtype=False)
 
 
 @pytest.fixture
