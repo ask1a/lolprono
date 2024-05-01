@@ -105,7 +105,7 @@ def html_content_schedule():
 
 @pytest.fixture
 def html_content_results():
-    file_path = os.path.abspath('') + '\\jobs\\test\\LolMatches.html'
+    file_path = os.path.abspath('') + '\\jobs\\test\\LolMatches.txt'
     with open(file_path, "r", encoding='utf-8') as f:
         html_content_byte = f.read()
     return html_content_byte
