@@ -18,7 +18,7 @@ class Scrap():
             self.today = datetime.date(2024, 4, 27)
             self.leagues = pd.DataFrame({'id': [3], 'leaguename': ['Mid-Season Invitational 2024']})
         else:
-            self.conn = sqlite3.connect('instance/db.sqlite')
+            self.conn = sqlite3.connect('lolprono/instance/db.sqlite')
             self.cursor = self.conn.cursor()
             self.today = datetime.date.today()
             self.leagues = pd.read_sql_query("SELECT * FROM league", self.conn)
