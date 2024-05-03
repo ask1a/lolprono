@@ -32,6 +32,6 @@ def update_game_datetime(conn):
 database_file = "../instance/db.sqlite"
 connection = create_connection(database_file)
 if connection:
-    update_developer_salary(connection)
+    update_game_datetime(connection)
 
 
