@@ -34,4 +34,5 @@ def create_standing_table(pronos: pd.DataFrame) -> list:
     recap_score = recap_score.sort_values('points', ascending=False)
     recap_score = recap_score.reset_index(level=['userid', 'username'])
     recap_score = recap_score.drop(columns=['userid']).to_dict("records")
+    recap_score['points'] = recap_score['points'].round(2)
     return recap_score
