@@ -242,7 +242,7 @@ class Scrap():
 
         yesterday = self.today - datetime.timedelta(days=1)
         # Initializing game_date in case first div isn't 'tounament__status
-        game_date = yesterday.strftime('%A, %B %d, %Y')
+        game_date = self.today.strftime('%A, %B %d, %Y')
         for game in games:
             # Converting element to a string to ease regex usage:
             # (Maybe not necessary)
