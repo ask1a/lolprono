@@ -13,7 +13,7 @@ def create_connection(db_file):
         return None
 
 
-def update_developer_salary(conn):
+def update_game_datetime(conn):
     try:
         cursor = conn.cursor()
         sql_update_query = """UPDATE game SET game_datetime = "2024-05-03 09:00:00"  
