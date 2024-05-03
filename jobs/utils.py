@@ -241,8 +241,10 @@ class Scrap():
         )
 
         yesterday = self.today - datetime.timedelta(days=1)
-        # Initializing game_date in case first div isn't 'tounament__status
-        game_date = self.today.strftime('%A, %B %d, %Y')
+        if self.conn:
+            game_date = self.today.strftime('%A, %B %d, %Y')
+        else:
+            game_date = 'Friday, April 26, 2024'
         for game in games:
             # Converting element to a string to ease regex usage:
             # (Maybe not necessary)
