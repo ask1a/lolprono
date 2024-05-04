@@ -189,7 +189,7 @@ def pronos():
 @auth.route('/pronos_update/<leaguename>', methods=['POST'])
 @login_required
 def pronos_update(leaguename):
-    heure_prono = (datetime.now() - timedelta(hours=2)).strftime('%Y-%m-%d %H:%M:%S')
+    heure_prono = (datetime.now() + timedelta(hours=2)).strftime('%Y-%m-%d %H:%M:%S')
     pronos_joueur = dict(request.form)
     pronos_team1 = {k.split(';')[1]: v for k, v in pronos_joueur.items() if 't1' in k}
     pronos_team2 = {k.split(';')[1]: v for k, v in pronos_joueur.items() if 't2' in k}
@@ -254,7 +254,7 @@ def pronos_show_league(leaguename):
     records = []
     if pronos_form:
         pronos_form = pd.DataFrame(pronos_form)
-        pronos_form['editable'] = (datetime.now() - timedelta(hours=2)) < pronos_form["game_datetime"]
+        pronos_form['editable'] = (datetime.now() + timedelta(hours=2)) < pronos_form["game_datetime"]
         pronos_form = pronos_form.replace(r'^\s*$', np.nan, regex=True)
         pronos_form = pronos_form.fillna(0)
 
