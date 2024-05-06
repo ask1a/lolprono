@@ -108,7 +108,7 @@ class Scrap():
             team_2 = game[1][4]
             score_team_1 = game[1][5]
             score_team_2 = game[1][6]
-            # Executing the update
+            # Executing the update order 1
             query = f"""
             UPDATE game
             SET score_team_1 = {score_team_1},
@@ -119,6 +119,20 @@ class Scrap():
                 AND date(game_datetime) = date('{game_date}')
                 AND team_1 = '{team_1}'
                 AND team_2 = '{team_2}';
+            """
+            self.cursor.execute(query)
+            self.conn.commit()
+            # Executing the update if order reversed
+            query = f"""
+            UPDATE game
+            SET score_team_1 = {score_team_2},
+                score_team_2 = {score_team_1}
+            WHERE
+                leagueid = {league_id}
+                AND bo = {bo}
+                AND date(game_datetime) = date('{game_date}')
+                AND team_1 = '{team_2}'
+                AND team_2 = '{team_1}';
             """
             self.cursor.execute(query)
             self.conn.commit()
