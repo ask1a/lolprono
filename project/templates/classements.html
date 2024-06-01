@@ -11,25 +11,21 @@
 
 <div class="hero-body header-image">
     <div class="container has-text-centered">
-        <div class="dropdown is-hoverable">
-            <div class="dropdown-trigger">
-                <button class="button has-background-link has-text-white" aria-haspopup="true"
-                        aria-controls="dropdown-menu4">
-                    <span>Selectionnez une ligue &#8964</span>
-                </button>
-            </div>
-            <div class="dropdown-menu" id="dropdown-menu4" role="menu">
-                <div class="dropdown-content has-background-dark">
-                    <div class="dropdown-item">
-                        {% for item in league_list %}
-                        <form method="POST" action="/classements_show_ranking/{{item}}">
-                            <button class="button is-dark">{{ item }}</button>
-                        </form>
-                        {% endfor %}
-                    </div>
-                </div>
-            </div>
-        </div>
+        <nav class="breadcrumb is-centered" aria-label="breadcrumbs">
+            <ul>
+                {% for item in league_list %}
+                <li>
+                    <form method="POST" action="/classements_show_ranking/{{item}}">
+                        {% if item == leaguename%}
+                        <button class="button is-link"><b>{{ item }}</b></button>
+                        {%else%}
+                        <button class="button is-dark">{{ item }}</button>
+                        {%endif%}
+                    </form>
+                </li>
+                {% endfor %}
+            </ul>
+        </nav>
         <h1 class="title has-text-white is-capitalized"></h1>
         {% if leagueid==0 %}
         <div></div>

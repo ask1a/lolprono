@@ -14,6 +14,14 @@
         <div class="columns">
             <div class="column"></div>
             <div class="column">
+                {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                <div class="notification is-primary">
+                    {{ messages[0] }}
+                </div>
+                {% endif %}
+                {% endwith %}
+
                 <div class="box has-background-dark">
                     <form method="POST" action="/ligue_spring">
                         <div class="columns">
@@ -46,6 +54,26 @@
                                 <h6 class="title is-6"></h6>
                                 <h6 class="title is-6 has-text-light">LEC Summer🌞 split 2024</h6>
                                 {% if league2 %}
+                                <div class="box has-background-dark has-text-white">Déjà inscrit!</div>
+                                {% else %}
+                                <button class="button is-link is-focused">Ajouter la ligue</button>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="box has-background-dark">
+                    <form method="POST" action="/ligue_msi_2024">
+                        <div class="columns">
+                            <div class="column">
+                                <figure class="image is-128x128">
+                                    <img class="is-rounded" src="static/logo_msi.JPG"/>
+                                </figure>
+                            </div>
+                            <div class="column">
+                                <h6 class="title is-6"></h6>
+                                <h6 class="title is-6 has-text-light">Mid-Season Invitational🧧 2024</h6>
+                                {% if league3 %}
                                 <div class="box has-background-dark has-text-white">Déjà inscrit!</div>
                                 {% else %}
                                 <button class="button is-link is-focused">Ajouter la ligue</button>

@@ -10,6 +10,11 @@ main = Blueprint('main', __name__)
 def index():
     return render_template('index.html')
 
+@main.route('/')
+def home():
+    return redirect(url_for('main.index'))
+
+
 
 @main.route('/profile')
 @login_required
