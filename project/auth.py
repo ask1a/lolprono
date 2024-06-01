@@ -66,7 +66,7 @@ def signup():
     return render_template('signup.html')
 
 
-@auth.route('/signup', methods=['POST'])
+@auth.route('/signup_post', methods=['POST'])
 def signup_post():
     email = request.form.get('email')
     name = request.form.get('name')
@@ -85,7 +85,7 @@ def signup_post():
             "L'inscription de nouveaux utilisateurs est actuellement verrouillée, contactez un admin ou utilisez un compte existant.")
         return redirect(url_for('auth.signup'))
 
-    send_email_validation(email)
+    send_email_validation(email,request.form.get('testing'))
     flash("Code de validation envoyé, ce dernier est valide pendant deux minutes")
     return render_template('signup_validation.html', email=email, name=name, password=password)
 
@@ -96,11 +96,14 @@ def signup_validation_post():
     email = request.form.get('email')
     name = request.form.get('name')
     password = request.form.get('password')
+    testing = request.form.get('testing')
 
     row = SignupCode.query.filter(
         SignupCode.email == email, SignupCode.code == code, SignupCode.expire_datetime >= datetime.today()).first()
     if row:
         # create a new user with the form data. Hash the password so the plaintext version isn't saved.
+        if testing:
+            password = generate_password_hash(password, method='scrypt')
         new_user = User(email=email, name=name, password=password)
 
         # delete signup to the database

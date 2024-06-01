@@ -8,6 +8,9 @@ from email.mime.text import MIMEText
 from . import db
 from .models import SignupCode
 from datetime import datetime, timedelta
+from dotenv import load_dotenv
+
+load_dotenv(".env")
 
 
 def create_standing_table(pronos: pd.DataFrame) -> list:
@@ -39,35 +42,15 @@ def create_standing_table(pronos: pd.DataFrame) -> list:
     return recap_score
 
 
-def random_digit()->str:
+def random_digit() -> str:
     return str(random.choice(list(range(10))))
 
 
-def validation_email_body(code:str)->str:
+def validation_email_body(code: str) -> str:
     return "Code de validation : " + code
 
 
-# def send_email(mail_to, mail_subject, mail_body):
-#     username = "lolprono.alerte@outlook.fr"
-#     password = os.getenv('PASS_EMAIL')
-#     mail_from = "lolprono.alerte@outlook.fr"
-#     mail_to = mail_to
-#     mail_subject = mail_subject
-#     mail_body = mail_body
-#
-#     mimemsg = MIMEMultipart()
-#     mimemsg['From'] = mail_from
-#     mimemsg['To'] = mail_to
-#     mimemsg['Subject'] = mail_subject
-#     mimemsg.attach(MIMEText(mail_body, 'plain'))
-#     connection = smtplib.SMTP(host='smtp.office365.com', port=587)
-#     connection.starttls()
-#     connection.login(username, password)
-#     connection.send_message(mimemsg)
-#     connection.quit()
-
-
-def write_signup_code(email:str, code:str)->None:
+def write_signup_code(email: str, code: str) -> None:
     row = SignupCode.query.filter(SignupCode.email == email).first()
     if row:
         db.session.delete(row)
@@ -79,70 +62,31 @@ def write_signup_code(email:str, code:str)->None:
     return None
 
 
-def send_email_validation(mail_to:str)->None:
+def send_email_validation(mail_to: str, testing=None) -> None:
     code = ''.join([random_digit() for i in range(6)])
-    send_email(mail_to, "Votre code de validation d'inscription.", validation_email_body(code))
+    if testing is None:
+        send_email(mail_to, "Votre code de validation d'inscription.", validation_email_body(code))
     write_signup_code(mail_to, code)
     return None
 
 
-# import smtplib
-# try:
-#     print("server connection")
-#     #server = smtplib.SMTP('pro2.mail.ovh.net', 587)
-#     #server = smtplib.SMTP('ssl0.ovh.net', 587)
-# #    server = smtplib.SMTP('ssl0.ovh.net', 465)
-#     server = smtplib.SMTP('ns0.ovh.net', 5025)
-#     server.set_debuglevel(1)
-#     print("server login")
-#     server.login("askia.vanryckeghem@lagrossedonnee.fr", "Slam14dunk14!")
-#     print("send mail")
-#
-#     msg = r"Hello de lu!"
-#     server.sendmail("skiaa@hotmail.com", "areumax", msg)
-#     server.quit()
-#
-# except:
-#     print("error")
-#
-import boto3
-from botocore.exceptions import ClientError
 
+def send_email(mail_to, mail_subject, mail_body, sender_email=os.getenv('EMAIL_LOGIN'), smtp_server='ssl0.ovh.net',
+            smtp_port=587, smtp_login=os.getenv('EMAIL_LOGIN'), smtp_password=os.getenv('EMAIL_PWD')):
+    # Création de l'objet message
+    msg = MIMEMultipart()
+    msg['From'] = sender_email
+    msg['To'] = mail_to
+    msg['Subject'] = mail_subject
 
-def send_email(mail_to:str, mail_subject:str, mail_body:str)->None:
-    SENDER = "contact@lolprono.fr"
-    RECIPIENT = mail_to
-    AWS_REGION = "us-east-1"
-    SUBJECT = mail_subject
-    BODY_TEXT = mail_body
-    CHARSET = "UTF-8"
-    # create client SES
-    client = boto3.client('ses', region_name=AWS_REGION)
-    try:
-        response = client.send_email(
-            Destination={
-                'ToAddresses': [
-                    RECIPIENT,
-                ],
-            },
-            Message={
-                'Body': {
-                    'Text': {
-                        'Charset': CHARSET,
-                        'Data': BODY_TEXT,
-                    },
-                },
-                'Subject': {
-                    'Charset': CHARSET,
-                    'Data': SUBJECT,
-                },
-            },
-            Source=SENDER
-        )
-    except ClientError as e:
-        print(e.response['Error']['Message'])
-    else:
-        print('Email sent! Message ID:')
-        print(response['MessageId'])
+    # Ajout du corps de l'email
+    msg.attach(MIMEText(mail_body, 'plain'))
+
+    # Connexion au serveur SMTP d'OVH et envoi de l'email
+    server = smtplib.SMTP(smtp_server, smtp_port)
+    server.starttls()  # Sécurisation de la connexion
+    server.login(smtp_login, smtp_password)  # Authentification
+    server.sendmail(sender_email, mail_to, msg.as_string())
+    server.quit()
 
 
