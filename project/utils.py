@@ -3,7 +3,7 @@ import pandas as pd
 
 
 def eval_team_win(df: pd.DataFrame, val_team_1: str, val_team_2: str) -> np.array:
-    return np.where(df[val_team_1] == df[val_team_2], ''
+    return np.where((df[val_team_1] == df[val_team_2]) | (df[val_team_1].isna()) | (df[val_team_2].isna()), ''
                     , np.where(df[val_team_1] > df[val_team_2], 'team_1', 'team_2'),
                     )
 
@@ -21,7 +21,7 @@ def create_points_dataframe(pronos: pd.DataFrame):
 
     pronos = pronos.merge(game_odds, on='gameid')
     pronos['points'] = np.where(pronos['score_exact'] == 1, pronos['odds'] * (pronos['bo'] // 2 + 1), pronos['odds'])
-    pronos['points'] = np.where(pronos['prono_correct'] == 1, pronos['points'], 0)
+    pronos['points'] = np.where(pronos['prono_correct'] == 1, round(pronos['points'],2), 0)
 
     return pronos
 
@@ -33,5 +33,6 @@ def create_standing_table(pronos: pd.DataFrame) -> list:
         ['userid', 'username']).sum()
     recap_score = recap_score.sort_values('points', ascending=False)
     recap_score = recap_score.reset_index(level=['userid', 'username'])
+    recap_score['points'] = recap_score['points'].round(2)
     recap_score = recap_score.drop(columns=['userid']).to_dict("records")
     return recap_score

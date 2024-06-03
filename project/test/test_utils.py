@@ -7,14 +7,14 @@ from pandas.testing import assert_frame_equal
 def test_eval_team_win():
     # Créez un DataFrame de test
     data = {
-        'score_team_1': [1, 2, 3],
-        'score_team_2': [2, 2, 2]
+        'score_team_1': [1, 2, 3, None, None],
+        'score_team_2': [2, 2, 2, None, 3]
     }
     df = pd.DataFrame(data)
 
     # Testez l'évaluation des équipes gagnantes
     result = u.eval_team_win(df, 'score_team_1', 'score_team_2')
-    expected_result = np.array(['team_2', '', 'team_1'])
+    expected_result = np.array(['team_2', '', 'team_1', '', ''])
     np.testing.assert_array_equal(result, expected_result)
 
 
