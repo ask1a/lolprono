@@ -2,6 +2,7 @@ import requests
 from dotenv import load_dotenv
 import os
 
+load_dotenv(".env")
 url_wh = os.getenv('DISCORD_WH')
 
 
