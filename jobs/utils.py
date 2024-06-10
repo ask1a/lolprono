@@ -331,7 +331,7 @@ class Scrap():
             future_games = pd.read_sql_query(query, self.conn)
         else:
             future_games = pd.DataFrame(
-                {'db_datetime': [], 'db_team_1': [], 'db_team_2':[]}
+                {'db_date': [], 'db_team_1': [], 'db_team_2':[]}
             )
         # Creating game_date so that we can merge on the date instead of datetime
         df['game_date'] = df['game_datetime'].apply(lambda x:
