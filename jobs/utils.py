@@ -333,13 +333,13 @@ class Scrap():
             future_games = pd.DataFrame(
                 {'db_datetime': [], 'db_team_1': [], 'db_team_2':[]}
             )
-        # Formatting datetime as a string to permit merge:
-        df['game_datetime'] = df['game_datetime'].apply(lambda x:
-            x.strftime('%Y-%m-%d %H:%M:%S')
-        )
         # Creating game_date so that we can merge on the date instead of datetime
         df['game_date'] = df['game_datetime'].apply(lambda x:
             x.strftime('%Y-%m-%d')
+        )
+        # Formatting datetime as a string to permit merge:
+        df['game_datetime'] = df['game_datetime'].apply(lambda x:
+            x.strftime('%Y-%m-%d %H:%M:%S')
         )
         df= df.merge(future_games, how='left',
             left_on=['game_date', 'team_1', 'team_2'],
