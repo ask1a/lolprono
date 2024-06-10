@@ -320,7 +320,7 @@ class Scrap():
         # Fetch existing games
         query = '''
             SELECT distinct
-                date(game_datetime) as db_date,
+                game_datetime as db_datetime,
                 team_1 as db_team_1,
                 team_2 as db_team_2
             FROM game
@@ -331,21 +331,22 @@ class Scrap():
             future_games = pd.read_sql_query(query, self.conn)
         else:
             future_games = pd.DataFrame(
+                {'db_datetime': [], 'db_team_1': [], 'db_team_2':[]}
             )
         # Formatting datetime as a string to permit merge:
-        df['game_date'] = df['game_date'].apply(lambda x:
-            x.strftime('%Y-%m-%d')
+        df['game_datetime'] = df['game_datetime'].apply(lambda x:
+            x.strftime('%Y-%m-%d %H:%M:%S')
         )
         df= df.merge(future_games, how='left',
-            left_on=['game_date', 'team_1', 'team_2'],
-            right_on=['db_date', 'db_team_1', 'db_team_2']
+            left_on=['game_datetime', 'team_1', 'team_2'],
+            right_on=['db_datetime', 'db_team_1', 'db_team_2']
         )
         # Keeping only games that are not yet inserted
-        df = df[df['db_date'].isna()]
+        df = df[df['db_datetime'].isna()]
         # Only getting the number of games
         df['bo'] = df['bo'].apply(lambda x: int(x[-1]))
         # Reordering dataframe to match destination table.
-        df = df[['leagueid', 'bo', 'game_date', 'team_1', 'team_2']]
+        df = df[['leagueid', 'bo', 'game_datetime', 'team_1', 'team_2']]
         return df
 
     def clean_results(self, df: pd.DataFrame) -> pd.DataFrame:
