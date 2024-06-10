@@ -320,7 +320,7 @@ class Scrap():
         # Fetch existing games
         query = '''
             SELECT distinct
-                game_datetime as db_datetime,
+                game_date as db_date,
                 team_1 as db_team_1,
                 team_2 as db_team_2
             FROM game
@@ -337,9 +337,13 @@ class Scrap():
         df['game_datetime'] = df['game_datetime'].apply(lambda x:
             x.strftime('%Y-%m-%d %H:%M:%S')
         )
+        # Creating game_date so that we can merge on the date instead of datetime
+        df['game_date'] = df['game_datetime'].apply(lambda x:
+            x.strftime('%Y-%m-%d')
+        )
         df= df.merge(future_games, how='left',
-            left_on=['game_datetime', 'team_1', 'team_2'],
-            right_on=['db_datetime', 'db_team_1', 'db_team_2']
+            left_on=['game_date', 'team_1', 'team_2'],
+            right_on=['db_date', 'db_team_1', 'db_team_2']
         )
         # Keeping only games that are not yet inserted
         df = df[df['db_datetime'].isna()]
