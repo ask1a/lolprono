@@ -115,7 +115,7 @@ def expected_df_for_clean_schedule():
     return pd.DataFrame(
         {
             'leagueid': [3, 3, 3, 3], 'bo': [3, 3, 3, 3],
-            'game_datetime': ['2024-05-01 08:00:00', '2024-05-01 11:00:00', '2024-05-02 08:00:00',
+            'game_date': ['2024-05-01', '2024-05-01', '2024-05-02',
             '2024-05-02 11:00:00'], 'team_1': ['Flyquest', 'T1', 'Fnatic', 'Top Esport'],
             'team_2': ['PSG Talon', 'Estral Esport', 'GAM Esport', 'Loud']
 
