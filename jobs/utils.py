@@ -346,7 +346,7 @@ class Scrap():
             right_on=['db_date', 'db_team_1', 'db_team_2']
         )
         # Keeping only games that are not yet inserted
-        df = df[df['db_datetime'].isna()]
+        df = df[df['db_date'].isna()]
         # Only getting the number of games
         df['bo'] = df['bo'].apply(lambda x: int(x[-1]))
         # Reordering dataframe to match destination table.
