@@ -136,6 +136,14 @@ def is_registered_in_league(leagueid):
     else:
         return 0
 
+    
+def get_local_time_diff():
+    '''Get the timezone diff between server and browser'''
+    local_time = request.args.get("time")
+    server_time = datetime.now()
+    h_diff = round(((local_time - server_time) / 3600).seconds) # Datetime is by default in seconds
+    return h_diff
+
 
 @auth.route('/ligue_spring', methods=['POST'])
 @login_required
@@ -236,6 +244,7 @@ def pronos_update(leaguename):
 @auth.route('/pronos_show_league/<leaguename>', methods=['POST'])
 @login_required
 def pronos_show_league(leaguename):
+    hour_diff = get_local_time_diff()
     leagueid = get_leagueid_from_leaguename(leaguename)
     current_user_league_list = get_current_user_league_list()
     query = (select(User.id.label("userid"), User.name.label("username")
@@ -256,6 +265,7 @@ def pronos_show_league(leaguename):
         pronos_form = pd.DataFrame(pronos_form)
         pronos_form['editable'] = (datetime.now() - timedelta(hours=2)) < pronos_form["game_datetime"]
         pronos_form = pronos_form.replace(r'^\s*$', np.nan, regex=True)
+        pronos_form["game_datetime"] = pronos_form["game_datetime"] + hour_diff
         pronos_form = pronos_form.fillna(0)
 
         columns_to_integer = ['score_team_1', 'score_team_2', 'prono_team_1', 'prono_team_2']
