@@ -323,7 +323,7 @@ class Scrap():
         # Fetch existing games
         query = '''
             SELECT distinct
-                game_date as db_date,
+                date(game_datetime) as db_date,
                 team_1 as db_team_1,
                 team_2 as db_team_2
             FROM game
