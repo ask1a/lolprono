@@ -166,6 +166,7 @@ class Scrap():
             # Converting element to a string to ease regex usage:
             # (Maybe not necessary)
             game = str(game)
+            yesterday = self.today - datetime.timedelta(days=1)
             tomorrow = self.today + datetime.timedelta(days=1)
             # If element is status, it gives us the date
             if '<div class="tournament__status">' in game:
@@ -174,6 +175,8 @@ class Scrap():
                     game_date = self.today.strftime('%A, %B %d, %Y')
                 elif 'Tomorrow' in game_date:
                     game_date = tomorrow.strftime('%A, %B %d, %Y')
+                elif 'Yesterday' in game_date:
+                    game_date = yesterday.strftime('%A, %B %d, %Y')
             # If element is stage, it gives us the league
             if '<div class="tournament__stage">' in game:
                 league = re.findall('(?<=alt=")(.*?)(?=" )', game)[0]
