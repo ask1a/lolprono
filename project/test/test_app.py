@@ -4,6 +4,8 @@ import os
 from project import create_app
 import pandas as pd
 
+from ..models import SignupCode
+
 app_test = create_app('testing')
 
 g2_win_expected_html = """                    <div class="column is-size-5">2024-04-07 17:00:00 (BO5)</div>
@@ -51,28 +53,46 @@ def test_signup_loadpage(client):
 
 
 def test_signup_success(client, email="test@test.fr", name="test", password="test"):
-    response = client.post("/signup", data={
+    response = client.post("/signup_post", data={
         "email": email,
         "name": name,
-        "password": password
+        "password": password,
+        "testing": 1
     }, follow_redirects=True)
-    assert response.text.__contains__("Connectez-vous :")
+    assert response.text.__contains__("Rentrez le code de validation envoyé par email")
+
+
+def test_signup_validation_loadpage(client, email='test@test.fr'):
+    assert signup(client).status_code == 200
+    response = signup_validation(client, email, 'test', 'test', 1)
+    assert response.text.__contains__("Connectez-vous")
+
+
+def signup_validation(client, email, name, password, testing):
+    row = SignupCode.query.filter(SignupCode.email == email).first()
+    code = row.code
+    response = client.post("/signup_validation",
+                           data={"code": code, "email": email, "name": name, "password": password, 'testing': testing},
+                           follow_redirects=True)
+    return response
 
 
 def test_signup_fail(client):
-    response = client.post("/signup", data={
+    response = client.post("/signup_post", data={
         "email": "test@test.fr",
         "name": "test",
-        "password": "test"
+        "password": "test",
+        "testing": 1
     }, follow_redirects=True)
     assert response.text.__contains__("email existe déjà en base de donnée!")
 
 
-def signup(client, email="test@test.fr", name="test", password="test"):
-    return client.post("/signup", data={
+def signup(client, email="test@test.fr", name="test", password="test",testing=1):
+    return client.post("/signup_post", data={
         "email": email,
         "name": name,
-        "password": password
+        "password": password,
+        "testing" : testing
     }, follow_redirects=True)
 
 
@@ -201,9 +221,6 @@ def test_admin_loadpage_allowed(client):
     response = client.get("/admin", follow_redirects=True)
     assert response.text.__contains__("Admin")
 
-
-
-
 def test_admin_show_games_loadpage(client):
     assert login(client).status_code == 200
     response = client.get("/admin_show_games", follow_redirects=True)
@@ -244,10 +261,11 @@ def test_admin_lock_signup_no(client):
 
 
 def test_admin_loadpage_not_allowed(client):
-    assert signup(client, 't@t.fr', 't', 't').status_code == 200
+    assert signup(client, 't@t.fr', 'toto', 't',1).status_code == 200
+    assert signup_validation(client,'t@t.fr', 'toto', 't',1).status_code == 200
     assert login(client, 't@t.fr', 't').status_code == 200
     response = client.get("/admin", follow_redirects=True)
-    assert response.text.__contains__("ça a commencé?")
+    assert (response.text.__contains__("ça a commencé?"))
 
 
 def test_delete_usertest2(client):

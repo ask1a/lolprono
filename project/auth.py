@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, redirect, url_for, request, flash
 from werkzeug.security import generate_password_hash, check_password_hash
-from .models import User, UserLeague, Game, GameProno, League, UserTableLocked, Teams, add_teams_values
+from .models import User, UserLeague, Game, GameProno, League, UserTableLocked, SignupCode, Teams, add_teams_values
 from flask_login import login_user, logout_user, login_required, current_user
 from . import db
 from sqlalchemy import select, and_, update
@@ -8,7 +8,7 @@ import pandas as pd
 import numpy as np
 import io
 from datetime import datetime, timedelta
-from .utils import create_standing_table, create_points_dataframe, eval_team_win
+from .utils import create_standing_table,send_email_validation, create_points_dataframe, eval_team_win
 
 auth = Blueprint('auth', __name__)
 
@@ -75,11 +75,11 @@ def signup():
     return render_template('signup.html')
 
 
-@auth.route('/signup', methods=['POST'])
+@auth.route('/signup_post', methods=['POST'])
 def signup_post():
     email = request.form.get('email').lower()
     name = request.form.get('name')
-    password = request.form.get('password')
+    password = generate_password_hash(request.form.get('password'), method='scrypt')
     user = User.query.filter_by(
         email=email).first()  # if this returns a user, then the email already exists in database
 
@@ -94,15 +94,39 @@ def signup_post():
             "L'inscription de nouveaux utilisateurs est actuellement verrouillée, contactez un admin ou utilisez un compte existant.")
         return redirect(url_for('auth.signup'))
 
-    # create a new user with the form data. Hash the password so the plaintext version isn't saved.
-    new_user = User(email=email, name=name, password=generate_password_hash(password, method='scrypt'))
+    send_email_validation(email,request.form.get('testing'))
+    flash("Code de validation envoyé, ce dernier est valide pendant deux minutes")
+    return render_template('signup_validation.html', email=email, name=name, password=password)
 
-    # add the new user to the database
-    db.session.add(new_user)
-    db.session.commit()
-    flash("Inscription réussie! 👍")
-    # code to validate and add user to database goes here
-    return redirect(url_for('auth.login'))
+
+@auth.route('/signup_validation', methods=['POST'])
+def signup_validation_post():
+    code = request.form.get('code')
+    email = request.form.get('email')
+    name = request.form.get('name')
+    password = request.form.get('password')
+    testing = request.form.get('testing')
+
+    row = SignupCode.query.filter(
+        SignupCode.email == email, SignupCode.code == code, SignupCode.expire_datetime >= datetime.today()).first()
+    if row:
+        # create a new user with the form data. Hash the password so the plaintext version isn't saved.
+        if testing:
+            password = generate_password_hash(password, method='scrypt')
+        new_user = User(email=email, name=name, password=password)
+
+        # delete signup to the database
+        db.session.delete(row)
+        # add the new user to the database
+        db.session.add(new_user)
+        db.session.commit()
+        flash("Inscription réussie! 👍")
+
+        # code to validate and add user to database goes here
+        return redirect(url_for('auth.login'))
+    else:
+        flash("Code de validation erroné ou trop tardif, retour à l'inscription.")
+        return redirect(url_for('auth.signup'))
 
 
 @auth.route('/ligues')

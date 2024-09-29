@@ -12,9 +12,16 @@ class User(UserMixin, db.Model):
     name = db.Column(db.String(1000))
 
 class UserTableLocked(db.Model):
-    """Manage users infos"""
+    """Manage users lockdown table"""
     id = db.Column(db.Integer, primary_key=True)  # primary keys are required by SQLAlchemy
     status = db.Column(db.Integer, unique=False)
+
+class SignupCode(db.Model):
+    """Manage signup's validation code"""
+    id = db.Column(db.Integer, primary_key=True)  # primary keys are required by SQLAlchemy
+    email = db.Column(db.String(100), unique=True)
+    code = db.Column(db.String(6), unique=False)
+    expire_datetime = db.Column(db.DateTime, unique=False, nullable=False)
 
 
 class League(db.Model):
