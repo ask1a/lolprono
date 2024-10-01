@@ -8,7 +8,7 @@ import pandas as pd
 import numpy as np
 import io
 from datetime import datetime, timedelta
-from .utils import create_standing_table,send_email_validation, create_points_dataframe, eval_team_win
+from .utils import create_standing_table,send_email_validation, create_points_dataframe, eval_team_win, send_email_reinit_mdp
 
 auth = Blueprint('auth', __name__)
 
@@ -131,6 +131,13 @@ def signup_validation_post():
 @auth.route('/lost_password')
 def lost_password():
         return render_template('lost_password.html')
+
+@auth.route('/lost_password', methods=['POST'])
+def lost_password_post():
+    email = request.form.get('email').lower()
+    send_email_reinit_mdp(email)
+    return redirect(url_for('auth.login'))
+
 
 
 @auth.route('/ligues')
