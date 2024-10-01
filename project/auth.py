@@ -135,7 +135,8 @@ def ligues():
     return render_template('ligues.html',
                            league1=is_registered_in_league(1),
                            league2=is_registered_in_league(2),
-                           league3=is_registered_in_league(3))
+                           league3=is_registered_in_league(3),
+                           league4=is_registered_in_league(4))
 
 
 def add_userleague_row(leagueid, leaguename, userid):
