@@ -128,6 +128,10 @@ def signup_validation_post():
         flash("Code de validation erroné ou trop tardif, retour à l'inscription.")
         return redirect(url_for('auth.signup'))
 
+@auth.route('/lost_password')
+def lost_password():
+        return render_template('lost_password.html')
+
 
 @auth.route('/ligues')
 @login_required
