@@ -209,6 +209,30 @@ def pronos():
     current_user_league_list = get_current_user_league_list()
     return render_template('pronos.html', league_list=current_user_league_list, leagueid=0)
 
+@auth.route('/mot_de_passe', methods=['POST'])
+@login_required
+def mot_de_passe():
+    # Récupérer les données du formulaire
+    formulaire_mot_de_passe = dict(request.form)
+    ancien_mdp = formulaire_mot_de_passe.get('password_old')
+    nouveau_mdp_1 = formulaire_mot_de_passe.get('password_new_1')
+    nouveau_mdp_2 = formulaire_mot_de_passe.get('password_new_2')
+
+    # Vérification du mot de passe actuel
+    if not check_password_hash(current_user.password, ancien_mdp):
+        flash("Le mot de passe actuel est incorrect 🤯.", 'danger')
+        return redirect(url_for('main.profile'))
+
+    # Vérification si les nouveaux mots de passe correspondent
+    if nouveau_mdp_1 != nouveau_mdp_2:
+        flash("Les nouveaux mots de passe ne correspondent pas 😵.", 'danger')
+        return redirect(url_for('main.profile'))
+
+    current_user.password = generate_password_hash(nouveau_mdp_1)
+    db.session.commit()
+    flash("Votre mot de passe a été changé avec succès 👌.", 'success')
+    return redirect(url_for('main.profile'))
+
 
 @auth.route('/pronos_update/<leaguename>', methods=['POST'])
 @login_required
