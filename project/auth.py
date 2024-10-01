@@ -190,6 +190,14 @@ def ligue_msi_2024_post():
 
     return add_userleague_row(leagueid, leaguename, userid)
 
+@auth.route('/ligue_worlds_2024', methods=['POST'])
+@login_required
+def ligue_worlds_2024_post():
+    userid = current_user.id
+    leagueid = 4
+    leaguename = "Worlds 2024"
+
+    return add_userleague_row(leagueid, leaguename, userid)
 
 def get_current_user_league_list():
     current_user_league_list = [e.leaguename for e in
