@@ -16,35 +16,82 @@
                 <h1 class="title has-text-white is-capitalized">
                     Bienvenu, {{ name }}!
                 </h1>
-                <h2 class="title is-4 has-text-white">
-                    Ligue(s) suivie(s) :
-                </h2>
             </div>
-
-            {% if league_list==[] %}
-            <div class="box has-background-dark has-text-white">
-                <p>Aucune ligue suivie!</p>
-                <a href="{{ url_for('auth.ligues') }}" class="button is-link">Ajouter une ligue.</a>
-            </div>
-            {% endif %}
-            {% for item in league_list %}
-            <div class="box has-background-dark has-text-white">
-                <form method="POST" action="/profile_unsubscribe_league/{{item}}">
-                    <div class="columns">
-                        <div class="column">
-                            {{ item }}
-                        </div>
-                        <div class="column">
-                            <button class="button is-link is-focused">
-                                Se désinscrire
-                            </button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-            {% endfor %}
         </div>
     </div>
 </div>
+
+<div class="hero-body header-image">
+    <div class="container has-text-centered">
+        <div class="column is-4 is-offset-4">
+            <div class="box has-background-dark">
+                <h1 class="title is-3 has-text-light">Changez votre mot de passe :</h1>
+                {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                <div class="notification is-{{ category }}">
+                    {{ messages[0] }}
+                </div>
+                {% endif %}
+                {% endwith %}
+                <form method="POST" action="/mot_de_passe">
+                    <div class="field">
+                        <div class="control">
+                            <input class="input" type="password" name="password_old" placeholder="Ancien mot de passe"
+                                   required autofocus="">
+                        </div>
+                    </div>
+                    <div class="field">
+                        <div class="control">
+                            <input class="input" type="password" name="password_new_1" required
+                                   placeholder="Nouveau mot de passe">
+                        </div>
+                    </div>
+                    <div class="field">
+                        <div class="control">
+                            <input class="input" type="password" name="password_new_2"
+                                   placeholder="Confirmez nouveau mot de passe" required autofocus="">
+                        </div>
+                    </div>
+                    <button class="button is-link is-dark is-large is-fullwidth">Valider</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="hero-body header-image">
+    <div class="container has-text-centered">
+        <div class="column is-6 is-offset-3">
+            <div class="notification is-dark">
+                <h1 class="title is-4 has-text-white">
+                    Ligue(s) suivie(s) :
+                </h1>
+                {% if league_list==[] %}
+                <div class="box has-background-dark has-text-white">
+                    <p>Aucune ligue suivie!</p>
+                    <a href="{{ url_for('auth.ligues') }}" class="button is-link">Ajouter une ligue.</a>
+                </div>
+                {% endif %}
+                {% for item in league_list %}
+                <div class="box has-background-grey has-text-white">
+                    <form method="POST" action="/profile_unsubscribe_league/{{item}}">
+                        <div class="columns">
+                            <div class="column">
+                                {{ item }}
+                            </div>
+                            <div class="column">
+                                <button class="button is-link is-focused">
+                                    Se désinscrire
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+
 
 {% endblock %}
