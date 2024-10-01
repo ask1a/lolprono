@@ -82,6 +82,26 @@
                         </div>
                     </form>
                 </div>
+                <div class="box has-background-dark">
+                    <form method="POST" action="/ligue_worlds_2024">
+                        <div class="columns">
+                            <div class="column">
+                                <figure class="image is-128x128">
+                                    <img class="is-rounded" src="static/worlds_2024.jpeg"/>
+                                </figure>
+                            </div>
+                            <div class="column">
+                                <h6 class="title is-6"></h6>
+                                <h6 class="title is-6 has-text-light">Worlds 2024</h6>
+                                {% if league4 %}
+                                <div class="box has-background-dark has-text-white">Déjà inscrit!</div>
+                                {% else %}
+                                <button class="button is-link is-focused">Ajouter la ligue</button>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </form>
+                </div>
             </div>
             <div class="column"></div>
         </div>

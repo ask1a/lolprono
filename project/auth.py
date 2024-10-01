@@ -8,7 +8,7 @@ import pandas as pd
 import numpy as np
 import io
 from datetime import datetime, timedelta
-from .utils import create_standing_table,send_email_validation, create_points_dataframe, eval_team_win
+from .utils import create_standing_table,send_email_validation, create_points_dataframe, eval_team_win, send_email_reinit_mdp
 
 auth = Blueprint('auth', __name__)
 
@@ -128,6 +128,17 @@ def signup_validation_post():
         flash("Code de validation erroné ou trop tardif, retour à l'inscription.")
         return redirect(url_for('auth.signup'))
 
+@auth.route('/lost_password')
+def lost_password():
+        return render_template('lost_password.html')
+
+@auth.route('/lost_password', methods=['POST'])
+def lost_password_post():
+    email = request.form.get('email').lower()
+    send_email_reinit_mdp(email)
+    return redirect(url_for('auth.login'))
+
+
 
 @auth.route('/ligues')
 @login_required
@@ -135,7 +146,8 @@ def ligues():
     return render_template('ligues.html',
                            league1=is_registered_in_league(1),
                            league2=is_registered_in_league(2),
-                           league3=is_registered_in_league(3))
+                           league3=is_registered_in_league(3),
+                           league4=is_registered_in_league(4))
 
 
 def add_userleague_row(leagueid, leaguename, userid):
@@ -190,6 +202,14 @@ def ligue_msi_2024_post():
 
     return add_userleague_row(leagueid, leaguename, userid)
 
+@auth.route('/ligue_worlds_2024', methods=['POST'])
+@login_required
+def ligue_worlds_2024_post():
+    userid = current_user.id
+    leagueid = 4
+    leaguename = "Worlds 2024"
+
+    return add_userleague_row(leagueid, leaguename, userid)
 
 def get_current_user_league_list():
     current_user_league_list = [e.leaguename for e in
