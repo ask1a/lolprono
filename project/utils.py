@@ -1,14 +1,20 @@
 import numpy as np
 import pandas as pd
 import random
+import string
 import os
 import smtplib
+
+from flask import flash
+
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from . import db
-from .models import SignupCode
+from .models import SignupCode, User
 from datetime import datetime, timedelta
 from dotenv import load_dotenv
+from werkzeug.security import generate_password_hash, check_password_hash
+from sqlalchemy import update
 
 load_dotenv(".env")
 
@@ -53,6 +59,17 @@ def random_digit() -> str:
     return str(random.choice(list(range(10))))
 
 
+def generate_random_string(length=8):
+    letters = string.ascii_letters  # Toutes les lettres (majuscules et minuscules)
+    digits = string.digits  # Tous les chiffres
+    specials = "!()*+,-.:;<=>?@[]^_{|}~#$%&"
+    characters = letters + digits + specials
+
+    result_str = ''.join(random.choice(characters) for _ in range(length))
+
+    return result_str
+
+
 def validation_email_body(code: str) -> str:
     return "Code de validation : " + code
 
@@ -68,6 +85,20 @@ def write_signup_code(email: str, code: str) -> None:
     db.session.commit()
     return None
 
+def update_password(email:str, new_pwd:str)-> None:
+    password = generate_password_hash(new_pwd, method='scrypt')
+    row = User.query.filter_by(email=email).first()
+    if row:
+        # Update existing password
+        db.session.execute(
+            update(User)
+            .where(User.email == email)
+            .values(password=password)
+        )
+        db.session.commit()
+        flash("Mot de passe mis à jour! 👌")
+    return None
+
 
 def send_email_validation(mail_to: str, testing=None) -> None:
     code = ''.join([random_digit() for i in range(6)])
@@ -76,6 +107,13 @@ def send_email_validation(mail_to: str, testing=None) -> None:
     write_signup_code(mail_to, code)
     return None
 
+def send_email_reinit_mdp(mail_to: str, testing=None) -> None:
+    mdp_temp = generate_random_string()
+    if testing is None:
+        send_email(mail_to, "Votre mot de passe temporaire.", mdp_temp)
+    update_password(mail_to,mdp_temp)
+    # write_signup_code(mail_to, code)
+    return None
 
 
 def send_email(mail_to, mail_subject, mail_body, sender_email=os.getenv('EMAIL_LOGIN'), smtp_server='ssl0.ovh.net',
