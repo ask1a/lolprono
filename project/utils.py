@@ -13,7 +13,7 @@ from . import db
 from .models import SignupCode, User
 from datetime import datetime, timedelta
 from dotenv import load_dotenv
-from werkzeug.security import generate_password_hash, check_password_hash
+from werkzeug.security import generate_password_hash
 from sqlalchemy import update
 
 load_dotenv(".env")

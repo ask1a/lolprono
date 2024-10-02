@@ -113,7 +113,7 @@ def test_login_success(client):
         "email": "test@test.fr",
         "password": "test"
     }, follow_redirects=True)
-    assert response.text.__contains__("Bienvenu, test!")
+    assert response.text.__contains__("Bienvenue, test!")
 
 
 def test_login_fail(client):
@@ -207,7 +207,7 @@ def test_classements_show_ranking(client):
 def test_profile_loadpage(client):
     assert login(client).status_code == 200
     response = client.get("/profile", follow_redirects=True)
-    assert response.text.__contains__("Bienvenu, test!")
+    assert response.text.__contains__("Bienvenue, test!")
 
 
 def test_profile_unsubscribe_league(client):
