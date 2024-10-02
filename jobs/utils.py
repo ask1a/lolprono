@@ -166,6 +166,7 @@ class Scrap():
             # Converting element to a string to ease regex usage:
             # (Maybe not necessary)
             game = str(game)
+            yesterday = self.today - datetime.timedelta(days=1)
             tomorrow = self.today + datetime.timedelta(days=1)
             # If element is status, it gives us the date
             if '<div class="tournament__status">' in game:
@@ -174,6 +175,8 @@ class Scrap():
                     game_date = self.today.strftime('%A, %B %d, %Y')
                 elif 'Tomorrow' in game_date:
                     game_date = tomorrow.strftime('%A, %B %d, %Y')
+                elif 'Yesterday' in game_date:
+                    game_date = yesterday.strftime('%A, %B %d, %Y')
             # If element is stage, it gives us the league
             if '<div class="tournament__stage">' in game:
                 league = re.findall('(?<=alt=")(.*?)(?=" )', game)[0]
@@ -320,7 +323,7 @@ class Scrap():
         # Fetch existing games
         query = '''
             SELECT distinct
-                game_datetime as db_datetime,
+                date(game_datetime) as db_date,
                 team_1 as db_team_1,
                 team_2 as db_team_2
             FROM game
@@ -331,18 +334,22 @@ class Scrap():
             future_games = pd.read_sql_query(query, self.conn)
         else:
             future_games = pd.DataFrame(
-                {'db_datetime': [], 'db_team_1': [], 'db_team_2':[]}
+                {'db_date': [], 'db_team_1': [], 'db_team_2':[]}
             )
+        # Creating game_date so that we can merge on the date instead of datetime
+        df['game_date'] = df['game_datetime'].apply(lambda x:
+            x.strftime('%Y-%m-%d')
+        )
         # Formatting datetime as a string to permit merge:
         df['game_datetime'] = df['game_datetime'].apply(lambda x:
             x.strftime('%Y-%m-%d %H:%M:%S')
         )
         df= df.merge(future_games, how='left',
-            left_on=['game_datetime', 'team_1', 'team_2'],
-            right_on=['db_datetime', 'db_team_1', 'db_team_2']
+            left_on=['game_date', 'team_1', 'team_2'],
+            right_on=['db_date', 'db_team_1', 'db_team_2']
         )
         # Keeping only games that are not yet inserted
-        df = df[df['db_datetime'].isna()]
+        df = df[df['db_date'].isna()]
         # Only getting the number of games
         df['bo'] = df['bo'].apply(lambda x: int(x[-1]))
         # Reordering dataframe to match destination table.
