@@ -57,7 +57,8 @@
                 <div class="columns">
                     <div class="column is-size-5">{{ item.game_datetime }} (BO{{ item.bo }})</div>
                     <div class="column">
-                        <img src="/static/logos/{{ item.logo_team_1 }}" alt="{{ item.team_1 }}" style="width: auto; height: 50px;">
+                        <img src="/static/logos/{{ item.logo_team_1 }}" alt="{{ item.team_1 }}"
+                             style="width: auto; height: 50px;">
                     </div>
                     {% if item.score_team_win == 'team_1' %}
                     <div class="column is-size-5 has-text-weight-bold">{{ item.team_1 }} ✅</div>
@@ -74,7 +75,8 @@
                     <div class="column">{{ item.team_2 }}</div>
                     {% endif %}
                     <div class="column">
-                        <img src="/static/logos/{{ item.logo_team_2 }}" alt="{{ item.team_2 }}" style="width: auto; height: 50px;"></div>
+                        <img src="/static/logos/{{ item.logo_team_2 }}" alt="{{ item.team_2 }}"
+                             style="width: auto; height: 50px;"></div>
                     <div class="column is-flex-direction-column">
                         <div class="is-size-5">Ton prono :</div>
                         <div class="mt-3 is-size-5">{{ item.prono_team_1 }} - {{ item.prono_team_2 }}</div>
@@ -96,7 +98,8 @@
                         </div>
                         {% endif %}
                         <div class="mt-3">
-                            <button class="button is-link is-dark is-medium is-size-6">Voir les pronos des potos</button>
+                            <button class="button is-link is-dark is-medium is-size-6">Voir les pronos des potos
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -108,7 +111,8 @@
                 <div class="columns">
                     <div class="column is-size-5">{{ item.game_datetime }} (BO{{ item.bo }})</div>
                     <div class="column">
-                        <img src="/static/logos/{{ item.logo_team_1 }}" alt="{{ item.team_1 }}" style="width: auto; height: 50px;"></div>
+                        <img src="/static/logos/{{ item.logo_team_1 }}" alt="{{ item.team_1 }}"
+                             style="width: auto; height: 50px;"></div>
                     <div class="column is-size-5">{{ item.team_1 }}
                     </div>
                     <div class="column">
@@ -131,12 +135,17 @@
                     </div>
                     <div class="column is-size-5">{{ item.team_2 }}</div>
                     <div class="column">
-                        <img src="/static/logos/{{ item.logo_team_2 }}" alt="{{ item.team_2 }}" style="width: auto; height: 50px;"></div>
+                        <img src="/static/logos/{{ item.logo_team_2 }}" alt="{{ item.team_2 }}"
+                             style="width: auto; height: 50px;"></div>
                     <div class="column is-size-5">Prono actuel : {{ item.prono_team_1 }} - {{ item.prono_team_2
                         }}
                     </div>
-                    <div class="column">
-                        <button class="button is-link is-dark is-medium">Valider mon pronostic</button>
+                    <div class="column is-flex-direction-column">
+                        <div class="is-size-6 has-background-grey has-text-white">Nombre de pronos : {{ item.nb_pronos }}
+                        </div>
+                        <div class="mt-3">
+                            <button class="button is-link is-dark is-medium is-size-6">Valider mon pronostic</button>
+                        </div>
                     </div>
                 </div>
             </form>
