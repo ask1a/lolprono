@@ -135,8 +135,12 @@
                     <div class="column is-size-5">Prono actuel : {{ item.prono_team_1 }} - {{ item.prono_team_2
                         }}
                     </div>
-                    <div class="column">
-                        <button class="button is-link is-dark is-medium">Valider mon pronostic</button>
+                    <div class="column is-flex-direction-column">
+                        <div class="is-size-6 has-background-grey has-text-white">Nombre de pronos : {{ item.nb_pronos }}
+                        </div>
+                        <div class="mt-3">
+                            <button class="button is-link is-dark is-medium is-size-6">Valider mon pronostic</button>
+                        </div>
                     </div>
                 </div>
             </form>
