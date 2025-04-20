@@ -1,0 +1,5474 @@
+[
+    {
+        "live": {
+            "supported": true,
+            "url": "wss://live.pandascore.co/matches/1148190",
+            "opens_at": "2025-04-19T14:45:00.000000Z"
+        },
+        "games": [
+            {
+                "complete": false,
+                "id": 265647,
+                "position": 1,
+                "status": "not_started",
+                "length": null,
+                "finished": false,
+                "match_id": 1148190,
+                "begin_at": null,
+                "detailed_stats": true,
+                "end_at": null,
+                "forfeit": false,
+                "winner_type": "Team",
+                "winner": {
+                    "id": null,
+                    "type": "Team"
+                }
+            },
+            {
+                "complete": false,
+                "id": 265648,
+                "position": 2,
+                "status": "not_started",
+                "length": null,
+                "finished": false,
+                "match_id": 1148190,
+                "begin_at": null,
+                "detailed_stats": true,
+                "end_at": null,
+                "forfeit": false,
+                "winner_type": "Team",
+                "winner": {
+                    "id": null,
+                    "type": "Team"
+                }
+            },
+            {
+                "complete": false,
+                "id": 265649,
+                "position": 3,
+                "status": "not_started",
+                "length": null,
+                "finished": false,
+                "match_id": 1148190,
+                "begin_at": null,
+                "detailed_stats": true,
+                "end_at": null,
+                "forfeit": false,
+                "winner_type": "Team",
+                "winner": {
+                    "id": null,
+                    "type": "Team"
+                }
+            }
+        ],
+        "detailed_stats": true,
+        "modified_at": "2025-04-18T14:26:03Z",
+        "number_of_games": 3,
+        "slug": "fnatic-vs-rogue-2025-04-19",
+        "winner": null,
+        "streams_list": [
+            {
+                "main": true,
+                "language": "en",
+                "embed_url": "https://player.twitch.tv/?channel=lec",
+                "official": true,
+                "raw_url": "https://www.twitch.tv/lec"
+            },
+            {
+                "main": false,
+                "language": "fr",
+                "embed_url": "https://player.twitch.tv/?channel=otplol_",
+                "official": false,
+                "raw_url": "https://www.twitch.tv/otplol_"
+            },
+            {
+                "main": false,
+                "language": "pl",
+                "embed_url": null,
+                "official": false,
+                "raw_url": "https://www.youtube.com/@Nervarien"
+            },
+            {
+                "main": false,
+                "language": "en",
+                "embed_url": "https://player.twitch.tv/?channel=caedrel",
+                "official": false,
+                "raw_url": "https://www.twitch.tv/caedrel"
+            },
+            {
+                "main": false,
+                "language": "es",
+                "embed_url": "https://player.twitch.tv/?channel=lvpes",
+                "official": false,
+                "raw_url": "https://www.twitch.tv/lvpes"
+            },
+            {
+                "main": false,
+                "language": "pt",
+                "embed_url": "https://player.twitch.tv/?channel=inygontv1",
+                "official": false,
+                "raw_url": "https://www.twitch.tv/inygontv1"
+            },
+            {
+                "main": false,
+                "language": "hu",
+                "embed_url": "https://player.twitch.tv/?channel=esport2tv",
+                "official": false,
+                "raw_url": "https://www.twitch.tv/esport2tv"
+            },
+            {
+                "main": false,
+                "language": "it",
+                "embed_url": "https://player.twitch.tv/?channel=litofficial",
+                "official": false,
+                "raw_url": "https://www.twitch.tv/litofficial"
+            }
+        ],
+        "winner_type": "Team",
+        "serie": {
+            "id": 9172,
+            "name": "",
+            "year": 2025,
+            "slug": "league-of-legends-lec-spring-2025",
+            "begin_at": "2025-03-29T13:00:00Z",
+            "end_at": "2025-06-08T21:00:00Z",
+            "winner_id": null,
+            "winner_type": "Team",
+            "modified_at": "2025-04-03T19:28:47Z",
+            "league_id": 4197,
+            "season": "Spring",
+            "full_name": "Spring 2025"
+        },
+        "winner_id": null,
+        "forfeit": false,
+        "draw": false,
+        "videogame": {
+            "id": 1,
+            "name": "LoL",
+            "slug": "league-of-legends"
+        },
+        "rescheduled": false,
+        "tournament_id": 16321,
+        "videogame_title": null,
+        "serie_id": 9172,
+        "status": "not_started",
+        "league": {
+            "id": 4197,
+            "name": "LEC",
+            "url": null,
+            "slug": "league-of-legends-lec",
+            "modified_at": "2019-03-03T01:22:54Z",
+            "image_url": "https://cdn.pandascore.co/images/league/image/4197/lec_2023-png"
+        },
+        "original_scheduled_at": "2025-04-19T15:00:00Z",
+        "begin_at": "2025-04-19T15:00:00Z",
+        "league_id": 4197,
+        "scheduled_at": "2025-04-19T15:00:00Z",
+        "opponents": [
+            {
+                "type": "Team",
+                "opponent": {
+                    "id": 394,
+                    "name": "Fnatic",
+                    "location": "GB",
+                    "slug": "fnatic",
+                    "modified_at": "2025-03-27T09:46:25Z",
+                    "acronym": "FNC",
+                    "image_url": "https://cdn.pandascore.co/images/team/image/394/220px_fnaticlogo_square.png"
+                }
+            },
+            {
+                "type": "Team",
+                "opponent": {
+                    "id": 3983,
+                    "name": "Rogue",
+                    "location": "US",
+                    "slug": "rogue",
+                    "modified_at": "2025-03-27T09:46:30Z",
+                    "acronym": "RGE",
+                    "image_url": "https://cdn.pandascore.co/images/team/image/3983/rogue__28_european_team_29logo_square.png"
+                }
+            }
+        ],
+        "id": 1148190,
+        "results": [
+            {
+                "team_id": 394,
+                "score": 0
+            },
+            {
+                "team_id": 3983,
+                "score": 0
+            }
+        ],
+        "name": "FNC vs RGE",
+        "tournament": {
+            "id": 16321,
+            "name": "Regular Season",
+            "type": "offline",
+            "country": "DE",
+            "slug": "league-of-legends-lec-spring-2025-regular-season",
+            "begin_at": "2025-03-29T13:00:00Z",
+            "detailed_stats": true,
+            "end_at": "2025-05-12T21:00:00Z",
+            "winner_id": null,
+            "winner_type": "Team",
+            "serie_id": 9172,
+            "modified_at": "2025-04-14T19:44:41Z",
+            "league_id": 4197,
+            "prizepool": null,
+            "tier": "a",
+            "has_bracket": false,
+            "region": "WEU",
+            "live_supported": true
+        },
+        "videogame_version": null,
+        "game_advantage": null,
+        "end_at": null,
+        "match_type": "best_of"
+    },
+    {
+        "live": {
+            "supported": true,
+            "url": "wss://live.pandascore.co/matches/1148191",
+            "opens_at": "2025-04-19T16:45:00.000000Z"
+        },
+        "games": [
+            {
+                "complete": false,
+                "id": 265650,
+                "position": 1,
+                "status": "not_started",
+                "length": null,
+                "finished": false,
+                "match_id": 1148191,
+                "begin_at": null,
+                "detailed_stats": true,
+                "end_at": null,
+                "forfeit": false,
+                "winner_type": "Team",
+                "winner": {
+                    "id": null,
+                    "type": "Team"
+                }
+            },
+            {
+                "complete": false,
+                "id": 265651,
+                "position": 2,
+                "status": "not_started",
+                "length": null,
+                "finished": false,
+                "match_id": 1148191,
+                "begin_at": null,
+                "detailed_stats": true,
+                "end_at": null,
+                "forfeit": false,
+                "winner_type": "Team",
+                "winner": {
+                    "id": null,
+                    "type": "Team"
+                }
+            },
+            {
+                "complete": false,
+                "id": 265652,
+                "position": 3,
+                "status": "not_started",
+                "length": null,
+                "finished": false,
+                "match_id": 1148191,
+                "begin_at": null,
+                "detailed_stats": true,
+                "end_at": null,
+                "forfeit": false,
+                "winner_type": "Team",
+                "winner": {
+                    "id": null,
+                    "type": "Team"
+                }
+            }
+        ],
+        "detailed_stats": true,
+        "modified_at": "2025-04-18T14:26:22Z",
+        "number_of_games": 3,
+        "slug": "giantx-vs-karmine-corp-2025-04-19",
+        "winner": null,
+        "streams_list": [
+            {
+                "main": true,
+                "language": "en",
+                "embed_url": "https://player.twitch.tv/?channel=lec",
+                "official": true,
+                "raw_url": "https://www.twitch.tv/lec"
+            },
+            {
+                "main": false,
+                "language": "fr",
+                "embed_url": "https://player.twitch.tv/?channel=otplol_",
+                "official": false,
+                "raw_url": "https://www.twitch.tv/otplol_"
+            },
+            {
+                "main": false,
+                "language": "pl",
+                "embed_url": null,
+                "official": false,
+                "raw_url": "https://www.youtube.com/@Nervarien"
+            },
+            {
+                "main": false,
+                "language": "en",
+                "embed_url": "https://player.twitch.tv/?channel=caedrel",
+                "official": false,
+                "raw_url": "https://www.twitch.tv/caedrel"
+            },
+            {
+                "main": false,
+                "language": "es",
+                "embed_url": "https://player.twitch.tv/?channel=lvpes",
+                "official": false,
+                "raw_url": "https://www.twitch.tv/lvpes"
+            },
+            {
+                "main": false,
+                "language": "pt",
+                "embed_url": "https://player.twitch.tv/?channel=inygontv1",
+                "official": false,
+                "raw_url": "https://www.twitch.tv/inygontv1"
+            },
+            {
+                "main": false,
+                "language": "hu",
+                "embed_url": "https://player.twitch.tv/?channel=esport2tv",
+                "official": false,
+                "raw_url": "https://www.twitch.tv/esport2tv"
+            },
+            {
+                "main": false,
+                "language": "it",
+                "embed_url": "https://player.twitch.tv/?channel=litofficial",
+                "official": false,
+                "raw_url": "https://www.twitch.tv/litofficial"
+            }
+        ],
+        "winner_type": "Team",
+        "serie": {
+            "id": 9172,
+            "name": "",
+            "year": 2025,
+            "slug": "league-of-legends-lec-spring-2025",
+            "begin_at": "2025-03-29T13:00:00Z",
+            "end_at": "2025-06-08T21:00:00Z",
+            "winner_id": null,
+            "winner_type": "Team",
+            "modified_at": "2025-04-03T19:28:47Z",
+            "league_id": 4197,
+            "season": "Spring",
+            "full_name": "Spring 2025"
+        },
+        "winner_id": null,
+        "forfeit": false,
+        "draw": false,
+        "videogame": {
+            "id": 1,
+            "name": "LoL",
+            "slug": "league-of-legends"
+        },
+        "rescheduled": false,
+        "tournament_id": 16321,
+        "videogame_title": null,
+        "serie_id": 9172,
+        "status": "not_started",
+        "league": {
+            "id": 4197,
+            "name": "LEC",
+            "url": null,
+            "slug": "league-of-legends-lec",
+            "modified_at": "2019-03-03T01:22:54Z",
+            "image_url": "https://cdn.pandascore.co/images/league/image/4197/lec_2023-png"
+        },
+        "original_scheduled_at": "2025-04-19T17:00:00Z",
+        "begin_at": "2025-04-19T17:00:00Z",
+        "league_id": 4197,
+        "scheduled_at": "2025-04-19T17:00:00Z",
+        "opponents": [
+            {
+                "type": "Team",
+                "opponent": {
+                    "id": 134068,
+                    "name": "GIANTX",
+                    "location": "GB",
+                    "slug": "giantx",
+                    "modified_at": "2025-03-27T09:46:50Z",
+                    "acronym": "GX",
+                    "image_url": "https://cdn.pandascore.co/images/team/image/134068/giant_x_logo.svg.png"
+                }
+            },
+            {
+                "type": "Team",
+                "opponent": {
+                    "id": 134078,
+                    "name": "Karmine Corp",
+                    "location": "FR",
+                    "slug": "karmine-corp-academy",
+                    "modified_at": "2025-03-27T09:46:26Z",
+                    "acronym": "KC",
+                    "image_url": "https://cdn.pandascore.co/images/team/image/134078/karmine_corplogo_square.png"
+                }
+            }
+        ],
+        "id": 1148191,
+        "results": [
+            {
+                "team_id": 134068,
+                "score": 0
+            },
+            {
+                "team_id": 134078,
+                "score": 0
+            }
+        ],
+        "name": "GX vs KC",
+        "tournament": {
+            "id": 16321,
+            "name": "Regular Season",
+            "type": "offline",
+            "country": "DE",
+            "slug": "league-of-legends-lec-spring-2025-regular-season",
+            "begin_at": "2025-03-29T13:00:00Z",
+            "detailed_stats": true,
+            "end_at": "2025-05-12T21:00:00Z",
+            "winner_id": null,
+            "winner_type": "Team",
+            "serie_id": 9172,
+            "modified_at": "2025-04-14T19:44:41Z",
+            "league_id": 4197,
+            "prizepool": null,
+            "tier": "a",
+            "has_bracket": false,
+            "region": "WEU",
+            "live_supported": true
+        },
+        "videogame_version": null,
+        "game_advantage": null,
+        "end_at": null,
+        "match_type": "best_of"
+    },
+    {
+        "live": {
+            "supported": true,
+            "url": "wss://live.pandascore.co/matches/1148192",
+            "opens_at": "2025-04-20T14:45:00.000000Z"
+        },
+        "games": [
+            {
+                "complete": false,
+                "id": 265653,
+                "position": 1,
+                "status": "not_started",
+                "length": null,
+                "finished": false,
+                "match_id": 1148192,
+                "begin_at": null,
+                "detailed_stats": true,
+                "end_at": null,
+                "forfeit": false,
+                "winner_type": "Team",
+                "winner": {
+                    "id": null,
+                    "type": "Team"
+                }
+            },
+            {
+                "complete": false,
+                "id": 265654,
+                "position": 2,
+                "status": "not_started",
+                "length": null,
+                "finished": false,
+                "match_id": 1148192,
+                "begin_at": null,
+                "detailed_stats": true,
+                "end_at": null,
+                "forfeit": false,
+                "winner_type": "Team",
+                "winner": {
+                    "id": null,
+                    "type": "Team"
+                }
+            },
+            {
+                "complete": false,
+                "id": 265655,
+                "position": 3,
+                "status": "not_started",
+                "length": null,
+                "finished": false,
+                "match_id": 1148192,
+                "begin_at": null,
+                "detailed_stats": true,
+                "end_at": null,
+                "forfeit": false,
+                "winner_type": "Team",
+                "winner": {
+                    "id": null,
+                    "type": "Team"
+                }
+            }
+        ],
+        "detailed_stats": true,
+        "modified_at": "2025-03-21T12:49:51Z",
+        "number_of_games": 3,
+        "slug": "team-heretics-vs-team-vitality-2025-04-20",
+        "winner": null,
+        "streams_list": [
+            {
+                "main": false,
+                "language": "it",
+                "embed_url": "https://player.twitch.tv/?channel=litofficial",
+                "official": false,
+                "raw_url": "https://www.twitch.tv/litofficial"
+            },
+            {
+                "main": false,
+                "language": "hu",
+                "embed_url": "https://player.twitch.tv/?channel=esport2tv",
+                "official": false,
+                "raw_url": "https://www.twitch.tv/esport2tv"
+            },
+            {
+                "main": false,
+                "language": "pt",
+                "embed_url": "https://player.twitch.tv/?channel=inygontv1",
+                "official": false,
+                "raw_url": "https://www.twitch.tv/inygontv1"
+            },
+            {
+                "main": false,
+                "language": "es",
+                "embed_url": "https://player.twitch.tv/?channel=lvpes",
+                "official": false,
+                "raw_url": "https://www.twitch.tv/lvpes"
+            },
+            {
+                "main": false,
+                "language": "en",
+                "embed_url": "https://player.twitch.tv/?channel=caedrel",
+                "official": false,
+                "raw_url": "https://www.twitch.tv/caedrel"
+            },
+            {
+                "main": false,
+                "language": "pl",
+                "embed_url": null,
+                "official": false,
+                "raw_url": "https://www.youtube.com/@Nervarien"
+            },
+            {
+                "main": false,
+                "language": "fr",
+                "embed_url": "https://player.twitch.tv/?channel=otplol_",
+                "official": false,
+                "raw_url": "https://www.twitch.tv/otplol_"
+            },
+            {
+                "main": true,
+                "language": "en",
+                "embed_url": "https://player.twitch.tv/?channel=lec",
+                "official": true,
+                "raw_url": "https://www.twitch.tv/lec"
+            }
+        ],
+        "winner_type": "Team",
+        "serie": {
+            "id": 9172,
+            "name": "",
+            "year": 2025,
+            "slug": "league-of-legends-lec-spring-2025",
+            "begin_at": "2025-03-29T13:00:00Z",
+            "end_at": "2025-06-08T21:00:00Z",
+            "winner_id": null,
+            "winner_type": "Team",
+            "modified_at": "2025-04-03T19:28:47Z",
+            "league_id": 4197,
+            "season": "Spring",
+            "full_name": "Spring 2025"
+        },
+        "winner_id": null,
+        "forfeit": false,
+        "draw": false,
+        "videogame": {
+            "id": 1,
+            "name": "LoL",
+            "slug": "league-of-legends"
+        },
+        "rescheduled": false,
+        "tournament_id": 16321,
+        "videogame_title": null,
+        "serie_id": 9172,
+        "status": "not_started",
+        "league": {
+            "id": 4197,
+            "name": "LEC",
+            "url": null,
+            "slug": "league-of-legends-lec",
+            "modified_at": "2019-03-03T01:22:54Z",
+            "image_url": "https://cdn.pandascore.co/images/league/image/4197/lec_2023-png"
+        },
+        "original_scheduled_at": "2025-04-20T15:00:00Z",
+        "begin_at": "2025-04-20T15:00:00Z",
+        "league_id": 4197,
+        "scheduled_at": "2025-04-20T15:00:00Z",
+        "opponents": [
+            {
+                "type": "Team",
+                "opponent": {
+                    "id": 130105,
+                    "name": "Team Heretics",
+                    "location": "ES",
+                    "slug": "team-heretics",
+                    "modified_at": "2025-03-27T09:46:31Z",
+                    "acronym": "TH",
+                    "image_url": "https://cdn.pandascore.co/images/team/image/130105/team_hereticslogo_square.png"
+                }
+            },
+            {
+                "type": "Team",
+                "opponent": {
+                    "id": 115,
+                    "name": "Team Vitality",
+                    "location": "FR",
+                    "slug": "vitality",
+                    "modified_at": "2025-03-27T09:46:28Z",
+                    "acronym": "VIT",
+                    "image_url": "https://cdn.pandascore.co/images/team/image/115/team_vitalitylogo_square.png"
+                }
+            }
+        ],
+        "id": 1148192,
+        "results": [
+            {
+                "team_id": 130105,
+                "score": 0
+            },
+            {
+                "team_id": 115,
+                "score": 0
+            }
+        ],
+        "name": "TH vs VIT",
+        "tournament": {
+            "id": 16321,
+            "name": "Regular Season",
+            "type": "offline",
+            "country": "DE",
+            "slug": "league-of-legends-lec-spring-2025-regular-season",
+            "begin_at": "2025-03-29T13:00:00Z",
+            "detailed_stats": true,
+            "end_at": "2025-05-12T21:00:00Z",
+            "winner_id": null,
+            "winner_type": "Team",
+            "serie_id": 9172,
+            "modified_at": "2025-04-14T19:44:41Z",
+            "league_id": 4197,
+            "prizepool": null,
+            "tier": "a",
+            "has_bracket": false,
+            "region": "WEU",
+            "live_supported": true
+        },
+        "videogame_version": null,
+        "game_advantage": null,
+        "end_at": null,
+        "match_type": "best_of"
+    },
+    {
+        "live": {
+            "supported": true,
+            "url": "wss://live.pandascore.co/matches/1148193",
+            "opens_at": "2025-04-20T16:45:00.000000Z"
+        },
+        "games": [
+            {
+                "complete": false,
+                "id": 265656,
+                "position": 1,
+                "status": "not_started",
+                "length": null,
+                "finished": false,
+                "match_id": 1148193,
+                "begin_at": null,
+                "detailed_stats": true,
+                "end_at": null,
+                "forfeit": false,
+                "winner_type": "Team",
+                "winner": {
+                    "id": null,
+                    "type": "Team"
+                }
+            },
+            {
+                "complete": false,
+                "id": 265657,
+                "position": 2,
+                "status": "not_started",
+                "length": null,
+                "finished": false,
+                "match_id": 1148193,
+                "begin_at": null,
+                "detailed_stats": true,
+                "end_at": null,
+                "forfeit": false,
+                "winner_type": "Team",
+                "winner": {
+                    "id": null,
+                    "type": "Team"
+                }
+            },
+            {
+                "complete": false,
+                "id": 265658,
+                "position": 3,
+                "status": "not_started",
+                "length": null,
+                "finished": false,
+                "match_id": 1148193,
+                "begin_at": null,
+                "detailed_stats": true,
+                "end_at": null,
+                "forfeit": false,
+                "winner_type": "Team",
+                "winner": {
+                    "id": null,
+                    "type": "Team"
+                }
+            }
+        ],
+        "detailed_stats": true,
+        "modified_at": "2025-03-21T12:49:51Z",
+        "number_of_games": 3,
+        "slug": "g2-esports-vs-bds-2025-04-20",
+        "winner": null,
+        "streams_list": [
+            {
+                "main": false,
+                "language": "it",
+                "embed_url": "https://player.twitch.tv/?channel=litofficial",
+                "official": false,
+                "raw_url": "https://www.twitch.tv/litofficial"
+            },
+            {
+                "main": false,
+                "language": "hu",
+                "embed_url": "https://player.twitch.tv/?channel=esport2tv",
+                "official": false,
+                "raw_url": "https://www.twitch.tv/esport2tv"
+            },
+            {
+                "main": false,
+                "language": "pt",
+                "embed_url": "https://player.twitch.tv/?channel=inygontv1",
+                "official": false,
+                "raw_url": "https://www.twitch.tv/inygontv1"
+            },
+            {
+                "main": false,
+                "language": "es",
+                "embed_url": "https://player.twitch.tv/?channel=lvpes",
+                "official": false,
+                "raw_url": "https://www.twitch.tv/lvpes"
+            },
+            {
+                "main": false,
+                "language": "en",
+                "embed_url": "https://player.twitch.tv/?channel=caedrel",
+                "official": false,
+                "raw_url": "https://www.twitch.tv/caedrel"
+            },
+            {
+                "main": false,
+                "language": "pl",
+                "embed_url": null,
+                "official": false,
+                "raw_url": "https://www.youtube.com/@Nervarien"
+            },
+            {
+                "main": false,
+                "language": "fr",
+                "embed_url": "https://player.twitch.tv/?channel=otplol_",
+                "official": false,
+                "raw_url": "https://www.twitch.tv/otplol_"
+            },
+            {
+                "main": true,
+                "language": "en",
+                "embed_url": "https://player.twitch.tv/?channel=lec",
+                "official": true,
+                "raw_url": "https://www.twitch.tv/lec"
+            }
+        ],
+        "winner_type": "Team",
+        "serie": {
+            "id": 9172,
+            "name": "",
+            "year": 2025,
+            "slug": "league-of-legends-lec-spring-2025",
+            "begin_at": "2025-03-29T13:00:00Z",
+            "end_at": "2025-06-08T21:00:00Z",
+            "winner_id": null,
+            "winner_type": "Team",
+            "modified_at": "2025-04-03T19:28:47Z",
+            "league_id": 4197,
+            "season": "Spring",
+            "full_name": "Spring 2025"
+        },
+        "winner_id": null,
+        "forfeit": false,
+        "draw": false,
+        "videogame": {
+            "id": 1,
+            "name": "LoL",
+            "slug": "league-of-legends"
+        },
+        "rescheduled": false,
+        "tournament_id": 16321,
+        "videogame_title": null,
+        "serie_id": 9172,
+        "status": "not_started",
+        "league": {
+            "id": 4197,
+            "name": "LEC",
+            "url": null,
+            "slug": "league-of-legends-lec",
+            "modified_at": "2019-03-03T01:22:54Z",
+            "image_url": "https://cdn.pandascore.co/images/league/image/4197/lec_2023-png"
+        },
+        "original_scheduled_at": "2025-04-20T17:00:00Z",
+        "begin_at": "2025-04-20T17:00:00Z",
+        "league_id": 4197,
+        "scheduled_at": "2025-04-20T17:00:00Z",
+        "opponents": [
+            {
+                "type": "Team",
+                "opponent": {
+                    "id": 88,
+                    "name": "G2 Esports",
+                    "location": "DE",
+                    "slug": "g2-esports",
+                    "modified_at": "2025-03-27T09:46:24Z",
+                    "acronym": "G2",
+                    "image_url": "https://cdn.pandascore.co/images/team/image/88/g2-esports.png"
+                }
+            },
+            {
+                "type": "Team",
+                "opponent": {
+                    "id": 128267,
+                    "name": "BDS",
+                    "location": null,
+                    "slug": "bds",
+                    "modified_at": "2025-03-27T09:46:28Z",
+                    "acronym": "BDS",
+                    "image_url": "https://cdn.pandascore.co/images/team/image/128267/team_bd_slogo_square.png"
+                }
+            }
+        ],
+        "id": 1148193,
+        "results": [
+            {
+                "team_id": 88,
+                "score": 0
+            },
+            {
+                "team_id": 128267,
+                "score": 0
+            }
+        ],
+        "name": "G2 vs BDS",
+        "tournament": {
+            "id": 16321,
+            "name": "Regular Season",
+            "type": "offline",
+            "country": "DE",
+            "slug": "league-of-legends-lec-spring-2025-regular-season",
+            "begin_at": "2025-03-29T13:00:00Z",
+            "detailed_stats": true,
+            "end_at": "2025-05-12T21:00:00Z",
+            "winner_id": null,
+            "winner_type": "Team",
+            "serie_id": 9172,
+            "modified_at": "2025-04-14T19:44:41Z",
+            "league_id": 4197,
+            "prizepool": null,
+            "tier": "a",
+            "has_bracket": false,
+            "region": "WEU",
+            "live_supported": true
+        },
+        "videogame_version": null,
+        "game_advantage": null,
+        "end_at": null,
+        "match_type": "best_of"
+    },
+    {
+        "live": {
+            "supported": true,
+            "url": "wss://live.pandascore.co/matches/1148194",
+            "opens_at": "2025-04-21T14:45:00.000000Z"
+        },
+        "games": [
+            {
+                "complete": false,
+                "id": 265659,
+                "position": 1,
+                "status": "not_started",
+                "length": null,
+                "finished": false,
+                "match_id": 1148194,
+                "begin_at": null,
+                "detailed_stats": true,
+                "end_at": null,
+                "forfeit": false,
+                "winner_type": "Team",
+                "winner": {
+                    "id": null,
+                    "type": "Team"
+                }
+            },
+            {
+                "complete": false,
+                "id": 265660,
+                "position": 2,
+                "status": "not_started",
+                "length": null,
+                "finished": false,
+                "match_id": 1148194,
+                "begin_at": null,
+                "detailed_stats": true,
+                "end_at": null,
+                "forfeit": false,
+                "winner_type": "Team",
+                "winner": {
+                    "id": null,
+                    "type": "Team"
+                }
+            },
+            {
+                "complete": false,
+                "id": 265661,
+                "position": 3,
+                "status": "not_started",
+                "length": null,
+                "finished": false,
+                "match_id": 1148194,
+                "begin_at": null,
+                "detailed_stats": true,
+                "end_at": null,
+                "forfeit": false,
+                "winner_type": "Team",
+                "winner": {
+                    "id": null,
+                    "type": "Team"
+                }
+            }
+        ],
+        "detailed_stats": true,
+        "modified_at": "2025-03-21T12:49:51Z",
+        "number_of_games": 3,
+        "slug": "sk-gaming-vs-rogue-2025-04-21",
+        "winner": null,
+        "streams_list": [
+            {
+                "main": false,
+                "language": "it",
+                "embed_url": "https://player.twitch.tv/?channel=litofficial",
+                "official": false,
+                "raw_url": "https://www.twitch.tv/litofficial"
+            },
+            {
+                "main": false,
+                "language": "hu",
+                "embed_url": "https://player.twitch.tv/?channel=esport2tv",
+                "official": false,
+                "raw_url": "https://www.twitch.tv/esport2tv"
+            },
+            {
+                "main": false,
+                "language": "pt",
+                "embed_url": "https://player.twitch.tv/?channel=inygontv1",
+                "official": false,
+                "raw_url": "https://www.twitch.tv/inygontv1"
+            },
+            {
+                "main": false,
+                "language": "es",
+                "embed_url": "https://player.twitch.tv/?channel=lvpes",
+                "official": false,
+                "raw_url": "https://www.twitch.tv/lvpes"
+            },
+            {
+                "main": false,
+                "language": "en",
+                "embed_url": "https://player.twitch.tv/?channel=caedrel",
+                "official": false,
+                "raw_url": "https://www.twitch.tv/caedrel"
+            },
+            {
+                "main": false,
+                "language": "pl",
+                "embed_url": null,
+                "official": false,
+                "raw_url": "https://www.youtube.com/@Nervarien"
+            },
+            {
+                "main": false,
+                "language": "fr",
+                "embed_url": "https://player.twitch.tv/?channel=otplol_",
+                "official": false,
+                "raw_url": "https://www.twitch.tv/otplol_"
+            },
+            {
+                "main": true,
+                "language": "en",
+                "embed_url": "https://player.twitch.tv/?channel=lec",
+                "official": true,
+                "raw_url": "https://www.twitch.tv/lec"
+            }
+        ],
+        "winner_type": "Team",
+        "serie": {
+            "id": 9172,
+            "name": "",
+            "year": 2025,
+            "slug": "league-of-legends-lec-spring-2025",
+            "begin_at": "2025-03-29T13:00:00Z",
+            "end_at": "2025-06-08T21:00:00Z",
+            "winner_id": null,
+            "winner_type": "Team",
+            "modified_at": "2025-04-03T19:28:47Z",
+            "league_id": 4197,
+            "season": "Spring",
+            "full_name": "Spring 2025"
+        },
+        "winner_id": null,
+        "forfeit": false,
+        "draw": false,
+        "videogame": {
+            "id": 1,
+            "name": "LoL",
+            "slug": "league-of-legends"
+        },
+        "rescheduled": false,
+        "tournament_id": 16321,
+        "videogame_title": null,
+        "serie_id": 9172,
+        "status": "not_started",
+        "league": {
+            "id": 4197,
+            "name": "LEC",
+            "url": null,
+            "slug": "league-of-legends-lec",
+            "modified_at": "2019-03-03T01:22:54Z",
+            "image_url": "https://cdn.pandascore.co/images/league/image/4197/lec_2023-png"
+        },
+        "original_scheduled_at": "2025-04-21T15:00:00Z",
+        "begin_at": "2025-04-21T15:00:00Z",
+        "league_id": 4197,
+        "scheduled_at": "2025-04-21T15:00:00Z",
+        "opponents": [
+            {
+                "type": "Team",
+                "opponent": {
+                    "id": 395,
+                    "name": "SK Gaming",
+                    "location": "DE",
+                    "slug": "sk-gaming",
+                    "modified_at": "2025-03-27T09:59:40Z",
+                    "acronym": "SK",
+                    "image_url": "https://cdn.pandascore.co/images/team/image/395/600px-SK_Gaminglogo_square.png"
+                }
+            },
+            {
+                "type": "Team",
+                "opponent": {
+                    "id": 3983,
+                    "name": "Rogue",
+                    "location": "US",
+                    "slug": "rogue",
+                    "modified_at": "2025-03-27T09:46:30Z",
+                    "acronym": "RGE",
+                    "image_url": "https://cdn.pandascore.co/images/team/image/3983/rogue__28_european_team_29logo_square.png"
+                }
+            }
+        ],
+        "id": 1148194,
+        "results": [
+            {
+                "team_id": 395,
+                "score": 0
+            },
+            {
+                "team_id": 3983,
+                "score": 0
+            }
+        ],
+        "name": "SK vs RGE",
+        "tournament": {
+            "id": 16321,
+            "name": "Regular Season",
+            "type": "offline",
+            "country": "DE",
+            "slug": "league-of-legends-lec-spring-2025-regular-season",
+            "begin_at": "2025-03-29T13:00:00Z",
+            "detailed_stats": true,
+            "end_at": "2025-05-12T21:00:00Z",
+            "winner_id": null,
+            "winner_type": "Team",
+            "serie_id": 9172,
+            "modified_at": "2025-04-14T19:44:41Z",
+            "league_id": 4197,
+            "prizepool": null,
+            "tier": "a",
+            "has_bracket": false,
+            "region": "WEU",
+            "live_supported": true
+        },
+        "videogame_version": null,
+        "game_advantage": null,
+        "end_at": null,
+        "match_type": "best_of"
+    },
+    {
+        "live": {
+            "supported": true,
+            "url": "wss://live.pandascore.co/matches/1148196",
+            "opens_at": "2025-04-21T16:45:00.000000Z"
+        },
+        "games": [
+            {
+                "complete": false,
+                "id": 265662,
+                "position": 1,
+                "status": "not_started",
+                "length": null,
+                "finished": false,
+                "match_id": 1148196,
+                "begin_at": null,
+                "detailed_stats": true,
+                "end_at": null,
+                "forfeit": false,
+                "winner_type": "Team",
+                "winner": {
+                    "id": null,
+                    "type": "Team"
+                }
+            },
+            {
+                "complete": false,
+                "id": 265663,
+                "position": 2,
+                "status": "not_started",
+                "length": null,
+                "finished": false,
+                "match_id": 1148196,
+                "begin_at": null,
+                "detailed_stats": true,
+                "end_at": null,
+                "forfeit": false,
+                "winner_type": "Team",
+                "winner": {
+                    "id": null,
+                    "type": "Team"
+                }
+            },
+            {
+                "complete": false,
+                "id": 265664,
+                "position": 3,
+                "status": "not_started",
+                "length": null,
+                "finished": false,
+                "match_id": 1148196,
+                "begin_at": null,
+                "detailed_stats": true,
+                "end_at": null,
+                "forfeit": false,
+                "winner_type": "Team",
+                "winner": {
+                    "id": null,
+                    "type": "Team"
+                }
+            }
+        ],
+        "detailed_stats": true,
+        "modified_at": "2025-03-21T12:49:51Z",
+        "number_of_games": 3,
+        "slug": "movistar-koi-vs-team-vitality-2025-04-21",
+        "winner": null,
+        "streams_list": [
+            {
+                "main": false,
+                "language": "it",
+                "embed_url": "https://player.twitch.tv/?channel=litofficial",
+                "official": false,
+                "raw_url": "https://www.twitch.tv/litofficial"
+            },
+            {
+                "main": false,
+                "language": "hu",
+                "embed_url": "https://player.twitch.tv/?channel=esport2tv",
+                "official": false,
+                "raw_url": "https://www.twitch.tv/esport2tv"
+            },
+            {
+                "main": false,
+                "language": "pt",
+                "embed_url": "https://player.twitch.tv/?channel=inygontv1",
+                "official": false,
+                "raw_url": "https://www.twitch.tv/inygontv1"
+            },
+            {
+                "main": false,
+                "language": "es",
+                "embed_url": "https://player.twitch.tv/?channel=lvpes",
+                "official": false,
+                "raw_url": "https://www.twitch.tv/lvpes"
+            },
+            {
+                "main": false,
+                "language": "en",
+                "embed_url": "https://player.twitch.tv/?channel=caedrel",
+                "official": false,
+                "raw_url": "https://www.twitch.tv/caedrel"
+            },
+            {
+                "main": false,
+                "language": "pl",
+                "embed_url": null,
+                "official": false,
+                "raw_url": "https://www.youtube.com/@Nervarien"
+            },
+            {
+                "main": false,
+                "language": "fr",
+                "embed_url": "https://player.twitch.tv/?channel=otplol_",
+                "official": false,
+                "raw_url": "https://www.twitch.tv/otplol_"
+            },
+            {
+                "main": true,
+                "language": "en",
+                "embed_url": "https://player.twitch.tv/?channel=lec",
+                "official": true,
+                "raw_url": "https://www.twitch.tv/lec"
+            }
+        ],
+        "winner_type": "Team",
+        "serie": {
+            "id": 9172,
+            "name": "",
+            "year": 2025,
+            "slug": "league-of-legends-lec-spring-2025",
+            "begin_at": "2025-03-29T13:00:00Z",
+            "end_at": "2025-06-08T21:00:00Z",
+            "winner_id": null,
+            "winner_type": "Team",
+            "modified_at": "2025-04-03T19:28:47Z",
+            "league_id": 4197,
+            "season": "Spring",
+            "full_name": "Spring 2025"
+        },
+        "winner_id": null,
+        "forfeit": false,
+        "draw": false,
+        "videogame": {
+            "id": 1,
+            "name": "LoL",
+            "slug": "league-of-legends"
+        },
+        "rescheduled": false,
+        "tournament_id": 16321,
+        "videogame_title": null,
+        "serie_id": 9172,
+        "status": "not_started",
+        "league": {
+            "id": 4197,
+            "name": "LEC",
+            "url": null,
+            "slug": "league-of-legends-lec",
+            "modified_at": "2019-03-03T01:22:54Z",
+            "image_url": "https://cdn.pandascore.co/images/league/image/4197/lec_2023-png"
+        },
+        "original_scheduled_at": "2025-04-21T17:00:00Z",
+        "begin_at": "2025-04-21T17:00:00Z",
+        "league_id": 4197,
+        "scheduled_at": "2025-04-21T17:00:00Z",
+        "opponents": [
+            {
+                "type": "Team",
+                "opponent": {
+                    "id": 126536,
+                    "name": "Movistar KOI",
+                    "location": "ES",
+                    "slug": "mad-lions-league-of-legends",
+                    "modified_at": "2025-03-27T10:14:20Z",
+                    "acronym": "MKOI",
+                    "image_url": "https://cdn.pandascore.co/images/team/image/126536/movistar_ko_ilogo_square.png"
+                }
+            },
+            {
+                "type": "Team",
+                "opponent": {
+                    "id": 115,
+                    "name": "Team Vitality",
+                    "location": "FR",
+                    "slug": "vitality",
+                    "modified_at": "2025-03-27T09:46:28Z",
+                    "acronym": "VIT",
+                    "image_url": "https://cdn.pandascore.co/images/team/image/115/team_vitalitylogo_square.png"
+                }
+            }
+        ],
+        "id": 1148196,
+        "results": [
+            {
+                "team_id": 126536,
+                "score": 0
+            },
+            {
+                "team_id": 115,
+                "score": 0
+            }
+        ],
+        "name": "MKOI vs VIT",
+        "tournament": {
+            "id": 16321,
+            "name": "Regular Season",
+            "type": "offline",
+            "country": "DE",
+            "slug": "league-of-legends-lec-spring-2025-regular-season",
+            "begin_at": "2025-03-29T13:00:00Z",
+            "detailed_stats": true,
+            "end_at": "2025-05-12T21:00:00Z",
+            "winner_id": null,
+            "winner_type": "Team",
+            "serie_id": 9172,
+            "modified_at": "2025-04-14T19:44:41Z",
+            "league_id": 4197,
+            "prizepool": null,
+            "tier": "a",
+            "has_bracket": false,
+            "region": "WEU",
+            "live_supported": true
+        },
+        "videogame_version": null,
+        "game_advantage": null,
+        "end_at": null,
+        "match_type": "best_of"
+    },
+    {
+        "live": {
+            "supported": true,
+            "url": "wss://live.pandascore.co/matches/1148197",
+            "opens_at": "2025-04-26T12:45:00.000000Z"
+        },
+        "games": [
+            {
+                "complete": false,
+                "id": 265665,
+                "position": 1,
+                "status": "not_started",
+                "length": null,
+                "finished": false,
+                "match_id": 1148197,
+                "begin_at": null,
+                "detailed_stats": true,
+                "end_at": null,
+                "forfeit": false,
+                "winner_type": "Team",
+                "winner": {
+                    "id": null,
+                    "type": "Team"
+                }
+            },
+            {
+                "complete": false,
+                "id": 265666,
+                "position": 2,
+                "status": "not_started",
+                "length": null,
+                "finished": false,
+                "match_id": 1148197,
+                "begin_at": null,
+                "detailed_stats": true,
+                "end_at": null,
+                "forfeit": false,
+                "winner_type": "Team",
+                "winner": {
+                    "id": null,
+                    "type": "Team"
+                }
+            },
+            {
+                "complete": false,
+                "id": 265667,
+                "position": 3,
+                "status": "not_started",
+                "length": null,
+                "finished": false,
+                "match_id": 1148197,
+                "begin_at": null,
+                "detailed_stats": true,
+                "end_at": null,
+                "forfeit": false,
+                "winner_type": "Team",
+                "winner": {
+                    "id": null,
+                    "type": "Team"
+                }
+            }
+        ],
+        "detailed_stats": true,
+        "modified_at": "2025-03-21T12:49:51Z",
+        "number_of_games": 3,
+        "slug": "g2-esports-vs-giantx-2025-04-26",
+        "winner": null,
+        "streams_list": [
+            {
+                "main": false,
+                "language": "it",
+                "embed_url": "https://player.twitch.tv/?channel=litofficial",
+                "official": false,
+                "raw_url": "https://www.twitch.tv/litofficial"
+            },
+            {
+                "main": false,
+                "language": "hu",
+                "embed_url": "https://player.twitch.tv/?channel=esport2tv",
+                "official": false,
+                "raw_url": "https://www.twitch.tv/esport2tv"
+            },
+            {
+                "main": false,
+                "language": "pt",
+                "embed_url": "https://player.twitch.tv/?channel=inygontv1",
+                "official": false,
+                "raw_url": "https://www.twitch.tv/inygontv1"
+            },
+            {
+                "main": false,
+                "language": "es",
+                "embed_url": "https://player.twitch.tv/?channel=lvpes",
+                "official": false,
+                "raw_url": "https://www.twitch.tv/lvpes"
+            },
+            {
+                "main": false,
+                "language": "en",
+                "embed_url": "https://player.twitch.tv/?channel=caedrel",
+                "official": false,
+                "raw_url": "https://www.twitch.tv/caedrel"
+            },
+            {
+                "main": false,
+                "language": "pl",
+                "embed_url": null,
+                "official": false,
+                "raw_url": "https://www.youtube.com/@Nervarien"
+            },
+            {
+                "main": false,
+                "language": "fr",
+                "embed_url": "https://player.twitch.tv/?channel=otplol_",
+                "official": false,
+                "raw_url": "https://www.twitch.tv/otplol_"
+            },
+            {
+                "main": true,
+                "language": "en",
+                "embed_url": "https://player.twitch.tv/?channel=lec",
+                "official": true,
+                "raw_url": "https://www.twitch.tv/lec"
+            }
+        ],
+        "winner_type": "Team",
+        "serie": {
+            "id": 9172,
+            "name": "",
+            "year": 2025,
+            "slug": "league-of-legends-lec-spring-2025",
+            "begin_at": "2025-03-29T13:00:00Z",
+            "end_at": "2025-06-08T21:00:00Z",
+            "winner_id": null,
+            "winner_type": "Team",
+            "modified_at": "2025-04-03T19:28:47Z",
+            "league_id": 4197,
+            "season": "Spring",
+            "full_name": "Spring 2025"
+        },
+        "winner_id": null,
+        "forfeit": false,
+        "draw": false,
+        "videogame": {
+            "id": 1,
+            "name": "LoL",
+            "slug": "league-of-legends"
+        },
+        "rescheduled": false,
+        "tournament_id": 16321,
+        "videogame_title": null,
+        "serie_id": 9172,
+        "status": "not_started",
+        "league": {
+            "id": 4197,
+            "name": "LEC",
+            "url": null,
+            "slug": "league-of-legends-lec",
+            "modified_at": "2019-03-03T01:22:54Z",
+            "image_url": "https://cdn.pandascore.co/images/league/image/4197/lec_2023-png"
+        },
+        "original_scheduled_at": "2025-04-26T13:00:00Z",
+        "begin_at": "2025-04-26T13:00:00Z",
+        "league_id": 4197,
+        "scheduled_at": "2025-04-26T13:00:00Z",
+        "opponents": [
+            {
+                "type": "Team",
+                "opponent": {
+                    "id": 88,
+                    "name": "G2 Esports",
+                    "location": "DE",
+                    "slug": "g2-esports",
+                    "modified_at": "2025-03-27T09:46:24Z",
+                    "acronym": "G2",
+                    "image_url": "https://cdn.pandascore.co/images/team/image/88/g2-esports.png"
+                }
+            },
+            {
+                "type": "Team",
+                "opponent": {
+                    "id": 134068,
+                    "name": "GIANTX",
+                    "location": "GB",
+                    "slug": "giantx",
+                    "modified_at": "2025-03-27T09:46:50Z",
+                    "acronym": "GX",
+                    "image_url": "https://cdn.pandascore.co/images/team/image/134068/giant_x_logo.svg.png"
+                }
+            }
+        ],
+        "id": 1148197,
+        "results": [
+            {
+                "team_id": 88,
+                "score": 0
+            },
+            {
+                "team_id": 134068,
+                "score": 0
+            }
+        ],
+        "name": "G2 vs GX",
+        "tournament": {
+            "id": 16321,
+            "name": "Regular Season",
+            "type": "offline",
+            "country": "DE",
+            "slug": "league-of-legends-lec-spring-2025-regular-season",
+            "begin_at": "2025-03-29T13:00:00Z",
+            "detailed_stats": true,
+            "end_at": "2025-05-12T21:00:00Z",
+            "winner_id": null,
+            "winner_type": "Team",
+            "serie_id": 9172,
+            "modified_at": "2025-04-14T19:44:41Z",
+            "league_id": 4197,
+            "prizepool": null,
+            "tier": "a",
+            "has_bracket": false,
+            "region": "WEU",
+            "live_supported": true
+        },
+        "videogame_version": null,
+        "game_advantage": null,
+        "end_at": null,
+        "match_type": "best_of"
+    },
+    {
+        "live": {
+            "supported": true,
+            "url": "wss://live.pandascore.co/matches/1148198",
+            "opens_at": "2025-04-26T14:45:00.000000Z"
+        },
+        "games": [
+            {
+                "complete": false,
+                "id": 265668,
+                "position": 1,
+                "status": "not_started",
+                "length": null,
+                "finished": false,
+                "match_id": 1148198,
+                "begin_at": null,
+                "detailed_stats": true,
+                "end_at": null,
+                "forfeit": false,
+                "winner_type": "Team",
+                "winner": {
+                    "id": null,
+                    "type": "Team"
+                }
+            },
+            {
+                "complete": false,
+                "id": 265669,
+                "position": 2,
+                "status": "not_started",
+                "length": null,
+                "finished": false,
+                "match_id": 1148198,
+                "begin_at": null,
+                "detailed_stats": true,
+                "end_at": null,
+                "forfeit": false,
+                "winner_type": "Team",
+                "winner": {
+                    "id": null,
+                    "type": "Team"
+                }
+            },
+            {
+                "complete": false,
+                "id": 265670,
+                "position": 3,
+                "status": "not_started",
+                "length": null,
+                "finished": false,
+                "match_id": 1148198,
+                "begin_at": null,
+                "detailed_stats": true,
+                "end_at": null,
+                "forfeit": false,
+                "winner_type": "Team",
+                "winner": {
+                    "id": null,
+                    "type": "Team"
+                }
+            }
+        ],
+        "detailed_stats": true,
+        "modified_at": "2025-03-21T12:49:51Z",
+        "number_of_games": 3,
+        "slug": "movistar-koi-vs-fnatic-2025-04-26",
+        "winner": null,
+        "streams_list": [
+            {
+                "main": false,
+                "language": "it",
+                "embed_url": "https://player.twitch.tv/?channel=litofficial",
+                "official": false,
+                "raw_url": "https://www.twitch.tv/litofficial"
+            },
+            {
+                "main": false,
+                "language": "hu",
+                "embed_url": "https://player.twitch.tv/?channel=esport2tv",
+                "official": false,
+                "raw_url": "https://www.twitch.tv/esport2tv"
+            },
+            {
+                "main": false,
+                "language": "pt",
+                "embed_url": "https://player.twitch.tv/?channel=inygontv1",
+                "official": false,
+                "raw_url": "https://www.twitch.tv/inygontv1"
+            },
+            {
+                "main": false,
+                "language": "es",
+                "embed_url": "https://player.twitch.tv/?channel=lvpes",
+                "official": false,
+                "raw_url": "https://www.twitch.tv/lvpes"
+            },
+            {
+                "main": false,
+                "language": "en",
+                "embed_url": "https://player.twitch.tv/?channel=caedrel",
+                "official": false,
+                "raw_url": "https://www.twitch.tv/caedrel"
+            },
+            {
+                "main": false,
+                "language": "pl",
+                "embed_url": null,
+                "official": false,
+                "raw_url": "https://www.youtube.com/@Nervarien"
+            },
+            {
+                "main": false,
+                "language": "fr",
+                "embed_url": "https://player.twitch.tv/?channel=otplol_",
+                "official": false,
+                "raw_url": "https://www.twitch.tv/otplol_"
+            },
+            {
+                "main": true,
+                "language": "en",
+                "embed_url": "https://player.twitch.tv/?channel=lec",
+                "official": true,
+                "raw_url": "https://www.twitch.tv/lec"
+            }
+        ],
+        "winner_type": "Team",
+        "serie": {
+            "id": 9172,
+            "name": "",
+            "year": 2025,
+            "slug": "league-of-legends-lec-spring-2025",
+            "begin_at": "2025-03-29T13:00:00Z",
+            "end_at": "2025-06-08T21:00:00Z",
+            "winner_id": null,
+            "winner_type": "Team",
+            "modified_at": "2025-04-03T19:28:47Z",
+            "league_id": 4197,
+            "season": "Spring",
+            "full_name": "Spring 2025"
+        },
+        "winner_id": null,
+        "forfeit": false,
+        "draw": false,
+        "videogame": {
+            "id": 1,
+            "name": "LoL",
+            "slug": "league-of-legends"
+        },
+        "rescheduled": false,
+        "tournament_id": 16321,
+        "videogame_title": null,
+        "serie_id": 9172,
+        "status": "not_started",
+        "league": {
+            "id": 4197,
+            "name": "LEC",
+            "url": null,
+            "slug": "league-of-legends-lec",
+            "modified_at": "2019-03-03T01:22:54Z",
+            "image_url": "https://cdn.pandascore.co/images/league/image/4197/lec_2023-png"
+        },
+        "original_scheduled_at": "2025-04-26T15:00:00Z",
+        "begin_at": "2025-04-26T15:00:00Z",
+        "league_id": 4197,
+        "scheduled_at": "2025-04-26T15:00:00Z",
+        "opponents": [
+            {
+                "type": "Team",
+                "opponent": {
+                    "id": 126536,
+                    "name": "Movistar KOI",
+                    "location": "ES",
+                    "slug": "mad-lions-league-of-legends",
+                    "modified_at": "2025-03-27T10:14:20Z",
+                    "acronym": "MKOI",
+                    "image_url": "https://cdn.pandascore.co/images/team/image/126536/movistar_ko_ilogo_square.png"
+                }
+            },
+            {
+                "type": "Team",
+                "opponent": {
+                    "id": 394,
+                    "name": "Fnatic",
+                    "location": "GB",
+                    "slug": "fnatic",
+                    "modified_at": "2025-03-27T09:46:25Z",
+                    "acronym": "FNC",
+                    "image_url": "https://cdn.pandascore.co/images/team/image/394/220px_fnaticlogo_square.png"
+                }
+            }
+        ],
+        "id": 1148198,
+        "results": [
+            {
+                "team_id": 126536,
+                "score": 0
+            },
+            {
+                "team_id": 394,
+                "score": 0
+            }
+        ],
+        "name": "MKOI vs FNC",
+        "tournament": {
+            "id": 16321,
+            "name": "Regular Season",
+            "type": "offline",
+            "country": "DE",
+            "slug": "league-of-legends-lec-spring-2025-regular-season",
+            "begin_at": "2025-03-29T13:00:00Z",
+            "detailed_stats": true,
+            "end_at": "2025-05-12T21:00:00Z",
+            "winner_id": null,
+            "winner_type": "Team",
+            "serie_id": 9172,
+            "modified_at": "2025-04-14T19:44:41Z",
+            "league_id": 4197,
+            "prizepool": null,
+            "tier": "a",
+            "has_bracket": false,
+            "region": "WEU",
+            "live_supported": true
+        },
+        "videogame_version": null,
+        "game_advantage": null,
+        "end_at": null,
+        "match_type": "best_of"
+    },
+    {
+        "live": {
+            "supported": true,
+            "url": "wss://live.pandascore.co/matches/1148199",
+            "opens_at": "2025-04-27T12:45:00.000000Z"
+        },
+        "games": [
+            {
+                "complete": false,
+                "id": 265671,
+                "position": 1,
+                "status": "not_started",
+                "length": null,
+                "finished": false,
+                "match_id": 1148199,
+                "begin_at": null,
+                "detailed_stats": true,
+                "end_at": null,
+                "forfeit": false,
+                "winner_type": "Team",
+                "winner": {
+                    "id": null,
+                    "type": "Team"
+                }
+            },
+            {
+                "complete": false,
+                "id": 265672,
+                "position": 2,
+                "status": "not_started",
+                "length": null,
+                "finished": false,
+                "match_id": 1148199,
+                "begin_at": null,
+                "detailed_stats": true,
+                "end_at": null,
+                "forfeit": false,
+                "winner_type": "Team",
+                "winner": {
+                    "id": null,
+                    "type": "Team"
+                }
+            },
+            {
+                "complete": false,
+                "id": 265673,
+                "position": 3,
+                "status": "not_started",
+                "length": null,
+                "finished": false,
+                "match_id": 1148199,
+                "begin_at": null,
+                "detailed_stats": true,
+                "end_at": null,
+                "forfeit": false,
+                "winner_type": "Team",
+                "winner": {
+                    "id": null,
+                    "type": "Team"
+                }
+            }
+        ],
+        "detailed_stats": true,
+        "modified_at": "2025-03-21T12:49:51Z",
+        "number_of_games": 3,
+        "slug": "g2-esports-vs-fnatic-2025-04-27",
+        "winner": null,
+        "streams_list": [
+            {
+                "main": false,
+                "language": "it",
+                "embed_url": "https://player.twitch.tv/?channel=litofficial",
+                "official": false,
+                "raw_url": "https://www.twitch.tv/litofficial"
+            },
+            {
+                "main": false,
+                "language": "hu",
+                "embed_url": "https://player.twitch.tv/?channel=esport2tv",
+                "official": false,
+                "raw_url": "https://www.twitch.tv/esport2tv"
+            },
+            {
+                "main": false,
+                "language": "pt",
+                "embed_url": "https://player.twitch.tv/?channel=inygontv1",
+                "official": false,
+                "raw_url": "https://www.twitch.tv/inygontv1"
+            },
+            {
+                "main": false,
+                "language": "es",
+                "embed_url": "https://player.twitch.tv/?channel=lvpes",
+                "official": false,
+                "raw_url": "https://www.twitch.tv/lvpes"
+            },
+            {
+                "main": false,
+                "language": "en",
+                "embed_url": "https://player.twitch.tv/?channel=caedrel",
+                "official": false,
+                "raw_url": "https://www.twitch.tv/caedrel"
+            },
+            {
+                "main": false,
+                "language": "pl",
+                "embed_url": null,
+                "official": false,
+                "raw_url": "https://www.youtube.com/@Nervarien"
+            },
+            {
+                "main": false,
+                "language": "fr",
+                "embed_url": "https://player.twitch.tv/?channel=otplol_",
+                "official": false,
+                "raw_url": "https://www.twitch.tv/otplol_"
+            },
+            {
+                "main": true,
+                "language": "en",
+                "embed_url": "https://player.twitch.tv/?channel=lec",
+                "official": true,
+                "raw_url": "https://www.twitch.tv/lec"
+            }
+        ],
+        "winner_type": "Team",
+        "serie": {
+            "id": 9172,
+            "name": "",
+            "year": 2025,
+            "slug": "league-of-legends-lec-spring-2025",
+            "begin_at": "2025-03-29T13:00:00Z",
+            "end_at": "2025-06-08T21:00:00Z",
+            "winner_id": null,
+            "winner_type": "Team",
+            "modified_at": "2025-04-03T19:28:47Z",
+            "league_id": 4197,
+            "season": "Spring",
+            "full_name": "Spring 2025"
+        },
+        "winner_id": null,
+        "forfeit": false,
+        "draw": false,
+        "videogame": {
+            "id": 1,
+            "name": "LoL",
+            "slug": "league-of-legends"
+        },
+        "rescheduled": false,
+        "tournament_id": 16321,
+        "videogame_title": null,
+        "serie_id": 9172,
+        "status": "not_started",
+        "league": {
+            "id": 4197,
+            "name": "LEC",
+            "url": null,
+            "slug": "league-of-legends-lec",
+            "modified_at": "2019-03-03T01:22:54Z",
+            "image_url": "https://cdn.pandascore.co/images/league/image/4197/lec_2023-png"
+        },
+        "original_scheduled_at": "2025-04-27T13:00:00Z",
+        "begin_at": "2025-04-27T13:00:00Z",
+        "league_id": 4197,
+        "scheduled_at": "2025-04-27T13:00:00Z",
+        "opponents": [
+            {
+                "type": "Team",
+                "opponent": {
+                    "id": 88,
+                    "name": "G2 Esports",
+                    "location": "DE",
+                    "slug": "g2-esports",
+                    "modified_at": "2025-03-27T09:46:24Z",
+                    "acronym": "G2",
+                    "image_url": "https://cdn.pandascore.co/images/team/image/88/g2-esports.png"
+                }
+            },
+            {
+                "type": "Team",
+                "opponent": {
+                    "id": 394,
+                    "name": "Fnatic",
+                    "location": "GB",
+                    "slug": "fnatic",
+                    "modified_at": "2025-03-27T09:46:25Z",
+                    "acronym": "FNC",
+                    "image_url": "https://cdn.pandascore.co/images/team/image/394/220px_fnaticlogo_square.png"
+                }
+            }
+        ],
+        "id": 1148199,
+        "results": [
+            {
+                "team_id": 88,
+                "score": 0
+            },
+            {
+                "team_id": 394,
+                "score": 0
+            }
+        ],
+        "name": "G2 vs FNC",
+        "tournament": {
+            "id": 16321,
+            "name": "Regular Season",
+            "type": "offline",
+            "country": "DE",
+            "slug": "league-of-legends-lec-spring-2025-regular-season",
+            "begin_at": "2025-03-29T13:00:00Z",
+            "detailed_stats": true,
+            "end_at": "2025-05-12T21:00:00Z",
+            "winner_id": null,
+            "winner_type": "Team",
+            "serie_id": 9172,
+            "modified_at": "2025-04-14T19:44:41Z",
+            "league_id": 4197,
+            "prizepool": null,
+            "tier": "a",
+            "has_bracket": false,
+            "region": "WEU",
+            "live_supported": true
+        },
+        "videogame_version": null,
+        "game_advantage": null,
+        "end_at": null,
+        "match_type": "best_of"
+    },
+    {
+        "live": {
+            "supported": true,
+            "url": "wss://live.pandascore.co/matches/1148200",
+            "opens_at": "2025-04-27T14:45:00.000000Z"
+        },
+        "games": [
+            {
+                "complete": false,
+                "id": 265674,
+                "position": 1,
+                "status": "not_started",
+                "length": null,
+                "finished": false,
+                "match_id": 1148200,
+                "begin_at": null,
+                "detailed_stats": true,
+                "end_at": null,
+                "forfeit": false,
+                "winner_type": "Team",
+                "winner": {
+                    "id": null,
+                    "type": "Team"
+                }
+            },
+            {
+                "complete": false,
+                "id": 265675,
+                "position": 2,
+                "status": "not_started",
+                "length": null,
+                "finished": false,
+                "match_id": 1148200,
+                "begin_at": null,
+                "detailed_stats": true,
+                "end_at": null,
+                "forfeit": false,
+                "winner_type": "Team",
+                "winner": {
+                    "id": null,
+                    "type": "Team"
+                }
+            },
+            {
+                "complete": false,
+                "id": 265676,
+                "position": 3,
+                "status": "not_started",
+                "length": null,
+                "finished": false,
+                "match_id": 1148200,
+                "begin_at": null,
+                "detailed_stats": true,
+                "end_at": null,
+                "forfeit": false,
+                "winner_type": "Team",
+                "winner": {
+                    "id": null,
+                    "type": "Team"
+                }
+            }
+        ],
+        "detailed_stats": true,
+        "modified_at": "2025-03-21T12:49:51Z",
+        "number_of_games": 3,
+        "slug": "movistar-koi-vs-giantx-2025-04-27",
+        "winner": null,
+        "streams_list": [
+            {
+                "main": false,
+                "language": "it",
+                "embed_url": "https://player.twitch.tv/?channel=litofficial",
+                "official": false,
+                "raw_url": "https://www.twitch.tv/litofficial"
+            },
+            {
+                "main": false,
+                "language": "hu",
+                "embed_url": "https://player.twitch.tv/?channel=esport2tv",
+                "official": false,
+                "raw_url": "https://www.twitch.tv/esport2tv"
+            },
+            {
+                "main": false,
+                "language": "pt",
+                "embed_url": "https://player.twitch.tv/?channel=inygontv1",
+                "official": false,
+                "raw_url": "https://www.twitch.tv/inygontv1"
+            },
+            {
+                "main": false,
+                "language": "es",
+                "embed_url": "https://player.twitch.tv/?channel=lvpes",
+                "official": false,
+                "raw_url": "https://www.twitch.tv/lvpes"
+            },
+            {
+                "main": false,
+                "language": "en",
+                "embed_url": "https://player.twitch.tv/?channel=caedrel",
+                "official": false,
+                "raw_url": "https://www.twitch.tv/caedrel"
+            },
+            {
+                "main": false,
+                "language": "pl",
+                "embed_url": null,
+                "official": false,
+                "raw_url": "https://www.youtube.com/@Nervarien"
+            },
+            {
+                "main": false,
+                "language": "fr",
+                "embed_url": "https://player.twitch.tv/?channel=otplol_",
+                "official": false,
+                "raw_url": "https://www.twitch.tv/otplol_"
+            },
+            {
+                "main": true,
+                "language": "en",
+                "embed_url": "https://player.twitch.tv/?channel=lec",
+                "official": true,
+                "raw_url": "https://www.twitch.tv/lec"
+            }
+        ],
+        "winner_type": "Team",
+        "serie": {
+            "id": 9172,
+            "name": "",
+            "year": 2025,
+            "slug": "league-of-legends-lec-spring-2025",
+            "begin_at": "2025-03-29T13:00:00Z",
+            "end_at": "2025-06-08T21:00:00Z",
+            "winner_id": null,
+            "winner_type": "Team",
+            "modified_at": "2025-04-03T19:28:47Z",
+            "league_id": 4197,
+            "season": "Spring",
+            "full_name": "Spring 2025"
+        },
+        "winner_id": null,
+        "forfeit": false,
+        "draw": false,
+        "videogame": {
+            "id": 1,
+            "name": "LoL",
+            "slug": "league-of-legends"
+        },
+        "rescheduled": false,
+        "tournament_id": 16321,
+        "videogame_title": null,
+        "serie_id": 9172,
+        "status": "not_started",
+        "league": {
+            "id": 4197,
+            "name": "LEC",
+            "url": null,
+            "slug": "league-of-legends-lec",
+            "modified_at": "2019-03-03T01:22:54Z",
+            "image_url": "https://cdn.pandascore.co/images/league/image/4197/lec_2023-png"
+        },
+        "original_scheduled_at": "2025-04-27T15:00:00Z",
+        "begin_at": "2025-04-27T15:00:00Z",
+        "league_id": 4197,
+        "scheduled_at": "2025-04-27T15:00:00Z",
+        "opponents": [
+            {
+                "type": "Team",
+                "opponent": {
+                    "id": 126536,
+                    "name": "Movistar KOI",
+                    "location": "ES",
+                    "slug": "mad-lions-league-of-legends",
+                    "modified_at": "2025-03-27T10:14:20Z",
+                    "acronym": "MKOI",
+                    "image_url": "https://cdn.pandascore.co/images/team/image/126536/movistar_ko_ilogo_square.png"
+                }
+            },
+            {
+                "type": "Team",
+                "opponent": {
+                    "id": 134068,
+                    "name": "GIANTX",
+                    "location": "GB",
+                    "slug": "giantx",
+                    "modified_at": "2025-03-27T09:46:50Z",
+                    "acronym": "GX",
+                    "image_url": "https://cdn.pandascore.co/images/team/image/134068/giant_x_logo.svg.png"
+                }
+            }
+        ],
+        "id": 1148200,
+        "results": [
+            {
+                "team_id": 126536,
+                "score": 0
+            },
+            {
+                "team_id": 134068,
+                "score": 0
+            }
+        ],
+        "name": "MKOI vs GX",
+        "tournament": {
+            "id": 16321,
+            "name": "Regular Season",
+            "type": "offline",
+            "country": "DE",
+            "slug": "league-of-legends-lec-spring-2025-regular-season",
+            "begin_at": "2025-03-29T13:00:00Z",
+            "detailed_stats": true,
+            "end_at": "2025-05-12T21:00:00Z",
+            "winner_id": null,
+            "winner_type": "Team",
+            "serie_id": 9172,
+            "modified_at": "2025-04-14T19:44:41Z",
+            "league_id": 4197,
+            "prizepool": null,
+            "tier": "a",
+            "has_bracket": false,
+            "region": "WEU",
+            "live_supported": true
+        },
+        "videogame_version": null,
+        "game_advantage": null,
+        "end_at": null,
+        "match_type": "best_of"
+    },
+    {
+        "live": {
+            "supported": true,
+            "url": "wss://live.pandascore.co/matches/1148201",
+            "opens_at": "2025-04-28T14:45:00.000000Z"
+        },
+        "games": [
+            {
+                "complete": false,
+                "id": 265677,
+                "position": 1,
+                "status": "not_started",
+                "length": null,
+                "finished": false,
+                "match_id": 1148201,
+                "begin_at": null,
+                "detailed_stats": true,
+                "end_at": null,
+                "forfeit": false,
+                "winner_type": "Team",
+                "winner": {
+                    "id": null,
+                    "type": "Team"
+                }
+            },
+            {
+                "complete": false,
+                "id": 265678,
+                "position": 2,
+                "status": "not_started",
+                "length": null,
+                "finished": false,
+                "match_id": 1148201,
+                "begin_at": null,
+                "detailed_stats": true,
+                "end_at": null,
+                "forfeit": false,
+                "winner_type": "Team",
+                "winner": {
+                    "id": null,
+                    "type": "Team"
+                }
+            },
+            {
+                "complete": false,
+                "id": 265679,
+                "position": 3,
+                "status": "not_started",
+                "length": null,
+                "finished": false,
+                "match_id": 1148201,
+                "begin_at": null,
+                "detailed_stats": true,
+                "end_at": null,
+                "forfeit": false,
+                "winner_type": "Team",
+                "winner": {
+                    "id": null,
+                    "type": "Team"
+                }
+            }
+        ],
+        "detailed_stats": true,
+        "modified_at": "2025-03-21T12:49:51Z",
+        "number_of_games": 3,
+        "slug": "team-heretics-vs-sk-gaming-2025-04-28",
+        "winner": null,
+        "streams_list": [
+            {
+                "main": false,
+                "language": "it",
+                "embed_url": "https://player.twitch.tv/?channel=litofficial",
+                "official": false,
+                "raw_url": "https://www.twitch.tv/litofficial"
+            },
+            {
+                "main": false,
+                "language": "hu",
+                "embed_url": "https://player.twitch.tv/?channel=esport2tv",
+                "official": false,
+                "raw_url": "https://www.twitch.tv/esport2tv"
+            },
+            {
+                "main": false,
+                "language": "pt",
+                "embed_url": "https://player.twitch.tv/?channel=inygontv1",
+                "official": false,
+                "raw_url": "https://www.twitch.tv/inygontv1"
+            },
+            {
+                "main": false,
+                "language": "es",
+                "embed_url": "https://player.twitch.tv/?channel=lvpes",
+                "official": false,
+                "raw_url": "https://www.twitch.tv/lvpes"
+            },
+            {
+                "main": false,
+                "language": "en",
+                "embed_url": "https://player.twitch.tv/?channel=caedrel",
+                "official": false,
+                "raw_url": "https://www.twitch.tv/caedrel"
+            },
+            {
+                "main": false,
+                "language": "pl",
+                "embed_url": null,
+                "official": false,
+                "raw_url": "https://www.youtube.com/@Nervarien"
+            },
+            {
+                "main": false,
+                "language": "fr",
+                "embed_url": "https://player.twitch.tv/?channel=otplol_",
+                "official": false,
+                "raw_url": "https://www.twitch.tv/otplol_"
+            },
+            {
+                "main": true,
+                "language": "en",
+                "embed_url": "https://player.twitch.tv/?channel=lec",
+                "official": true,
+                "raw_url": "https://www.twitch.tv/lec"
+            }
+        ],
+        "winner_type": "Team",
+        "serie": {
+            "id": 9172,
+            "name": "",
+            "year": 2025,
+            "slug": "league-of-legends-lec-spring-2025",
+            "begin_at": "2025-03-29T13:00:00Z",
+            "end_at": "2025-06-08T21:00:00Z",
+            "winner_id": null,
+            "winner_type": "Team",
+            "modified_at": "2025-04-03T19:28:47Z",
+            "league_id": 4197,
+            "season": "Spring",
+            "full_name": "Spring 2025"
+        },
+        "winner_id": null,
+        "forfeit": false,
+        "draw": false,
+        "videogame": {
+            "id": 1,
+            "name": "LoL",
+            "slug": "league-of-legends"
+        },
+        "rescheduled": false,
+        "tournament_id": 16321,
+        "videogame_title": null,
+        "serie_id": 9172,
+        "status": "not_started",
+        "league": {
+            "id": 4197,
+            "name": "LEC",
+            "url": null,
+            "slug": "league-of-legends-lec",
+            "modified_at": "2019-03-03T01:22:54Z",
+            "image_url": "https://cdn.pandascore.co/images/league/image/4197/lec_2023-png"
+        },
+        "original_scheduled_at": "2025-04-28T15:00:00Z",
+        "begin_at": "2025-04-28T15:00:00Z",
+        "league_id": 4197,
+        "scheduled_at": "2025-04-28T15:00:00Z",
+        "opponents": [
+            {
+                "type": "Team",
+                "opponent": {
+                    "id": 130105,
+                    "name": "Team Heretics",
+                    "location": "ES",
+                    "slug": "team-heretics",
+                    "modified_at": "2025-03-27T09:46:31Z",
+                    "acronym": "TH",
+                    "image_url": "https://cdn.pandascore.co/images/team/image/130105/team_hereticslogo_square.png"
+                }
+            },
+            {
+                "type": "Team",
+                "opponent": {
+                    "id": 395,
+                    "name": "SK Gaming",
+                    "location": "DE",
+                    "slug": "sk-gaming",
+                    "modified_at": "2025-03-27T09:59:40Z",
+                    "acronym": "SK",
+                    "image_url": "https://cdn.pandascore.co/images/team/image/395/600px-SK_Gaminglogo_square.png"
+                }
+            }
+        ],
+        "id": 1148201,
+        "results": [
+            {
+                "team_id": 130105,
+                "score": 0
+            },
+            {
+                "team_id": 395,
+                "score": 0
+            }
+        ],
+        "name": "TH vs SK",
+        "tournament": {
+            "id": 16321,
+            "name": "Regular Season",
+            "type": "offline",
+            "country": "DE",
+            "slug": "league-of-legends-lec-spring-2025-regular-season",
+            "begin_at": "2025-03-29T13:00:00Z",
+            "detailed_stats": true,
+            "end_at": "2025-05-12T21:00:00Z",
+            "winner_id": null,
+            "winner_type": "Team",
+            "serie_id": 9172,
+            "modified_at": "2025-04-14T19:44:41Z",
+            "league_id": 4197,
+            "prizepool": null,
+            "tier": "a",
+            "has_bracket": false,
+            "region": "WEU",
+            "live_supported": true
+        },
+        "videogame_version": null,
+        "game_advantage": null,
+        "end_at": null,
+        "match_type": "best_of"
+    },
+    {
+        "live": {
+            "supported": true,
+            "url": "wss://live.pandascore.co/matches/1148203",
+            "opens_at": "2025-04-28T16:45:00.000000Z"
+        },
+        "games": [
+            {
+                "complete": false,
+                "id": 265680,
+                "position": 1,
+                "status": "not_started",
+                "length": null,
+                "finished": false,
+                "match_id": 1148203,
+                "begin_at": null,
+                "detailed_stats": true,
+                "end_at": null,
+                "forfeit": false,
+                "winner_type": "Team",
+                "winner": {
+                    "id": null,
+                    "type": "Team"
+                }
+            },
+            {
+                "complete": false,
+                "id": 265681,
+                "position": 2,
+                "status": "not_started",
+                "length": null,
+                "finished": false,
+                "match_id": 1148203,
+                "begin_at": null,
+                "detailed_stats": true,
+                "end_at": null,
+                "forfeit": false,
+                "winner_type": "Team",
+                "winner": {
+                    "id": null,
+                    "type": "Team"
+                }
+            },
+            {
+                "complete": false,
+                "id": 265682,
+                "position": 3,
+                "status": "not_started",
+                "length": null,
+                "finished": false,
+                "match_id": 1148203,
+                "begin_at": null,
+                "detailed_stats": true,
+                "end_at": null,
+                "forfeit": false,
+                "winner_type": "Team",
+                "winner": {
+                    "id": null,
+                    "type": "Team"
+                }
+            }
+        ],
+        "detailed_stats": true,
+        "modified_at": "2025-03-21T12:49:51Z",
+        "number_of_games": 3,
+        "slug": "team-vitality-vs-bds-2025-04-28",
+        "winner": null,
+        "streams_list": [
+            {
+                "main": false,
+                "language": "it",
+                "embed_url": "https://player.twitch.tv/?channel=litofficial",
+                "official": false,
+                "raw_url": "https://www.twitch.tv/litofficial"
+            },
+            {
+                "main": false,
+                "language": "hu",
+                "embed_url": "https://player.twitch.tv/?channel=esport2tv",
+                "official": false,
+                "raw_url": "https://www.twitch.tv/esport2tv"
+            },
+            {
+                "main": false,
+                "language": "pt",
+                "embed_url": "https://player.twitch.tv/?channel=inygontv1",
+                "official": false,
+                "raw_url": "https://www.twitch.tv/inygontv1"
+            },
+            {
+                "main": false,
+                "language": "es",
+                "embed_url": "https://player.twitch.tv/?channel=lvpes",
+                "official": false,
+                "raw_url": "https://www.twitch.tv/lvpes"
+            },
+            {
+                "main": false,
+                "language": "en",
+                "embed_url": "https://player.twitch.tv/?channel=caedrel",
+                "official": false,
+                "raw_url": "https://www.twitch.tv/caedrel"
+            },
+            {
+                "main": false,
+                "language": "pl",
+                "embed_url": null,
+                "official": false,
+                "raw_url": "https://www.youtube.com/@Nervarien"
+            },
+            {
+                "main": false,
+                "language": "fr",
+                "embed_url": "https://player.twitch.tv/?channel=otplol_",
+                "official": false,
+                "raw_url": "https://www.twitch.tv/otplol_"
+            },
+            {
+                "main": true,
+                "language": "en",
+                "embed_url": "https://player.twitch.tv/?channel=lec",
+                "official": true,
+                "raw_url": "https://www.twitch.tv/lec"
+            }
+        ],
+        "winner_type": "Team",
+        "serie": {
+            "id": 9172,
+            "name": "",
+            "year": 2025,
+            "slug": "league-of-legends-lec-spring-2025",
+            "begin_at": "2025-03-29T13:00:00Z",
+            "end_at": "2025-06-08T21:00:00Z",
+            "winner_id": null,
+            "winner_type": "Team",
+            "modified_at": "2025-04-03T19:28:47Z",
+            "league_id": 4197,
+            "season": "Spring",
+            "full_name": "Spring 2025"
+        },
+        "winner_id": null,
+        "forfeit": false,
+        "draw": false,
+        "videogame": {
+            "id": 1,
+            "name": "LoL",
+            "slug": "league-of-legends"
+        },
+        "rescheduled": false,
+        "tournament_id": 16321,
+        "videogame_title": null,
+        "serie_id": 9172,
+        "status": "not_started",
+        "league": {
+            "id": 4197,
+            "name": "LEC",
+            "url": null,
+            "slug": "league-of-legends-lec",
+            "modified_at": "2019-03-03T01:22:54Z",
+            "image_url": "https://cdn.pandascore.co/images/league/image/4197/lec_2023-png"
+        },
+        "original_scheduled_at": "2025-04-28T17:00:00Z",
+        "begin_at": "2025-04-28T17:00:00Z",
+        "league_id": 4197,
+        "scheduled_at": "2025-04-28T17:00:00Z",
+        "opponents": [
+            {
+                "type": "Team",
+                "opponent": {
+                    "id": 115,
+                    "name": "Team Vitality",
+                    "location": "FR",
+                    "slug": "vitality",
+                    "modified_at": "2025-03-27T09:46:28Z",
+                    "acronym": "VIT",
+                    "image_url": "https://cdn.pandascore.co/images/team/image/115/team_vitalitylogo_square.png"
+                }
+            },
+            {
+                "type": "Team",
+                "opponent": {
+                    "id": 128267,
+                    "name": "BDS",
+                    "location": null,
+                    "slug": "bds",
+                    "modified_at": "2025-03-27T09:46:28Z",
+                    "acronym": "BDS",
+                    "image_url": "https://cdn.pandascore.co/images/team/image/128267/team_bd_slogo_square.png"
+                }
+            }
+        ],
+        "id": 1148203,
+        "results": [
+            {
+                "team_id": 115,
+                "score": 0
+            },
+            {
+                "team_id": 128267,
+                "score": 0
+            }
+        ],
+        "name": "VIT vs BDS",
+        "tournament": {
+            "id": 16321,
+            "name": "Regular Season",
+            "type": "offline",
+            "country": "DE",
+            "slug": "league-of-legends-lec-spring-2025-regular-season",
+            "begin_at": "2025-03-29T13:00:00Z",
+            "detailed_stats": true,
+            "end_at": "2025-05-12T21:00:00Z",
+            "winner_id": null,
+            "winner_type": "Team",
+            "serie_id": 9172,
+            "modified_at": "2025-04-14T19:44:41Z",
+            "league_id": 4197,
+            "prizepool": null,
+            "tier": "a",
+            "has_bracket": false,
+            "region": "WEU",
+            "live_supported": true
+        },
+        "videogame_version": null,
+        "game_advantage": null,
+        "end_at": null,
+        "match_type": "best_of"
+    },
+    {
+        "live": {
+            "supported": true,
+            "url": "wss://live.pandascore.co/matches/1148204",
+            "opens_at": "2025-05-03T14:45:00.000000Z"
+        },
+        "games": [
+            {
+                "complete": false,
+                "id": 265683,
+                "position": 1,
+                "status": "not_started",
+                "length": null,
+                "finished": false,
+                "match_id": 1148204,
+                "begin_at": null,
+                "detailed_stats": true,
+                "end_at": null,
+                "forfeit": false,
+                "winner_type": "Team",
+                "winner": {
+                    "id": null,
+                    "type": "Team"
+                }
+            },
+            {
+                "complete": false,
+                "id": 265684,
+                "position": 2,
+                "status": "not_started",
+                "length": null,
+                "finished": false,
+                "match_id": 1148204,
+                "begin_at": null,
+                "detailed_stats": true,
+                "end_at": null,
+                "forfeit": false,
+                "winner_type": "Team",
+                "winner": {
+                    "id": null,
+                    "type": "Team"
+                }
+            },
+            {
+                "complete": false,
+                "id": 265685,
+                "position": 3,
+                "status": "not_started",
+                "length": null,
+                "finished": false,
+                "match_id": 1148204,
+                "begin_at": null,
+                "detailed_stats": true,
+                "end_at": null,
+                "forfeit": false,
+                "winner_type": "Team",
+                "winner": {
+                    "id": null,
+                    "type": "Team"
+                }
+            }
+        ],
+        "detailed_stats": true,
+        "modified_at": "2025-03-21T12:49:51Z",
+        "number_of_games": 3,
+        "slug": "fnatic-vs-bds-2025-05-03",
+        "winner": null,
+        "streams_list": [
+            {
+                "main": false,
+                "language": "it",
+                "embed_url": "https://player.twitch.tv/?channel=litofficial",
+                "official": false,
+                "raw_url": "https://www.twitch.tv/litofficial"
+            },
+            {
+                "main": false,
+                "language": "hu",
+                "embed_url": "https://player.twitch.tv/?channel=esport2tv",
+                "official": false,
+                "raw_url": "https://www.twitch.tv/esport2tv"
+            },
+            {
+                "main": false,
+                "language": "pt",
+                "embed_url": "https://player.twitch.tv/?channel=inygontv1",
+                "official": false,
+                "raw_url": "https://www.twitch.tv/inygontv1"
+            },
+            {
+                "main": false,
+                "language": "es",
+                "embed_url": "https://player.twitch.tv/?channel=lvpes",
+                "official": false,
+                "raw_url": "https://www.twitch.tv/lvpes"
+            },
+            {
+                "main": false,
+                "language": "en",
+                "embed_url": "https://player.twitch.tv/?channel=caedrel",
+                "official": false,
+                "raw_url": "https://www.twitch.tv/caedrel"
+            },
+            {
+                "main": false,
+                "language": "pl",
+                "embed_url": null,
+                "official": false,
+                "raw_url": "https://www.youtube.com/@Nervarien"
+            },
+            {
+                "main": false,
+                "language": "fr",
+                "embed_url": "https://player.twitch.tv/?channel=otplol_",
+                "official": false,
+                "raw_url": "https://www.twitch.tv/otplol_"
+            },
+            {
+                "main": true,
+                "language": "en",
+                "embed_url": "https://player.twitch.tv/?channel=lec",
+                "official": true,
+                "raw_url": "https://www.twitch.tv/lec"
+            }
+        ],
+        "winner_type": "Team",
+        "serie": {
+            "id": 9172,
+            "name": "",
+            "year": 2025,
+            "slug": "league-of-legends-lec-spring-2025",
+            "begin_at": "2025-03-29T13:00:00Z",
+            "end_at": "2025-06-08T21:00:00Z",
+            "winner_id": null,
+            "winner_type": "Team",
+            "modified_at": "2025-04-03T19:28:47Z",
+            "league_id": 4197,
+            "season": "Spring",
+            "full_name": "Spring 2025"
+        },
+        "winner_id": null,
+        "forfeit": false,
+        "draw": false,
+        "videogame": {
+            "id": 1,
+            "name": "LoL",
+            "slug": "league-of-legends"
+        },
+        "rescheduled": false,
+        "tournament_id": 16321,
+        "videogame_title": null,
+        "serie_id": 9172,
+        "status": "not_started",
+        "league": {
+            "id": 4197,
+            "name": "LEC",
+            "url": null,
+            "slug": "league-of-legends-lec",
+            "modified_at": "2019-03-03T01:22:54Z",
+            "image_url": "https://cdn.pandascore.co/images/league/image/4197/lec_2023-png"
+        },
+        "original_scheduled_at": "2025-05-03T15:00:00Z",
+        "begin_at": "2025-05-03T15:00:00Z",
+        "league_id": 4197,
+        "scheduled_at": "2025-05-03T15:00:00Z",
+        "opponents": [
+            {
+                "type": "Team",
+                "opponent": {
+                    "id": 394,
+                    "name": "Fnatic",
+                    "location": "GB",
+                    "slug": "fnatic",
+                    "modified_at": "2025-03-27T09:46:25Z",
+                    "acronym": "FNC",
+                    "image_url": "https://cdn.pandascore.co/images/team/image/394/220px_fnaticlogo_square.png"
+                }
+            },
+            {
+                "type": "Team",
+                "opponent": {
+                    "id": 128267,
+                    "name": "BDS",
+                    "location": null,
+                    "slug": "bds",
+                    "modified_at": "2025-03-27T09:46:28Z",
+                    "acronym": "BDS",
+                    "image_url": "https://cdn.pandascore.co/images/team/image/128267/team_bd_slogo_square.png"
+                }
+            }
+        ],
+        "id": 1148204,
+        "results": [
+            {
+                "team_id": 394,
+                "score": 0
+            },
+            {
+                "team_id": 128267,
+                "score": 0
+            }
+        ],
+        "name": "FNC vs BDS",
+        "tournament": {
+            "id": 16321,
+            "name": "Regular Season",
+            "type": "offline",
+            "country": "DE",
+            "slug": "league-of-legends-lec-spring-2025-regular-season",
+            "begin_at": "2025-03-29T13:00:00Z",
+            "detailed_stats": true,
+            "end_at": "2025-05-12T21:00:00Z",
+            "winner_id": null,
+            "winner_type": "Team",
+            "serie_id": 9172,
+            "modified_at": "2025-04-14T19:44:41Z",
+            "league_id": 4197,
+            "prizepool": null,
+            "tier": "a",
+            "has_bracket": false,
+            "region": "WEU",
+            "live_supported": true
+        },
+        "videogame_version": null,
+        "game_advantage": null,
+        "end_at": null,
+        "match_type": "best_of"
+    },
+    {
+        "live": {
+            "supported": true,
+            "url": "wss://live.pandascore.co/matches/1148206",
+            "opens_at": "2025-05-03T16:45:00.000000Z"
+        },
+        "games": [
+            {
+                "complete": false,
+                "id": 265686,
+                "position": 1,
+                "status": "not_started",
+                "length": null,
+                "finished": false,
+                "match_id": 1148206,
+                "begin_at": null,
+                "detailed_stats": true,
+                "end_at": null,
+                "forfeit": false,
+                "winner_type": "Team",
+                "winner": {
+                    "id": null,
+                    "type": "Team"
+                }
+            },
+            {
+                "complete": false,
+                "id": 265687,
+                "position": 2,
+                "status": "not_started",
+                "length": null,
+                "finished": false,
+                "match_id": 1148206,
+                "begin_at": null,
+                "detailed_stats": true,
+                "end_at": null,
+                "forfeit": false,
+                "winner_type": "Team",
+                "winner": {
+                    "id": null,
+                    "type": "Team"
+                }
+            },
+            {
+                "complete": false,
+                "id": 265688,
+                "position": 3,
+                "status": "not_started",
+                "length": null,
+                "finished": false,
+                "match_id": 1148206,
+                "begin_at": null,
+                "detailed_stats": true,
+                "end_at": null,
+                "forfeit": false,
+                "winner_type": "Team",
+                "winner": {
+                    "id": null,
+                    "type": "Team"
+                }
+            }
+        ],
+        "detailed_stats": true,
+        "modified_at": "2025-03-21T12:49:51Z",
+        "number_of_games": 3,
+        "slug": "karmine-corp-vs-rogue-2025-05-03",
+        "winner": null,
+        "streams_list": [
+            {
+                "main": false,
+                "language": "it",
+                "embed_url": "https://player.twitch.tv/?channel=litofficial",
+                "official": false,
+                "raw_url": "https://www.twitch.tv/litofficial"
+            },
+            {
+                "main": false,
+                "language": "hu",
+                "embed_url": "https://player.twitch.tv/?channel=esport2tv",
+                "official": false,
+                "raw_url": "https://www.twitch.tv/esport2tv"
+            },
+            {
+                "main": false,
+                "language": "pt",
+                "embed_url": "https://player.twitch.tv/?channel=inygontv1",
+                "official": false,
+                "raw_url": "https://www.twitch.tv/inygontv1"
+            },
+            {
+                "main": false,
+                "language": "es",
+                "embed_url": "https://player.twitch.tv/?channel=lvpes",
+                "official": false,
+                "raw_url": "https://www.twitch.tv/lvpes"
+            },
+            {
+                "main": false,
+                "language": "en",
+                "embed_url": "https://player.twitch.tv/?channel=caedrel",
+                "official": false,
+                "raw_url": "https://www.twitch.tv/caedrel"
+            },
+            {
+                "main": false,
+                "language": "pl",
+                "embed_url": null,
+                "official": false,
+                "raw_url": "https://www.youtube.com/@Nervarien"
+            },
+            {
+                "main": false,
+                "language": "fr",
+                "embed_url": "https://player.twitch.tv/?channel=otplol_",
+                "official": false,
+                "raw_url": "https://www.twitch.tv/otplol_"
+            },
+            {
+                "main": true,
+                "language": "en",
+                "embed_url": "https://player.twitch.tv/?channel=lec",
+                "official": true,
+                "raw_url": "https://www.twitch.tv/lec"
+            }
+        ],
+        "winner_type": "Team",
+        "serie": {
+            "id": 9172,
+            "name": "",
+            "year": 2025,
+            "slug": "league-of-legends-lec-spring-2025",
+            "begin_at": "2025-03-29T13:00:00Z",
+            "end_at": "2025-06-08T21:00:00Z",
+            "winner_id": null,
+            "winner_type": "Team",
+            "modified_at": "2025-04-03T19:28:47Z",
+            "league_id": 4197,
+            "season": "Spring",
+            "full_name": "Spring 2025"
+        },
+        "winner_id": null,
+        "forfeit": false,
+        "draw": false,
+        "videogame": {
+            "id": 1,
+            "name": "LoL",
+            "slug": "league-of-legends"
+        },
+        "rescheduled": false,
+        "tournament_id": 16321,
+        "videogame_title": null,
+        "serie_id": 9172,
+        "status": "not_started",
+        "league": {
+            "id": 4197,
+            "name": "LEC",
+            "url": null,
+            "slug": "league-of-legends-lec",
+            "modified_at": "2019-03-03T01:22:54Z",
+            "image_url": "https://cdn.pandascore.co/images/league/image/4197/lec_2023-png"
+        },
+        "original_scheduled_at": "2025-05-03T17:00:00Z",
+        "begin_at": "2025-05-03T17:00:00Z",
+        "league_id": 4197,
+        "scheduled_at": "2025-05-03T17:00:00Z",
+        "opponents": [
+            {
+                "type": "Team",
+                "opponent": {
+                    "id": 134078,
+                    "name": "Karmine Corp",
+                    "location": "FR",
+                    "slug": "karmine-corp-academy",
+                    "modified_at": "2025-03-27T09:46:26Z",
+                    "acronym": "KC",
+                    "image_url": "https://cdn.pandascore.co/images/team/image/134078/karmine_corplogo_square.png"
+                }
+            },
+            {
+                "type": "Team",
+                "opponent": {
+                    "id": 3983,
+                    "name": "Rogue",
+                    "location": "US",
+                    "slug": "rogue",
+                    "modified_at": "2025-03-27T09:46:30Z",
+                    "acronym": "RGE",
+                    "image_url": "https://cdn.pandascore.co/images/team/image/3983/rogue__28_european_team_29logo_square.png"
+                }
+            }
+        ],
+        "id": 1148206,
+        "results": [
+            {
+                "team_id": 134078,
+                "score": 0
+            },
+            {
+                "team_id": 3983,
+                "score": 0
+            }
+        ],
+        "name": "KC vs RGE",
+        "tournament": {
+            "id": 16321,
+            "name": "Regular Season",
+            "type": "offline",
+            "country": "DE",
+            "slug": "league-of-legends-lec-spring-2025-regular-season",
+            "begin_at": "2025-03-29T13:00:00Z",
+            "detailed_stats": true,
+            "end_at": "2025-05-12T21:00:00Z",
+            "winner_id": null,
+            "winner_type": "Team",
+            "serie_id": 9172,
+            "modified_at": "2025-04-14T19:44:41Z",
+            "league_id": 4197,
+            "prizepool": null,
+            "tier": "a",
+            "has_bracket": false,
+            "region": "WEU",
+            "live_supported": true
+        },
+        "videogame_version": null,
+        "game_advantage": null,
+        "end_at": null,
+        "match_type": "best_of"
+    },
+    {
+        "live": {
+            "supported": true,
+            "url": "wss://live.pandascore.co/matches/1148207",
+            "opens_at": "2025-05-04T14:45:00.000000Z"
+        },
+        "games": [
+            {
+                "complete": false,
+                "id": 265689,
+                "position": 1,
+                "status": "not_started",
+                "length": null,
+                "finished": false,
+                "match_id": 1148207,
+                "begin_at": null,
+                "detailed_stats": true,
+                "end_at": null,
+                "forfeit": false,
+                "winner_type": "Team",
+                "winner": {
+                    "id": null,
+                    "type": "Team"
+                }
+            },
+            {
+                "complete": false,
+                "id": 265690,
+                "position": 2,
+                "status": "not_started",
+                "length": null,
+                "finished": false,
+                "match_id": 1148207,
+                "begin_at": null,
+                "detailed_stats": true,
+                "end_at": null,
+                "forfeit": false,
+                "winner_type": "Team",
+                "winner": {
+                    "id": null,
+                    "type": "Team"
+                }
+            },
+            {
+                "complete": false,
+                "id": 265691,
+                "position": 3,
+                "status": "not_started",
+                "length": null,
+                "finished": false,
+                "match_id": 1148207,
+                "begin_at": null,
+                "detailed_stats": true,
+                "end_at": null,
+                "forfeit": false,
+                "winner_type": "Team",
+                "winner": {
+                    "id": null,
+                    "type": "Team"
+                }
+            }
+        ],
+        "detailed_stats": true,
+        "modified_at": "2025-03-21T12:49:51Z",
+        "number_of_games": 3,
+        "slug": "giantx-vs-bds-2025-05-04",
+        "winner": null,
+        "streams_list": [
+            {
+                "main": false,
+                "language": "it",
+                "embed_url": "https://player.twitch.tv/?channel=litofficial",
+                "official": false,
+                "raw_url": "https://www.twitch.tv/litofficial"
+            },
+            {
+                "main": false,
+                "language": "hu",
+                "embed_url": "https://player.twitch.tv/?channel=esport2tv",
+                "official": false,
+                "raw_url": "https://www.twitch.tv/esport2tv"
+            },
+            {
+                "main": false,
+                "language": "pt",
+                "embed_url": "https://player.twitch.tv/?channel=inygontv1",
+                "official": false,
+                "raw_url": "https://www.twitch.tv/inygontv1"
+            },
+            {
+                "main": false,
+                "language": "es",
+                "embed_url": "https://player.twitch.tv/?channel=lvpes",
+                "official": false,
+                "raw_url": "https://www.twitch.tv/lvpes"
+            },
+            {
+                "main": false,
+                "language": "en",
+                "embed_url": "https://player.twitch.tv/?channel=caedrel",
+                "official": false,
+                "raw_url": "https://www.twitch.tv/caedrel"
+            },
+            {
+                "main": false,
+                "language": "pl",
+                "embed_url": null,
+                "official": false,
+                "raw_url": "https://www.youtube.com/@Nervarien"
+            },
+            {
+                "main": false,
+                "language": "fr",
+                "embed_url": "https://player.twitch.tv/?channel=otplol_",
+                "official": false,
+                "raw_url": "https://www.twitch.tv/otplol_"
+            },
+            {
+                "main": true,
+                "language": "en",
+                "embed_url": "https://player.twitch.tv/?channel=lec",
+                "official": true,
+                "raw_url": "https://www.twitch.tv/lec"
+            }
+        ],
+        "winner_type": "Team",
+        "serie": {
+            "id": 9172,
+            "name": "",
+            "year": 2025,
+            "slug": "league-of-legends-lec-spring-2025",
+            "begin_at": "2025-03-29T13:00:00Z",
+            "end_at": "2025-06-08T21:00:00Z",
+            "winner_id": null,
+            "winner_type": "Team",
+            "modified_at": "2025-04-03T19:28:47Z",
+            "league_id": 4197,
+            "season": "Spring",
+            "full_name": "Spring 2025"
+        },
+        "winner_id": null,
+        "forfeit": false,
+        "draw": false,
+        "videogame": {
+            "id": 1,
+            "name": "LoL",
+            "slug": "league-of-legends"
+        },
+        "rescheduled": false,
+        "tournament_id": 16321,
+        "videogame_title": null,
+        "serie_id": 9172,
+        "status": "not_started",
+        "league": {
+            "id": 4197,
+            "name": "LEC",
+            "url": null,
+            "slug": "league-of-legends-lec",
+            "modified_at": "2019-03-03T01:22:54Z",
+            "image_url": "https://cdn.pandascore.co/images/league/image/4197/lec_2023-png"
+        },
+        "original_scheduled_at": "2025-05-04T15:00:00Z",
+        "begin_at": "2025-05-04T15:00:00Z",
+        "league_id": 4197,
+        "scheduled_at": "2025-05-04T15:00:00Z",
+        "opponents": [
+            {
+                "type": "Team",
+                "opponent": {
+                    "id": 134068,
+                    "name": "GIANTX",
+                    "location": "GB",
+                    "slug": "giantx",
+                    "modified_at": "2025-03-27T09:46:50Z",
+                    "acronym": "GX",
+                    "image_url": "https://cdn.pandascore.co/images/team/image/134068/giant_x_logo.svg.png"
+                }
+            },
+            {
+                "type": "Team",
+                "opponent": {
+                    "id": 128267,
+                    "name": "BDS",
+                    "location": null,
+                    "slug": "bds",
+                    "modified_at": "2025-03-27T09:46:28Z",
+                    "acronym": "BDS",
+                    "image_url": "https://cdn.pandascore.co/images/team/image/128267/team_bd_slogo_square.png"
+                }
+            }
+        ],
+        "id": 1148207,
+        "results": [
+            {
+                "team_id": 134068,
+                "score": 0
+            },
+            {
+                "team_id": 128267,
+                "score": 0
+            }
+        ],
+        "name": "GX vs BDS",
+        "tournament": {
+            "id": 16321,
+            "name": "Regular Season",
+            "type": "offline",
+            "country": "DE",
+            "slug": "league-of-legends-lec-spring-2025-regular-season",
+            "begin_at": "2025-03-29T13:00:00Z",
+            "detailed_stats": true,
+            "end_at": "2025-05-12T21:00:00Z",
+            "winner_id": null,
+            "winner_type": "Team",
+            "serie_id": 9172,
+            "modified_at": "2025-04-14T19:44:41Z",
+            "league_id": 4197,
+            "prizepool": null,
+            "tier": "a",
+            "has_bracket": false,
+            "region": "WEU",
+            "live_supported": true
+        },
+        "videogame_version": null,
+        "game_advantage": null,
+        "end_at": null,
+        "match_type": "best_of"
+    },
+    {
+        "live": {
+            "supported": true,
+            "url": "wss://live.pandascore.co/matches/1148208",
+            "opens_at": "2025-05-04T16:45:00.000000Z"
+        },
+        "games": [
+            {
+                "complete": false,
+                "id": 265692,
+                "position": 1,
+                "status": "not_started",
+                "length": null,
+                "finished": false,
+                "match_id": 1148208,
+                "begin_at": null,
+                "detailed_stats": true,
+                "end_at": null,
+                "forfeit": false,
+                "winner_type": "Team",
+                "winner": {
+                    "id": null,
+                    "type": "Team"
+                }
+            },
+            {
+                "complete": false,
+                "id": 265693,
+                "position": 2,
+                "status": "not_started",
+                "length": null,
+                "finished": false,
+                "match_id": 1148208,
+                "begin_at": null,
+                "detailed_stats": true,
+                "end_at": null,
+                "forfeit": false,
+                "winner_type": "Team",
+                "winner": {
+                    "id": null,
+                    "type": "Team"
+                }
+            },
+            {
+                "complete": false,
+                "id": 265694,
+                "position": 3,
+                "status": "not_started",
+                "length": null,
+                "finished": false,
+                "match_id": 1148208,
+                "begin_at": null,
+                "detailed_stats": true,
+                "end_at": null,
+                "forfeit": false,
+                "winner_type": "Team",
+                "winner": {
+                    "id": null,
+                    "type": "Team"
+                }
+            }
+        ],
+        "detailed_stats": true,
+        "modified_at": "2025-03-21T12:49:51Z",
+        "number_of_games": 3,
+        "slug": "g2-esports-vs-team-vitality-2025-05-04",
+        "winner": null,
+        "streams_list": [
+            {
+                "main": false,
+                "language": "it",
+                "embed_url": "https://player.twitch.tv/?channel=litofficial",
+                "official": false,
+                "raw_url": "https://www.twitch.tv/litofficial"
+            },
+            {
+                "main": false,
+                "language": "hu",
+                "embed_url": "https://player.twitch.tv/?channel=esport2tv",
+                "official": false,
+                "raw_url": "https://www.twitch.tv/esport2tv"
+            },
+            {
+                "main": false,
+                "language": "pt",
+                "embed_url": "https://player.twitch.tv/?channel=inygontv1",
+                "official": false,
+                "raw_url": "https://www.twitch.tv/inygontv1"
+            },
+            {
+                "main": false,
+                "language": "es",
+                "embed_url": "https://player.twitch.tv/?channel=lvpes",
+                "official": false,
+                "raw_url": "https://www.twitch.tv/lvpes"
+            },
+            {
+                "main": false,
+                "language": "en",
+                "embed_url": "https://player.twitch.tv/?channel=caedrel",
+                "official": false,
+                "raw_url": "https://www.twitch.tv/caedrel"
+            },
+            {
+                "main": false,
+                "language": "pl",
+                "embed_url": null,
+                "official": false,
+                "raw_url": "https://www.youtube.com/@Nervarien"
+            },
+            {
+                "main": false,
+                "language": "fr",
+                "embed_url": "https://player.twitch.tv/?channel=otplol_",
+                "official": false,
+                "raw_url": "https://www.twitch.tv/otplol_"
+            },
+            {
+                "main": true,
+                "language": "en",
+                "embed_url": "https://player.twitch.tv/?channel=lec",
+                "official": true,
+                "raw_url": "https://www.twitch.tv/lec"
+            }
+        ],
+        "winner_type": "Team",
+        "serie": {
+            "id": 9172,
+            "name": "",
+            "year": 2025,
+            "slug": "league-of-legends-lec-spring-2025",
+            "begin_at": "2025-03-29T13:00:00Z",
+            "end_at": "2025-06-08T21:00:00Z",
+            "winner_id": null,
+            "winner_type": "Team",
+            "modified_at": "2025-04-03T19:28:47Z",
+            "league_id": 4197,
+            "season": "Spring",
+            "full_name": "Spring 2025"
+        },
+        "winner_id": null,
+        "forfeit": false,
+        "draw": false,
+        "videogame": {
+            "id": 1,
+            "name": "LoL",
+            "slug": "league-of-legends"
+        },
+        "rescheduled": false,
+        "tournament_id": 16321,
+        "videogame_title": null,
+        "serie_id": 9172,
+        "status": "not_started",
+        "league": {
+            "id": 4197,
+            "name": "LEC",
+            "url": null,
+            "slug": "league-of-legends-lec",
+            "modified_at": "2019-03-03T01:22:54Z",
+            "image_url": "https://cdn.pandascore.co/images/league/image/4197/lec_2023-png"
+        },
+        "original_scheduled_at": "2025-05-04T17:00:00Z",
+        "begin_at": "2025-05-04T17:00:00Z",
+        "league_id": 4197,
+        "scheduled_at": "2025-05-04T17:00:00Z",
+        "opponents": [
+            {
+                "type": "Team",
+                "opponent": {
+                    "id": 88,
+                    "name": "G2 Esports",
+                    "location": "DE",
+                    "slug": "g2-esports",
+                    "modified_at": "2025-03-27T09:46:24Z",
+                    "acronym": "G2",
+                    "image_url": "https://cdn.pandascore.co/images/team/image/88/g2-esports.png"
+                }
+            },
+            {
+                "type": "Team",
+                "opponent": {
+                    "id": 115,
+                    "name": "Team Vitality",
+                    "location": "FR",
+                    "slug": "vitality",
+                    "modified_at": "2025-03-27T09:46:28Z",
+                    "acronym": "VIT",
+                    "image_url": "https://cdn.pandascore.co/images/team/image/115/team_vitalitylogo_square.png"
+                }
+            }
+        ],
+        "id": 1148208,
+        "results": [
+            {
+                "team_id": 88,
+                "score": 0
+            },
+            {
+                "team_id": 115,
+                "score": 0
+            }
+        ],
+        "name": "G2 vs VIT",
+        "tournament": {
+            "id": 16321,
+            "name": "Regular Season",
+            "type": "offline",
+            "country": "DE",
+            "slug": "league-of-legends-lec-spring-2025-regular-season",
+            "begin_at": "2025-03-29T13:00:00Z",
+            "detailed_stats": true,
+            "end_at": "2025-05-12T21:00:00Z",
+            "winner_id": null,
+            "winner_type": "Team",
+            "serie_id": 9172,
+            "modified_at": "2025-04-14T19:44:41Z",
+            "league_id": 4197,
+            "prizepool": null,
+            "tier": "a",
+            "has_bracket": false,
+            "region": "WEU",
+            "live_supported": true
+        },
+        "videogame_version": null,
+        "game_advantage": null,
+        "end_at": null,
+        "match_type": "best_of"
+    },
+    {
+        "live": {
+            "supported": true,
+            "url": "wss://live.pandascore.co/matches/1148209",
+            "opens_at": "2025-05-05T14:45:00.000000Z"
+        },
+        "games": [
+            {
+                "complete": false,
+                "id": 265695,
+                "position": 1,
+                "status": "not_started",
+                "length": null,
+                "finished": false,
+                "match_id": 1148209,
+                "begin_at": null,
+                "detailed_stats": true,
+                "end_at": null,
+                "forfeit": false,
+                "winner_type": "Team",
+                "winner": {
+                    "id": null,
+                    "type": "Team"
+                }
+            },
+            {
+                "complete": false,
+                "id": 265696,
+                "position": 2,
+                "status": "not_started",
+                "length": null,
+                "finished": false,
+                "match_id": 1148209,
+                "begin_at": null,
+                "detailed_stats": true,
+                "end_at": null,
+                "forfeit": false,
+                "winner_type": "Team",
+                "winner": {
+                    "id": null,
+                    "type": "Team"
+                }
+            },
+            {
+                "complete": false,
+                "id": 265697,
+                "position": 3,
+                "status": "not_started",
+                "length": null,
+                "finished": false,
+                "match_id": 1148209,
+                "begin_at": null,
+                "detailed_stats": true,
+                "end_at": null,
+                "forfeit": false,
+                "winner_type": "Team",
+                "winner": {
+                    "id": null,
+                    "type": "Team"
+                }
+            }
+        ],
+        "detailed_stats": true,
+        "modified_at": "2025-03-21T12:49:51Z",
+        "number_of_games": 3,
+        "slug": "team-heretics-vs-fnatic-2025-05-05",
+        "winner": null,
+        "streams_list": [
+            {
+                "main": false,
+                "language": "it",
+                "embed_url": "https://player.twitch.tv/?channel=litofficial",
+                "official": false,
+                "raw_url": "https://www.twitch.tv/litofficial"
+            },
+            {
+                "main": false,
+                "language": "hu",
+                "embed_url": "https://player.twitch.tv/?channel=esport2tv",
+                "official": false,
+                "raw_url": "https://www.twitch.tv/esport2tv"
+            },
+            {
+                "main": false,
+                "language": "pt",
+                "embed_url": "https://player.twitch.tv/?channel=inygontv1",
+                "official": false,
+                "raw_url": "https://www.twitch.tv/inygontv1"
+            },
+            {
+                "main": false,
+                "language": "es",
+                "embed_url": "https://player.twitch.tv/?channel=lvpes",
+                "official": false,
+                "raw_url": "https://www.twitch.tv/lvpes"
+            },
+            {
+                "main": false,
+                "language": "en",
+                "embed_url": "https://player.twitch.tv/?channel=caedrel",
+                "official": false,
+                "raw_url": "https://www.twitch.tv/caedrel"
+            },
+            {
+                "main": false,
+                "language": "pl",
+                "embed_url": null,
+                "official": false,
+                "raw_url": "https://www.youtube.com/@Nervarien"
+            },
+            {
+                "main": false,
+                "language": "fr",
+                "embed_url": "https://player.twitch.tv/?channel=otplol_",
+                "official": false,
+                "raw_url": "https://www.twitch.tv/otplol_"
+            },
+            {
+                "main": true,
+                "language": "en",
+                "embed_url": "https://player.twitch.tv/?channel=lec",
+                "official": true,
+                "raw_url": "https://www.twitch.tv/lec"
+            }
+        ],
+        "winner_type": "Team",
+        "serie": {
+            "id": 9172,
+            "name": "",
+            "year": 2025,
+            "slug": "league-of-legends-lec-spring-2025",
+            "begin_at": "2025-03-29T13:00:00Z",
+            "end_at": "2025-06-08T21:00:00Z",
+            "winner_id": null,
+            "winner_type": "Team",
+            "modified_at": "2025-04-03T19:28:47Z",
+            "league_id": 4197,
+            "season": "Spring",
+            "full_name": "Spring 2025"
+        },
+        "winner_id": null,
+        "forfeit": false,
+        "draw": false,
+        "videogame": {
+            "id": 1,
+            "name": "LoL",
+            "slug": "league-of-legends"
+        },
+        "rescheduled": false,
+        "tournament_id": 16321,
+        "videogame_title": null,
+        "serie_id": 9172,
+        "status": "not_started",
+        "league": {
+            "id": 4197,
+            "name": "LEC",
+            "url": null,
+            "slug": "league-of-legends-lec",
+            "modified_at": "2019-03-03T01:22:54Z",
+            "image_url": "https://cdn.pandascore.co/images/league/image/4197/lec_2023-png"
+        },
+        "original_scheduled_at": "2025-05-05T15:00:00Z",
+        "begin_at": "2025-05-05T15:00:00Z",
+        "league_id": 4197,
+        "scheduled_at": "2025-05-05T15:00:00Z",
+        "opponents": [
+            {
+                "type": "Team",
+                "opponent": {
+                    "id": 130105,
+                    "name": "Team Heretics",
+                    "location": "ES",
+                    "slug": "team-heretics",
+                    "modified_at": "2025-03-27T09:46:31Z",
+                    "acronym": "TH",
+                    "image_url": "https://cdn.pandascore.co/images/team/image/130105/team_hereticslogo_square.png"
+                }
+            },
+            {
+                "type": "Team",
+                "opponent": {
+                    "id": 394,
+                    "name": "Fnatic",
+                    "location": "GB",
+                    "slug": "fnatic",
+                    "modified_at": "2025-03-27T09:46:25Z",
+                    "acronym": "FNC",
+                    "image_url": "https://cdn.pandascore.co/images/team/image/394/220px_fnaticlogo_square.png"
+                }
+            }
+        ],
+        "id": 1148209,
+        "results": [
+            {
+                "team_id": 130105,
+                "score": 0
+            },
+            {
+                "team_id": 394,
+                "score": 0
+            }
+        ],
+        "name": "TH vs FNC",
+        "tournament": {
+            "id": 16321,
+            "name": "Regular Season",
+            "type": "offline",
+            "country": "DE",
+            "slug": "league-of-legends-lec-spring-2025-regular-season",
+            "begin_at": "2025-03-29T13:00:00Z",
+            "detailed_stats": true,
+            "end_at": "2025-05-12T21:00:00Z",
+            "winner_id": null,
+            "winner_type": "Team",
+            "serie_id": 9172,
+            "modified_at": "2025-04-14T19:44:41Z",
+            "league_id": 4197,
+            "prizepool": null,
+            "tier": "a",
+            "has_bracket": false,
+            "region": "WEU",
+            "live_supported": true
+        },
+        "videogame_version": null,
+        "game_advantage": null,
+        "end_at": null,
+        "match_type": "best_of"
+    },
+    {
+        "live": {
+            "supported": true,
+            "url": "wss://live.pandascore.co/matches/1148210",
+            "opens_at": "2025-05-05T16:45:00.000000Z"
+        },
+        "games": [
+            {
+                "complete": false,
+                "id": 265698,
+                "position": 1,
+                "status": "not_started",
+                "length": null,
+                "finished": false,
+                "match_id": 1148210,
+                "begin_at": null,
+                "detailed_stats": true,
+                "end_at": null,
+                "forfeit": false,
+                "winner_type": "Team",
+                "winner": {
+                    "id": null,
+                    "type": "Team"
+                }
+            },
+            {
+                "complete": false,
+                "id": 265699,
+                "position": 2,
+                "status": "not_started",
+                "length": null,
+                "finished": false,
+                "match_id": 1148210,
+                "begin_at": null,
+                "detailed_stats": true,
+                "end_at": null,
+                "forfeit": false,
+                "winner_type": "Team",
+                "winner": {
+                    "id": null,
+                    "type": "Team"
+                }
+            },
+            {
+                "complete": false,
+                "id": 265700,
+                "position": 3,
+                "status": "not_started",
+                "length": null,
+                "finished": false,
+                "match_id": 1148210,
+                "begin_at": null,
+                "detailed_stats": true,
+                "end_at": null,
+                "forfeit": false,
+                "winner_type": "Team",
+                "winner": {
+                    "id": null,
+                    "type": "Team"
+                }
+            }
+        ],
+        "detailed_stats": true,
+        "modified_at": "2025-03-21T12:49:51Z",
+        "number_of_games": 3,
+        "slug": "movistar-koi-vs-sk-gaming-2025-05-05",
+        "winner": null,
+        "streams_list": [
+            {
+                "main": false,
+                "language": "it",
+                "embed_url": "https://player.twitch.tv/?channel=litofficial",
+                "official": false,
+                "raw_url": "https://www.twitch.tv/litofficial"
+            },
+            {
+                "main": false,
+                "language": "hu",
+                "embed_url": "https://player.twitch.tv/?channel=esport2tv",
+                "official": false,
+                "raw_url": "https://www.twitch.tv/esport2tv"
+            },
+            {
+                "main": false,
+                "language": "pt",
+                "embed_url": "https://player.twitch.tv/?channel=inygontv1",
+                "official": false,
+                "raw_url": "https://www.twitch.tv/inygontv1"
+            },
+            {
+                "main": false,
+                "language": "es",
+                "embed_url": "https://player.twitch.tv/?channel=lvpes",
+                "official": false,
+                "raw_url": "https://www.twitch.tv/lvpes"
+            },
+            {
+                "main": false,
+                "language": "en",
+                "embed_url": "https://player.twitch.tv/?channel=caedrel",
+                "official": false,
+                "raw_url": "https://www.twitch.tv/caedrel"
+            },
+            {
+                "main": false,
+                "language": "pl",
+                "embed_url": null,
+                "official": false,
+                "raw_url": "https://www.youtube.com/@Nervarien"
+            },
+            {
+                "main": false,
+                "language": "fr",
+                "embed_url": "https://player.twitch.tv/?channel=otplol_",
+                "official": false,
+                "raw_url": "https://www.twitch.tv/otplol_"
+            },
+            {
+                "main": true,
+                "language": "en",
+                "embed_url": "https://player.twitch.tv/?channel=lec",
+                "official": true,
+                "raw_url": "https://www.twitch.tv/lec"
+            }
+        ],
+        "winner_type": "Team",
+        "serie": {
+            "id": 9172,
+            "name": "",
+            "year": 2025,
+            "slug": "league-of-legends-lec-spring-2025",
+            "begin_at": "2025-03-29T13:00:00Z",
+            "end_at": "2025-06-08T21:00:00Z",
+            "winner_id": null,
+            "winner_type": "Team",
+            "modified_at": "2025-04-03T19:28:47Z",
+            "league_id": 4197,
+            "season": "Spring",
+            "full_name": "Spring 2025"
+        },
+        "winner_id": null,
+        "forfeit": false,
+        "draw": false,
+        "videogame": {
+            "id": 1,
+            "name": "LoL",
+            "slug": "league-of-legends"
+        },
+        "rescheduled": false,
+        "tournament_id": 16321,
+        "videogame_title": null,
+        "serie_id": 9172,
+        "status": "not_started",
+        "league": {
+            "id": 4197,
+            "name": "LEC",
+            "url": null,
+            "slug": "league-of-legends-lec",
+            "modified_at": "2019-03-03T01:22:54Z",
+            "image_url": "https://cdn.pandascore.co/images/league/image/4197/lec_2023-png"
+        },
+        "original_scheduled_at": "2025-05-05T17:00:00Z",
+        "begin_at": "2025-05-05T17:00:00Z",
+        "league_id": 4197,
+        "scheduled_at": "2025-05-05T17:00:00Z",
+        "opponents": [
+            {
+                "type": "Team",
+                "opponent": {
+                    "id": 126536,
+                    "name": "Movistar KOI",
+                    "location": "ES",
+                    "slug": "mad-lions-league-of-legends",
+                    "modified_at": "2025-03-27T10:14:20Z",
+                    "acronym": "MKOI",
+                    "image_url": "https://cdn.pandascore.co/images/team/image/126536/movistar_ko_ilogo_square.png"
+                }
+            },
+            {
+                "type": "Team",
+                "opponent": {
+                    "id": 395,
+                    "name": "SK Gaming",
+                    "location": "DE",
+                    "slug": "sk-gaming",
+                    "modified_at": "2025-03-27T09:59:40Z",
+                    "acronym": "SK",
+                    "image_url": "https://cdn.pandascore.co/images/team/image/395/600px-SK_Gaminglogo_square.png"
+                }
+            }
+        ],
+        "id": 1148210,
+        "results": [
+            {
+                "team_id": 126536,
+                "score": 0
+            },
+            {
+                "team_id": 395,
+                "score": 0
+            }
+        ],
+        "name": "MKOI vs SK",
+        "tournament": {
+            "id": 16321,
+            "name": "Regular Season",
+            "type": "offline",
+            "country": "DE",
+            "slug": "league-of-legends-lec-spring-2025-regular-season",
+            "begin_at": "2025-03-29T13:00:00Z",
+            "detailed_stats": true,
+            "end_at": "2025-05-12T21:00:00Z",
+            "winner_id": null,
+            "winner_type": "Team",
+            "serie_id": 9172,
+            "modified_at": "2025-04-14T19:44:41Z",
+            "league_id": 4197,
+            "prizepool": null,
+            "tier": "a",
+            "has_bracket": false,
+            "region": "WEU",
+            "live_supported": true
+        },
+        "videogame_version": null,
+        "game_advantage": null,
+        "end_at": null,
+        "match_type": "best_of"
+    },
+    {
+        "live": {
+            "supported": true,
+            "url": "wss://live.pandascore.co/matches/1148212",
+            "opens_at": "2025-05-10T14:45:00.000000Z"
+        },
+        "games": [
+            {
+                "complete": false,
+                "id": 265701,
+                "position": 1,
+                "status": "not_started",
+                "length": null,
+                "finished": false,
+                "match_id": 1148212,
+                "begin_at": null,
+                "detailed_stats": true,
+                "end_at": null,
+                "forfeit": false,
+                "winner_type": "Team",
+                "winner": {
+                    "id": null,
+                    "type": "Team"
+                }
+            },
+            {
+                "complete": false,
+                "id": 265702,
+                "position": 2,
+                "status": "not_started",
+                "length": null,
+                "finished": false,
+                "match_id": 1148212,
+                "begin_at": null,
+                "detailed_stats": true,
+                "end_at": null,
+                "forfeit": false,
+                "winner_type": "Team",
+                "winner": {
+                    "id": null,
+                    "type": "Team"
+                }
+            },
+            {
+                "complete": false,
+                "id": 265703,
+                "position": 3,
+                "status": "not_started",
+                "length": null,
+                "finished": false,
+                "match_id": 1148212,
+                "begin_at": null,
+                "detailed_stats": true,
+                "end_at": null,
+                "forfeit": false,
+                "winner_type": "Team",
+                "winner": {
+                    "id": null,
+                    "type": "Team"
+                }
+            }
+        ],
+        "detailed_stats": true,
+        "modified_at": "2025-03-21T12:49:51Z",
+        "number_of_games": 3,
+        "slug": "g2-esports-vs-sk-gaming-2025-05-10",
+        "winner": null,
+        "streams_list": [
+            {
+                "main": false,
+                "language": "it",
+                "embed_url": "https://player.twitch.tv/?channel=litofficial",
+                "official": false,
+                "raw_url": "https://www.twitch.tv/litofficial"
+            },
+            {
+                "main": false,
+                "language": "hu",
+                "embed_url": "https://player.twitch.tv/?channel=esport2tv",
+                "official": false,
+                "raw_url": "https://www.twitch.tv/esport2tv"
+            },
+            {
+                "main": false,
+                "language": "pt",
+                "embed_url": "https://player.twitch.tv/?channel=inygontv1",
+                "official": false,
+                "raw_url": "https://www.twitch.tv/inygontv1"
+            },
+            {
+                "main": false,
+                "language": "es",
+                "embed_url": "https://player.twitch.tv/?channel=lvpes",
+                "official": false,
+                "raw_url": "https://www.twitch.tv/lvpes"
+            },
+            {
+                "main": false,
+                "language": "en",
+                "embed_url": "https://player.twitch.tv/?channel=caedrel",
+                "official": false,
+                "raw_url": "https://www.twitch.tv/caedrel"
+            },
+            {
+                "main": false,
+                "language": "pl",
+                "embed_url": null,
+                "official": false,
+                "raw_url": "https://www.youtube.com/@Nervarien"
+            },
+            {
+                "main": false,
+                "language": "fr",
+                "embed_url": "https://player.twitch.tv/?channel=otplol_",
+                "official": false,
+                "raw_url": "https://www.twitch.tv/otplol_"
+            },
+            {
+                "main": true,
+                "language": "en",
+                "embed_url": "https://player.twitch.tv/?channel=lec",
+                "official": true,
+                "raw_url": "https://www.twitch.tv/lec"
+            }
+        ],
+        "winner_type": "Team",
+        "serie": {
+            "id": 9172,
+            "name": "",
+            "year": 2025,
+            "slug": "league-of-legends-lec-spring-2025",
+            "begin_at": "2025-03-29T13:00:00Z",
+            "end_at": "2025-06-08T21:00:00Z",
+            "winner_id": null,
+            "winner_type": "Team",
+            "modified_at": "2025-04-03T19:28:47Z",
+            "league_id": 4197,
+            "season": "Spring",
+            "full_name": "Spring 2025"
+        },
+        "winner_id": null,
+        "forfeit": false,
+        "draw": false,
+        "videogame": {
+            "id": 1,
+            "name": "LoL",
+            "slug": "league-of-legends"
+        },
+        "rescheduled": false,
+        "tournament_id": 16321,
+        "videogame_title": null,
+        "serie_id": 9172,
+        "status": "not_started",
+        "league": {
+            "id": 4197,
+            "name": "LEC",
+            "url": null,
+            "slug": "league-of-legends-lec",
+            "modified_at": "2019-03-03T01:22:54Z",
+            "image_url": "https://cdn.pandascore.co/images/league/image/4197/lec_2023-png"
+        },
+        "original_scheduled_at": "2025-05-10T15:00:00Z",
+        "begin_at": "2025-05-10T15:00:00Z",
+        "league_id": 4197,
+        "scheduled_at": "2025-05-10T15:00:00Z",
+        "opponents": [
+            {
+                "type": "Team",
+                "opponent": {
+                    "id": 88,
+                    "name": "G2 Esports",
+                    "location": "DE",
+                    "slug": "g2-esports",
+                    "modified_at": "2025-03-27T09:46:24Z",
+                    "acronym": "G2",
+                    "image_url": "https://cdn.pandascore.co/images/team/image/88/g2-esports.png"
+                }
+            },
+            {
+                "type": "Team",
+                "opponent": {
+                    "id": 395,
+                    "name": "SK Gaming",
+                    "location": "DE",
+                    "slug": "sk-gaming",
+                    "modified_at": "2025-03-27T09:59:40Z",
+                    "acronym": "SK",
+                    "image_url": "https://cdn.pandascore.co/images/team/image/395/600px-SK_Gaminglogo_square.png"
+                }
+            }
+        ],
+        "id": 1148212,
+        "results": [
+            {
+                "team_id": 88,
+                "score": 0
+            },
+            {
+                "team_id": 395,
+                "score": 0
+            }
+        ],
+        "name": "G2 vs SK",
+        "tournament": {
+            "id": 16321,
+            "name": "Regular Season",
+            "type": "offline",
+            "country": "DE",
+            "slug": "league-of-legends-lec-spring-2025-regular-season",
+            "begin_at": "2025-03-29T13:00:00Z",
+            "detailed_stats": true,
+            "end_at": "2025-05-12T21:00:00Z",
+            "winner_id": null,
+            "winner_type": "Team",
+            "serie_id": 9172,
+            "modified_at": "2025-04-14T19:44:41Z",
+            "league_id": 4197,
+            "prizepool": null,
+            "tier": "a",
+            "has_bracket": false,
+            "region": "WEU",
+            "live_supported": true
+        },
+        "videogame_version": null,
+        "game_advantage": null,
+        "end_at": null,
+        "match_type": "best_of"
+    },
+    {
+        "live": {
+            "supported": true,
+            "url": "wss://live.pandascore.co/matches/1148216",
+            "opens_at": "2025-05-10T16:45:00.000000Z"
+        },
+        "games": [
+            {
+                "complete": false,
+                "id": 265704,
+                "position": 1,
+                "status": "not_started",
+                "length": null,
+                "finished": false,
+                "match_id": 1148216,
+                "begin_at": null,
+                "detailed_stats": true,
+                "end_at": null,
+                "forfeit": false,
+                "winner_type": "Team",
+                "winner": {
+                    "id": null,
+                    "type": "Team"
+                }
+            },
+            {
+                "complete": false,
+                "id": 265705,
+                "position": 2,
+                "status": "not_started",
+                "length": null,
+                "finished": false,
+                "match_id": 1148216,
+                "begin_at": null,
+                "detailed_stats": true,
+                "end_at": null,
+                "forfeit": false,
+                "winner_type": "Team",
+                "winner": {
+                    "id": null,
+                    "type": "Team"
+                }
+            },
+            {
+                "complete": false,
+                "id": 265706,
+                "position": 3,
+                "status": "not_started",
+                "length": null,
+                "finished": false,
+                "match_id": 1148216,
+                "begin_at": null,
+                "detailed_stats": true,
+                "end_at": null,
+                "forfeit": false,
+                "winner_type": "Team",
+                "winner": {
+                    "id": null,
+                    "type": "Team"
+                }
+            }
+        ],
+        "detailed_stats": true,
+        "modified_at": "2025-03-21T12:49:51Z",
+        "number_of_games": 3,
+        "slug": "karmine-corp-vs-team-vitality-2025-05-10",
+        "winner": null,
+        "streams_list": [
+            {
+                "main": false,
+                "language": "it",
+                "embed_url": "https://player.twitch.tv/?channel=litofficial",
+                "official": false,
+                "raw_url": "https://www.twitch.tv/litofficial"
+            },
+            {
+                "main": false,
+                "language": "hu",
+                "embed_url": "https://player.twitch.tv/?channel=esport2tv",
+                "official": false,
+                "raw_url": "https://www.twitch.tv/esport2tv"
+            },
+            {
+                "main": false,
+                "language": "pt",
+                "embed_url": "https://player.twitch.tv/?channel=inygontv1",
+                "official": false,
+                "raw_url": "https://www.twitch.tv/inygontv1"
+            },
+            {
+                "main": false,
+                "language": "es",
+                "embed_url": "https://player.twitch.tv/?channel=lvpes",
+                "official": false,
+                "raw_url": "https://www.twitch.tv/lvpes"
+            },
+            {
+                "main": false,
+                "language": "en",
+                "embed_url": "https://player.twitch.tv/?channel=caedrel",
+                "official": false,
+                "raw_url": "https://www.twitch.tv/caedrel"
+            },
+            {
+                "main": false,
+                "language": "pl",
+                "embed_url": null,
+                "official": false,
+                "raw_url": "https://www.youtube.com/@Nervarien"
+            },
+            {
+                "main": false,
+                "language": "fr",
+                "embed_url": "https://player.twitch.tv/?channel=otplol_",
+                "official": false,
+                "raw_url": "https://www.twitch.tv/otplol_"
+            },
+            {
+                "main": true,
+                "language": "en",
+                "embed_url": "https://player.twitch.tv/?channel=lec",
+                "official": true,
+                "raw_url": "https://www.twitch.tv/lec"
+            }
+        ],
+        "winner_type": "Team",
+        "serie": {
+            "id": 9172,
+            "name": "",
+            "year": 2025,
+            "slug": "league-of-legends-lec-spring-2025",
+            "begin_at": "2025-03-29T13:00:00Z",
+            "end_at": "2025-06-08T21:00:00Z",
+            "winner_id": null,
+            "winner_type": "Team",
+            "modified_at": "2025-04-03T19:28:47Z",
+            "league_id": 4197,
+            "season": "Spring",
+            "full_name": "Spring 2025"
+        },
+        "winner_id": null,
+        "forfeit": false,
+        "draw": false,
+        "videogame": {
+            "id": 1,
+            "name": "LoL",
+            "slug": "league-of-legends"
+        },
+        "rescheduled": false,
+        "tournament_id": 16321,
+        "videogame_title": null,
+        "serie_id": 9172,
+        "status": "not_started",
+        "league": {
+            "id": 4197,
+            "name": "LEC",
+            "url": null,
+            "slug": "league-of-legends-lec",
+            "modified_at": "2019-03-03T01:22:54Z",
+            "image_url": "https://cdn.pandascore.co/images/league/image/4197/lec_2023-png"
+        },
+        "original_scheduled_at": "2025-05-10T17:00:00Z",
+        "begin_at": "2025-05-10T17:00:00Z",
+        "league_id": 4197,
+        "scheduled_at": "2025-05-10T17:00:00Z",
+        "opponents": [
+            {
+                "type": "Team",
+                "opponent": {
+                    "id": 134078,
+                    "name": "Karmine Corp",
+                    "location": "FR",
+                    "slug": "karmine-corp-academy",
+                    "modified_at": "2025-03-27T09:46:26Z",
+                    "acronym": "KC",
+                    "image_url": "https://cdn.pandascore.co/images/team/image/134078/karmine_corplogo_square.png"
+                }
+            },
+            {
+                "type": "Team",
+                "opponent": {
+                    "id": 115,
+                    "name": "Team Vitality",
+                    "location": "FR",
+                    "slug": "vitality",
+                    "modified_at": "2025-03-27T09:46:28Z",
+                    "acronym": "VIT",
+                    "image_url": "https://cdn.pandascore.co/images/team/image/115/team_vitalitylogo_square.png"
+                }
+            }
+        ],
+        "id": 1148216,
+        "results": [
+            {
+                "team_id": 134078,
+                "score": 0
+            },
+            {
+                "team_id": 115,
+                "score": 0
+            }
+        ],
+        "name": "KC vs VIT",
+        "tournament": {
+            "id": 16321,
+            "name": "Regular Season",
+            "type": "offline",
+            "country": "DE",
+            "slug": "league-of-legends-lec-spring-2025-regular-season",
+            "begin_at": "2025-03-29T13:00:00Z",
+            "detailed_stats": true,
+            "end_at": "2025-05-12T21:00:00Z",
+            "winner_id": null,
+            "winner_type": "Team",
+            "serie_id": 9172,
+            "modified_at": "2025-04-14T19:44:41Z",
+            "league_id": 4197,
+            "prizepool": null,
+            "tier": "a",
+            "has_bracket": false,
+            "region": "WEU",
+            "live_supported": true
+        },
+        "videogame_version": null,
+        "game_advantage": null,
+        "end_at": null,
+        "match_type": "best_of"
+    },
+    {
+        "live": {
+            "supported": true,
+            "url": "wss://live.pandascore.co/matches/1148221",
+            "opens_at": "2025-05-11T14:45:00.000000Z"
+        },
+        "games": [
+            {
+                "complete": false,
+                "id": 265707,
+                "position": 1,
+                "status": "not_started",
+                "length": null,
+                "finished": false,
+                "match_id": 1148221,
+                "begin_at": null,
+                "detailed_stats": true,
+                "end_at": null,
+                "forfeit": false,
+                "winner_type": "Team",
+                "winner": {
+                    "id": null,
+                    "type": "Team"
+                }
+            },
+            {
+                "complete": false,
+                "id": 265708,
+                "position": 2,
+                "status": "not_started",
+                "length": null,
+                "finished": false,
+                "match_id": 1148221,
+                "begin_at": null,
+                "detailed_stats": true,
+                "end_at": null,
+                "forfeit": false,
+                "winner_type": "Team",
+                "winner": {
+                    "id": null,
+                    "type": "Team"
+                }
+            },
+            {
+                "complete": false,
+                "id": 265709,
+                "position": 3,
+                "status": "not_started",
+                "length": null,
+                "finished": false,
+                "match_id": 1148221,
+                "begin_at": null,
+                "detailed_stats": true,
+                "end_at": null,
+                "forfeit": false,
+                "winner_type": "Team",
+                "winner": {
+                    "id": null,
+                    "type": "Team"
+                }
+            }
+        ],
+        "detailed_stats": true,
+        "modified_at": "2025-03-21T12:49:51Z",
+        "number_of_games": 3,
+        "slug": "team-vitality-vs-sk-gaming-2025-05-11",
+        "winner": null,
+        "streams_list": [
+            {
+                "main": false,
+                "language": "it",
+                "embed_url": "https://player.twitch.tv/?channel=litofficial",
+                "official": false,
+                "raw_url": "https://www.twitch.tv/litofficial"
+            },
+            {
+                "main": false,
+                "language": "hu",
+                "embed_url": "https://player.twitch.tv/?channel=esport2tv",
+                "official": false,
+                "raw_url": "https://www.twitch.tv/esport2tv"
+            },
+            {
+                "main": false,
+                "language": "pt",
+                "embed_url": "https://player.twitch.tv/?channel=inygontv1",
+                "official": false,
+                "raw_url": "https://www.twitch.tv/inygontv1"
+            },
+            {
+                "main": false,
+                "language": "es",
+                "embed_url": "https://player.twitch.tv/?channel=lvpes",
+                "official": false,
+                "raw_url": "https://www.twitch.tv/lvpes"
+            },
+            {
+                "main": false,
+                "language": "en",
+                "embed_url": "https://player.twitch.tv/?channel=caedrel",
+                "official": false,
+                "raw_url": "https://www.twitch.tv/caedrel"
+            },
+            {
+                "main": false,
+                "language": "pl",
+                "embed_url": null,
+                "official": false,
+                "raw_url": "https://www.youtube.com/@Nervarien"
+            },
+            {
+                "main": false,
+                "language": "fr",
+                "embed_url": "https://player.twitch.tv/?channel=otplol_",
+                "official": false,
+                "raw_url": "https://www.twitch.tv/otplol_"
+            },
+            {
+                "main": true,
+                "language": "en",
+                "embed_url": "https://player.twitch.tv/?channel=lec",
+                "official": true,
+                "raw_url": "https://www.twitch.tv/lec"
+            }
+        ],
+        "winner_type": "Team",
+        "serie": {
+            "id": 9172,
+            "name": "",
+            "year": 2025,
+            "slug": "league-of-legends-lec-spring-2025",
+            "begin_at": "2025-03-29T13:00:00Z",
+            "end_at": "2025-06-08T21:00:00Z",
+            "winner_id": null,
+            "winner_type": "Team",
+            "modified_at": "2025-04-03T19:28:47Z",
+            "league_id": 4197,
+            "season": "Spring",
+            "full_name": "Spring 2025"
+        },
+        "winner_id": null,
+        "forfeit": false,
+        "draw": false,
+        "videogame": {
+            "id": 1,
+            "name": "LoL",
+            "slug": "league-of-legends"
+        },
+        "rescheduled": false,
+        "tournament_id": 16321,
+        "videogame_title": null,
+        "serie_id": 9172,
+        "status": "not_started",
+        "league": {
+            "id": 4197,
+            "name": "LEC",
+            "url": null,
+            "slug": "league-of-legends-lec",
+            "modified_at": "2019-03-03T01:22:54Z",
+            "image_url": "https://cdn.pandascore.co/images/league/image/4197/lec_2023-png"
+        },
+        "original_scheduled_at": "2025-05-11T15:00:00Z",
+        "begin_at": "2025-05-11T15:00:00Z",
+        "league_id": 4197,
+        "scheduled_at": "2025-05-11T15:00:00Z",
+        "opponents": [
+            {
+                "type": "Team",
+                "opponent": {
+                    "id": 115,
+                    "name": "Team Vitality",
+                    "location": "FR",
+                    "slug": "vitality",
+                    "modified_at": "2025-03-27T09:46:28Z",
+                    "acronym": "VIT",
+                    "image_url": "https://cdn.pandascore.co/images/team/image/115/team_vitalitylogo_square.png"
+                }
+            },
+            {
+                "type": "Team",
+                "opponent": {
+                    "id": 395,
+                    "name": "SK Gaming",
+                    "location": "DE",
+                    "slug": "sk-gaming",
+                    "modified_at": "2025-03-27T09:59:40Z",
+                    "acronym": "SK",
+                    "image_url": "https://cdn.pandascore.co/images/team/image/395/600px-SK_Gaminglogo_square.png"
+                }
+            }
+        ],
+        "id": 1148221,
+        "results": [
+            {
+                "team_id": 115,
+                "score": 0
+            },
+            {
+                "team_id": 395,
+                "score": 0
+            }
+        ],
+        "name": "VIT vs SK",
+        "tournament": {
+            "id": 16321,
+            "name": "Regular Season",
+            "type": "offline",
+            "country": "DE",
+            "slug": "league-of-legends-lec-spring-2025-regular-season",
+            "begin_at": "2025-03-29T13:00:00Z",
+            "detailed_stats": true,
+            "end_at": "2025-05-12T21:00:00Z",
+            "winner_id": null,
+            "winner_type": "Team",
+            "serie_id": 9172,
+            "modified_at": "2025-04-14T19:44:41Z",
+            "league_id": 4197,
+            "prizepool": null,
+            "tier": "a",
+            "has_bracket": false,
+            "region": "WEU",
+            "live_supported": true
+        },
+        "videogame_version": null,
+        "game_advantage": null,
+        "end_at": null,
+        "match_type": "best_of"
+    },
+    {
+        "live": {
+            "supported": true,
+            "url": "wss://live.pandascore.co/matches/1148222",
+            "opens_at": "2025-05-11T16:45:00.000000Z"
+        },
+        "games": [
+            {
+                "complete": false,
+                "id": 265710,
+                "position": 1,
+                "status": "not_started",
+                "length": null,
+                "finished": false,
+                "match_id": 1148222,
+                "begin_at": null,
+                "detailed_stats": true,
+                "end_at": null,
+                "forfeit": false,
+                "winner_type": "Team",
+                "winner": {
+                    "id": null,
+                    "type": "Team"
+                }
+            },
+            {
+                "complete": false,
+                "id": 265711,
+                "position": 2,
+                "status": "not_started",
+                "length": null,
+                "finished": false,
+                "match_id": 1148222,
+                "begin_at": null,
+                "detailed_stats": true,
+                "end_at": null,
+                "forfeit": false,
+                "winner_type": "Team",
+                "winner": {
+                    "id": null,
+                    "type": "Team"
+                }
+            },
+            {
+                "complete": false,
+                "id": 265712,
+                "position": 3,
+                "status": "not_started",
+                "length": null,
+                "finished": false,
+                "match_id": 1148222,
+                "begin_at": null,
+                "detailed_stats": true,
+                "end_at": null,
+                "forfeit": false,
+                "winner_type": "Team",
+                "winner": {
+                    "id": null,
+                    "type": "Team"
+                }
+            }
+        ],
+        "detailed_stats": true,
+        "modified_at": "2025-03-21T12:49:51Z",
+        "number_of_games": 3,
+        "slug": "karmine-corp-vs-g2-esports-2025-05-11",
+        "winner": null,
+        "streams_list": [
+            {
+                "main": false,
+                "language": "it",
+                "embed_url": "https://player.twitch.tv/?channel=litofficial",
+                "official": false,
+                "raw_url": "https://www.twitch.tv/litofficial"
+            },
+            {
+                "main": false,
+                "language": "hu",
+                "embed_url": "https://player.twitch.tv/?channel=esport2tv",
+                "official": false,
+                "raw_url": "https://www.twitch.tv/esport2tv"
+            },
+            {
+                "main": false,
+                "language": "pt",
+                "embed_url": "https://player.twitch.tv/?channel=inygontv1",
+                "official": false,
+                "raw_url": "https://www.twitch.tv/inygontv1"
+            },
+            {
+                "main": false,
+                "language": "es",
+                "embed_url": "https://player.twitch.tv/?channel=lvpes",
+                "official": false,
+                "raw_url": "https://www.twitch.tv/lvpes"
+            },
+            {
+                "main": false,
+                "language": "en",
+                "embed_url": "https://player.twitch.tv/?channel=caedrel",
+                "official": false,
+                "raw_url": "https://www.twitch.tv/caedrel"
+            },
+            {
+                "main": false,
+                "language": "pl",
+                "embed_url": null,
+                "official": false,
+                "raw_url": "https://www.youtube.com/@Nervarien"
+            },
+            {
+                "main": false,
+                "language": "fr",
+                "embed_url": "https://player.twitch.tv/?channel=otplol_",
+                "official": false,
+                "raw_url": "https://www.twitch.tv/otplol_"
+            },
+            {
+                "main": true,
+                "language": "en",
+                "embed_url": "https://player.twitch.tv/?channel=lec",
+                "official": true,
+                "raw_url": "https://www.twitch.tv/lec"
+            }
+        ],
+        "winner_type": "Team",
+        "serie": {
+            "id": 9172,
+            "name": "",
+            "year": 2025,
+            "slug": "league-of-legends-lec-spring-2025",
+            "begin_at": "2025-03-29T13:00:00Z",
+            "end_at": "2025-06-08T21:00:00Z",
+            "winner_id": null,
+            "winner_type": "Team",
+            "modified_at": "2025-04-03T19:28:47Z",
+            "league_id": 4197,
+            "season": "Spring",
+            "full_name": "Spring 2025"
+        },
+        "winner_id": null,
+        "forfeit": false,
+        "draw": false,
+        "videogame": {
+            "id": 1,
+            "name": "LoL",
+            "slug": "league-of-legends"
+        },
+        "rescheduled": false,
+        "tournament_id": 16321,
+        "videogame_title": null,
+        "serie_id": 9172,
+        "status": "not_started",
+        "league": {
+            "id": 4197,
+            "name": "LEC",
+            "url": null,
+            "slug": "league-of-legends-lec",
+            "modified_at": "2019-03-03T01:22:54Z",
+            "image_url": "https://cdn.pandascore.co/images/league/image/4197/lec_2023-png"
+        },
+        "original_scheduled_at": "2025-05-11T17:00:00Z",
+        "begin_at": "2025-05-11T17:00:00Z",
+        "league_id": 4197,
+        "scheduled_at": "2025-05-11T17:00:00Z",
+        "opponents": [
+            {
+                "type": "Team",
+                "opponent": {
+                    "id": 134078,
+                    "name": "Karmine Corp",
+                    "location": "FR",
+                    "slug": "karmine-corp-academy",
+                    "modified_at": "2025-03-27T09:46:26Z",
+                    "acronym": "KC",
+                    "image_url": "https://cdn.pandascore.co/images/team/image/134078/karmine_corplogo_square.png"
+                }
+            },
+            {
+                "type": "Team",
+                "opponent": {
+                    "id": 88,
+                    "name": "G2 Esports",
+                    "location": "DE",
+                    "slug": "g2-esports",
+                    "modified_at": "2025-03-27T09:46:24Z",
+                    "acronym": "G2",
+                    "image_url": "https://cdn.pandascore.co/images/team/image/88/g2-esports.png"
+                }
+            }
+        ],
+        "id": 1148222,
+        "results": [
+            {
+                "team_id": 134078,
+                "score": 0
+            },
+            {
+                "team_id": 88,
+                "score": 0
+            }
+        ],
+        "name": "KC vs G2",
+        "tournament": {
+            "id": 16321,
+            "name": "Regular Season",
+            "type": "offline",
+            "country": "DE",
+            "slug": "league-of-legends-lec-spring-2025-regular-season",
+            "begin_at": "2025-03-29T13:00:00Z",
+            "detailed_stats": true,
+            "end_at": "2025-05-12T21:00:00Z",
+            "winner_id": null,
+            "winner_type": "Team",
+            "serie_id": 9172,
+            "modified_at": "2025-04-14T19:44:41Z",
+            "league_id": 4197,
+            "prizepool": null,
+            "tier": "a",
+            "has_bracket": false,
+            "region": "WEU",
+            "live_supported": true
+        },
+        "videogame_version": null,
+        "game_advantage": null,
+        "end_at": null,
+        "match_type": "best_of"
+    },
+    {
+        "live": {
+            "supported": true,
+            "url": "wss://live.pandascore.co/matches/1148224",
+            "opens_at": "2025-05-12T14:45:00.000000Z"
+        },
+        "games": [
+            {
+                "complete": false,
+                "id": 265713,
+                "position": 1,
+                "status": "not_started",
+                "length": null,
+                "finished": false,
+                "match_id": 1148224,
+                "begin_at": null,
+                "detailed_stats": true,
+                "end_at": null,
+                "forfeit": false,
+                "winner_type": "Team",
+                "winner": {
+                    "id": null,
+                    "type": "Team"
+                }
+            },
+            {
+                "complete": false,
+                "id": 265714,
+                "position": 2,
+                "status": "not_started",
+                "length": null,
+                "finished": false,
+                "match_id": 1148224,
+                "begin_at": null,
+                "detailed_stats": true,
+                "end_at": null,
+                "forfeit": false,
+                "winner_type": "Team",
+                "winner": {
+                    "id": null,
+                    "type": "Team"
+                }
+            },
+            {
+                "complete": false,
+                "id": 265715,
+                "position": 3,
+                "status": "not_started",
+                "length": null,
+                "finished": false,
+                "match_id": 1148224,
+                "begin_at": null,
+                "detailed_stats": true,
+                "end_at": null,
+                "forfeit": false,
+                "winner_type": "Team",
+                "winner": {
+                    "id": null,
+                    "type": "Team"
+                }
+            }
+        ],
+        "detailed_stats": true,
+        "modified_at": "2025-03-21T12:49:51Z",
+        "number_of_games": 3,
+        "slug": "team-heretics-vs-giantx-2025-05-12",
+        "winner": null,
+        "streams_list": [
+            {
+                "main": false,
+                "language": "it",
+                "embed_url": "https://player.twitch.tv/?channel=litofficial",
+                "official": false,
+                "raw_url": "https://www.twitch.tv/litofficial"
+            },
+            {
+                "main": false,
+                "language": "hu",
+                "embed_url": "https://player.twitch.tv/?channel=esport2tv",
+                "official": false,
+                "raw_url": "https://www.twitch.tv/esport2tv"
+            },
+            {
+                "main": false,
+                "language": "pt",
+                "embed_url": "https://player.twitch.tv/?channel=inygontv1",
+                "official": false,
+                "raw_url": "https://www.twitch.tv/inygontv1"
+            },
+            {
+                "main": false,
+                "language": "es",
+                "embed_url": "https://player.twitch.tv/?channel=lvpes",
+                "official": false,
+                "raw_url": "https://www.twitch.tv/lvpes"
+            },
+            {
+                "main": false,
+                "language": "en",
+                "embed_url": "https://player.twitch.tv/?channel=caedrel",
+                "official": false,
+                "raw_url": "https://www.twitch.tv/caedrel"
+            },
+            {
+                "main": false,
+                "language": "pl",
+                "embed_url": null,
+                "official": false,
+                "raw_url": "https://www.youtube.com/@Nervarien"
+            },
+            {
+                "main": false,
+                "language": "fr",
+                "embed_url": "https://player.twitch.tv/?channel=otplol_",
+                "official": false,
+                "raw_url": "https://www.twitch.tv/otplol_"
+            },
+            {
+                "main": true,
+                "language": "en",
+                "embed_url": "https://player.twitch.tv/?channel=lec",
+                "official": true,
+                "raw_url": "https://www.twitch.tv/lec"
+            }
+        ],
+        "winner_type": "Team",
+        "serie": {
+            "id": 9172,
+            "name": "",
+            "year": 2025,
+            "slug": "league-of-legends-lec-spring-2025",
+            "begin_at": "2025-03-29T13:00:00Z",
+            "end_at": "2025-06-08T21:00:00Z",
+            "winner_id": null,
+            "winner_type": "Team",
+            "modified_at": "2025-04-03T19:28:47Z",
+            "league_id": 4197,
+            "season": "Spring",
+            "full_name": "Spring 2025"
+        },
+        "winner_id": null,
+        "forfeit": false,
+        "draw": false,
+        "videogame": {
+            "id": 1,
+            "name": "LoL",
+            "slug": "league-of-legends"
+        },
+        "rescheduled": false,
+        "tournament_id": 16321,
+        "videogame_title": null,
+        "serie_id": 9172,
+        "status": "not_started",
+        "league": {
+            "id": 4197,
+            "name": "LEC",
+            "url": null,
+            "slug": "league-of-legends-lec",
+            "modified_at": "2019-03-03T01:22:54Z",
+            "image_url": "https://cdn.pandascore.co/images/league/image/4197/lec_2023-png"
+        },
+        "original_scheduled_at": "2025-05-12T15:00:00Z",
+        "begin_at": "2025-05-12T15:00:00Z",
+        "league_id": 4197,
+        "scheduled_at": "2025-05-12T15:00:00Z",
+        "opponents": [
+            {
+                "type": "Team",
+                "opponent": {
+                    "id": 130105,
+                    "name": "Team Heretics",
+                    "location": "ES",
+                    "slug": "team-heretics",
+                    "modified_at": "2025-03-27T09:46:31Z",
+                    "acronym": "TH",
+                    "image_url": "https://cdn.pandascore.co/images/team/image/130105/team_hereticslogo_square.png"
+                }
+            },
+            {
+                "type": "Team",
+                "opponent": {
+                    "id": 134068,
+                    "name": "GIANTX",
+                    "location": "GB",
+                    "slug": "giantx",
+                    "modified_at": "2025-03-27T09:46:50Z",
+                    "acronym": "GX",
+                    "image_url": "https://cdn.pandascore.co/images/team/image/134068/giant_x_logo.svg.png"
+                }
+            }
+        ],
+        "id": 1148224,
+        "results": [
+            {
+                "team_id": 130105,
+                "score": 0
+            },
+            {
+                "team_id": 134068,
+                "score": 0
+            }
+        ],
+        "name": "TH vs GX",
+        "tournament": {
+            "id": 16321,
+            "name": "Regular Season",
+            "type": "offline",
+            "country": "DE",
+            "slug": "league-of-legends-lec-spring-2025-regular-season",
+            "begin_at": "2025-03-29T13:00:00Z",
+            "detailed_stats": true,
+            "end_at": "2025-05-12T21:00:00Z",
+            "winner_id": null,
+            "winner_type": "Team",
+            "serie_id": 9172,
+            "modified_at": "2025-04-14T19:44:41Z",
+            "league_id": 4197,
+            "prizepool": null,
+            "tier": "a",
+            "has_bracket": false,
+            "region": "WEU",
+            "live_supported": true
+        },
+        "videogame_version": null,
+        "game_advantage": null,
+        "end_at": null,
+        "match_type": "best_of"
+    },
+    {
+        "live": {
+            "supported": true,
+            "url": "wss://live.pandascore.co/matches/1148227",
+            "opens_at": "2025-05-12T16:45:00.000000Z"
+        },
+        "games": [
+            {
+                "complete": false,
+                "id": 265716,
+                "position": 1,
+                "status": "not_started",
+                "length": null,
+                "finished": false,
+                "match_id": 1148227,
+                "begin_at": null,
+                "detailed_stats": true,
+                "end_at": null,
+                "forfeit": false,
+                "winner_type": "Team",
+                "winner": {
+                    "id": null,
+                    "type": "Team"
+                }
+            },
+            {
+                "complete": false,
+                "id": 265717,
+                "position": 2,
+                "status": "not_started",
+                "length": null,
+                "finished": false,
+                "match_id": 1148227,
+                "begin_at": null,
+                "detailed_stats": true,
+                "end_at": null,
+                "forfeit": false,
+                "winner_type": "Team",
+                "winner": {
+                    "id": null,
+                    "type": "Team"
+                }
+            },
+            {
+                "complete": false,
+                "id": 265718,
+                "position": 3,
+                "status": "not_started",
+                "length": null,
+                "finished": false,
+                "match_id": 1148227,
+                "begin_at": null,
+                "detailed_stats": true,
+                "end_at": null,
+                "forfeit": false,
+                "winner_type": "Team",
+                "winner": {
+                    "id": null,
+                    "type": "Team"
+                }
+            }
+        ],
+        "detailed_stats": true,
+        "modified_at": "2025-03-21T12:49:51Z",
+        "number_of_games": 3,
+        "slug": "movistar-koi-vs-rogue-2025-05-12",
+        "winner": null,
+        "streams_list": [
+            {
+                "main": false,
+                "language": "it",
+                "embed_url": "https://player.twitch.tv/?channel=litofficial",
+                "official": false,
+                "raw_url": "https://www.twitch.tv/litofficial"
+            },
+            {
+                "main": false,
+                "language": "hu",
+                "embed_url": "https://player.twitch.tv/?channel=esport2tv",
+                "official": false,
+                "raw_url": "https://www.twitch.tv/esport2tv"
+            },
+            {
+                "main": false,
+                "language": "pt",
+                "embed_url": "https://player.twitch.tv/?channel=inygontv1",
+                "official": false,
+                "raw_url": "https://www.twitch.tv/inygontv1"
+            },
+            {
+                "main": false,
+                "language": "es",
+                "embed_url": "https://player.twitch.tv/?channel=lvpes",
+                "official": false,
+                "raw_url": "https://www.twitch.tv/lvpes"
+            },
+            {
+                "main": false,
+                "language": "en",
+                "embed_url": "https://player.twitch.tv/?channel=caedrel",
+                "official": false,
+                "raw_url": "https://www.twitch.tv/caedrel"
+            },
+            {
+                "main": false,
+                "language": "pl",
+                "embed_url": null,
+                "official": false,
+                "raw_url": "https://www.youtube.com/@Nervarien"
+            },
+            {
+                "main": false,
+                "language": "fr",
+                "embed_url": "https://player.twitch.tv/?channel=otplol_",
+                "official": false,
+                "raw_url": "https://www.twitch.tv/otplol_"
+            },
+            {
+                "main": true,
+                "language": "en",
+                "embed_url": "https://player.twitch.tv/?channel=lec",
+                "official": true,
+                "raw_url": "https://www.twitch.tv/lec"
+            }
+        ],
+        "winner_type": "Team",
+        "serie": {
+            "id": 9172,
+            "name": "",
+            "year": 2025,
+            "slug": "league-of-legends-lec-spring-2025",
+            "begin_at": "2025-03-29T13:00:00Z",
+            "end_at": "2025-06-08T21:00:00Z",
+            "winner_id": null,
+            "winner_type": "Team",
+            "modified_at": "2025-04-03T19:28:47Z",
+            "league_id": 4197,
+            "season": "Spring",
+            "full_name": "Spring 2025"
+        },
+        "winner_id": null,
+        "forfeit": false,
+        "draw": false,
+        "videogame": {
+            "id": 1,
+            "name": "LoL",
+            "slug": "league-of-legends"
+        },
+        "rescheduled": false,
+        "tournament_id": 16321,
+        "videogame_title": null,
+        "serie_id": 9172,
+        "status": "not_started",
+        "league": {
+            "id": 4197,
+            "name": "LEC",
+            "url": null,
+            "slug": "league-of-legends-lec",
+            "modified_at": "2019-03-03T01:22:54Z",
+            "image_url": "https://cdn.pandascore.co/images/league/image/4197/lec_2023-png"
+        },
+        "original_scheduled_at": "2025-05-12T17:00:00Z",
+        "begin_at": "2025-05-12T17:00:00Z",
+        "league_id": 4197,
+        "scheduled_at": "2025-05-12T17:00:00Z",
+        "opponents": [
+            {
+                "type": "Team",
+                "opponent": {
+                    "id": 126536,
+                    "name": "Movistar KOI",
+                    "location": "ES",
+                    "slug": "mad-lions-league-of-legends",
+                    "modified_at": "2025-03-27T10:14:20Z",
+                    "acronym": "MKOI",
+                    "image_url": "https://cdn.pandascore.co/images/team/image/126536/movistar_ko_ilogo_square.png"
+                }
+            },
+            {
+                "type": "Team",
+                "opponent": {
+                    "id": 3983,
+                    "name": "Rogue",
+                    "location": "US",
+                    "slug": "rogue",
+                    "modified_at": "2025-03-27T09:46:30Z",
+                    "acronym": "RGE",
+                    "image_url": "https://cdn.pandascore.co/images/team/image/3983/rogue__28_european_team_29logo_square.png"
+                }
+            }
+        ],
+        "id": 1148227,
+        "results": [
+            {
+                "team_id": 126536,
+                "score": 0
+            },
+            {
+                "team_id": 3983,
+                "score": 0
+            }
+        ],
+        "name": "MKOI vs RGE",
+        "tournament": {
+            "id": 16321,
+            "name": "Regular Season",
+            "type": "offline",
+            "country": "DE",
+            "slug": "league-of-legends-lec-spring-2025-regular-season",
+            "begin_at": "2025-03-29T13:00:00Z",
+            "detailed_stats": true,
+            "end_at": "2025-05-12T21:00:00Z",
+            "winner_id": null,
+            "winner_type": "Team",
+            "serie_id": 9172,
+            "modified_at": "2025-04-14T19:44:41Z",
+            "league_id": 4197,
+            "prizepool": null,
+            "tier": "a",
+            "has_bracket": false,
+            "region": "WEU",
+            "live_supported": true
+        },
+        "videogame_version": null,
+        "game_advantage": null,
+        "end_at": null,
+        "match_type": "best_of"
+    }
+]

@@ -10,6 +10,8 @@ import requests
 from bs4 import BeautifulSoup
 
 class Scrap():
+    
+    '''DEPRECATED'''
 
     def __init__(self, test_job=None) -> None:
         if test_job:
@@ -388,3 +390,354 @@ class Scrap():
         # Reordering dataframe to match destination table.
         df = df[['leagueid','bo', 'game_date', 'team_1', 'team_2', 'score_team_1', 'score_team_2']]
         return df
+
+
+class PandaScoreRequest:
+    
+    def __init__(self, test_job=None) -> None:
+        if test_job:
+            self.base_url = None
+            self.cursor = None
+            self.conn = None
+            self.today = datetime.date(2024, 4, 27)
+        else:
+            self.conn = sqlite3.connect('lolprono/instance/db.sqlite')
+            self.cursor = self.conn.cursor()
+            self.today = datetime.date.today()
+            self.base_url = 'https://api.pandascore.co/lol/matches/'
+            self.token = 'QyQjU22tZ4Ks7h26GJQYLP8JjycUujGZDewAYqpz6RNNj1aM6xo' # to assign through environment variable
+            self.leagues_panda = {
+                'LEC': 4197,
+                'LCK': 293,
+                'LPL': 294                
+            }
+        pass
+    
+    def identifty_team_names(self, df) -> pd.DataFrame:
+        '''
+        Fetch long labels from the database, and use them to replace short labels fetched when scraping.
+
+        parameters:
+        -----------
+        df: Pandas Dataframes
+        '''
+        if self.conn:
+            teams = pd.read_sql_query("SELECT DISTINCT short_label, long_label FROM teams", self.conn)
+        else:
+            teams = pd.DataFrame(
+                {
+                    'short_label': ['FLY', 'T1', 'FNC', 'TES', 'PSG', 'EST', 'GAM', 'LLL'],
+                    'long_label': [
+                        'Flyquest', 'T1', 'Fnatic', 'Top Esport',
+                        'PSG Talon', 'Estral Esport', 'GAM Esport', 'Loud'
+                    ]
+                }
+            )
+        for column in ['team_1', 'team_2']:
+            df = df.merge(teams, how='left', left_on=column, right_on='short_label')
+            df[column] = df['long_label']
+            df = df.drop(['short_label', 'long_label'], axis=1)
+        return df
+    
+    def insert_future_games(self, df: pd.DataFrame) -> None:
+        '''
+        Insert the new games in the database
+
+        parameters:
+        -----------
+        df: Pandas DataFrame containing cleaned and formated data.
+        '''
+        df.to_sql(name='game', con=self.conn, if_exists='append', index=False)
+    
+    def insert_new_league_serie(self, df: pd.DataFrame) -> None:
+        '''
+        Look into the upcoming games and insert to the db league if it's not already there.
+        
+        parameters:
+        ----------
+        df: pd.DataFrame
+            DataFrame containing the upcoming games. 
+            
+        return:
+        -------
+        None
+        '''
+        # Fetching all available leagues
+        temp_df = df.merge(self.leagues, how='left', left_on='league_name', right_on='leaguename')
+        temp_df['leaguename'] = temp_df['leaguename'].fillna('to_insert')
+        insert_df = temp_df[temp_df['leaguename'] == 'insert'][['id', 'league_name']].drop_duplicates()
+        # Creating new ID based on the maximum available ID, and incremeting by 1.
+        insert_df['id'] = range(temp_df['id'].max(), temp_df['id'].max() + len(insert_df))
+        # inserting new leagues to table
+        insert_df.to_sql(name='league', con=self.conn, if_exists='append', index=False)
+
+    def update_game_results(self, df: pd.DataFrame) -> None:
+        '''
+        Update Games' results in the database
+
+        parameters:
+        -----------
+        df: Pandas DataFrame containing cleaned and formated data.
+        '''
+        df.to_sql(name='temp_results', con=self.conn, if_exists='replace', index=False)
+        # Update game table using temp_results:
+        for game in df.iterrows():
+            league_id = game[1][0]
+            bo = game[1][1]
+            game_date = game[1][2]
+            team_1 = game[1][3]
+            team_2 = game[1][4]
+            score_team_1 = game[1][5]
+            score_team_2 = game[1][6]
+            # Executing the update order 1
+            query = f"""
+            UPDATE game
+            SET score_team_1 = {score_team_1},
+                score_team_2 = {score_team_2}
+            WHERE
+                leagueid = {league_id}
+                AND bo = {bo}
+                AND date(game_datetime) = date('{game_date}')
+                AND team_1 = '{team_1}'
+                AND team_2 = '{team_2}';
+            """
+            self.cursor.execute(query)
+            self.conn.commit()
+
+    def assign_league_id(self, league_name: str)->int:
+        '''
+        Assign the correct leagueid used in a Lambda Function.
+        This is comparing 2 strings between them. Not ideal, but it works.
+
+        parameters:
+        -----------
+        x: String
+        leagues_df: Pandas DataFrame containing leagueid and leaguename
+        '''
+        if self.conn: # exists only if we're not in test
+            leagues = pd.read_sql_query("SELECT * FROM league", self.conn)
+        else:
+            leagues = pd.DataFrame({'id': [3], 'leaguename': ['Mid-Season Invitational 2024']})
+        # assigning the league ID from the database. 
+        for serie in leagues['leaguename'].unique():
+            if serie in league_name:
+                return leagues[leagues['leaguename'] == serie]['id'].values[0]
+        return -1
+
+    def clean_schedule(self, df: pd.DataFrame) -> pd.DataFrame:
+        '''
+        Function to clean Schedule DF before inserting it in DB
+
+        parameters:
+        -----------
+        df: Pandas DataFrame containing games' informations.
+        '''
+        df['leagueid'] = df['league_name'].apply(
+            lambda x: self.assign_league_id(x)
+        )
+        # identify long names: 
+        df = self.identifty_team_names(df)
+        # Fetch existing games
+        query = '''
+            SELECT distinct
+                date(game_datetime) as db_date,
+                team_1 as db_team_1,
+                team_2 as db_team_2
+            FROM game
+            WHERE
+                date(game_datetime) >= current_date
+        '''
+        if self.conn:
+            future_games = pd.read_sql_query(query, self.conn)
+        else:
+            future_games = pd.DataFrame(
+                {'db_date': [], 'db_team_1': [], 'db_team_2':[]}
+            )
+        # Creating game_date so that we can merge on the date instead of datetime
+        df['game_date'] = df['game_datetime'].apply(lambda x:
+            x.strftime('%Y-%m-%d')
+        )
+        # Formatting datetime as a string to permit merge:
+        df['game_datetime'] = df['game_datetime'].apply(lambda x:
+            x.strftime('%Y-%m-%d %H:%M:%S')
+        )
+        df= df.merge(future_games, how='left',
+            left_on=['game_date', 'team_1', 'team_2'],
+            right_on=['db_date', 'db_team_1', 'db_team_2']
+        )
+        # Keeping only games that are not yet inserted
+        df = df[df['db_date'].isna()]
+        # Reordering dataframe to match destination table.
+        df = df[['leagueid', 'bo', 'game_datetime', 'team_1', 'team_2']]
+        return df
+    
+        def clean_results(self, df: pd.DataFrame) -> pd.DataFrame:
+        '''
+        Function to clean results DF before updating DB
+
+        parameters:
+        -----------
+        df: Pandas DataFrame containing games' informations.
+        '''
+        # Getting Long names:
+        df = self.identifty_team_names(df)
+        # Drop if team name if we don't have it.
+        df =df.dropna()
+        # Formatting Score
+        df['score_team_1'] = df['score'].apply(lambda x: x[0][0])
+        df['score_team_2'] = df['score'].apply(lambda x: x[0][-1])
+
+        # If the league is in the list, we're keeping the games
+        df['keep'] = df['league_name'].apply(
+            lambda x: self.check_league(x)
+        )
+        df['leagueid'] = df['league_name'].apply(
+            lambda x: self.assign_league_id(x)
+        )
+        # Formating Date:
+        df['game_date'] = df['game_date'].apply(
+            lambda x: datetime.datetime.strptime(x, '%A, %B %d, %Y').strftime('%Y-%m-%d')
+        )
+        # Only getting the number of games
+        df['bo'] = df['bo'].apply(lambda x: int(x[-1]))
+        # Reordering dataframe to match destination table.
+        df = df[['leagueid','bo', 'game_date', 'team_1', 'team_2', 'score_team_1', 'score_team_2']]
+        return df
+
+    def clean_results(self, df: pd.DataFrame) -> pd.DataFrame:
+        '''
+        Function to clean results DF before updating DB
+
+        parameters:
+        -----------
+        df: Pandas DataFrame containing games' informations.
+        '''
+        # Getting Long names:
+        df = self.identifty_team_names(df)
+        # If the league is in the list, we're keeping the games
+        df['leagueid'] = df['league_name'].apply(
+            lambda x: self.assign_league_id(x)
+        )
+        # If the league has no id, we're dropping it. 
+        df = df.dropna()
+
+        # Formating Date:
+        df['game_date'] = df['game_date'].apply(
+            lambda x: datetime.datetime.strptime(x, '%A, %B %d, %Y').strftime('%Y-%m-%d')
+        )
+        # Only getting the number of games
+        df['bo'] = df['bo'].apply(lambda x: int(x[-1]))
+        # Reordering dataframe to match destination table.
+        df = df[['leagueid','bo', 'game_date', 'team_1', 'team_2', 'score_team_1', 'score_team_2']]
+        
+        return df
+    
+    def get_upcoming_games(self, league: str)-> pd.DataFrame:
+        '''
+        Builds a dataframe of upcoming games for the given league. 
+        
+        parameters:
+        -----------
+        league: string
+            name of the league we want to import the games from.
+        
+        return:
+        -------
+        Pandas DataFrame
+        
+        '''
+        # Building URL for API Call
+        url = self.base_url + "upcoming"
+        headers = {
+            "Authorization": f"Bearer {self.token}", "Accept": "application/json"
+        }
+        params = {
+            "filter[league_id]": self.leagues_panda[league],
+            "range[begin_at]": datetime.datetime.now(), datetime.datetime.now() + datetime.timedelta(days=30)
+        }   
+        response = requests.get(url, headers=headers, params=params)
+        # Printing API responde code
+        print(response.status_code)
+        # Loading api response in a json
+        result = response.json()
+        # Generating data to be insertedin DataFrame
+        data = []
+        for game in range(len(result)):
+            row = []
+            row.append(f'{league} ' + result[game]['serie']['full_name'])
+            row.append(result[game]['original_scheduled_at'])
+            row.append(len(result[game]['games']))
+            for team in result[game]['opponents']:
+                row.append(team['opponent']['acronym'])
+            data.append(row)
+        # Generating columns names
+        columns=['league_name', 'game_datetime', 'bo', 'team_1', 'team_2' ]
+        # Creating the dataFrame
+        upcoming = pd.DataFrame(data=data, columns=columns)
+        # changing type of gamedatetime
+        upcoming['game_datetime'] = upcoming['game_datetime'].apply(
+            lambda x: pd.to_datetime(x, format='%Y-%m-%dT%H:%M:%SZ')
+        )
+        # Returning DataFrame
+        return upcoming
+    
+    def get_past_games(self, league: str)-> pd.DataFrame:
+        '''
+        Builds a dataframe of past games for the given league. 
+        
+        parameters:
+        -----------
+        league: string
+            name of the league we want to import the games from.
+        
+        return:
+        -------
+        Pandas DataFrame
+        
+        '''
+        # Building URL for API Call
+        url = self.base_url + "past"
+        headers = {
+            "Authorization": f"Bearer {self.token}", "Accept": "application/json"
+        }
+        params = {
+            "filter[league_id]": self.leagues_panda[league],
+            "begin_at": datetime.datetime.now() - datetime.timedelta(days=30) # Arbitrary 30 days
+        }   
+        response = requests.get(url, headers=headers, params=params)
+        # Printing API responde code
+        print(response.status_code)
+        # Loading api response in a json
+        result = response.json()
+        # Generating data to be inserted in DataFrame
+        data = []
+        for game in range(len(result)):
+            row = []
+            row.append(f'{league} ' + result[game]['serie']['full_name'])
+            row.append(result[game]['original_scheduled_at'])
+            row.append(result[game]['number_of_games'])
+            for team in result[game]['opponents']:
+                row.append(team['opponent']['acronym'])
+                row.append(team['opponent']['id'])
+            for team in result[game]['results']:
+                row.append(team['score'])
+                row.append(team['team_id'])
+            data.append(row)
+        # Generating columns names
+        columns=[
+            'league_name', 'game_datetime', 'bo', 'team_1', 'team_id_1', 'team_2', 'team_id_2',
+            'score_team1', 'score_id_1', 'score_team_2', 'score_id_2' 
+        ]
+                # Creating the dataFrame
+        past = pd.DataFrame(data=data, columns=columns)
+        # changing type of gamedatetime
+        past['game_datetime'] = past['game_datetime'].apply(
+            lambda x: pd.to_datetime(x, format='%Y-%m-%dT%H:%M:%SZ')
+        )
+        # Running Check in score id matching team id
+        past['check_pass'] = (past['team_id_1'] == past['score_id_1']) & (past['team_id_2'] == past['score_id_2'])
+        # Keeping only date for which check is passed
+        past = past[past['check_pass'] == True]
+        # creating final DF
+        past = past[['league_name', 'game_datetime', 'bo', 'team_1', 'team_2', 'score_team_1', 'score_team_2']]
+        return past
