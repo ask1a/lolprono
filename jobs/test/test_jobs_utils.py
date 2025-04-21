@@ -107,8 +107,8 @@ def test_get_game_results_dataframe(json_content_results, expected_df_for_get_ga
     test_panda = utils.PandaScoreRequest(test_job=True)
     results_df = test_panda.get_past_games('LEC', test_json=json_content_results)
     results_expected_df = expected_df_for_get_game_results_dataframe
-    expected_df['game_datetime'] = pd.to_datetime(expected_df['game_datetime']).dt.date
-    rslt_df['game_datetime'] = pd.to_datetime(rslt_df['game_datetime']).dt.date
+    results_df['game_date'] = pd.to_datetime(results_df['game_date']).dt.date
+    results_expected_df['game_date'] = pd.to_datetime(results_expected_df['game_date']).dt.date
     assert_frame_equal(results_df.reset_index(drop=True), results_expected_df.reset_index(drop=True), check_dtype=False)
 
 
