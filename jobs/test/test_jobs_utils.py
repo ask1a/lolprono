@@ -156,7 +156,7 @@ def expected_df_for_clean_results():
             'team_2':  [
                     'Vitality', 'Team BDS', 'Rogue', 'Vitality', 'Giant X', 'Fnatic', 'Fnatic', 'Giant X', 'SK Gaming', 'Team BDS', 'Team BDS', 'Rogue',
                     'Team BDS', 'Vitality', 'Fnatic', 'SK Gaming', 'SK Gaming', 'Vitality', 'SK Gaming', 'G2 Esport', 'Giant X', 'Rogue'
-                ]
+                ],
             'score_team_1': [
                 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
             ],
