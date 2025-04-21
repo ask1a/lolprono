@@ -723,6 +723,7 @@ class PandaScoreRequest:
         past['game_datetime'] = past['game_datetime'].apply(
             lambda x: pd.to_datetime(x, format='%Y-%m-%dT%H:%M:%SZ')
         )
+        past['game_date'] = past['game_datetime'].dt.date
         # Running Check in score id matching team id
         past['check_pass'] = (past['team_id_1'] == past['score_id_1']) & (past['team_id_2'] == past['score_id_2'])
         # Keeping only date for which check is passed
