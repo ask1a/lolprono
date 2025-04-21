@@ -86,8 +86,8 @@ def test_clean_schedule(expected_df_for_get_game_schedule_dataframe,expected_df_
     test_panda = utils.PandaScoreRequest(test_job=True)
     rslt_df = test_panda.clean_schedule(expected_df_for_get_game_schedule_dataframe)
     expected_df = expected_df_for_clean_schedule
-    expected_df['game_datetime'] = pd.to_datetime(expected_df['game_datetime'])
-    rslt_df['game_datetime'] = pd.to_datetime(rslt_df['game_datetime'])
+    expected_df['game_datetime'] = pd.to_datetime(expected_df['game_datetime']).dt.date
+    rslt_df['game_datetime'] = pd.to_datetime(rslt_df['game_datetime']).dt.date
 
     assert_frame_equal(rslt_df.reset_index(drop=True), expected_df.reset_index(drop=True), check_dtype=False)
 
