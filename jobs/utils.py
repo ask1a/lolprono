@@ -480,6 +480,36 @@ class PandaScoreRequest:
         # inserting new leagues to table
         insert_df.to_sql(name='league', con=self.conn, if_exists='append', index=False)
 
+    def insert_new_teams(self, df: pd.DataFrame) -> None:
+        '''
+        Look through all the coming game and check if all teams are in the team table.
+        if not it inserts
+        parameters:
+        ----------
+        df: pd.DataFrame
+            DataFrame containing the upcoming games.
+
+        return:
+        -------
+        None
+        '''
+        # fetching current teams in table
+        teams = pd.read_sql_query("SELECT DISTINCT short_label, long_label FROM teams", self.conn)
+        # identifying upcoming teams
+        t1 = df[['team_1', 'team_1_name']].rename(columns={'team_1': 'short_label', 'team_1_name': 'team_name'})
+        t2 = df[['team_2', 'team_2_name']].rename(columns={'team_2': 'short_label', 'team_2_name': 'team_name'})
+        # Merging both and dropping dupolicate
+        final = pd.concat([t1, t2]).drop_duplicates()
+        # Merging upcoming and teams from database.
+        final = final.merge(teams, how='left', on='short_label')
+        # dropping existing teams
+        final = final[final['long_label'].isna()]
+        # Assigning team name to long label
+        final['long_label'] = final['team_name']
+        final = final[['short_label', 'long_label']]
+        # appending new team to table
+        final.to_sql(name='teams', con=self.conn, if_exists='append', index=False)
+
     def update_game_results(self, df: pd.DataFrame) -> None:
         '''
         Update Games' results in the database
@@ -651,16 +681,25 @@ class PandaScoreRequest:
             row.append(len(result[game]['games']))
             for team in result[game]['opponents']:
                 row.append(team['opponent']['acronym'])
+                row.append(team['opponent']['name'])
             data.append(row)
         # Generating columns names
-        columns=['league_name', 'game_datetime', 'bo', 'team_1', 'team_2' ]
+        columns=['league_name', 'game_datetime', 'bo', 'team_1', 'team_1_name', 'team_2', 'team_2_name' ]
         # Creating the dataFrame
         upcoming = pd.DataFrame(data=data, columns=columns)
         # changing type of gamedatetime
         upcoming['game_datetime'] = upcoming['game_datetime'].apply(
             lambda x: pd.to_datetime(x, format='%Y-%m-%dT%H:%M:%SZ')
         )
-        # Returning DataFrame
+        # Inserting new teams
+        if self.conn:
+            self.insert_new_teams(upcoming)
+        else:
+            pass # to implement a test on this?
+
+        # Keeping only relevant columns
+        upcoming = upcoming[['league_name', 'game_datetime', 'bo', 'team_1', 'team_2']]
+
         return upcoming
 
     def get_past_games(self, league: str, test_json=None)-> pd.DataFrame:
