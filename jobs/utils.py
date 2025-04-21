@@ -408,8 +408,7 @@ class PandaScoreRequest:
             self.token = 'QyQjU22tZ4Ks7h26GJQYLP8JjycUujGZDewAYqpz6RNNj1aM6xo' # to assign through environment variable
             self.leagues_panda = {
                 'LEC': 4197,
-                'LCK': 293,
-                'LPL': 294
+                'LFL': 9163
             }
         pass
 
@@ -729,5 +728,5 @@ class PandaScoreRequest:
         # Keeping only date for which check is passed
         past = past[past['check_pass']]
         # creating final DF
-        past = past[['league_name', 'game_date', 'bo', 'team_1', 'team_2', 'score_team_1', 'score_team_2']]
+        past = past[['league_name', 'game_date ', 'bo', 'team_1', 'team_2', 'score_team_1', 'score_team_2']]
         return past
