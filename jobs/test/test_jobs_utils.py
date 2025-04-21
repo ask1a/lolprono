@@ -95,6 +95,9 @@ def test_clean_results(expected_df_for_get_game_results_dataframe, expected_df_f
     rslt_df = test_panda.clean_results(expected_df_for_get_game_results_dataframe)
     print(rslt_df)
     expected_df = expected_df_for_clean_results
+
+    expected_df['game_datetime'] = pd.to_datetime(expected_df['game_datetime'])
+    rslt_df['game_datetime'] = pd.to_datetime(rslt_df['game_datetime'])
     print(expected_df)
 
     assert_frame_equal(rslt_df.reset_index(drop=True), expected_df.reset_index(drop=True), check_dtype=False)
@@ -193,17 +196,17 @@ def expected_df_for_get_game_schedule_dataframe():
                     'LEC Spring 2025', 'LEC Spring 2025'
                 ],
             'game_datetime': [
-                    Timestamp('2025-04-20 15:00:00'), Timestamp('2025-04-20 17:00:00'),
-                    Timestamp('2025-04-21 15:00:00'), Timestamp('2025-04-21 17:00:00'),
-                    Timestamp('2025-04-26 13:00:00'), Timestamp('2025-04-26 15:00:00'),
-                    Timestamp('2025-04-27 13:00:00'), Timestamp('2025-04-27 15:00:00'),
-                    Timestamp('2025-04-28 15:00:00'), Timestamp('2025-04-28 17:00:00'),
-                    Timestamp('2025-05-03 15:00:00'), Timestamp('2025-05-03 17:00:00'),
-                    Timestamp('2025-05-04 15:00:00'), Timestamp('2025-05-04 17:00:00'),
-                    Timestamp('2025-05-05 15:00:00'), Timestamp('2025-05-05 17:00:00'),
-                    Timestamp('2025-05-10 15:00:00'), Timestamp('2025-05-10 17:00:00'),
-                    Timestamp('2025-05-11 15:00:00'), Timestamp('2025-05-11 17:00:00'),
-                    Timestamp('2025-05-12 15:00:00'), Timestamp('2025-05-12 17:00:00')
+                    '2025-04-20 15:00:00', '2025-04-20 17:00:00',
+                    '2025-04-21 15:00:00', '2025-04-21 17:00:00',
+                    '2025-04-26 13:00:00', '2025-04-26 15:00:00',
+                    '2025-04-27 13:00:00', '2025-04-27 15:00:00',
+                    '2025-04-28 15:00:00', '2025-04-28 17:00:00',
+                    '2025-05-03 15:00:00', '2025-05-03 17:00:00',
+                    '2025-05-04 15:00:00', '2025-05-04 17:00:00',
+                    '2025-05-05 15:00:00', '2025-05-05 17:00:00',
+                    '2025-05-10 15:00:00', '2025-05-10 17:00:00',
+                    '2025-05-11 15:00:00', '2025-05-11 17:00:00',
+                    '2025-05-12 15:00:00', '2025-05-12 17:00:00'
                 ],
             'bo': [
                     3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3
