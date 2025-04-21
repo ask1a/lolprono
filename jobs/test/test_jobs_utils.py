@@ -102,7 +102,7 @@ def test_clean_results(expected_df_for_get_game_results_dataframe, expected_df_f
 
 def test_get_game_results_dataframe(json_content_results, expected_df_for_get_game_results_dataframe):
     test_panda = utils.PandaScoreRequest(test_job=True)
-    results_df = test_panda.get_past_games(json_content_results)
+    results_df = test_panda.get_past_games('LEC', test_json=json_content_results)
     results_expected_df = expected_df_for_get_game_results_dataframe
     assert_frame_equal(results_df.reset_index(drop=True), results_expected_df.reset_index(drop=True), check_dtype=False)
 

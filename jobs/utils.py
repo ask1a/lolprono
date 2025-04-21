@@ -602,8 +602,6 @@ class PandaScoreRequest:
         df['game_date'] = df['game_date'].apply(
             lambda x: datetime.datetime.strptime(x, '%Y-%m-%d').strftime('%Y-%m-%d')
         )
-        # Only getting the number of games
-        df['bo'] = df['bo'].apply(lambda x: int(x[-1]))
         # Reordering dataframe to match destination table.
         df = df[['leagueid','bo', 'game_date', 'team_1', 'team_2', 'score_team_1', 'score_team_2']]
 
@@ -666,7 +664,7 @@ class PandaScoreRequest:
         # Returning DataFrame
         return upcoming
 
-    def get_past_games(self, league: str)-> pd.DataFrame:
+    def get_past_games(self, league: str, test_json=None)-> pd.DataFrame:
         '''
         Builds a dataframe of past games for the given league.
 
@@ -675,25 +673,31 @@ class PandaScoreRequest:
         league: string
             name of the league we want to import the games from.
 
+        test_json: json
+            Used for test purposes only.
+
         return:
         -------
         Pandas DataFrame
 
         '''
-        # Building URL for API Call
-        url = self.base_url + "past"
-        headers = {
-            "Authorization": f"Bearer {self.token}", "Accept": "application/json"
-        }
-        params = {
-            "filter[league_id]": self.leagues_panda[league],
-            "begin_at": datetime.datetime.now() - datetime.timedelta(days=30) # Arbitrary 30 days
-        }
-        response = requests.get(url, headers=headers, params=params)
-        # Printing API responde code
-        print(response.status_code)
-        # Loading api response in a json
-        result = response.json()
+        if self.conn:
+            # Building URL for API Call
+            url = self.base_url + "past"
+            headers = {
+                "Authorization": f"Bearer {self.token}", "Accept": "application/json"
+            }
+            params = {
+                "filter[league_id]": self.leagues_panda[league],
+                "begin_at": datetime.datetime.now() - datetime.timedelta(days=30) # Arbitrary 30 days
+            }
+            response = requests.get(url, headers=headers, params=params)
+            # Printing API responde code
+            print(response.status_code)
+            # Loading api response in a json
+            result = response.json()
+        else:
+            result = test_json
         # Generating data to be inserted in DataFrame
         data = []
         for game in range(len(result)):
