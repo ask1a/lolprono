@@ -100,9 +100,9 @@ def test_clean_results(expected_df_for_get_game_results_dataframe, expected_df_f
     assert_frame_equal(rslt_df.reset_index(drop=True), expected_df.reset_index(drop=True), check_dtype=False)
 
 
-def test_get_game_results_dataframe(html_content_results, expected_df_for_get_game_results_dataframe):
+def test_get_game_results_dataframe(json_content_results, expected_df_for_get_game_results_dataframe):
     test_panda = utils.PandaScoreRequest(test_job=True)
-    results_df = test_panda.get_game_results_dataframe(html_content_results)
+    results_df = test_panda.get_past_games(json_content_results)
     results_expected_df = expected_df_for_get_game_results_dataframe
     assert_frame_equal(results_df.reset_index(drop=True), results_expected_df.reset_index(drop=True), check_dtype=False)
 
@@ -116,7 +116,7 @@ def json_content_schedule():
     return json_content_byte
 
 @pytest.fixture
-def html_content_results():
+def json_content_results():
     home = Path(__file__).resolve().parent.parent.parent
     file_path = home / 'jobs/test/past.json'
     with open(file_path, "rb") as f:

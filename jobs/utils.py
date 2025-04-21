@@ -600,7 +600,7 @@ class PandaScoreRequest:
 
         # Formating Date:
         df['game_date'] = df['game_date'].apply(
-            lambda x: datetime.datetime.strptime(x, '%Y-%m-%d %H:%M:%S').strftime('%Y-%m-%d')
+            lambda x: datetime.datetime.strptime(x, '%Y-%m-%d').strftime('%Y-%m-%d')
         )
         # Only getting the number of games
         df['bo'] = df['bo'].apply(lambda x: int(x[-1]))
