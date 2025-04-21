@@ -91,7 +91,7 @@ def test_clean_schedule(expected_df_for_get_game_schedule_dataframe,expected_df_
 
 
 def test_clean_results(expected_df_for_get_game_results_dataframe, expected_df_for_clean_results):
-    test_panda = utils.Scrap(test_job=True)
+    test_panda = utils.PandaScoreRequest(test_job=True)
     rslt_df = test_panda.clean_results(expected_df_for_get_game_results_dataframe)
     print(rslt_df)
     expected_df = expected_df_for_clean_results
@@ -101,7 +101,7 @@ def test_clean_results(expected_df_for_get_game_results_dataframe, expected_df_f
 
 
 def test_get_game_results_dataframe(html_content_results, expected_df_for_get_game_results_dataframe):
-    test_panda = utils.Scrap(test_job=True)
+    test_panda = utils.PandaScoreRequest(test_job=True)
     results_df = test_panda.get_game_results_dataframe(html_content_results)
     results_expected_df = expected_df_for_get_game_results_dataframe
     assert_frame_equal(results_df.reset_index(drop=True), results_expected_df.reset_index(drop=True), check_dtype=False)

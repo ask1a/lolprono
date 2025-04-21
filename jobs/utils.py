@@ -429,7 +429,7 @@ class PandaScoreRequest:
                     'short_label': ['G2', 'TH', 'VIT', 'BDS', 'SK', 'RGE', 'MKOI', 'GX', 'FNC', 'KC'],
                     'long_label': [
                         'G2 Esport', 'Team Heretics', 'Vitality', 'Team BDS', 'SK Gaming',
-                        'Rogue', 'Movistar Koi', 'Giant X', 'Fnatic', 'Karmine Corp'
+                        'Rogue', 'Movistar KOI', 'Giant X', 'Fnatic', 'Karmine Corp'
                     ]
                 }
             )
