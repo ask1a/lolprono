@@ -565,11 +565,11 @@ class PandaScoreRequest:
             )
         # Creating game_date so that we can merge on the date instead of datetime
         df['game_date'] = df['game_datetime'].apply(lambda x:
-            x.strftime('%Y-%m-%d')
+            datetime.datetime.strptime(x, '%Y-%m-%d %H:%M:%S').strftime('%Y-%m-%d')
         )
         # Formatting datetime as a string to permit merge:
         df['game_datetime'] = df['game_datetime'].apply(lambda x:
-            x.strftime('%Y-%m-%d %H:%M:%S')
+            datetime.datetime.strptime(x, '%Y-%m-%d %H:%M:%S').strftime('%Y-%m-%d %H:%M:%S')
         )
         df= df.merge(future_games, how='left',
             left_on=['game_date', 'team_1', 'team_2'],
@@ -600,7 +600,7 @@ class PandaScoreRequest:
 
         # Formating Date:
         df['game_date'] = df['game_date'].apply(
-            lambda x: datetime.datetime.strptime(x, '%Y-%m-%d %H:%M:%s').strftime('%Y-%m-%d')
+            lambda x: datetime.datetime.strptime(x, '%Y-%m-%d %H:%M:%S').strftime('%Y-%m-%d')
         )
         # Only getting the number of games
         df['bo'] = df['bo'].apply(lambda x: int(x[-1]))
