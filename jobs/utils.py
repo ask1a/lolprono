@@ -1,8 +1,11 @@
 # Python core Librairies
 import datetime
+import os
 import re
 import sqlite3
 
+from dotenv import load_dotenv
+load_dotenv()
 # Community Librairies
 import pandas as pd
 import requests
@@ -405,7 +408,7 @@ class PandaScoreRequest:
             self.cursor = self.conn.cursor()
             self.today = datetime.date.today()
             self.base_url = 'https://api.pandascore.co/lol/matches/'
-            self.token = 'QyQjU22tZ4Ks7h26GJQYLP8JjycUujGZDewAYqpz6RNNj1aM6xo' # to assign through environment variable
+            self.token = os.environ["PANDASCORE_API_TOKEN"]
             self.leagues_panda = {
                 'LEC': 4197,
                 'LFL': 9163
@@ -476,7 +479,7 @@ class PandaScoreRequest:
         temp_df['leaguename'] = temp_df['leaguename'].fillna('to_insert')
         insert_df = temp_df[temp_df['leaguename'] == 'insert'][['id', 'league_name']].drop_duplicates()
         # Creating new ID based on the maximum available ID, and incremeting by 1.
-        insert_df['id'] = range(temp_df['id'].max(), temp_df['id'].max() + len(insert_df))
+        # insert_df['id'] = range(temp_df['id'].max(), temp_df['id'].max() + len(insert_df))
         # inserting new leagues to table
         insert_df.to_sql(name='league', con=self.conn, if_exists='append', index=False)
 
