@@ -499,8 +499,8 @@ class PandaScoreRequest:
         # fetching current teams in table
         teams = pd.read_sql_query("SELECT DISTINCT short_label, long_label FROM teams", self.conn)
         # identifying upcoming teams
-        t1 = df[['team_1', 'team_1_name']].rename(columns={'team_1': 'short_label', 'team_1_name': 'team_name'})
-        t2 = df[['team_2', 'team_2_name']].rename(columns={'team_2': 'short_label', 'team_2_name': 'team_name'})
+        t1 = df[['team_1', 'team_1_name', 'region']].rename(columns={'team_1': 'short_label', 'team_1_name': 'team_name'})
+        t2 = df[['team_2', 'team_2_name', 'region']].rename(columns={'team_2': 'short_label', 'team_2_name': 'team_name'})
         # Merging both and dropping dupolicate
         final = pd.concat([t1, t2]).drop_duplicates()
         # Merging upcoming and teams from database.
@@ -509,7 +509,7 @@ class PandaScoreRequest:
         final = final[final['long_label'].isna()]
         # Assigning team name to long label
         final['long_label'] = final['team_name']
-        final = final[['short_label', 'long_label']]
+        final = final[['short_label', 'long_label', 'region']]
         # appending new team to table
         final.to_sql(name='teams', con=self.conn, if_exists='append', index=False)
 
@@ -680,6 +680,7 @@ class PandaScoreRequest:
         for game in range(len(result)):
             row = []
             row.append(f'{league} ' + result[game]['serie']['full_name'])
+            row.appent(result[game]['league']['name'])
             row.append(result[game]['original_scheduled_at'])
             row.append(len(result[game]['games']))
             for team in result[game]['opponents']:
@@ -687,7 +688,7 @@ class PandaScoreRequest:
                 row.append(team['opponent']['name'])
             data.append(row)
         # Generating columns names
-        columns=['league_name', 'game_datetime', 'bo', 'team_1', 'team_1_name', 'team_2', 'team_2_name' ]
+        columns=['league_name', 'region', 'game_datetime', 'bo', 'team_1', 'team_1_name', 'team_2', 'team_2_name' ]
         # Creating the dataFrame
         upcoming = pd.DataFrame(data=data, columns=columns)
         # changing type of gamedatetime
