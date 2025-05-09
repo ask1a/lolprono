@@ -477,7 +477,9 @@ class PandaScoreRequest:
         # Fetching all available leagues
         temp_df = df.merge(leagues, how='left', left_on='league_name', right_on='leaguename')
         temp_df['leaguename'] = temp_df['leaguename'].fillna('to_insert')
-        insert_df = temp_df[temp_df['leaguename'] == 'insert'][['id', 'league_name']].drop_duplicates()
+        insert_df = temp_df[temp_df['leaguename'] == 'to_insert'][['id', 'league_name']].drop_duplicates()
+        # renaming columns to correct name
+        insert_df =insert_df.rename(columns={'league_name': 'leaguename'})
         # Creating new ID based on the maximum available ID, and incremeting by 1.
         # insert_df['id'] = range(temp_df['id'].max(), temp_df['id'].max() + len(insert_df))
         # inserting new leagues to table
@@ -499,8 +501,18 @@ class PandaScoreRequest:
         # fetching current teams in table
         teams = pd.read_sql_query("SELECT DISTINCT short_label, long_label FROM teams", self.conn)
         # identifying upcoming teams
-        t1 = df[['team_1', 'team_1_name', 'region']].rename(columns={'team_1': 'short_label', 'team_1_name': 'team_name', 'region': 'region_league'})
-        t2 = df[['team_2', 'team_2_name', 'region']].rename(columns={'team_2': 'short_label', 'team_2_name': 'team_name', 'region': 'region_league'})
+        t1 = df[['team_1', 'team_1_name', 'region', 'logo_1']].rename(columns={
+            'team_1': 'short_label',
+            'team_1_name': 'team_name',
+            'region': 'region_league',
+            'logo_1': 'logo_url'}
+        )
+        t2 = df[['team_2', 'team_2_name', 'region', 'logo_2']].rename(columns={
+            'team_2': 'short_label',
+            'team_2_name': 'team_name',
+            'region': 'region_league',
+            'logo_2': 'logo_url'}
+        )
         # Merging both and dropping dupolicate
         final = pd.concat([t1, t2]).drop_duplicates()
         # Merging upcoming and teams from database.
@@ -509,7 +521,8 @@ class PandaScoreRequest:
         final = final[final['long_label'].isna()]
         # Assigning team name to long label
         final['long_label'] = final['team_name']
-        final = final[['short_label', 'long_label', 'region_league']]
+        final = final[['short_label', 'long_label', 'region_league', 'logo_url']]
+        print(final)
         # appending new team to table
         final.to_sql(name='teams', con=self.conn, if_exists='append', index=False)
 
@@ -687,9 +700,10 @@ class PandaScoreRequest:
             for team in result[game]['opponents']:
                 row.append(team['opponent']['acronym'])
                 row.append(team['opponent']['name'])
+                row.append(team['opponent']['image_url'])
             data.append(row)
         # Generating columns names
-        columns=['league_name', 'region', 'game_datetime', 'bo', 'team_1', 'team_1_name', 'team_2', 'team_2_name' ]
+        columns=['league_name', 'region', 'game_datetime', 'bo', 'team_1', 'team_1_name', 'logo_1', 'team_2', 'team_2_name', 'logo_2' ]
         # Creating the dataFrame
         upcoming = pd.DataFrame(data=data, columns=columns)
         # changing type of gamedatetime
