@@ -1,4 +1,4 @@
-import utils 
+import utils
 
 if __name__ == '__main__':
 
@@ -8,8 +8,8 @@ if __name__ == '__main__':
     df_clean =scrap.clean_schedule(df_raw)
     scrap.insert_future_games(df_clean)
     '''
-    
-    psr = utils.pandaScoreRequest()
+
+    psr = utils.PandaScoreRequest()
     # Fetching game data
     for league in psr.leagues_panda:
         # Creating DF from panda score api call
