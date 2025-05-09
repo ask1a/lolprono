@@ -609,14 +609,23 @@ class PandaScoreRequest:
                 {'db_date': [], 'db_team_1': [], 'db_team_2':[]}
             )
         # Creating game_date so that we can merge on the date instead of datetime
+        if self.conn:
+            df['game_date'] = df['game_datetime'].apply(lambda x:
+                pd.Timestamp.to_pydatetime(x).strftime('%Y-%m-%d')
+            )
+            # Formatting datetime as a string to permit merge:
+            df['game_datetime'] = df['game_datetime'].apply(lambda x:
+                pd.Timestamp.to_pydatetime(x).strftime('%Y-%m-%d %H:%M:%S')
+            )
+        else:
+            df['game_date'] = df['game_datetime'].apply(lambda x:
+                datetime.datetime.strptime(x, '%Y-%m-%d %H:%M:%S').strftime('%Y-%m-%d')
+            )
+            # Formatting datetime as a string to permit merge:
+            df['game_datetime'] = df['game_datetime'].apply(lambda x:
+                datetime.datetime.strptime(x, '%Y-%m-%d %H:%M:%S').strftime('%Y-%m-%d %H:%M:%S')
+            )
 
-        df['game_date'] = df['game_datetime'].apply(lambda x:
-            pd.Timestamp.to_pydatetime(x).strftime('%Y-%m-%d')
-        )
-        # Formatting datetime as a string to permit merge:
-        df['game_datetime'] = df['game_datetime'].apply(lambda x:
-            pd.Timestamp.to_pydatetime(x).strftime('%Y-%m-%d %H:%M:%S')
-        )
         df= df.merge(future_games, how='left',
             left_on=['game_date', 'team_1', 'team_2'],
             right_on=['db_date', 'db_team_1', 'db_team_2']
@@ -645,9 +654,14 @@ class PandaScoreRequest:
         df = df.dropna()
 
         # Formating Date:
-        df['game_date'] = df['game_date'].apply(
-            lambda x: datetime.datetime.strftime(x, '%Y-%m-%d')
-        )
+        if self.conn:
+            df['game_date'] = df['game_date'].apply(
+                lambda x: datetime.datetime.strftime(x, '%Y-%m-%d')
+            )
+        else:
+            df['game_date'] = df['game_date'].apply(
+                lambda x: datetime.datetime.strptime(x, '%Y-%m-%d').strftime('%Y-%m-%d')
+            )
         # Reordering dataframe to match destination table.
         df = df[['leagueid','bo', 'game_date', 'team_1', 'team_2', 'score_team_1', 'score_team_2']]
 
