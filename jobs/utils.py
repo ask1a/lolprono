@@ -499,8 +499,8 @@ class PandaScoreRequest:
         # fetching current teams in table
         teams = pd.read_sql_query("SELECT DISTINCT short_label, long_label FROM teams", self.conn)
         # identifying upcoming teams
-        t1 = df[['team_1', 'team_1_name', 'region_league']].rename(columns={'team_1': 'short_label', 'team_1_name': 'team_name'})
-        t2 = df[['team_2', 'team_2_name', 'region_league']].rename(columns={'team_2': 'short_label', 'team_2_name': 'team_name'})
+        t1 = df[['team_1', 'team_1_name', 'region']].rename(columns={'team_1': 'short_label', 'team_1_name': 'team_name', 'region': 'region_league'})
+        t2 = df[['team_2', 'team_2_name', 'region']].rename(columns={'team_2': 'short_label', 'team_2_name': 'team_name', 'region': 'region_league'})
         # Merging both and dropping dupolicate
         final = pd.concat([t1, t2]).drop_duplicates()
         # Merging upcoming and teams from database.
@@ -596,12 +596,13 @@ class PandaScoreRequest:
                 {'db_date': [], 'db_team_1': [], 'db_team_2':[]}
             )
         # Creating game_date so that we can merge on the date instead of datetime
+
         df['game_date'] = df['game_datetime'].apply(lambda x:
-            datetime.datetime.strptime(x, '%Y-%m-%d %H:%M:%S').strftime('%Y-%m-%d')
+            pd.Timestamp.to_pydatetime(x).strftime('%Y-%m-%d')
         )
         # Formatting datetime as a string to permit merge:
         df['game_datetime'] = df['game_datetime'].apply(lambda x:
-            datetime.datetime.strptime(x, '%Y-%m-%d %H:%M:%S').strftime('%Y-%m-%d %H:%M:%S')
+            pd.Timestamp.to_pydatetime(x).strftime('%Y-%m-%d %H:%M:%S')
         )
         df= df.merge(future_games, how='left',
             left_on=['game_date', 'team_1', 'team_2'],
@@ -632,7 +633,7 @@ class PandaScoreRequest:
 
         # Formating Date:
         df['game_date'] = df['game_date'].apply(
-            lambda x: datetime.datetime.strptime(x, '%Y-%m-%d').strftime('%Y-%m-%d')
+            lambda x: datetime.datetime.strftime(x, '%Y-%m-%d')
         )
         # Reordering dataframe to match destination table.
         df = df[['leagueid','bo', 'game_date', 'team_1', 'team_2', 'score_team_1', 'score_team_2']]
@@ -765,7 +766,7 @@ class PandaScoreRequest:
         past['game_datetime'] = past['game_datetime'].apply(
             lambda x: pd.to_datetime(x, format='%Y-%m-%dT%H:%M:%SZ')
         )
-        past['game_date'] = past['game_datetime'].dt.date
+        past['game_date'] = pd.to_datetime(past['game_datetime']).dt.date
         # Running Check in score id matching team id
         past['check_pass'] = (past['team_id_1'] == past['score_id_1']) & (past['team_id_2'] == past['score_id_2'])
         # Keeping only date for which check is passed

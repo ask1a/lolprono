@@ -4,3 +4,4 @@ instance/
 __pycache__/
 draft.py
 x.json
+.env
