@@ -48,3 +48,5 @@ http://127.0.0.1:5000/index
 
 ```python -m pytest -v```
 
+## Recuperer en local la db (à lancer depuis powershell)
+```scp ubuntu@149.000.00.000:/home/ubuntu/lolprono/instance/db.sqlite C:/Users/username/Downloads/db.sqlite```
