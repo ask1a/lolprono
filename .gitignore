@@ -5,3 +5,5 @@ __pycache__/
 draft.py
 x.json
 .env
+**/draft.py
+**/draft.json

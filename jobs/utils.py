@@ -411,7 +411,9 @@ class PandaScoreRequest:
             self.token = os.environ["PANDASCORE_API_TOKEN"]
             self.leagues_panda = {
                 'LEC': 4197,
-                'LFL': 9163
+                'LFL': 9163,
+                'MSI': 9232,
+                'Worlds': 5262
             }
         pass
 
