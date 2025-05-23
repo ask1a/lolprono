@@ -3,3 +3,7 @@ instance/
 .sqlite
 __pycache__/
 draft.py
+x.json
+.env
+**/draft.py
+**/draft.json
