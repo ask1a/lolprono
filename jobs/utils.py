@@ -524,7 +524,7 @@ class PandaScoreRequest:
         # Assigning team name to long label
         final['long_label'] = final['team_name']
         final = final[['short_label', 'long_label', 'region_league', 'logo_url']]
-        print(final)
+        final = final.dropna()
         # appending new team to table
         final.to_sql(name='teams', con=self.conn, if_exists='append', index=False)
 
