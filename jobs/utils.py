@@ -412,8 +412,8 @@ class PandaScoreRequest:
             self.leagues_panda = {
                 'LEC': 4197,
                 'LFL': 9163,
-                'MSI': 9232,
-                'Worlds': 5262
+                'MSI': 300,
+                #'Worlds': 5262
             }
         pass
 
@@ -451,7 +451,7 @@ class PandaScoreRequest:
         -----------
         df: Pandas DataFrame containing cleaned and formated data.
         '''
-        df.to_sql(name='game', con=self.conn, if_exists='append', index=False)
+        df.dropna().to_sql(name='game', con=self.conn, if_exists='append', index=False)
 
     def insert_new_league_serie(self, df: pd.DataFrame) -> None:
         '''
@@ -524,9 +524,9 @@ class PandaScoreRequest:
         # Assigning team name to long label
         final['long_label'] = final['team_name']
         final = final[['short_label', 'long_label', 'region_league', 'logo_url']]
-        print(final)
+        final = final.dropna()
         # appending new team to table
-        final.to_sql(name='teams', con=self.conn, if_exists='append', index=False)
+        final.dropna().to_sql(name='teams', con=self.conn, if_exists='append', index=False)
 
     def update_game_results(self, df: pd.DataFrame) -> None:
         '''
