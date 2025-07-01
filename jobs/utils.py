@@ -526,7 +526,7 @@ class PandaScoreRequest:
         final = final[['short_label', 'long_label', 'region_league', 'logo_url']]
         final = final.dropna()
         # appending new team to table
-        final.to_sql(name='teams', con=self.conn, if_exists='append', index=False)
+        final.dropna().to_sql(name='teams', con=self.conn, if_exists='append', index=False)
 
     def update_game_results(self, df: pd.DataFrame) -> None:
         '''
