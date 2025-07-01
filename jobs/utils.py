@@ -412,8 +412,8 @@ class PandaScoreRequest:
             self.leagues_panda = {
                 'LEC': 4197,
                 'LFL': 9163,
-                'MSI': 9232,
-                'Worlds': 5262
+                'MSI': 300,
+                #'Worlds': 5262
             }
         pass
 
