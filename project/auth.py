@@ -147,7 +147,8 @@ def ligues():
                            league1=is_registered_in_league(1),
                            league2=is_registered_in_league(2),
                            league3=is_registered_in_league(3),
-                           league4=is_registered_in_league(4))
+                           league4=is_registered_in_league(4),
+                           league5=is_registered_in_league(5))
 
 
 def add_userleague_row(leagueid, leaguename, userid):
@@ -199,6 +200,15 @@ def ligue_msi_2024_post():
     userid = current_user.id
     leagueid = 3
     leaguename = "Mid-Season Invitational 2024"
+
+    return add_userleague_row(leagueid, leaguename, userid)
+
+@auth.route('/ligue_msi_2025', methods=['POST'])
+@login_required
+def ligue_msi_2025_post():
+    userid = current_user.id
+    leagueid = 5
+    leaguename = "MSI 2025"
 
     return add_userleague_row(leagueid, leaguename, userid)
 
