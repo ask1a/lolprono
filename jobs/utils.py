@@ -451,7 +451,7 @@ class PandaScoreRequest:
         -----------
         df: Pandas DataFrame containing cleaned and formated data.
         '''
-        df.to_sql(name='game', con=self.conn, if_exists='append', index=False)
+        df.dropna().to_sql(name='game', con=self.conn, if_exists='append', index=False)
 
     def insert_new_league_serie(self, df: pd.DataFrame) -> None:
         '''
