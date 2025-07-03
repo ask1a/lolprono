@@ -557,6 +557,8 @@ class PandaScoreRequest:
                 AND date(game_datetime) = date('{game_date}')
                 AND team_1 = '{team_1}'
                 AND team_2 = '{team_2}';
+                AND team_1 = "{team_1}"
+                AND team_2 = "{team_2}";
             """
             self.cursor.execute(query)
             self.conn.commit()
