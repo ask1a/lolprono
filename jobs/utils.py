@@ -506,14 +506,12 @@ class PandaScoreRequest:
         t1 = df[['team_1', 'team_1_name', 'region', 'logo_1']].rename(columns={
             'team_1': 'short_label',
             'team_1_name': 'team_name',
-            'region': 'region_league',
-            'logo_1': 'logo_url'}
+            'region': 'region_league'}
         )
         t2 = df[['team_2', 'team_2_name', 'region', 'logo_2']].rename(columns={
             'team_2': 'short_label',
             'team_2_name': 'team_name',
-            'region': 'region_league',
-            'logo_2': 'logo_url'}
+            'region': 'region_league'}
         )
         # Merging both and dropping dupolicate
         final = pd.concat([t1, t2]).drop_duplicates()
@@ -523,7 +521,7 @@ class PandaScoreRequest:
         final = final[final['long_label'].isna()]
         # Assigning team name to long label
         final['long_label'] = final['team_name']
-        final = final[['short_label', 'long_label', 'region_league', 'logo_url']]
+        final = final[['short_label', 'long_label', 'region_league']]
         # updating logo url to lower
         final['logo_url'] = final['short_label'].apply(lambda x: x.lower() + '.png')
         final = final.dropna()
