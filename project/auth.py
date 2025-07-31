@@ -145,7 +145,7 @@ def lost_password_post():
 def ligues():
     return render_template('ligues.html',
                            league1=is_registered_in_league(1),
-                           league2=is_registered_in_league(2),
+                           league2=is_registered_in_league(6),
                            league3=is_registered_in_league(3),
                            league4=is_registered_in_league(4),
                            league5=is_registered_in_league(5))
@@ -188,8 +188,8 @@ def ligue_spring_post():
 @login_required
 def ligue_summer_post():
     userid = current_user.id
-    leagueid = 2
-    leaguename = "LEC summer 2024"
+    leagueid = 6
+    leaguename = "LEC Summer 2025"
 
     return add_userleague_row(leagueid, leaguename, userid)
 
