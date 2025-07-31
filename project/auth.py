@@ -188,8 +188,8 @@ def ligue_spring_post():
 @login_required
 def ligue_summer_post():
     userid = current_user.id
-    leagueid = 2
-    leaguename = "LEC summer 2024"
+    leagueid = 6
+    leaguename = "LEC Summer 2025"
 
     return add_userleague_row(leagueid, leaguename, userid)
 
