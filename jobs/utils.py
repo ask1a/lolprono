@@ -500,6 +500,8 @@ class PandaScoreRequest:
         -------
         None
         '''
+        teams = teams[teams['team_1'] != 'None']
+        teams = teams[teams['team_2'] != 'None']
         # fetching current teams in table
         teams = pd.read_sql_query("SELECT DISTINCT short_label, long_label FROM teams", self.conn)
         # identifying upcoming teams
