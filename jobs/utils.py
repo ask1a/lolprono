@@ -500,8 +500,6 @@ class PandaScoreRequest:
         -------
         None
         '''
-        teams = teams[teams['team_1'] != 'None']
-        teams = teams[teams['team_2'] != 'None']
         # fetching current teams in table
         teams = pd.read_sql_query("SELECT DISTINCT short_label, long_label FROM teams", self.conn)
         # identifying upcoming teams
@@ -525,6 +523,7 @@ class PandaScoreRequest:
         final['long_label'] = final['team_name']
         final = final[['short_label', 'long_label', 'region_league']]
         # updating logo url to lower
+        final = final.dropna(subset=['short_label'])
         final['logo_url'] = final['short_label'].apply(lambda x: x.lower() + '.png')
         final = final.dropna()
         # appending new team to table
