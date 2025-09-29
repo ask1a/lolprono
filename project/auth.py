@@ -147,7 +147,7 @@ def ligues():
                            league1=is_registered_in_league(1),
                            league2=is_registered_in_league(6),
                            league3=is_registered_in_league(3),
-                           league4=is_registered_in_league(4),
+                           league4=is_registered_in_league(7),
                            league5=is_registered_in_league(5))
 
 
@@ -212,14 +212,17 @@ def ligue_msi_2025_post():
 
     return add_userleague_row(leagueid, leaguename, userid)
 
-@auth.route('/ligue_worlds_2024', methods=['POST'])
+@auth.route('/ligue_worlds', methods=['POST'])
 @login_required
-def ligue_worlds_2024_post():
+def ligue_worlds_post():
     userid = current_user.id
-    leagueid = 4
-    leaguename = "Worlds 2024"
+    leagueid = 7 # It's a guess
+    year = datetime.datetime.now().year
+    leaguename = f"Worlds {year}"
 
     return add_userleague_row(leagueid, leaguename, userid)
+
+
 
 def get_current_user_league_list():
     current_user_league_list = [e.leaguename for e in
