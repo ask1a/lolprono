@@ -413,7 +413,7 @@ class PandaScoreRequest:
                 'LEC': 4197,
                 'LFL': 9163,
                 'MSI': 300,
-                #'Worlds': 5262
+                'Worlds': 297
             }
         pass
 
