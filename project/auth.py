@@ -217,7 +217,7 @@ def ligue_msi_2025_post():
 def ligue_worlds_post():
     userid = current_user.id
     leagueid = 7 # It's a guess
-    year = datetime.datetime.now().year
+    year = 2025
     leaguename = f"Worlds {year}"
 
     return add_userleague_row(leagueid, leaguename, userid)
