@@ -712,7 +712,7 @@ class PandaScoreRequest:
             row = []
             row.append(f'{league} ' + result[game]['serie']['full_name'])
             row.append(result[game]['league']['name'])
-            row.append(result[game]['original_scheduled_at'])
+            row.append(result[game]['scheduled_at'])
             row.append(len(result[game]['games']))
             for team in result[game]['opponents']:
                 row.append(team['opponent']['acronym'])
@@ -777,7 +777,7 @@ class PandaScoreRequest:
         for game in range(len(result)):
             row = []
             row.append(f'{league} ' + result[game]['serie']['full_name'])
-            row.append(result[game]['original_scheduled_at'])
+            row.append(result[game]['scheduled_at'])
             row.append(result[game]['number_of_games'])
             for team in result[game]['opponents']:
                 row.append(team['opponent']['acronym'])
