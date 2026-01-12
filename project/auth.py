@@ -144,9 +144,11 @@ def lost_password_post():
 @login_required
 def ligues():
     return render_template('ligues.html',
-                           league1=is_registered_in_league(8),
-                           league2=is_registered_in_league(6),
-                           league4=is_registered_in_league(7))
+                           league1=is_registered_in_league(8), # Winter
+                           league2=is_registered_in_league(1), # Spring
+                           league3=is_registered_in_league(5), # MSI
+                           league4=is_registered_in_league(6), # Summer
+                           league5=is_registered_in_league(7)) # Worlds
 
 
 def add_userleague_row(leagueid, leaguename, userid):
