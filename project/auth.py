@@ -144,11 +144,9 @@ def lost_password_post():
 @login_required
 def ligues():
     return render_template('ligues.html',
-                           league1=is_registered_in_league(1),
+                           league1=is_registered_in_league(8),
                            league2=is_registered_in_league(6),
-                           league3=is_registered_in_league(3),
-                           league4=is_registered_in_league(7),
-                           league5=is_registered_in_league(5))
+                           league4=is_registered_in_league(7))
 
 
 def add_userleague_row(leagueid, leaguename, userid):
@@ -174,6 +172,16 @@ def is_registered_in_league(leagueid):
         return 0
 
 
+@auth.route('/ligue_winter', methods=['POST'])
+@login_required
+def ligue_winter_post():
+    userid = current_user.id
+    leagueid = 8
+    leaguename = "LEC Winter 2026"
+
+    return add_userleague_row(leagueid, leaguename, userid)
+
+
 @auth.route('/ligue_spring', methods=['POST'])
 @login_required
 def ligue_spring_post():
@@ -193,19 +201,9 @@ def ligue_summer_post():
 
     return add_userleague_row(leagueid, leaguename, userid)
 
-
-@auth.route('/ligue_msi_2024', methods=['POST'])
+@auth.route('/ligue_msi', methods=['POST'])
 @login_required
-def ligue_msi_2024_post():
-    userid = current_user.id
-    leagueid = 3
-    leaguename = "Mid-Season Invitational 2024"
-
-    return add_userleague_row(leagueid, leaguename, userid)
-
-@auth.route('/ligue_msi_2025', methods=['POST'])
-@login_required
-def ligue_msi_2025_post():
+def ligue_msi_post():
     userid = current_user.id
     leagueid = 5
     leaguename = "MSI 2025"
