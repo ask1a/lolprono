@@ -21,7 +21,28 @@
                 </div>
                 {% endif %}
                 {% endwith %}
-
+                <!-- LEC WINTER -->
+                <div class="box has-background-dark">
+                    <form method="POST" action="/ligue_winter">
+                        <div class="columns">
+                            <div class="column">
+                                <figure class="image is-128x128">
+                                    <img class="is-rounded" src="static/LEC_logo.webp"/>
+                                </figure>
+                            </div>
+                            <div class="column">
+                                <h6 class="title is-6"></h6>
+                                <h6 class="title is-6 has-text-light">LEC Winter❄️ 2026</h6>
+                                {% if league1 %}
+                                <div class="box has-background-dark has-text-white">Déjà inscrit!</div>
+                                {% else %}
+                                <button class="button is-link is-focused">Ajouter la ligue</button>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <!-- LEC SPRING -->
                 <div class="box has-background-dark">
                     <form method="POST" action="/ligue_spring">
                         <div class="columns">
@@ -32,8 +53,8 @@
                             </div>
                             <div class="column">
                                 <h6 class="title is-6"></h6>
-                                <h6 class="title is-6 has-text-light">LEC Spring🌷 split 2024</h6>
-                                {% if league1 %}
+                                <h6 class="title is-6 has-text-light">LEC Spring🌷 2025</h6>
+                                {% if league2 %}
                                 <div class="box has-background-dark has-text-white">Déjà inscrit!</div>
                                 {% else %}
                                 <button class="button is-link is-focused">Ajouter la ligue</button>
@@ -42,6 +63,28 @@
                         </div>
                     </form>
                 </div>
+                <!-- MSI -->
+                <div class="box has-background-dark">
+                    <form method="POST" action="/ligue_msi">
+                        <div class="columns">
+                            <div class="column">
+                                <figure class="image is-128x128">
+                                    <img class="is-rounded" src="static/logo_msi.JPG"/>
+                                </figure>
+                            </div>
+                            <div class="column">
+                                <h6 class="title is-6"></h6>
+                                <h6 class="title is-6 has-text-light">Mid-Season Invitational 2025</h6>
+                                {% if league3 %}
+                                <div class="box has-background-dark has-text-white">Déjà inscrit!</div>
+                                {% else %}
+                                <button class="button is-link is-focused">Ajouter la ligue</button>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <!-- LEC SUMMER -->
                 <div class="box has-background-dark">
                     <form method="POST" action="/ligue_summer">
                         <div class="columns">
@@ -52,8 +95,8 @@
                             </div>
                             <div class="column">
                                 <h6 class="title is-6"></h6>
-                                <h6 class="title is-6 has-text-light">LEC Summer🌞 split 2025</h6>
-                                {% if league2 %}
+                                <h6 class="title is-6 has-text-light">LEC Summer🌞 2025</h6>
+                                {% if league4 %}
                                 <div class="box has-background-dark has-text-white">Déjà inscrit!</div>
                                 {% else %}
                                 <button class="button is-link is-focused">Ajouter la ligue</button>
@@ -62,28 +105,7 @@
                         </div>
                     </form>
                 </div>
-
-                <div class="box has-background-dark">
-                    <form method="POST" action="/ligue_msi_2025">
-                        <div class="columns">
-                            <div class="column">
-                                <figure class="image is-128x128">
-                                    <img class="is-rounded" src="static/logo_msi.JPG"/>
-                                </figure>
-                            </div>
-                            <div class="column">
-                                <h6 class="title is-6"></h6>
-                                <h6 class="title is-6 has-text-light">Mid-Season Invitational 2025</h6>
-                                {% if league5 %}
-                                <div class="box has-background-dark has-text-white">Déjà inscrit!</div>
-                                {% else %}
-                                <button class="button is-link is-focused">Ajouter la ligue</button>
-                                {% endif %}
-                            </div>
-                        </div>
-                    </form>
-                </div>
-
+                <!-- WOOOOOOORRRLDDDDDSSSSSS -->
                 <div class="box has-background-dark">
                     <form method="POST" action="/ligue_worlds">
                         <div class="columns">
@@ -95,7 +117,7 @@
                             <div class="column">
                                 <h6 class="title is-6"></h6>
                                 <h6 class="title is-6 has-text-light">Worlds 2025</h6>
-                                {% if league4 %}
+                                {% if league5 %}
                                 <div class="box has-background-dark has-text-white">Déjà inscrit!</div>
                                 {% else %}
                                 <button class="button is-link is-focused">Ajouter la ligue</button>
