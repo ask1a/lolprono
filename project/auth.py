@@ -8,7 +8,8 @@ import pandas as pd
 import numpy as np
 import io
 from datetime import datetime, timedelta
-from .utils import create_standing_table,send_email_validation, create_points_dataframe, eval_team_win, send_email_reinit_mdp
+from .utils import create_standing_table, send_email_validation, create_points_dataframe, eval_team_win, \
+    send_email_reinit_mdp
 
 auth = Blueprint('auth', __name__)
 
@@ -94,7 +95,7 @@ def signup_post():
             "L'inscription de nouveaux utilisateurs est actuellement verrouillée, contactez un admin ou utilisez un compte existant.")
         return redirect(url_for('auth.signup'))
 
-    send_email_validation(email,request.form.get('testing'))
+    send_email_validation(email, request.form.get('testing'))
     flash("Code de validation envoyé, ce dernier est valide pendant deux minutes")
     return render_template('signup_validation.html', email=email, name=name, password=password)
 
@@ -128,9 +129,11 @@ def signup_validation_post():
         flash("Code de validation erroné ou trop tardif, retour à l'inscription.")
         return redirect(url_for('auth.signup'))
 
+
 @auth.route('/lost_password')
 def lost_password():
-        return render_template('lost_password.html')
+    return render_template('lost_password.html')
+
 
 @auth.route('/lost_password', methods=['POST'])
 def lost_password_post():
@@ -139,16 +142,15 @@ def lost_password_post():
     return redirect(url_for('auth.login'))
 
 
-
 @auth.route('/ligues')
 @login_required
 def ligues():
     return render_template('ligues.html',
-                           league1=is_registered_in_league(8), # Winter
-                           league2=is_registered_in_league(1), # Spring
-                           league3=is_registered_in_league(5), # MSI
-                           league4=is_registered_in_league(6), # Summer
-                           league5=is_registered_in_league(7)) # Worlds
+                           league1=is_registered_in_league(8),  # Winter
+                           league2=is_registered_in_league(1),  # Spring
+                           league3=is_registered_in_league(5),  # MSI
+                           league4=is_registered_in_league(6),  # Summer
+                           league5=is_registered_in_league(7))  # Worlds
 
 
 def add_userleague_row(leagueid, leaguename, userid):
@@ -203,6 +205,7 @@ def ligue_summer_post():
 
     return add_userleague_row(leagueid, leaguename, userid)
 
+
 @auth.route('/ligue_msi', methods=['POST'])
 @login_required
 def ligue_msi_post():
@@ -212,16 +215,16 @@ def ligue_msi_post():
 
     return add_userleague_row(leagueid, leaguename, userid)
 
+
 @auth.route('/ligue_worlds', methods=['POST'])
 @login_required
 def ligue_worlds_post():
     userid = current_user.id
-    leagueid = 7 # It's a guess
+    leagueid = 7  # It's a guess
     year = 2025
     leaguename = f"Worlds {year}"
 
     return add_userleague_row(leagueid, leaguename, userid)
-
 
 
 def get_current_user_league_list():
@@ -233,6 +236,7 @@ def get_current_user_league_list():
 def get_leagueid_from_leaguename(leaguename):
     row = UserLeague.query.filter_by(userid=current_user.id, leaguename=leaguename).first()
     leagueid = row.leagueid
+
     return leagueid
 
 
@@ -241,6 +245,7 @@ def get_leagueid_from_leaguename(leaguename):
 def pronos():
     current_user_league_list = get_current_user_league_list()
     return render_template('pronos.html', league_list=current_user_league_list, leagueid=0)
+
 
 @auth.route('/mot_de_passe', methods=['POST'])
 @login_required
@@ -265,7 +270,6 @@ def mot_de_passe():
     db.session.commit()
     flash("Votre mot de passe a été changé avec succès 👌.", 'success')
     return redirect(url_for('main.profile'))
-
 
 @auth.route('/pronos_update/<leaguename>', methods=['POST'])
 @login_required
@@ -333,6 +337,7 @@ def pronos_show_league(leaguename):
              )
     pronos_form = db.session.execute(query).all()
     records = []
+
     if pronos_form:
         pronos_form = pd.DataFrame(pronos_form)
         pronos_form['editable'] = (datetime.now() + timedelta(hours=2)) < pronos_form["game_datetime"]
@@ -378,9 +383,12 @@ def pronos_show_league(leaguename):
         for item in records:
             item['logo_team_1'] = logos.get(item.get('team_1'))
             item['logo_team_2'] = logos.get(item.get('team_2'))
+            item['day'] = item['game_datetime'].strftime('%Y-%m-%d')
+
+    today = datetime.today().strftime('%Y-%m-%d')
 
     return render_template('pronos.html', league_list=current_user_league_list, leaguename=leaguename,
-                           leagueid=leagueid, records=records, datetime=datetime)
+                           leagueid=leagueid, records=records, datetime=datetime, today=today)
 
 
 @auth.route('/pronos_resume/<gameid>', methods=['POST'])
@@ -417,6 +425,9 @@ def show_game_pronos(gameid):
                                  columns=['id', 'gameid', 'team_1', 'team_2', 'score_team_1', 'score_team_2',
                                           'leagueid', 'leaguename'])
     tableau_score = tableau_score.to_dict('records')
+
+    print(tableau_score)
+
     for item in tableau_score:
         tableau_score = item
 
@@ -431,6 +442,8 @@ def show_game_pronos(gameid):
     titles.append(tableau_score.get('team_1'))
     titles.append(tableau_score.get('team_2'))
     titles.append('Points')
+
+    print(titles)
 
     return render_template('pronos_resume.html', recap_score=recap_score, titles=titles, tableau_score=tableau_score)
 
@@ -607,6 +620,7 @@ def admin_delete_league():
 @redirect_not_allowed_admin_account
 def admin_delete_user():
     return admin_delete_from(User)
+
 
 @auth.route('/admin_update_table_teams')
 @login_required
