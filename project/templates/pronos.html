@@ -103,66 +103,73 @@
                 {% endfor %}
                 {% for day, matches in outdated_records|groupby('day') %}
                     <div class="box has-background-dark has-text-grey-light is-multiline mb-6">
-
                         <div class="divider has-text-white mt-4 mb-5">
-                            <h2 class="title is-4 has-text-light">📅 Journée du {{ day }}</h2>
+                            <h2 class="title is-4 has-text-grey-lighter">📅 Journée du {{ day }}</h2>
                         </div>
                         <br>
                         {% for item in matches %}
                             <div class="box has-background-grey-dark has-text-white is-multiline">
-                                <form method="POST" action="/pronos_resume/{{ item.gameid }}">
-                                    <div class="columns">
-                                        <div class="column is-size-5">{{ item.game_datetime }} (BO{{ item.bo }})</div>
-                                        <div class="column">
-                                            <img src="/static/logos/{{ item.logo_team_1 }}" alt="{{ item.team_1 }}"
-                                                 style="width: auto; height: 50px;">
-                                        </div>
-                                        {% if item.score_team_win == 'team_1' %}
-                                            <div class="column is-size-5 has-text-weight-bold">{{ item.team_1 }}🏆</div>
-                                        {% else %}
-                                            <div class="column is-size-5">{{ item.team_1 }}</div>
+                                <div class="columns">
+                                    <div class="column is-size-5">{{ item.game_datetime }}</div>
+                                    <div class="column">
+                                        <img src="/static/logos/{{ item.logo_team_1 }}" alt="{{ item.team_1 }}"
+                                             style="width: auto; height: 50px;"></div>
+                                    {% if item.score_team_win == 'team_1' %}
+                                        <div class="column is-size-5 has-text-weight-bold">{{ item.team_1 }}🏆</div>
+                                    {% else %}
+                                        <div class="column is-size-5">{{ item.team_1 }}</div>
+                                    {% endif %}
+                                    <div class="column is-flex-direction-column">
+                                        <div class="has-background-grey has-text-white">Score
+                                            final: {{ item.score_team_1 }} - {{ item.score_team_2 }}</div>
+                                        {% if item.prono_correct %}
+                                            {% if item.score_exact %}
+                                                <div class="has-background-success has-text-white">
+                                                    Ton prono: {{ item.prono_team_1 }} - {{ item.prono_team_2 }}
+                                                </div>
+                                            {% elif not item.score_exact %}
+                                                <div class=" has-background-warning has-text-white">
+                                                    Ton prono: {{ item.prono_team_1 }} - {{ item.prono_team_2 }}
+                                                </div>
+                                            {% endif %}
+                                        {% elif not item.prono_correct %}
+                                            <div class="has-background-danger has-text-white">
+                                                Ton prono: {{ item.prono_team_1 }} - {{ item.prono_team_2 }}
+                                            </div>
                                         {% endif %}
-                                        <div class="column is-flex-direction-column">
-                                            <div class="is-size-5">Score final :</div>
-                                            <div class="mt-3 is-size-5">{{ item.score_team_1 }}
-                                                - {{ item.score_team_2 }}</div>
-                                        </div>
-                                        {% if item.score_team_win == 'team_2' %}
-                                            <div class="column is-size-5 has-text-weight-bold">{{ item.team_2 }}🏆</div>
-                                        {% else %}
-                                            <div class="column is-size-5">{{ item.team_2 }}</div>
-                                        {% endif %}
-                                        <div class="column">
-                                            <img src="/static/logos/{{ item.logo_team_2 }}" alt="{{ item.team_2 }}"
-                                                 style="width: auto; height: 50px;"></div>
-                                        <div class="column is-flex-direction-column">
-                                            {% if item.prono_correct %}
-                                                {% if item.score_exact %}
-                                                    <div class="is-size-5 has-background-success has-text-white">
-                                                        Pts: {{ item.points }}
-                                                    </div>
-                                                {% elif not item.score_exact %}
-                                                    <div class="is-size-5 has-background-warning has-text-white">
-                                                        Pts: {{ item.points }}
-                                                    </div>
-                                                {% endif %}
-                                            {% elif not item.prono_correct %}
-                                                <div class="is-size-5 has-background-danger has-text-white">
+                                    </div>
+                                    {% if item.score_team_win == 'team_2' %}
+                                        <div class="column is-size-5 has-text-weight-bold">{{ item.team_2 }}🏆</div>
+                                    {% else %}
+                                        <div class="column is-size-5">{{ item.team_2 }}</div>
+                                    {% endif %}
+                                    <div class="column">
+                                        <img src="/static/logos/{{ item.logo_team_2 }}" alt="{{ item.team_2 }}"
+                                             style="width: auto; height: 50px;"></div>
+                                    <div class="column is-flex-direction-column">
+                                        {% if item.prono_correct %}
+                                            {% if item.score_exact %}
+                                                <div class="has-background-success has-text-white">
+                                                    Pts: {{ item.points }}
+                                                </div>
+                                            {% elif not item.score_exact %}
+                                                <div class="has-background-warning has-text-white">
                                                     Pts: {{ item.points }}
                                                 </div>
                                             {% endif %}
-                                            <div class="has-background-grey-light has-text-dark"> Ton prono
-                                                : {{ item.prono_team_1 }}
-                                                - {{ item.prono_team_2 }}</div>
-                                            <div class="mt-3">
-                                                <button class="button is-link is-dark is-medium is-size-6">Voir les
-                                                    pronos
-                                                    des potos
-                                                </button>
+                                        {% elif not item.prono_correct %}
+                                            <div class="has-background-danger has-text-white">
+                                                Pts: {{ item.points }}
                                             </div>
+                                        {% endif %}
+                                        <div class="mt-3">
+                                            <button class="button is-link is-dark is-medium is-size-6">Voir les
+                                                pronos
+                                                des potos
+                                            </button>
                                         </div>
                                     </div>
-                                </form>
+                                </div>
                             </div>
                         {% endfor %}
                     </div>
