@@ -306,7 +306,7 @@ def pronos_update(leaguename):
                 flash("Pronostic mis à jour! 👌")
             db.session.commit()
         else:
-            flash("🧐 Erreur, ton pronostic est invalide, pense à bien tenir compte du type de BO 👨‍🏫.")
+            flash("👨‍🏫 Attention, plusieurs matchs restent à pronostiquer pour cette journée !")
 
     return redirect(url_for('auth.pronos_show_league', leaguename=leaguename), 307)
 

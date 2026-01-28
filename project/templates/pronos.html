@@ -39,8 +39,8 @@
                 <h1 class="title has-text-white"></h1>
                 {% with messages = get_flashed_messages() %}
                     {% if messages %}
-                        {% if 'Erreur' in messages[0] %}
-                            <div class="notification is-danger">
+                        {% if 'Attention' in messages[0] %}
+                            <div class="notification is-warning">
                                 {{ messages[0] }}
                             </div>
                         {% else %}
@@ -74,7 +74,7 @@
                                                    value="{{ item.prono_team_1 }}"
                                                    autofocus>
                                         </div>
-                                        <div class="column is-size-4">BO{{ item.bo }}</div>
+                                        <div class="column is-size-5-mobile">BO{{ item.bo }}</div>
                                         <div class="column">
                                             <input class="input is-medium" type="number"
                                                    name="gameidt2;{{ item.gameid }};{{ item.game_datetime }};{{ item.bo }}"
