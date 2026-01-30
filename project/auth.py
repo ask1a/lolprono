@@ -130,7 +130,7 @@ def signup_validation_post():
 
 @auth.route('/lost_password')
 def lost_password():
-    return render_template('lost_password.html')
+        return render_template('lost_password.html')
 
 @auth.route('/lost_password', methods=['POST'])
 def lost_password_post():
@@ -139,15 +139,16 @@ def lost_password_post():
     return redirect(url_for('auth.login'))
 
 
+
 @auth.route('/ligues')
 @login_required
 def ligues():
     return render_template('ligues.html',
-                           league1=is_registered_in_league(8),  # Winter
-                           league2=is_registered_in_league(1),  # Spring
-                           league3=is_registered_in_league(5),  # MSI
-                           league4=is_registered_in_league(6),  # Summer
-                           league5=is_registered_in_league(7))  # Worlds
+                           league1=is_registered_in_league(8), # Winter
+                           league2=is_registered_in_league(1), # Spring
+                           league3=is_registered_in_league(5), # MSI
+                           league4=is_registered_in_league(6), # Summer
+                           league5=is_registered_in_league(7)) # Worlds
 
 
 def add_userleague_row(leagueid, leaguename, userid):
@@ -222,6 +223,7 @@ def ligue_worlds_post():
     return add_userleague_row(leagueid, leaguename, userid)
 
 
+
 def get_current_user_league_list():
     current_user_league_list = [e.leaguename for e in
                                 UserLeague.query.filter_by(userid=current_user.id).order_by(UserLeague.leagueid).all()]
@@ -263,6 +265,7 @@ def mot_de_passe():
     db.session.commit()
     flash("Votre mot de passe a été changé avec succès 👌.", 'success')
     return redirect(url_for('main.profile'))
+
 
 @auth.route('/pronos_update/<leaguename>', methods=['POST'])
 @login_required
