@@ -8,12 +8,11 @@ from ..models import SignupCode
 
 app_test = create_app('testing')
 
-g2_win_expected_html = """                    <div class="column is-size-5">2024-04-07 17:00:00 (BO5)</div>
-                    <div class="column">
-                        <img src="/static/logos/g2.png" alt="G2 Esports" style="width: auto; height: 50px;">
-                    </div>
-                    
-                    <div class="column is-size-5 has-text-weight-bold">G2 Esports ✅</div>
+g2_win_expected_html = """<div class="column">
+                                        <img src="/static/logos/g2.png" alt="G2 Esports"
+                                             style="width: auto; height: 50px;"></div>
+                                    
+                                        <div class="column is-size-5 has-text-weight-bold">G2 Esports🏆</div>
 """
 
 
