@@ -389,7 +389,7 @@ def pronos_show_league(leaguename):
                            leagueid=leagueid, records=records, outdated_records=outdated_records, datetime=datetime)
 
 
-@auth.route('/pronos_resume/<gameid>', methods=['POST'])
+@auth.route('/pronos_resume/<gameid>', methods=['GET','POST'])
 @login_required
 def show_game_pronos(gameid):
     query = (select(User.id, User.name
