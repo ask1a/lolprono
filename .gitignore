@@ -1,6 +1,6 @@
 .idea
 instance/
-.sqlite
+*.sqlite
 __pycache__/
 draft.py
 x.json
