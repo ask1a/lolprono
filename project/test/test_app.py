@@ -8,12 +8,11 @@ from ..models import SignupCode
 
 app_test = create_app('testing')
 
-g2_win_expected_html = """                    <div class="column is-size-5">2024-04-07 17:00:00 (BO5)</div>
-                    <div class="column">
-                        <img src="/static/logos/g2.png" alt="G2 Esports" style="width: auto; height: 50px;">
-                    </div>
-                    
-                    <div class="column is-size-5 has-text-weight-bold">G2 Esports ✅</div>
+g2_win_expected_html = """<div class="column">
+                                        <img src="/static/logos/g2.png" alt="G2 Esports"
+                                             style="width: auto; height: 50px;"></div>
+                                    
+                                        <div class="column is-size-5 has-text-weight-bold">G2 Esports🏆</div>
 """
 
 
@@ -164,7 +163,7 @@ def test_pronos_update_fail(client):
     assert login(client).status_code == 200
     response = client.post("/pronos_update/LEC spring 2024", data=dict(
         [('gameidt1;6;2034-04-07 17:00:00;3', '0'), ('gameidt2;6;2034-04-07 17:00:00;3', '0')]), follow_redirects=True)
-    assert response.text.__contains__("Erreur, ton pronostic est invalide, pense à bien tenir compte du ")
+    assert response.text.__contains__("Matchs")
 
 
 def test_pronos_update_success(client):

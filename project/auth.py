@@ -309,7 +309,7 @@ def pronos_update(leaguename):
                 flash("Pronostic mis à jour! 👌")
             db.session.commit()
         else:
-            flash("🧐 Erreur, ton pronostic est invalide, pense à bien tenir compte du type de BO 👨‍🏫.")
+            flash("👨‍🏫 Attention, plusieurs matchs restent à pronostiquer pour cette journée !")
 
     return redirect(url_for('auth.pronos_show_league', leaguename=leaguename), 307)
 
@@ -378,12 +378,18 @@ def pronos_show_league(leaguename):
         for item in records:
             item['logo_team_1'] = logos.get(item.get('team_1'))
             item['logo_team_2'] = logos.get(item.get('team_2'))
+            item['day'] = item['game_datetime'].strftime('%Y-%m-%d')
+
+    outdated_records = [item for item in records if not item['editable']] #liste des matchs déjà passés
+    # j'ai crée deux listes pour pouvoir afficher les matchs ouverts / fermés séparément pour des questions de mise en page.
+    # En effet, comme il n'est pas possible d'avoir un form à l'intérieur d'un autre form, j'ai dû séparer les deux pour pouvoir afficher le bouton "pronos des potos"
+    records = [item for item in records if item['editable']] #liste des matchs ouverts
 
     return render_template('pronos.html', league_list=current_user_league_list, leaguename=leaguename,
-                           leagueid=leagueid, records=records, datetime=datetime)
+                           leagueid=leagueid, records=records, outdated_records=outdated_records, datetime=datetime)
 
 
-@auth.route('/pronos_resume/<gameid>', methods=['POST'])
+@auth.route('/pronos_resume/<gameid>', methods=['GET','POST'])
 @login_required
 def show_game_pronos(gameid):
     query = (select(User.id, User.name
