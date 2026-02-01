@@ -316,7 +316,7 @@ def pronos_update(leaguename):
 
 
     flash(f"🗓️ Pour la journée du {datetime.strptime(pronos_teams[0][4], '%Y-%m-%d %H:%M:%S').strftime('%Y-%m-%d')} : ")
-    flash(f"♻️{message_update} matchs ont été mis à jour.")
+    flash(f"♻️{message_update} pronos ont été mis à jour.")
     flash(f"➕{message_ajout} pronos ont été ajoutés.")
     flash(f"⚠️{message_reste_a_prono} matchs restent à pronostiquer.")
 

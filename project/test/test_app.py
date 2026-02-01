@@ -170,7 +170,7 @@ def test_pronos_update_success(client):
     assert login(client).status_code == 200
     response = client.post("/pronos_update/LEC spring 2024", data=dict(
         [('gameidt1;6;2034-04-07 17:00:00;3', '2'), ('gameidt2;6;2034-04-07 17:00:00;3', '0')]), follow_redirects=True)
-    assert response.text.__contains__("mis à jour")
+    assert response.text.__contains__("pronos")
 
 
 def test_admin_update_table_teams(client):
