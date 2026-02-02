@@ -314,11 +314,10 @@ def pronos_update(leaguename):
         else:
             message_reste_a_prono += 1
 
-
-    flash(f"🗓️ Pour la journée du {datetime.strptime(pronos_teams[0][4], '%Y-%m-%d %H:%M:%S').strftime('%Y-%m-%d')} : ")
-    flash(f"♻️{message_update} pronos ont été mis à jour.")
-    flash(f"➕{message_ajout} pronos ont été ajoutés.")
-    flash(f"⚠️{message_reste_a_prono} matchs restent à pronostiquer.")
+    flash(f"🗓️ Pour la journée du {datetime.strptime(pronos_teams[0][4], '%Y-%m-%d %H:%M:%S').strftime('%d-%m-%Y')} : ")
+    flash(f"♻️{message_update} prono(s) mis à jour.")
+    flash(f"➕{message_ajout} prono(s) ajouté(s).")
+    flash(f"⚠️{message_reste_a_prono} match(s) incorrect(s) ou vide(s).")
 
     return redirect(url_for('auth.pronos_show_league', leaguename=leaguename), 307)
 
@@ -387,7 +386,7 @@ def pronos_show_league(leaguename):
         for item in records:
             item['logo_team_1'] = logos.get(item.get('team_1'))
             item['logo_team_2'] = logos.get(item.get('team_2'))
-            item['day'] = item['game_datetime'].strftime('%Y-%m-%d')
+            item['day'] = item['game_datetime'].strftime('%d-%m-%Y')
 
     outdated_records = [item for item in records if not item['editable']] #liste des matchs déjà passés
     # j'ai crée deux listes pour pouvoir afficher les matchs ouverts / fermés séparément pour des questions de mise en page.
