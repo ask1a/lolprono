@@ -280,6 +280,8 @@ def pronos_update(leaguename):
     # in the database (gameid, score1, score2, bo and datetime)
     pronos_teams = list(common_entries(pronos_team1, pronos_team2, pronos_bo, heure_pronos))
 
+    message_update = message_ajout = message_reste_a_prono = 0 # variables pour afficher les messages flashs.
+
     for prono in pronos_teams:
         # skip incomplete prono
         if '' in prono:
@@ -300,16 +302,22 @@ def pronos_update(leaguename):
                     .where(GameProno.gameid == prono[0])
                     .values(prono_team_1=int(prono[1]), prono_team_2=int(prono[2]))
                 )
-                flash("Pronostic mis à jour! 👌")
+                message_update += 1
+
             else:
                 # Add new prediction
                 new_prono = GameProno(userid=current_user.id, gameid=prono[0], prono_team_1=int(prono[1]),
                                       prono_team_2=int(prono[2]))
                 db.session.add(new_prono)
-                flash("Pronostic mis à jour! 👌")
+                message_ajout += 1
             db.session.commit()
         else:
-            flash("👨‍🏫 Attention, plusieurs matchs restent à pronostiquer pour cette journée !")
+            message_reste_a_prono += 1
+
+    flash(f"🗓️ Pour la journée du {datetime.strptime(pronos_teams[0][4], '%Y-%m-%d %H:%M:%S').strftime('%d-%m-%Y')} : ")
+    flash(f"♻️{message_update} prono(s) mis à jour.")
+    flash(f"➕{message_ajout} prono(s) ajouté(s).")
+    flash(f"⚠️{message_reste_a_prono} match(s) incorrect(s) ou vide(s).")
 
     return redirect(url_for('auth.pronos_show_league', leaguename=leaguename), 307)
 
@@ -378,7 +386,7 @@ def pronos_show_league(leaguename):
         for item in records:
             item['logo_team_1'] = logos.get(item.get('team_1'))
             item['logo_team_2'] = logos.get(item.get('team_2'))
-            item['day'] = item['game_datetime'].strftime('%Y-%m-%d')
+            item['day'] = item['game_datetime'].strftime('%d-%m-%Y')
 
     outdated_records = [item for item in records if not item['editable']] #liste des matchs déjà passés
     # j'ai crée deux listes pour pouvoir afficher les matchs ouverts / fermés séparément pour des questions de mise en page.
