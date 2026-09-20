@@ -199,7 +199,7 @@ def ligue_spring_post():
 def ligue_summer_post():
     userid = current_user.id
     leagueid = 6
-    leaguename = "LEC Summer 2025"
+    leaguename = "LEC Summer 2026"
 
     return add_userleague_row(leagueid, leaguename, userid)
 
@@ -217,7 +217,7 @@ def ligue_msi_post():
 def ligue_worlds_post():
     userid = current_user.id
     leagueid = 7 # It's a guess
-    year = 2025
+    year = 2026
     leaguename = f"Worlds {year}"
 
     return add_userleague_row(leagueid, leaguename, userid)
