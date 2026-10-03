@@ -148,7 +148,7 @@ def ligues():
                            league2=is_registered_in_league(1), # Spring
                            league3=is_registered_in_league(5), # MSI
                            league4=is_registered_in_league(6), # Summer
-                           league5=is_registered_in_league(7)) # Worlds
+                           league5=is_registered_in_league(10)) # Worlds
 
 
 def add_userleague_row(leagueid, leaguename, userid):
@@ -199,7 +199,7 @@ def ligue_spring_post():
 def ligue_summer_post():
     userid = current_user.id
     leagueid = 6
-    leaguename = "LEC Summer 2025"
+    leaguename = "LEC Summer 2026"
 
     return add_userleague_row(leagueid, leaguename, userid)
 
@@ -216,8 +216,8 @@ def ligue_msi_post():
 @login_required
 def ligue_worlds_post():
     userid = current_user.id
-    leagueid = 7 # It's a guess
-    year = 2025
+    leagueid = 10 # If Demacia Cup is 9 then Worlds will be 10 -->  we have to find a better way.
+    year = 2026
     leaguename = f"Worlds {year}"
 
     return add_userleague_row(leagueid, leaguename, userid)
