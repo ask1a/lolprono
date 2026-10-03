@@ -229,7 +229,7 @@ def ligue_demaciacup_post():
     userid = current_user.id
     leagueid = 9 # It's a guess
     year = 2026
-    leaguename = f"Demacia Cup {year}"
+    leaguename = f"Demacia Cup Global Invitational {year}"
 
     return add_userleague_row(leagueid, leaguename, userid)
 
