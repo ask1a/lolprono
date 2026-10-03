@@ -148,7 +148,8 @@ def ligues():
                            league2=is_registered_in_league(1), # Spring
                            league3=is_registered_in_league(5), # MSI
                            league4=is_registered_in_league(6), # Summer
-                           league5=is_registered_in_league(7)) # Worlds
+                           league5=is_registered_in_league(7), # Worlds
+                           league6=is_registered_in_league(9)) # DemaciaCup
 
 
 def add_userleague_row(leagueid, leaguename, userid):
@@ -222,7 +223,15 @@ def ligue_worlds_post():
 
     return add_userleague_row(leagueid, leaguename, userid)
 
+@auth.route('/ligue_demaciacup', methods=['POST'])
+@login_required
+def ligue_demaciacup_post():
+    userid = current_user.id
+    leagueid = 9 # It's a guess
+    year = 2026
+    leaguename = f"Demacia Cup {year}"
 
+    return add_userleague_row(leagueid, leaguename, userid)
 
 def get_current_user_league_list():
     current_user_league_list = [e.leaguename for e in

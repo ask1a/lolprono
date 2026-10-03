@@ -413,7 +413,8 @@ class PandaScoreRequest:
                 'LEC': 4197,
                 'LFL': 9163,
                 'MSI': 300,
-                'Worlds': 297
+                'Worlds': 297,
+                'Demacia Cup': 5561
             }
         pass
 
