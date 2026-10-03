@@ -414,7 +414,7 @@ class PandaScoreRequest:
                 'LFL': 9163,
                 'MSI': 300,
                 'Worlds': 297,
-                'Demacia Cup': 5561
+                'Demacia Cup Global Invitational': 5561
             }
         pass
 
@@ -711,7 +711,7 @@ class PandaScoreRequest:
         data = []
         for game in range(len(result)):
             row = []
-            row.append(f'{league} ' + result[game]['serie']['full_name'])
+            row.append(f'{league} ' + result[game]['serie']['   '])
             row.append(result[game]['league']['name'])
             row.append(result[game]['original_scheduled_at'])
             row.append(len(result[game]['games']))
