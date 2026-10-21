@@ -148,7 +148,7 @@ def ligues():
                            league2=is_registered_in_league(1), # Spring
                            league3=is_registered_in_league(5), # MSI
                            league4=is_registered_in_league(6), # Summer
-                           league5=is_registered_in_league(9)) # Worlds
+                           league5=is_registered_in_league(12)) # Worlds
 
 
 def add_userleague_row(leagueid, leaguename, userid):
@@ -216,7 +216,7 @@ def ligue_msi_post():
 @login_required
 def ligue_worlds_post():
     userid = current_user.id
-    leagueid = 9
+    leagueid = 12
     year = 2026
     leaguename = f"Worlds {year}"
 
