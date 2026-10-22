@@ -597,7 +597,7 @@ class PandaScoreRequest:
             future_games = pd.read_sql_query(query, self.conn)
         else:
             future_games = pd.DataFrame(
-                {'id': []}
+                {'existing_id': []}
             )
         # Creating game_date so that we can merge on the date instead of datetime
         if self.conn:
@@ -646,12 +646,13 @@ class PandaScoreRequest:
             df['game_date'] = df['game_date'].apply(
                 lambda x: datetime.datetime.strftime(x, '%Y-%m-%d')
             )
+            # Reordering dataframe to match destination table.
+            df = df[['id', 'leagueid','bo', 'game_date', 'team_1', 'team_2', 'score_team_1', 'score_team_2']]
         else:
             df['game_date'] = df['game_date'].apply(
                 lambda x: datetime.datetime.strptime(x, '%Y-%m-%d').strftime('%Y-%m-%d')
             )
-        # Reordering dataframe to match destination table.
-        df = df[['id', 'leagueid','bo', 'game_date', 'team_1', 'team_2', 'score_team_1', 'score_team_2']]
+            df = df[['leagueid','bo', 'game_date', 'team_1', 'team_2', 'score_team_1', 'score_team_2']]
 
         return df
 
