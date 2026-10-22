@@ -608,6 +608,11 @@ class PandaScoreRequest:
             df['game_datetime'] = df['game_datetime'].apply(lambda x:
                 pd.Timestamp.to_pydatetime(x).strftime('%Y-%m-%d %H:%M:%S')
             )
+            df= df.merge(future_games, how='left', left_on='id', right_on='existing_id')
+            # Keeping only games that are not yet inserted
+            df = df[df['existing_id'].isna()]
+            # Reordering dataframe to match destination table.
+            df = df[['id', 'leagueid', 'bo', 'game_datetime', 'team_1', 'team_2']]
         else:
             df['game_date'] = df['game_datetime'].apply(lambda x:
                 datetime.datetime.strptime(x, '%Y-%m-%d %H:%M:%S').strftime('%Y-%m-%d')
@@ -616,14 +621,6 @@ class PandaScoreRequest:
             df['game_datetime'] = df['game_datetime'].apply(lambda x:
                 datetime.datetime.strptime(x, '%Y-%m-%d %H:%M:%S').strftime('%Y-%m-%d %H:%M:%S')
             )
-
-        df= df.merge(future_games, how='left', left_on='id', right_on='existing_id')
-        # Keeping only games that are not yet inserted
-        df = df[df['existing_id'].isna()]
-        # Reordering dataframe to match destination table.
-        if self.conn:
-            df = df[['id', 'leagueid', 'bo', 'game_datetime', 'team_1', 'team_2']]
-        else:
             df = df[['leagueid', 'bo', 'game_datetime', 'team_1', 'team_2']]
         return df
 
