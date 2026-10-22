@@ -540,20 +540,17 @@ class PandaScoreRequest:
         '''
         df.to_sql(name='temp_results', con=self.conn, if_exists='replace', index=False)
         # Update game table using temp_results:
-        for game in df.iterrows():
-            id = game[1][0]
-            score_team_1 = game[1][6]
-            score_team_2 = game[1][7]
-            # Executing the update order 1
-            query = f"""
-            UPDATE game
-            SET score_team_1 = {score_team_1},
-                score_team_2 = {score_team_2}
-            WHERE
-                id = {id};
-            """
-            self.cursor.execute(query)
-            self.conn.commit()
+        query = """
+        UPDATE game
+        SET score_team_1 = tp.score_team_1,
+            score_team_2 = tp.score_team_2
+        FROM
+            temp_results as tp
+        WHERE
+            game.id = tp.id;
+        """
+        self.cursor.execute(query)
+        self.conn.commit()
 
     def assign_league_id(self, league_name: str)->int:
         '''
