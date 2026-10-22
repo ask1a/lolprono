@@ -621,7 +621,10 @@ class PandaScoreRequest:
         # Keeping only games that are not yet inserted
         df = df[df['existing_id'].isna()]
         # Reordering dataframe to match destination table.
-        df = df[['id', 'leagueid', 'bo', 'game_datetime', 'team_1', 'team_2']]
+        if self.conn:
+            df = df[['id', 'leagueid', 'bo', 'game_datetime', 'team_1', 'team_2']]
+        else:
+            df = df[['leagueid', 'bo', 'game_datetime', 'team_1', 'team_2']]
         return df
 
     def clean_results(self, df: pd.DataFrame) -> pd.DataFrame:
