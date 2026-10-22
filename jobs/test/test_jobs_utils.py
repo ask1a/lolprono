@@ -76,7 +76,7 @@ def test_identifty_team_names(expected_df_for_clean_schedule):
 
 def test_get_game_schedule_dataframe(json_content_schedule, expected_df_for_get_game_schedule_dataframe):
     test_panda = utils.PandaScoreRequest(test_job=True)
-    rslt_df = test_panda.get_upcoming_games('LEC', test_json=json_content_schedule)
+    rslt_df = test_panda.get_upcoming_games('LEC', test_json=json_content_schedule).drop(columns=['id'])
     expected_df = expected_df_for_get_game_schedule_dataframe
     expected_df['game_datetime'] = pd.to_datetime(expected_df['game_datetime']).dt.date
     rslt_df['game_datetime'] = pd.to_datetime(rslt_df['game_datetime']).dt.date
@@ -85,7 +85,7 @@ def test_get_game_schedule_dataframe(json_content_schedule, expected_df_for_get_
 
 def test_clean_schedule(expected_df_for_get_game_schedule_dataframe,expected_df_for_clean_schedule):
     test_panda = utils.PandaScoreRequest(test_job=True)
-    rslt_df = test_panda.clean_schedule(expected_df_for_get_game_schedule_dataframe)
+    rslt_df = test_panda.clean_schedule(expected_df_for_get_game_schedule_dataframe).drop(columns=['id'])
     expected_df = expected_df_for_clean_schedule
     expected_df['game_datetime'] = pd.to_datetime(expected_df['game_datetime']).dt.date
     rslt_df['game_datetime'] = pd.to_datetime(rslt_df['game_datetime']).dt.date
@@ -95,7 +95,7 @@ def test_clean_schedule(expected_df_for_get_game_schedule_dataframe,expected_df_
 
 def test_clean_results(expected_df_for_get_game_results_dataframe, expected_df_for_clean_results):
     test_panda = utils.PandaScoreRequest(test_job=True)
-    rslt_df = test_panda.clean_results(expected_df_for_get_game_results_dataframe)
+    rslt_df = test_panda.clean_results(expected_df_for_get_game_results_dataframe).drop(columns=['id'])
     print(rslt_df)
     expected_df = expected_df_for_clean_results
     print(expected_df)
@@ -105,7 +105,7 @@ def test_clean_results(expected_df_for_get_game_results_dataframe, expected_df_f
 
 def test_get_game_results_dataframe(json_content_results, expected_df_for_get_game_results_dataframe):
     test_panda = utils.PandaScoreRequest(test_job=True)
-    results_df = test_panda.get_past_games('LEC', test_json=json_content_results)
+    results_df = test_panda.get_past_games('LEC', test_json=json_content_results).drop(columns=['id'])
     results_expected_df = expected_df_for_get_game_results_dataframe
     results_df['game_date'] = pd.to_datetime(results_df['game_date']).dt.date
     results_expected_df['game_date'] = pd.to_datetime(results_expected_df['game_date']).dt.date
