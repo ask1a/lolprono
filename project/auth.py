@@ -23,7 +23,7 @@ def common_entries(*dcts):
 
 def redirect_not_allowed_admin_account(func):
     def wrapper():
-        allowed_admin_account = ('skiaa@hotmail.com', 'zayedlewis@hotmail.com', 'test@test.fr')
+        allowed_admin_account = ('skiaa@hotmail.com', 'zayedlewis@hotmail.com', 'geoffrey.roig+lolprono@gmail.com')
         if current_user.email not in allowed_admin_account:
             return redirect(url_for('main.index'))
         else:
