@@ -80,7 +80,7 @@ def test_get_game_schedule_dataframe(json_content_schedule, expected_df_for_get_
     expected_df = expected_df_for_get_game_schedule_dataframe
     expected_df['game_datetime'] = pd.to_datetime(expected_df['game_datetime']).dt.date
     rslt_df['game_datetime'] = pd.to_datetime(rslt_df['game_datetime']).dt.date
-    assert_frame_equal(rslt_df.reset_index(drop=True), expected_df.reset_index(drop=True), check_dtype=False)
+    assert_frame_equal(rslt_df.reset_index(drop=True).drop(columns=['id']), expected_df.reset_index(drop=True), check_dtype=False)
 
 
 def test_clean_schedule(expected_df_for_get_game_schedule_dataframe,expected_df_for_clean_schedule):
@@ -105,7 +105,7 @@ def test_clean_results(expected_df_for_get_game_results_dataframe, expected_df_f
 
 def test_get_game_results_dataframe(json_content_results, expected_df_for_get_game_results_dataframe):
     test_panda = utils.PandaScoreRequest(test_job=True)
-    results_df = test_panda.get_past_games('LEC', test_json=json_content_results)
+    results_df = test_panda.get_past_games('LEC', test_json=json_content_results).drop(columns=['id'])
     results_expected_df = expected_df_for_get_game_results_dataframe
     results_df['game_date'] = pd.to_datetime(results_df['game_date']).dt.date
     results_expected_df['game_date'] = pd.to_datetime(results_expected_df['game_date']).dt.date

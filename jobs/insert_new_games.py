@@ -19,3 +19,5 @@ if __name__ == '__main__':
         # Cleaning df from existing games and inserting data in db
         df_clean = psr.clean_schedule(upcoming_df)
         psr.insert_future_games(df_clean)
+        # Update Game datetime if changed.
+        psr.update_game_datetime(upcoming_df)
