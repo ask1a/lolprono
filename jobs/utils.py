@@ -476,6 +476,7 @@ class PandaScoreRequest:
                     'leaguename': ['MSI 2024', 'LEC spring 2024', 'LEC summer 2024']
                 }
             )
+        df = df.drop(columns=['id'])
         # Fetching all available leagues
         temp_df = df.merge(leagues, how='left', left_on='league_name', right_on='leaguename')
         temp_df['leaguename'] = temp_df['leaguename'].fillna('to_insert')
@@ -540,24 +541,16 @@ class PandaScoreRequest:
         df.to_sql(name='temp_results', con=self.conn, if_exists='replace', index=False)
         # Update game table using temp_results:
         for game in df.iterrows():
-            league_id = game[1][0]
-            bo = game[1][1]
-            game_date = game[1][2]
-            team_1 = game[1][3]
-            team_2 = game[1][4]
-            score_team_1 = game[1][5]
-            score_team_2 = game[1][6]
+            id = game[1][0]
+            score_team_1 = game[1][6]
+            score_team_2 = game[1][7]
             # Executing the update order 1
             query = f"""
             UPDATE game
             SET score_team_1 = {score_team_1},
                 score_team_2 = {score_team_2}
             WHERE
-                leagueid = {league_id}
-                AND bo = {bo}
-                AND date(game_datetime) = date('{game_date}')
-                AND team_1 = "{team_1}"
-                AND team_2 = "{team_2}";
+                id = {id};
             """
             self.cursor.execute(query)
             self.conn.commit()
@@ -598,9 +591,7 @@ class PandaScoreRequest:
         # Fetch existing games
         query = '''
             SELECT distinct
-                date(game_datetime) as db_date,
-                team_1 as db_team_1,
-                team_2 as db_team_2
+                id as existing_id
             FROM game
             WHERE
                 date(game_datetime) >= current_date
@@ -609,7 +600,7 @@ class PandaScoreRequest:
             future_games = pd.read_sql_query(query, self.conn)
         else:
             future_games = pd.DataFrame(
-                {'db_date': [], 'db_team_1': [], 'db_team_2':[]}
+                {'id': []}
             )
         # Creating game_date so that we can merge on the date instead of datetime
         if self.conn:
@@ -629,14 +620,11 @@ class PandaScoreRequest:
                 datetime.datetime.strptime(x, '%Y-%m-%d %H:%M:%S').strftime('%Y-%m-%d %H:%M:%S')
             )
 
-        df= df.merge(future_games, how='left',
-            left_on=['game_date', 'team_1', 'team_2'],
-            right_on=['db_date', 'db_team_1', 'db_team_2']
-        )
+        df= df.merge(future_games, how='left', left_on='id', right_on='existing_id')
         # Keeping only games that are not yet inserted
-        df = df[df['db_date'].isna()]
+        df = df[df['existing_id'].isna()]
         # Reordering dataframe to match destination table.
-        df = df[['leagueid', 'bo', 'game_datetime', 'team_1', 'team_2']]
+        df = df[['id', 'leagueid', 'bo', 'game_datetime', 'team_1', 'team_2']]
         return df
 
     def clean_results(self, df: pd.DataFrame) -> pd.DataFrame:
@@ -666,7 +654,7 @@ class PandaScoreRequest:
                 lambda x: datetime.datetime.strptime(x, '%Y-%m-%d').strftime('%Y-%m-%d')
             )
         # Reordering dataframe to match destination table.
-        df = df[['leagueid','bo', 'game_date', 'team_1', 'team_2', 'score_team_1', 'score_team_2']]
+        df = df[['id', 'leagueid','bo', 'game_date', 'team_1', 'team_2', 'score_team_1', 'score_team_2']]
 
         return df
 
@@ -710,9 +698,10 @@ class PandaScoreRequest:
         data = []
         for game in range(len(result)):
             row = []
+            row.append(result[game]['id'])
             row.append(f'{league} ' + result[game]['serie']['full_name'])
             row.append(result[game]['league']['name'])
-            row.append(result[game]['original_scheduled_at'])
+            row.append(result[game]['scheduled_at'])
             row.append(len(result[game]['games']))
             for team in result[game]['opponents']:
                 row.append(team['opponent']['acronym'])
@@ -720,7 +709,7 @@ class PandaScoreRequest:
                 row.append(team['opponent']['image_url'])
             data.append(row)
         # Generating columns names
-        columns=['league_name', 'region', 'game_datetime', 'bo', 'team_1', 'team_1_name', 'logo_1', 'team_2', 'team_2_name', 'logo_2' ]
+        columns=['id', 'league_name', 'region', 'game_datetime', 'bo', 'team_1', 'team_1_name', 'logo_1', 'team_2', 'team_2_name', 'logo_2' ]
         # Creating the dataFrame
         upcoming = pd.DataFrame(data=data, columns=columns)
         # changing type of gamedatetime
@@ -734,7 +723,7 @@ class PandaScoreRequest:
             pass # to implement a test on this?
 
         # Keeping only relevant columns
-        upcoming = upcoming[['league_name', 'game_datetime', 'bo', 'team_1', 'team_2']]
+        upcoming = upcoming[['id', 'league_name', 'game_datetime', 'bo', 'team_1', 'team_2']]
 
         return upcoming
 
@@ -776,6 +765,7 @@ class PandaScoreRequest:
         data = []
         for game in range(len(result)):
             row = []
+            row.append(result[game]['id'])
             row.append(f'{league} ' + result[game]['serie']['full_name'])
             row.append(result[game]['original_scheduled_at'])
             row.append(result[game]['number_of_games'])
@@ -788,7 +778,7 @@ class PandaScoreRequest:
             data.append(row)
         # Generating columns names
         columns=[
-            'league_name', 'game_datetime', 'bo', 'team_1', 'team_id_1', 'team_2', 'team_id_2',
+            'id', 'league_name', 'game_datetime', 'bo', 'team_1', 'team_id_1', 'team_2', 'team_id_2',
             'score_team_1', 'score_id_1', 'score_team_2', 'score_id_2'
         ]
                 # Creating the dataFrame
@@ -803,5 +793,25 @@ class PandaScoreRequest:
         # Keeping only date for which check is passed
         past = past[past['check_pass']]
         # creating final DF
-        past = past[['league_name', 'game_date', 'bo', 'team_1', 'team_2', 'score_team_1', 'score_team_2']]
+        past = past[['id', 'league_name', 'game_date', 'bo', 'team_1', 'team_2', 'score_team_1', 'score_team_2']]
         return past
+
+    def update_game_datetime(self, df: pd.DataFrame) -> None:
+        '''
+        Update Games' scheduled datetime.
+
+        parameters:
+        -----------
+        df: Pandas DataFrame containing the output of the get_upcoming_games function.
+        '''
+        df.dropna().to_sql(name='temp_schedule', con=self.conn, if_exists='replace', index=False)
+        # Update game table using temp_results:
+        query = """
+        UPDATE game
+        SET game_datetime = tp.game_datetime
+        FROM temp_schedule as tp
+        WHERE
+            game.id = tp.id;
+        """
+        self.cursor.execute(query)
+        self.conn.commit()
